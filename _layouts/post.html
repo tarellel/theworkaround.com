@@ -1,0 +1,17 @@
+---
+layout: default
+---
+<h2 class="post-title">{{ page.title }}</h2>
+<div class="row">
+  <div class="span2">
+    <p class="meta">{{ page.date | date: "%B %d, %Y" }}</p>
+  </div>
+  <div class="span7 text-right">
+    {% if page | tags %}
+      Tags: {{ page | tags }}
+    {% endif %}
+  </div>
+</div>
+<div class="post">
+{{ content }}
+</div>

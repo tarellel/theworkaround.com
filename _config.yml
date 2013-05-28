@@ -1,0 +1,48 @@
+# Good example - https://github.com/pathawks/pathawks.github.com/blob/master/_config.yml
+#auto:       true
+# destination: ./_site
+#safe: true
+lsi: false
+markdown: rdiscount
+pygments: true
+exclude: [ "README.md", "Rakefile", 'ideas.md', 'misc.md']
+permalink:  /:year/:month/:day/:title.html
+
+title: 'The Work Around'
+name: TheWorkAround
+url: http://theworkaround.com
+tagline: 'blah blah blah'
+description: 'The infinate rambelings and ideas of Brandon Hicks'
+keywords: [ design, development, ruby ]
+
+author:
+  email: tarellel@gmail.com
+  name: 'Brandon Hicks'
+  github: tarellel
+  twitter: tarellel
+
+apis:
+  google_analytics: UA-XXXXX-X
+  disqus_shortname: theworkaround
+
+# tagging - https://github.com/pattex/jekyll-tagging
+tag_page_layout: tag_page
+tag_page_dir: tag
+
+# for jekyll-assets
+assets:
+  dirname: assets
+  #baseurl: /assets/
+
+  compress:
+    css:  sass
+    js:   uglifier
+
+  # Pathnames where to find assets relative to the root of the site.
+  sources:
+    - _assets/js
+    - _assets/css
+    - _assets/img
+    #- _assets/fonts
+  gzip: [ text/css, application/javascript ]
+

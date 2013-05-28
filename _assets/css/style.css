@@ -1,0 +1,79 @@
+/*
+ * Gradient Sample - http://www.gibbon.co/
+ */
+
+/********************
+ * Attributes
+ ********************/
+ body{
+  /*background:#FFFFFF;*/
+  color:#323A45;
+  font-weight:300;
+  font-size:16px;
+  font-family: 'Open Sans', sans-serif;
+  line-height:28px;
+
+  padding:1em 0 2.5em 0;
+
+  border-top:1em solid #4cb8c4;
+}
+
+a, a:link, a:active, a:visited{ color:#4dbeba; }
+a:hover { color:#4EA7BF; }
+
+h1, h2, h3, h4, h5 {
+  font-weight:300;
+}
+
+.centered-text{ text-align:center; }
+
+/********************
+ * Layout
+ ********************/
+ul.posts{
+  margin:0; padding:0;
+  list-style-type:none;
+}
+
+.posts{
+  font-size:115%;
+}
+
+.posts li{
+  margin-bottom:1em;
+}
+
+.post-title{
+  margin-top:0;
+  padding-top:0;
+}
+
+
+/***** Highlight first sentence of the post
+.post>p:first-child{font-size:20px;font-size:1.25rem}
+*/
+.meta{
+  color:#a8a8a8;
+}
+
+
+.social-icons{
+  text-align:center;
+}
+.social-icons a{
+  margin-left:.5em;
+  color:#bdbdbd;
+  font-size:25px;
+}
+
+.social-icons a:hover{
+  color:#7e7e7e;
+  text-decoration:none;
+}
+
+.navlinks{
+  padding-right:1em;
+}
+.content{
+  padding:0 1em 0 1em;
+}
