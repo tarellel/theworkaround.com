@@ -4,7 +4,8 @@
 #safe: true
 lsi: false
 markdown: rdiscount
-pygments: true
+#pygments: true
+highlighter: pygments
 exclude: [ "README.md", "Rakefile", 'ideas.md', 'misc.md']
 permalink:  /:year/:month/:day/:title.html
 
@@ -45,4 +46,3 @@ assets:
     - _assets/img
     #- _assets/fonts
   gzip: [ text/css, application/javascript ]
-
