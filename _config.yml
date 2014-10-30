@@ -1,11 +1,27 @@
 # Good example - https://github.com/pathawks/pathawks.github.com/blob/master/_config.yml
+# Newer Example: https://github.com/codebykat/blog/blob/master/_config.yml
 #auto:       true
 # destination: ./_site
 #safe: true
+encoding:     "utf-8"
 lsi: false
-markdown: rdiscount
+#markdown: rdiscount
 #pygments: true
-highlighter: pygments
+#highlighter: pygments
+#highlighter: coderay
+markdown: kramdown
+kramdown:
+  use_coderay: true
+  coderay:
+    coderay_wrap: div
+    # coderay_line_numbers: table
+    coderay_line_numbers: nil
+    coderay_tab_width: 4
+    coderay_bold_every: 10
+    coderay_css: class
+
+
+
 exclude: [ "README.md", "Rakefile", 'ideas.md', 'misc.md']
 permalink:  /:year/:month/:day/:title.html
 
