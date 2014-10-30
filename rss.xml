@@ -6,9 +6,80 @@
     <atom:link href="http://theworkaround.com/rss.xml" rel="self" type="application/rss+xml" />
     <description>The infinate rambelings and ideas of Brandon Hicks</description>
     <language>en-us</language>
-    <pubDate>Sun, 06 Jul 2014 18:40:15 -0600</pubDate>
-    <lastBuildDate>Sun, 06 Jul 2014 18:40:15 -0600</lastBuildDate>
+    <pubDate>Wed, 29 Oct 2014 22:57:00 -0600</pubDate>
+    <lastBuildDate>Wed, 29 Oct 2014 22:57:00 -0600</lastBuildDate>
 
+    
+    <item>
+      <title>Resque to Sidekiq</title>
+      <link>http://theworkaround.com/2014/10/29/resque-to-sidekiq.html</link>
+      <pubDate>Wed, 29 Oct 2014 00:00:00 -0600</pubDate>
+      <author> ( {"email"=>"tarellel@gmail.com", "name"=>"Brandon Hicks", "github"=>"tarellel", "twitter"=>"tarellel"} )</author>
+      <guid>http://theworkaround.com/2014/10/29/resque-to-sidekiq</guid>
+      <description>&lt;p&gt;Background processing is an important feature with any web application to improve performance.
+Not only does it free up your application for requests, it can be used to prioritize tasks and delay processes until your system has available resources.&lt;/p&gt;
+
+&lt;p&gt;This post is not about &lt;a href=&quot;https://github.com/collectiveidea/delayed_job&quot;&gt;delayed_job&lt;/a&gt;, &lt;a href=&quot;https://kr.github.io/beanstalkd/&quot;&gt;beanstalkd&lt;/a&gt;, &lt;a href=&quot;https://github.com/mperham/girl_friday&quot;&gt;girl_friday&lt;/a&gt;, &lt;a href=&quot;https://github.com/brandonhilkert/sucker_punch&quot;&gt;sucker_punch&lt;/a&gt;, or a &lt;a href=&quot;https://www.ruby-toolbox.com/categories/Background_Jobs&quot;&gt;wide selection&lt;/a&gt; of other background processors.
+Even though I’ve used delayed_job which is amazingly easy to setup and use, I don’t exactly want to clog up my ActiveRecord database with database queries. The use of a key-value store tends to make things fast and simple as it is.
+For background jobs, caching, and various other tasks Redis does an amazing job: it’s fast, reliable, and does over complicate the application.&lt;/p&gt;
+
+&lt;p&gt;Until recently I had been using &lt;a href=&quot;https://github.com/resque/resque&quot;&gt;Resque&lt;/a&gt; the Holy Grail of Ruby based background processors and it has worked flawlessly to the needs I required.
+But one of the applications I have setup allows users to upload as many images (using &lt;a href=&quot;https://github.com/carrierwaveuploader/carrierwave&quot;&gt;Carrierwave&lt;/a&gt;) as they want at any given time.
+Upon successful upload of these images the files mime-types and extensions are verified to ensure that malicous files aren’t being uploaded to the server.
+Than the images are processed to create thumbnails, gallery images, etc. and when you’re processing numerous image files at one time without background processing this absolutely bogs down a server.
+When you have some a mechanism to do this effecively in the background this doesn’t have such a huge impact. But as of lately with a higher user base the image uploads have begin to display delayes in their processing times.&lt;/p&gt;
+
+&lt;p&gt;It may not seem like much, but when it’s a few images here and there from numerous users at any given time, the processing time begins to add up.
+Especially when upon upload a thumbnail is generated and expected to be displayed almost immediately showing the available uploads for use.&lt;/p&gt;
+
+&lt;p&gt;One great thing about Sidekiq is that just like Resque it uses &lt;a href=&quot;http://redis.io/&quot;&gt;Redis&lt;/a&gt;, if you’ve never used Redis before, please do us all a favor and at least give a quick try.
+Compared to large SQL databases it’s very simple (key/value pair) and extremely fast, &lt;a href=&quot;https://github.com/redis-store/redis-rails&quot;&gt;some people&lt;/a&gt; have gone as far to use it for caching, sessions, and various other tasks.&lt;/p&gt;
+
+&lt;p&gt;The amazing part that makes this migration from Resque to Sidekiq fast and easy is that both libraries use Redis as their backend database to keep track of queues/tasks.
+A lot of the gems and initializers just require that you to change the backend from resque to sidekiq, while others just adjust to detecting what’s available.&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;c1&quot;&gt;# carrierwave_backgrounder&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;c&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;backend&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:resque&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;c&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;backend&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:sidekiq&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;# devise-async&lt;/span&gt;
+&lt;span class=&quot;no&quot;&gt;Devise&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;Async&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;backend&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:resque&lt;/span&gt;
+&lt;span class=&quot;no&quot;&gt;Devise&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;Async&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;backend&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:sidekiq&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;In order to get everything working propely with your gems only slight adjustments are required.&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;c1&quot;&gt;# Gemfile&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;#gem &amp;#39;resque&amp;#39;, :require =&amp;gt; &amp;quot;resque/server&amp;quot;&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;gem&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;sidekiq&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:github&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;mperham/sidekiq&amp;#39;&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;gem&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;devise-async&amp;#39;&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;gem&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;carrierwave_backgrounder&amp;#39;&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;# And if your using it for caching, sessions, etc.&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;gem&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;redis-rails&amp;#39;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Performance wise, I have have noticed a significant increase in processing speed. Resque and delayed_job were produced when Ruby/Rails was
+hitting a massive explosion of growth something was needed and needed fast. Don’t get me wrong Resque is an amazing ruby gem, but if your
+application is using thread-safe libraries Sidekiq will kick quite a punch when it comes to your background processes.
+Upon benchmarking, Sidekiq tends to significantly outperform Resque when it comes to completing background processes.&lt;/p&gt;
+
+&lt;h3 id=&quot;goworker&quot;&gt;GoWorker&lt;/h3&gt;
+&lt;p&gt;Seeing as how lately I’ve been dealing with &lt;a href=&quot;http://golang.org/&quot;&gt;Go&lt;/a&gt; not only for it smooth edge, but compiled libraries tent to perform significantly faster than interpreted languages, another option I considered (and still am looking into is) &lt;a href=&quot;http://www.goworker.org/&quot;&gt;goworker&lt;/a&gt;.
+Goworker is pretty much a drop in replacement for Resque and Sidekiq, relies on Redis as well and massively out performed them both.
+But before I attempt to push this any faster and milk every drop of performance out of the application, I plan to learn quite a bit more about programming with Go.&lt;/p&gt;
+
+&lt;h3 id=&quot;performance&quot;&gt;Performance&lt;/h3&gt;
+&lt;p&gt;Performance wise, I have have noticed a significant increase in processing speed. Resque and delayed_job were produced when Ruby/Rails was
+hitting a massive explosion of growth something was needed and needed fast. Don’t get me wrong Resque is an amazing ruby gem, but if your
+application is using thread-safe libraries Sidekiq will kick quite a punch when it comes to your background processes.
+Upon benchmarking, Sidekiq tends to significantly outperform Resque when it comes to completing background processes.&lt;/p&gt;
+
+&lt;h3 id=&quot;goworker-1&quot;&gt;GoWorker&lt;/h3&gt;
+&lt;p&gt;Seeing as how lately I’ve been dealing with &lt;a href=&quot;http://golang.org/&quot;&gt;Go&lt;/a&gt; not only for it smooth edge, but compiled libraries tent to perform significantly faster than interpreted languages, another option I considered (and still am looking into is) &lt;a href=&quot;http://www.goworker.org/&quot;&gt;goworker&lt;/a&gt;.
+Goworker is pretty much a drop in replacement for Resque and Sidekiq, relies on Redis as well and massively out performed them both.
+But before I attempt to push this any faster and milk every drop of performance out of the application, I plan to learn quite a bit more about programming with Go.&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>The Saturation of a Technologies</title>
@@ -22,19 +93,19 @@
 
 &lt;p&gt;In class a few of them stuck with the material, but very few of them enjoyed it. Even fewer of these people actually practiced any sort of coding outside of the school material. Almost no one ever went in depth to learn the languages, linux systems, or every got curious about the systems we were working with.&lt;/p&gt;
 
-&lt;p&gt;This was in the very least, quite a disturbing revelation. You want to make a career out of developing software, yet you don&#39;t want to learn anything other than the skimmed examples in the book?&lt;/p&gt;
+&lt;p&gt;This was in the very least, quite a disturbing revelation. You want to make a career out of developing software, yet you don’t want to learn anything other than the skimmed examples in the book?&lt;/p&gt;
 
-&lt;p&gt;I do understand that not everyone has the time to heavily dedicate to a given subject. (I have a family, kids, and a job this is fully understandable). Sometimes I get so tired of work, chores, worries, and everything I can&#39;t even sit down and look at code. It&#39;s nice to sometimes just burn everything away and fidget with a hobby or stare in my massive fish tank and relax for a bit. And sometimes just coding or refactoring a few lines of code is enough to relax my like a good nights sleep and I&#39;ll spring to life.&lt;/p&gt;
+&lt;p&gt;I do understand that not everyone has the time to heavily dedicate to a given subject. (I have a family, kids, and a job this is fully understandable). Sometimes I get so tired of work, chores, worries, and everything I can’t even sit down and look at code. It’s nice to sometimes just burn everything away and fidget with a hobby or stare in my massive fish tank and relax for a bit. And sometimes just coding or refactoring a few lines of code is enough to relax my like a good nights sleep and I’ll spring to life.&lt;/p&gt;
 
-&lt;p&gt;But when you&#39;re trying to make a career in a specific field, I honestly believe you need to have a passion for it in the first place. I understand that when you&#39;re in the technology field there&#39;s alot of pressure to spend every waking moment learning, studing, and creating in your field of expertise. Some technologist only learn what is required of them at their jobs, the bare minimum. And what works for them may not work for others, obviously the passion and desire isn&#39;t always there. They&#39;ve got job security until they&#39;ve got the train that new college grad years down the road and be their manager, switch fields, or retire. And some people try to learn and create in every little nitch that they can.&lt;/p&gt;
+&lt;p&gt;But when you’re trying to make a career in a specific field, I honestly believe you need to have a passion for it in the first place. I understand that when you’re in the technology field there’s alot of pressure to spend every waking moment learning, studing, and creating in your field of expertise. Some technologist only learn what is required of them at their jobs, the bare minimum. And what works for them may not work for others, obviously the passion and desire isn’t always there. They’ve got job security until they’ve got the train that new college grad years down the road and be their manager, switch fields, or retire. And some people try to learn and create in every little nitch that they can.&lt;/p&gt;
 
-&lt;p&gt;As I&#39;ve grown older I&#39;ve learned it not solely about dedicating every moment you&#39;ve got to your studies, it&#39;s about learning to sift to sift through all the fads and learn what is required to work for you. Let it be: Swift, Dart, Go, Angular, Ember, AWS, one of the dozens of NoSQL databases coming out each weel, Python, Ruby, the newest Web Framework and flashiest, Responsive Design, the list could go on forever.&lt;/p&gt;
+&lt;p&gt;As I’ve grown older I’ve learned it not solely about dedicating every moment you’ve got to your studies, it’s about learning to sift to sift through all the fads and learn what is required to work for you. Let it be: Swift, Dart, Go, Angular, Ember, AWS, one of the dozens of NoSQL databases coming out each weel, Python, Ruby, the newest Web Framework and flashiest, Responsive Design, the list could go on forever.&lt;/p&gt;
 
-&lt;p&gt;I&#39;ve learned you need to focus on learning the big picture, you don&#39;t need to learn every language out there. It&#39;s important to stick to a language you like or need and get to be good at it. Especially considering once you&#39;ve learned the the concepts of on language very well, you generally understand the basics of numerous other technologies and languages. And once you have got a fine grasp on things, it&#39;s quite  easier to begin learning other things. Just don&#39;t overwhelm yourself with fads, trends, the newest and coolest language. And before you jump into a new technology, take a moment to think: where do you think it&#39;ll be in 5, 7, or even 10 years from now.&lt;/p&gt;
+&lt;p&gt;I’ve learned you need to focus on learning the big picture, you don’t need to learn every language out there. It’s important to stick to a language you like or need and get to be good at it. Especially considering once you’ve learned the the concepts of on language very well, you generally understand the basics of numerous other technologies and languages. And once you have got a fine grasp on things, it’s quite  easier to begin learning other things. Just don’t overwhelm yourself with fads, trends, the newest and coolest language. And before you jump into a new technology, take a moment to think: where do you think it’ll be in 5, 7, or even 10 years from now.&lt;/p&gt;
 
-&lt;p&gt;Will learning X or Y give you an &quot;in-demand&quot; skill? Will JavaScript continue to take over the development world or will there be something new to push it aside? Will those late nights pay off? Have we reached our saturation point, where we no longer want to learn the newest tool and only stick to what we know?&lt;/p&gt;
+&lt;p&gt;Will learning X or Y give you an “in-demand” skill? Will JavaScript continue to take over the development world or will there be something new to push it aside? Will those late nights pay off? Have we reached our saturation point, where we no longer want to learn the newest tool and only stick to what we know?&lt;/p&gt;
 
-&lt;p&gt;We can only hope the paths we have chosen to follow, the skills we have learned, and technologies we have adapted won&#39;t be the thing that causes us regret and worries years down the road. And that the skills what we&#39;ve decided to learn we&#39;ll still be able to pay the bills, support our families, and enjoy our careers with.&lt;/p&gt;
+&lt;p&gt;We can only hope the paths we have chosen to follow, the skills we have learned, and technologies we have adapted won’t be the thing that causes us regret and worries years down the road. And that the skills what we’ve decided to learn we’ll still be able to pay the bills, support our families, and enjoy our careers with.&lt;/p&gt;
 </description>
     </item>
     
@@ -44,7 +115,7 @@
       <pubDate>Sun, 26 May 2013 00:00:00 -0600</pubDate>
       <author> ( {"email"=>"tarellel@gmail.com", "name"=>"Brandon Hicks", "github"=>"tarellel", "twitter"=>"tarellel"} )</author>
       <guid>http://theworkaround.com/2013/05/26/nurture-it-like-a-garden</guid>
-      <description>&lt;p&gt;&lt;img src=&quot;/img/grape_bunch.png&quot; title=&quot;Kumquat Tree&quot; alt=&quot;Alt text&quot; /&gt;&lt;/p&gt;
+      <description>&lt;p&gt;&lt;img src=&quot;/img/grape_bunch.png&quot; alt=&quot;Alt text&quot; title=&quot;Kumquat Tree&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;As of recently I have been building and growing a small vegetable garden for my family. My children love the idea of putting
 work into it something quite so amazing: digging up the dirt, playing the seeds and plant buds, watering, and taking responsibility for a small living object that will someday be rewarding them for their effort.
@@ -53,22 +124,19 @@ But in the meantime they have to put time, effort, and tender love and care into
 &lt;p&gt;This is very much like any project you may work on. It usually starts out as a small idea, like planting a seed in your mind.&lt;/p&gt;
 
 &lt;p&gt;It begins by putting a lot of effort into turning that idea into something real, that idea begins to grow into something fruitful and full of life. But in order for your idea to grow into something big and wonderful you need to take care of it, feed it, nourish it, and look after it until it flourishes into something wonderful.
-But once it&#39;s alive and growing you can&#39;t just forget about it. You have to look after it, tend to it, make sure it doesn&#39;t get out of control, and is well fed.&lt;/p&gt;
+But once it’s alive and growing you can’t just forget about it. You have to look after it, tend to it, make sure it doesn’t get out of control, and is well fed.&lt;/p&gt;
 
-&lt;p&gt;Once an application has reached a satisifing level of use and income you don&#39;t just forget about it and hope it can maintain
+&lt;p&gt;Once an application has reached a satisifing level of use and income you don’t just forget about it and hope it can maintain
 itself for the long run. Trends and technology are always advancing, needs, requirements, and desires are always growing.
 One day your application my be the top of its category and tomorrow it could be a long forgotten memory of the past (just
 look at how fast the social web has jumped around in the past few years). In other words, if you believe in your idea and
-dreams don&#39;t let it dwindle and die. Build that idea, make it more than a dream, make it into something that will be used
-by someone other than yourself. Success isn&#39;t achieved by just planting the seeds, you have to be patient and maintain
-the foundation of what you&#39;ve build.&lt;/p&gt;
+dreams don’t let it dwindle and die. Build that idea, make it more than a dream, make it into something that will be used
+by someone other than yourself. Success isn’t achieved by just planting the seeds, you have to be patient and maintain
+the foundation of what you’ve build.&lt;/p&gt;
 
 &lt;hr /&gt;
-
-&lt;p&gt;Image obtained from - &lt;a href=&quot;http://www.sxc.hu/photo/1392865&quot;&gt;stock.xchng&lt;/a&gt;&lt;/p&gt;
-
-&lt;!-- Image obtained from - [stock.xchng](http://www.sxc.hu/photo/1402199/) --&gt;
-
+&lt;p&gt;Image obtained from - &lt;a href=&quot;http://www.sxc.hu/photo/1392865&quot;&gt;stock.xchng&lt;/a&gt;
+&lt;!-- Image obtained from - [stock.xchng](http://www.sxc.hu/photo/1402199/) --&gt;&lt;/p&gt;
 </description>
     </item>
     
@@ -78,22 +146,22 @@ the foundation of what you&#39;ve build.&lt;/p&gt;
       <pubDate>Mon, 20 May 2013 00:00:00 -0600</pubDate>
       <author> ( {"email"=>"tarellel@gmail.com", "name"=>"Brandon Hicks", "github"=>"tarellel", "twitter"=>"tarellel"} )</author>
       <guid>http://theworkaround.com/2013/05/20/the-truth-of-it-all</guid>
-      <description>&lt;p&gt;We all know it&#39;s been asked time and time again, &quot;What do you want in the long run out of your life?&quot; We all have hopes and dreams we want to fulfill, different routes we
-want to take through life. But we&#39;re all (well most of us) going to end up the same in the end. We&#39;ll either be stuffed
+      <description>&lt;p&gt;We all know it’s been asked time and time again, “What do you want in the long run out of your life?” We all have hopes and dreams we want to fulfill, different routes we
+want to take through life. But we’re all (well most of us) going to end up the same in the end. We’ll either be stuffed
 away like a number in a nursing home or living with out children/grandchildren and feeling bad about them having to help
 manage our lives.&lt;/p&gt;
 
-&lt;p&gt;The reality of this question is, its&#39; not as easy of an answer as it seems. And as you live your life and experience new things
+&lt;p&gt;The reality of this question is, its’ not as easy of an answer as it seems. And as you live your life and experience new things
 your answer will change. When your young and stupid you want fame and money, but as you age and become more mature you
 want happiness and health.&lt;/p&gt;
 
-&lt;p&gt;Our outcome in life isn&#39;t always what we&#39;d want it to be. But in the meantime, it&#39;s about making the most you can out of what you love doing.
-The reason many people goto college, participate in training seminar, start a hobby, etc. is because they want to spend the bulk of their life doing what they&#39;re passionate about.
-You don&#39;t necessarily have to be a millionaire living extravagantly or a philanthropist in order to be happy. But you do want to look back and
-tell people you did something amazing with your life, that you weren&#39;t just a couch potato sitting back coasting through life and always hoping for more.&lt;/p&gt;
+&lt;p&gt;Our outcome in life isn’t always what we’d want it to be. But in the meantime, it’s about making the most you can out of what you love doing.
+The reason many people goto college, participate in training seminar, start a hobby, etc. is because they want to spend the bulk of their life doing what they’re passionate about.
+You don’t necessarily have to be a millionaire living extravagantly or a philanthropist in order to be happy. But you do want to look back and
+tell people you did something amazing with your life, that you weren’t just a couch potato sitting back coasting through life and always hoping for more.&lt;/p&gt;
 
 &lt;p&gt;At the moment my children and fiance, are my number one priorities. But I am still passionate about what makes me happy, with keeps my mind going, and something that pushes my limits.
-If you&#39;re deeply passionate about an interest, you don&#39;t just make it a hobby, don&#39;t think about pushing it aside and saying it&#39;s just a phase.
+If you’re deeply passionate about an interest, you don’t just make it a hobby, don’t think about pushing it aside and saying it’s just a phase.
 Think about diving head first into it, make a life out of doing what you enjoy. And creating a stable life for you and your family in the long run.&lt;/p&gt;
 </description>
     </item>
@@ -105,7 +173,7 @@ Think about diving head first into it, make a life out of doing what you enjoy. 
       <author> ( {"email"=>"tarellel@gmail.com", "name"=>"Brandon Hicks", "github"=>"tarellel", "twitter"=>"tarellel"} )</author>
       <guid>http://theworkaround.com/2013/05/19/fresh-bacon</guid>
       <description>&lt;p&gt;Yum, a fresh new reset blog is like a fresh new package of bacon.
-You don&#39;t know exactly what it&#39;s going to taste like, but you know it&#39;s going to be delicious and full of delight.&lt;/p&gt;
+You don’t know exactly what it’s going to taste like, but you know it’s going to be delicious and full of delight.&lt;/p&gt;
 </description>
     </item>
     
