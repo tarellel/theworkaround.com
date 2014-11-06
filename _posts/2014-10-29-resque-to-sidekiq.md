@@ -2,7 +2,7 @@
 layout: post
 title: "Resque to Sidekiq"
 date: 2014-10-29 14-10-39
-description: ""
+description: "Background processing with SideKiq"
 tags: [ruby, rails, redis]
 ---
 Background processing is an important feature with any web application to improve performance.
