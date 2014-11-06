@@ -6,8 +6,8 @@
     <atom:link href="http://theworkaround.com/rss.xml" rel="self" type="application/rss+xml" />
     <description>The infinate rambelings and ideas of Brandon Hicks</description>
     <language>en-us</language>
-    <pubDate>Wed, 05 Nov 2014 18:35:58 -0700</pubDate>
-    <lastBuildDate>Wed, 05 Nov 2014 18:35:58 -0700</lastBuildDate>
+    <pubDate>Wed, 05 Nov 2014 23:19:57 -0700</pubDate>
+    <lastBuildDate>Wed, 05 Nov 2014 23:19:57 -0700</lastBuildDate>
 
     
     <item>
@@ -16,7 +16,70 @@
       <pubDate>Wed, 05 Nov 2014 00:00:00 -0700</pubDate>
       <author> ( {"email"=>"tarellel@gmail.com", "name"=>"Brandon Hicks", "github"=>"tarellel", "twitter"=>"tarellel"} )</author>
       <guid>http://theworkaround.com/2014/11/05/slimming-down</guid>
-      <description>&lt;p&gt;Lorem Ipsum&lt;/p&gt;
+      <description>&lt;p&gt;I have used Slim on various projects and have grown to thoroughly enjoy using it. &lt;a href=&quot;http://slim-lang.com/index.html&quot;&gt;Slim&lt;/a&gt; is a simple, lightweight, and fast Rails templating alternative to ERB or HAML. I prefer it over HAML because of it’s use of use and it takes almost nothing to get started.&lt;/p&gt;
+
+&lt;h3 id=&quot;setup&quot;&gt;Setup&lt;/h3&gt;
+&lt;p&gt;In order to been using Slim with your Rails application, simple add the following line to your Gemfile.&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;n&quot;&gt;gem&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;slim-rails&amp;quot;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;And continue making your views as usual, but instead of using the file extension of &lt;code&gt;*.html.erb&lt;/code&gt; your being the file extension &lt;code&gt;*.html.slim&lt;/code&gt;. Than you can  begin formatting your views using the Slim syntax right away. It doesn’t take a magician playing tricks all night in order to get running, it has a very simple setup and the syntax is quite easy to grasp and get started on. If you know how to format views (using ruby and HTML) using Rails basic templating engine ERB, switch to Slim will be a piece of cake. And what makes it even easier is you can render layouts, partials, includes, etc. with both erb and Slim interchangeably. Say for example your applications primary layout is &lt;code&gt;application.html.erb&lt;/code&gt; you can include a partial: &lt;code&gt;header.html.slim&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h3 id=&quot;comparing-erb-and-slim&quot;&gt;Comparing ERB and Slim&lt;/h3&gt;
+&lt;p&gt;Not only is Slim fast and clean, it’s quite a bit less cluttered than using erb. When using slim you simplify and clean up your templates and allow for a much more readable structure and tag hierarchy. For example compare the following examples&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;c1&quot;&gt;# ERB&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ul&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;class&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;candylist&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;sx&quot;&gt;% @candy.each &lt;/span&gt;&lt;span class=&quot;k&quot;&gt;do&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;candy&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;sx&quot;&gt;%&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;sx&quot;&gt;    &amp;lt;li&amp;gt;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;%=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;candy&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;type&lt;/span&gt; &lt;span class=&quot;sx&quot;&gt;%&amp;gt;&amp;lt;/li&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;sx&quot;&gt;% end %&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;sx&quot;&gt;&amp;lt;/ul&amp;gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;c1&quot;&gt;# Slim&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;ul&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;candylist&lt;/span&gt;
+  &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;vi&quot;&gt;@candy&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;each&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;candy&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;li&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;candy&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;type&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;And no matter which option you choose to go with, they both output the exact same thing.&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;ul&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;candylist&amp;quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;li&amp;gt;&lt;/span&gt;Jaw Breaker&lt;span class=&quot;nt&quot;&gt;&amp;lt;/li&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;li&amp;gt;&lt;/span&gt;Lollipop&lt;span class=&quot;nt&quot;&gt;&amp;lt;/li&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;li&amp;gt;&lt;/span&gt;Pop Rocks&lt;span class=&quot;nt&quot;&gt;&amp;lt;/li&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;li&amp;gt;&lt;/span&gt;Skittles&lt;span class=&quot;nt&quot;&gt;&amp;lt;/li&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/ul&amp;gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;The Slim template engine removes the complexities and unnecessary clustering of tags associated with using ERB. Slim is very concise, free flowing, and easy to read. Look at the example above and tell me it isn’t dead simple to understand exactly what is going on without a ton of extra tags. Another great thing I absolutely love is, Whitespace Matters! Some may argue “blah blah blah, this is to much like Python and kills the whole concept of ERB/Ruby”. Well if you’re already writing legible and structured code in the first place, than you should already be indenting and tabbing to begin with.&lt;/p&gt;
+
+&lt;h4 id=&quot;bad-example&quot;&gt;Bad Example&lt;/h4&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;c1&quot;&gt;# Slim&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;ul&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;li&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;p&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;splash&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;Hello&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;World&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;# Outputs&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ul&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ul&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;li&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;/li&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;sr&quot;&gt;&amp;lt;p class=&amp;quot;splash&amp;quot;&amp;gt;Hello World&amp;lt;/&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;p&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h4 id=&quot;better-example&quot;&gt;Better Example&lt;/h4&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;c1&quot;&gt;# Slim&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;ul&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;li&lt;/span&gt;
+    &lt;span class=&quot;nb&quot;&gt;p&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;splash&lt;/span&gt;
+      &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;Hello&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;World&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;# Outputs&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ul&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;li&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;p&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;class&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;splash&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;Hello&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;World&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;/p&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;sr&quot;&gt;  &amp;lt;li&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;sr&quot;&gt;&amp;lt;ul&amp;gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;For those of you into all the big buzz words flying around, just think of it as the CoffeeScript, Sass, Less, or any other abstraction engine except for HTML. It’s quick, clean, and easy to use.&lt;/p&gt;
 </description>
     </item>
     
