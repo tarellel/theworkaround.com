@@ -2,7 +2,7 @@
 layout: post
 title: "Setting Goals for 2015"
 date: 2014-12-27 12-03-22
-description: ""
+description: "Setting some basic goals for 2015"
 tags: [misc]
 ---
 Once again the new year is upon us, goals should be set in order to help us look forward to achieving something rather than just watching time pass us by. We also need to sit down and look at what we've actually done within the last year. Have I wasted more time that I should have, of course we all have. But have we taken the necessary steps to get done what we wanted to? Probably not, we've started in the right direction.

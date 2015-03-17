@@ -6,9 +6,10 @@
     <title>Slimming Down - The Work Around</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link href='//fonts.googleapis.com/css?family=Open+Sans:400italic,400,600' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="/assets/app-409fcff5ce463b0c26f0816c54d05760.css">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,600' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Inconsolata:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/assets/app-3c805182e82d0895770df56c2fe26e6b.css">
 
     <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
@@ -86,63 +87,74 @@
 <h3 id="setup">Setup</h3>
 <p>In order to been using Slim with your Rails application, simple add the following line to your Gemfile.</p>
 
-<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="n">gem</span> <span class="s2">&quot;slim-rails&quot;</span></code></pre></div>
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="n">gem</span> <span class="s2">"slim-rails"</span>
+</code></pre>
+</div>
 
 <p>And continue making your views as usual, but instead of using the file extension of <code>*.html.erb</code> your being the file extension <code>*.html.slim</code>. Than you can  begin formatting your views using the Slim syntax right away. It doesn’t take a magician playing tricks all night in order to get running, it has a very simple setup and the syntax is quite easy to grasp and get started on. If you know how to format views (using ruby and HTML) using Rails basic templating engine ERB, switch to Slim will be a piece of cake. And what makes it even easier is you can render layouts, partials, includes, etc. with both erb and Slim interchangeably. Say for example your applications primary layout is <code>application.html.erb</code> you can include a partial: <code>header.html.slim</code>.</p>
 
 <h3 id="comparing-erb-and-slim">Comparing ERB and Slim</h3>
 <p>Not only is Slim fast and clean, it’s quite a bit less cluttered than using erb. When using slim you simplify and clean up your templates and allow for a much more readable structure and tag hierarchy. For example compare the following examples</p>
 
-<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="c1"># ERB</span>
-<span class="o">&lt;</span><span class="n">ul</span> <span class="n">class</span><span class="o">=</span><span class="s2">&quot;candylist&quot;</span><span class="o">&gt;</span>
-  <span class="o">&lt;</span><span class="sx">% @candy.each </span><span class="k">do</span> <span class="o">|</span><span class="n">candy</span><span class="o">|</span> <span class="sx">%&gt;</span>
-<span class="sx">    &lt;li&gt;</span><span class="o">&lt;%=</span> <span class="n">candy</span><span class="o">.</span><span class="n">type</span> <span class="sx">%&gt;&lt;/li&gt;</span>
-  <span class="o">&lt;</span><span class="sx">% end %&gt;</span>
-<span class="sx">&lt;/ul&gt;</span></code></pre></div>
+<div class="highlighter-rouge"><pre class="highlight"><code># ERB
+<span class="nt">&lt;ul</span> <span class="na">class=</span><span class="s">"candylist"</span><span class="nt">&gt;</span>
+  <span class="cp">&lt;%</span> <span class="vi">@candy</span><span class="p">.</span><span class="nf">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">candy</span><span class="o">|</span> <span class="cp">%&gt;</span>
+    <span class="nt">&lt;li&gt;</span><span class="cp">&lt;%=</span> <span class="n">candy</span><span class="p">.</span><span class="nf">type</span> <span class="cp">%&gt;</span><span class="nt">&lt;/li&gt;</span>
+  <span class="cp">&lt;%</span> <span class="k">end</span> <span class="cp">%&gt;</span>
+<span class="nt">&lt;/ul&gt;</span>
+</code></pre>
+</div>
 
-<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="c1"># Slim</span>
-<span class="n">ul</span><span class="o">.</span><span class="n">candylist</span>
-  <span class="o">-</span> <span class="vi">@candy</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">candy</span><span class="o">|</span>
-    <span class="n">li</span> <span class="o">=</span> <span class="n">candy</span><span class="o">.</span><span class="n">type</span></code></pre></div>
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="c1"># Slim</span>
+<span class="n">ul</span><span class="p">.</span><span class="nf">candylist</span>
+  <span class="o">-</span> <span class="vi">@candy</span><span class="p">.</span><span class="nf">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">candy</span><span class="o">|</span>
+    <span class="n">li</span> <span class="o">=</span> <span class="n">candy</span><span class="p">.</span><span class="nf">type</span>
+</code></pre>
+</div>
 
 <p>And no matter which option you choose to go with, they both output the exact same thing.</p>
 
-<div class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;ul</span> <span class="na">class=</span><span class="s">&quot;candylist&quot;</span><span class="nt">&gt;</span>
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;ul</span> <span class="na">class=</span><span class="s">"candylist"</span><span class="nt">&gt;</span>
   <span class="nt">&lt;li&gt;</span>Jaw Breaker<span class="nt">&lt;/li&gt;</span>
   <span class="nt">&lt;li&gt;</span>Lollipop<span class="nt">&lt;/li&gt;</span>
   <span class="nt">&lt;li&gt;</span>Pop Rocks<span class="nt">&lt;/li&gt;</span>
   <span class="nt">&lt;li&gt;</span>Skittles<span class="nt">&lt;/li&gt;</span>
-<span class="nt">&lt;/ul&gt;</span></code></pre></div>
+<span class="nt">&lt;/ul&gt;</span>
+</code></pre>
+</div>
 
 <p>The Slim template engine removes the complexities and unnecessary clustering of tags associated with using ERB. Slim is very concise, free flowing, and easy to read. Look at the example above and tell me it isn’t dead simple to understand exactly what is going on without a ton of extra tags. Another great thing I absolutely love is, Whitespace Matters! Some may argue “blah blah blah, this is to much like Python and kills the whole concept of ERB/Ruby”. Well if you’re already writing legible and structured code in the first place, than you should already be indenting and tabbing to begin with.</p>
 
 <h4 id="bad-example">Bad Example</h4>
-
-<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="c1"># Slim</span>
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="c1"># Slim</span>
 <span class="n">ul</span>
 <span class="n">li</span>
-<span class="nb">p</span><span class="o">.</span><span class="n">splash</span>
+<span class="nb">p</span><span class="p">.</span><span class="nf">splash</span>
 <span class="o">|</span> <span class="no">Hello</span> <span class="no">World</span>
 
 <span class="c1"># Outputs</span>
 <span class="o">&lt;</span><span class="n">ul</span><span class="o">&gt;&lt;</span><span class="n">ul</span><span class="o">&gt;</span>
-<span class="o">&lt;</span><span class="n">li</span><span class="o">&gt;&lt;</span><span class="sr">/li&gt;</span>
-<span class="sr">&lt;p class=&quot;splash&quot;&gt;Hello World&lt;/</span><span class="nb">p</span><span class="o">&gt;</span></code></pre></div>
+<span class="o">&lt;</span><span class="n">li</span><span class="o">&gt;&lt;</span><span class="sr">/li&gt;
+&lt;p class="splash"&gt;Hello World&lt;/</span><span class="nb">p</span><span class="o">&gt;</span>
+</code></pre>
+</div>
 
 <h4 id="better-example">Better Example</h4>
-
-<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="c1"># Slim</span>
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="c1"># Slim</span>
 <span class="n">ul</span>
   <span class="n">li</span>
-    <span class="nb">p</span><span class="o">.</span><span class="n">splash</span>
+    <span class="nb">p</span><span class="p">.</span><span class="nf">splash</span>
       <span class="o">|</span> <span class="no">Hello</span> <span class="no">World</span>
 
 <span class="c1"># Outputs</span>
 <span class="o">&lt;</span><span class="n">ul</span><span class="o">&gt;</span>
   <span class="o">&lt;</span><span class="n">li</span><span class="o">&gt;</span>
-    <span class="o">&lt;</span><span class="nb">p</span> <span class="n">class</span><span class="o">=</span><span class="s2">&quot;splash&quot;</span><span class="o">&gt;</span><span class="no">Hello</span> <span class="no">World</span><span class="o">&lt;</span><span class="sr">/p&gt;</span>
-<span class="sr">  &lt;li&gt;</span>
-<span class="sr">&lt;ul&gt;</span></code></pre></div>
+    <span class="o">&lt;</span><span class="nb">p</span> <span class="k">class</span><span class="o">=</span><span class="s2">"splash"</span><span class="o">&gt;</span><span class="no">Hello</span> <span class="no">World</span><span class="o">&lt;</span><span class="sr">/p&gt;
+  &lt;li&gt;
+&lt;ul&gt;
+
+</span></code></pre>
+</div>
 
 <p>For those of you into all the big buzz words flying around, just think of it as the CoffeeScript, Sass, Less, or any other abstraction engine except for HTML. It’s quick, clean, and easy to use.</p>
 

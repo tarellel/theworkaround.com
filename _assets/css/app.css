@@ -2,5 +2,16 @@
  *= require bootstrap.css
  *= require bootstrap-responsive
  *= require style
- *= require syntax
+ *= require syntax/syntax
+ *= require syntax/darky
  */
+
+ pre, code{
+  font-family: 'Inconsolata', "Courier New", Courier, monospace;
+  font-size: 15px;
+ }
+
+pre.highlight code{
+  font-family: 'Inconsolata', "Courier New", Courier, monospace;
+  font-size:15px;
+}
