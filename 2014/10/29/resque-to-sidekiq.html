@@ -6,9 +6,10 @@
     <title>Resque to Sidekiq - The Work Around</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link href='//fonts.googleapis.com/css?family=Open+Sans:400italic,400,600' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="/assets/app-409fcff5ce463b0c26f0816c54d05760.css">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,600' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Inconsolata:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/assets/app-3c805182e82d0895770df56c2fe26e6b.css">
 
     <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
@@ -81,67 +82,67 @@
   </div>
 </div>
 <div class="post">
-<p>Background processing is an important feature with any web application to improve performance.
+<p>Background processing is an important feature with any web application to improve performance.<br />
 Not only does it free up your application for requests, it can be used to prioritize tasks and delay processes until your system has available resources.</p>
 
-<p>This post is not about <a href="https://github.com/collectiveidea/delayed_job">delayed_job</a>, <a href="https://kr.github.io/beanstalkd/">beanstalkd</a>, <a href="https://github.com/mperham/girl_friday">girl_friday</a>, <a href="https://github.com/brandonhilkert/sucker_punch">sucker_punch</a>, or a <a href="https://www.ruby-toolbox.com/categories/Background_Jobs">wide selection</a> of other background processors.
-Even though I’ve used delayed_job which is amazingly easy to setup and use, I don’t exactly want to clog up my ActiveRecord database with database queries. The use of a key-value store tends to make things fast and simple as it is.
+<p>This post is not about <a href="https://github.com/collectiveidea/delayed_job">delayed_job</a>, <a href="https://kr.github.io/beanstalkd/">beanstalkd</a>, <a href="https://github.com/mperham/girl_friday">girl_friday</a>, <a href="https://github.com/brandonhilkert/sucker_punch">sucker_punch</a>, or a <a href="https://www.ruby-toolbox.com/categories/Background_Jobs">wide selection</a> of other background processors.<br />
+Even though I’ve used delayed_job which is amazingly easy to setup and use, I don’t exactly want to clog up my ActiveRecord database with database queries. The use of a key-value store tends to make things fast and simple as it is.<br />
 For background jobs, caching, and various other tasks Redis does an amazing job: it’s fast, reliable, and does over complicate the application.</p>
 
-<p>Until recently I had been using <a href="https://github.com/resque/resque">Resque</a> the Holy Grail of Ruby based background processors and it has worked flawlessly to the needs I required.
-But one of the applications I have setup allows users to upload as many images (using <a href="https://github.com/carrierwaveuploader/carrierwave">Carrierwave</a>) as they want at any given time.
-Upon successful upload of these images the files mime-types and extensions are verified to ensure that malicous files aren’t being uploaded to the server.
-Than the images are processed to create thumbnails, gallery images, etc. and when you’re processing numerous image files at one time without background processing this absolutely bogs down a server.
+<p>Until recently I had been using <a href="https://github.com/resque/resque">Resque</a> the Holy Grail of Ruby based background processors and it has worked flawlessly to the needs I required.<br />
+But one of the applications I have setup allows users to upload as many images (using <a href="https://github.com/carrierwaveuploader/carrierwave">Carrierwave</a>) as they want at any given time.<br />
+Upon successful upload of these images the files mime-types and extensions are verified to ensure that malicous files aren’t being uploaded to the server.<br />
+Than the images are processed to create thumbnails, gallery images, etc. and when you’re processing numerous image files at one time without background processing this absolutely bogs down a server.<br />
 When you have some a mechanism to do this effecively in the background this doesn’t have such a huge impact. But as of lately with a higher user base the image uploads have begin to display delayes in their processing times.</p>
 
-<p>It may not seem like much, but when it’s a few images here and there from numerous users at any given time, the processing time begins to add up.
+<p>It may not seem like much, but when it’s a few images here and there from numerous users at any given time, the processing time begins to add up.<br />
 Especially when upon upload a thumbnail is generated and expected to be displayed almost immediately showing the available uploads for use.</p>
 
-<p>One great thing about Sidekiq is that just like Resque it uses <a href="http://redis.io/">Redis</a>, if you’ve never used Redis before, please do us all a favor and at least give a quick try.
+<p>One great thing about Sidekiq is that just like Resque it uses <a href="http://redis.io/">Redis</a>, if you’ve never used Redis before, please do us all a favor and at least give a quick try.<br />
 Compared to large SQL databases it’s very simple (key/value pair) and extremely fast, <a href="https://github.com/redis-store/redis-rails">some people</a> have gone as far to use it for caching, sessions, and various other tasks.</p>
 
-<p>The amazing part that makes this migration from Resque to Sidekiq fast and easy is that both libraries use Redis as their backend database to keep track of queues/tasks.
+<p>The amazing part that makes this migration from Resque to Sidekiq fast and easy is that both libraries use Redis as their backend database to keep track of queues/tasks.<br />
 A lot of the gems and initializers just require that you to change the backend from resque to sidekiq, while others just adjust to detecting what’s available.</p>
 
 <div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="c1"># carrierwave_backgrounder</span>
-<span class="n">c</span><span class="o">.</span><span class="n">backend</span> <span class="ss">:resque</span>
-<span class="n">c</span><span class="o">.</span><span class="n">backend</span> <span class="ss">:sidekiq</span>
+<span class="n">c</span><span class="p">.</span><span class="nf">backend</span> <span class="ss">:resque</span>
+<span class="n">c</span><span class="p">.</span><span class="nf">backend</span> <span class="ss">:sidekiq</span>
 
 <span class="c1"># devise-async</span>
-<span class="no">Devise</span><span class="o">::</span><span class="no">Async</span><span class="o">.</span><span class="n">backend</span> <span class="o">=</span> <span class="ss">:resque</span>
-<span class="no">Devise</span><span class="o">::</span><span class="no">Async</span><span class="o">.</span><span class="n">backend</span> <span class="o">=</span> <span class="ss">:sidekiq</span></code></pre></div>
+<span class="no">Devise</span><span class="o">::</span><span class="no">Async</span><span class="p">.</span><span class="nf">backend</span> <span class="o">=</span> <span class="ss">:resque</span>
+<span class="no">Devise</span><span class="o">::</span><span class="no">Async</span><span class="p">.</span><span class="nf">backend</span> <span class="o">=</span> <span class="ss">:sidekiq</span></code></pre></div>
 
 <p>In order to get everything working propely with your gems only slight adjustments are required.</p>
 
 <div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="c1"># Gemfile</span>
 
-<span class="c1">#gem &#39;resque&#39;, :require =&gt; &quot;resque/server&quot;</span>
-<span class="n">gem</span> <span class="s1">&#39;sidekiq&#39;</span><span class="p">,</span> <span class="ss">:github</span> <span class="o">=&gt;</span> <span class="s1">&#39;mperham/sidekiq&#39;</span>
-<span class="n">gem</span> <span class="s1">&#39;devise-async&#39;</span>
-<span class="n">gem</span> <span class="s1">&#39;carrierwave_backgrounder&#39;</span>
+<span class="c1">#gem 'resque', :require =&gt; "resque/server"</span>
+<span class="n">gem</span> <span class="s1">'sidekiq'</span><span class="p">,</span> <span class="ss">:github</span> <span class="o">=&gt;</span> <span class="s1">'mperham/sidekiq'</span>
+<span class="n">gem</span> <span class="s1">'devise-async'</span>
+<span class="n">gem</span> <span class="s1">'carrierwave_backgrounder'</span>
 
 <span class="c1"># And if your using it for caching, sessions, etc.</span>
-<span class="n">gem</span> <span class="s1">&#39;redis-rails&#39;</span></code></pre></div>
+<span class="n">gem</span> <span class="s1">'redis-rails'</span></code></pre></div>
 
-<p>Performance wise, I have have noticed a significant increase in processing speed. Resque and delayed_job were produced when Ruby/Rails was
-hitting a massive explosion of growth something was needed and needed fast. Don’t get me wrong Resque is an amazing ruby gem, but if your
-application is using thread-safe libraries Sidekiq will kick quite a punch when it comes to your background processes.
+<p>Performance wise, I have have noticed a significant increase in processing speed. Resque and delayed_job were produced when Ruby/Rails was<br />
+hitting a massive explosion of growth something was needed and needed fast. Don’t get me wrong Resque is an amazing ruby gem, but if your<br />
+application is using thread-safe libraries Sidekiq will kick quite a punch when it comes to your background processes.<br />
 Upon benchmarking, Sidekiq tends to significantly outperform Resque when it comes to completing background processes.</p>
 
 <h3 id="goworker">GoWorker</h3>
-<p>Seeing as how lately I’ve been dealing with <a href="http://golang.org/">Go</a> not only for it smooth edge, but compiled libraries tent to perform significantly faster than interpreted languages, another option I considered (and still am looking into is) <a href="http://www.goworker.org/">goworker</a>.
-Goworker is pretty much a drop in replacement for Resque and Sidekiq, relies on Redis as well and massively out performed them both.
+<p>Seeing as how lately I’ve been dealing with <a href="http://golang.org/">Go</a> not only for it smooth edge, but compiled libraries tent to perform significantly faster than interpreted languages, another option I considered (and still am looking into is) <a href="http://www.goworker.org/">goworker</a>.<br />
+Goworker is pretty much a drop in replacement for Resque and Sidekiq, relies on Redis as well and massively out performed them both.<br />
 But before I attempt to push this any faster and milk every drop of performance out of the application, I plan to learn quite a bit more about programming with Go.</p>
 
 <h3 id="performance">Performance</h3>
-<p>Performance wise, I have have noticed a significant increase in processing speed. Resque and delayed_job were produced when Ruby/Rails was
-hitting a massive explosion of growth something was needed and needed fast. Don’t get me wrong Resque is an amazing ruby gem, but if your
-application is using thread-safe libraries Sidekiq will kick quite a punch when it comes to your background processes.
+<p>Performance wise, I have have noticed a significant increase in processing speed. Resque and delayed_job were produced when Ruby/Rails was<br />
+hitting a massive explosion of growth something was needed and needed fast. Don’t get me wrong Resque is an amazing ruby gem, but if your<br />
+application is using thread-safe libraries Sidekiq will kick quite a punch when it comes to your background processes.<br />
 Upon benchmarking, Sidekiq tends to significantly outperform Resque when it comes to completing background processes.</p>
 
 <h3 id="goworker-1">GoWorker</h3>
-<p>Seeing as how lately I’ve been dealing with <a href="http://golang.org/">Go</a> not only for it smooth edge, but compiled libraries tent to perform significantly faster than interpreted languages, another option I considered (and still am looking into is) <a href="http://www.goworker.org/">goworker</a>.
-Goworker is pretty much a drop in replacement for Resque and Sidekiq, relies on Redis as well and massively out performed them both.
+<p>Seeing as how lately I’ve been dealing with <a href="http://golang.org/">Go</a> not only for it smooth edge, but compiled libraries tent to perform significantly faster than interpreted languages, another option I considered (and still am looking into is) <a href="http://www.goworker.org/">goworker</a>.<br />
+Goworker is pretty much a drop in replacement for Resque and Sidekiq, relies on Redis as well and massively out performed them both.<br />
 But before I attempt to push this any faster and milk every drop of performance out of the application, I plan to learn quite a bit more about programming with Go.</p>
 
 </div>

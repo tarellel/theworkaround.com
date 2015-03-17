@@ -13,6 +13,7 @@ gem 'jekyll-tagging', :git => 'git://github.com/pattex/jekyll-tagging.git'
 # Formatting/Structure/Etc.
 gem 'uglifier'
 gem "sass"
-#gem 'rdiscount'
 gem 'kramdown'
-gem 'coderay'
+#gem 'coderay'
+#gem 'coderay_bash' # :bash :erb_bash
+gem 'rouge' # http://rouge.jayferd.us/demo
