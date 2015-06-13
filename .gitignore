@@ -1,5 +1,7 @@
 # src: https://raw.github.com/Modernizr/modernizr.com/gh-pages/.gitignore
-#_site/
+_site/
+_site/*
+/_site/*
 ideas.md
 misc.md
 

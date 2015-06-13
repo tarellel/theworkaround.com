@@ -29,7 +29,7 @@ kramdown:
 exclude: [ "README.md", "Rakefile", 'ideas.md', 'misc.md']
 permalink:  /:year/:month/:day/:title.html
 
-title: 'The Work Around'
+title: 'TheWorkAround'
 name: TheWorkAround
 url: http://theworkaround.com
 tagline: 'blah blah blah'

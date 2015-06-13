@@ -3,7 +3,7 @@ layout: post
 title: "Slimming Down"
 date: 2014-11-05 18-11-48
 description: ""
-tags: [Rails, Ruby, Slim]
+tags: [rails, ruby, slim]
 ---
 I have used Slim on various projects and have grown to thoroughly enjoy using it. [Slim](http://slim-lang.com/index.html) is a simple, lightweight, and fast Rails templating alternative to ERB or HAML. I prefer it over HAML because of it's use of use and it takes almost nothing to get started.
 
