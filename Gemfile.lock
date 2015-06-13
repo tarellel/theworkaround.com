@@ -115,3 +115,6 @@ DEPENDENCIES
   rouge
   sass
   uglifier
+
+BUNDLED WITH
+   1.10.3
