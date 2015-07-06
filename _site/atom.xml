@@ -4,7 +4,7 @@
   <title>TheWorkAround</title>
   <link href="http://theworkaround.com/"/>
   <link type="application/atom+xml" rel="self" href="http://theworkaround.com/atom.xml"/>
-  <updated>2015-06-13T15:19:46-06:00</updated>
+  <updated>2015-07-05T22:00:41-06:00</updated>
   <id>http://theworkaround.com/</id>
   <author>
     <name>Brandon Hicks</name>
@@ -385,39 +385,31 @@ Sometimes we get the point where we experience a level of extreme burnout. We do
       <name>Brandon Hicks</name>
       <uri>http://theworkaround.com</uri>
     </author>
-    <content type="html">&lt;p&gt;Background processing is an important feature with any web application to improve performance.&lt;br /&gt;
-Not only does it free up your application for requests, it can be used to prioritize tasks and delay processes until your system has available resources.&lt;/p&gt;
+    <content type="html">&lt;p&gt;Background processing is an important feature with any web application to improve performance. Not only does it free up your application for requests, it can be used to prioritize tasks and delay processes until your system has available resources.&lt;/p&gt;
 
-&lt;p&gt;This post is not about &lt;a href=&quot;https://github.com/collectiveidea/delayed_job&quot;&gt;delayed_job&lt;/a&gt;, &lt;a href=&quot;https://kr.github.io/beanstalkd/&quot;&gt;beanstalkd&lt;/a&gt;, &lt;a href=&quot;https://github.com/mperham/girl_friday&quot;&gt;girl_friday&lt;/a&gt;, &lt;a href=&quot;https://github.com/brandonhilkert/sucker_punch&quot;&gt;sucker_punch&lt;/a&gt;, or a &lt;a href=&quot;https://www.ruby-toolbox.com/categories/Background_Jobs&quot;&gt;wide selection&lt;/a&gt; of other background processors.&lt;br /&gt;
-Even though I’ve used delayed_job which is amazingly easy to setup and use, I don’t exactly want to clog up my ActiveRecord database with database queries. The use of a key-value store tends to make things fast and simple as it is.&lt;br /&gt;
-For background jobs, caching, and various other tasks Redis does an amazing job: it’s fast, reliable, and does over complicate the application.&lt;/p&gt;
+&lt;p&gt;This post is not about &lt;a href=&quot;https://github.com/collectiveidea/delayed_job&quot;&gt;delayed_job&lt;/a&gt;, &lt;a href=&quot;https://kr.github.io/beanstalkd/&quot;&gt;beanstalkd&lt;/a&gt;, &lt;a href=&quot;https://github.com/mperham/girl_friday&quot;&gt;girl_friday&lt;/a&gt;, &lt;a href=&quot;https://github.com/brandonhilkert/sucker_punch&quot;&gt;sucker_punch&lt;/a&gt;, or a &lt;a href=&quot;https://www.ruby-toolbox.com/categories/Background_Jobs&quot;&gt;wide selection&lt;/a&gt; of other background processors. Even though I’ve used delayed_job which is amazingly easy to setup and use, I don’t exactly want to clog up my ActiveRecord database with database queries. The use of a key-value store tends to make things fast and simple as it is. For background jobs, caching, and various other tasks Redis does an amazing job: it’s fast, reliable, and does over complicate the application.&lt;/p&gt;
 
-&lt;p&gt;Until recently I had been using &lt;a href=&quot;https://github.com/resque/resque&quot;&gt;Resque&lt;/a&gt; the Holy Grail of Ruby based background processors and it has worked flawlessly to the needs I required.&lt;br /&gt;
-But one of the applications I have setup allows users to upload as many images (using &lt;a href=&quot;https://github.com/carrierwaveuploader/carrierwave&quot;&gt;Carrierwave&lt;/a&gt;) as they want at any given time.&lt;br /&gt;
-Upon successful upload of these images the files mime-types and extensions are verified to ensure that malicous files aren’t being uploaded to the server.&lt;br /&gt;
-Than the images are processed to create thumbnails, gallery images, etc. and when you’re processing numerous image files at one time without background processing this absolutely bogs down a server.&lt;br /&gt;
-When you have some a mechanism to do this effecively in the background this doesn’t have such a huge impact. But as of lately with a higher user base the image uploads have begin to display delayes in their processing times.&lt;/p&gt;
+&lt;p&gt;Until recently I had been using &lt;a href=&quot;https://github.com/resque/resque&quot;&gt;Resque&lt;/a&gt; the Holy Grail of Ruby based background processors and it has worked flawlessly to the needs I required. But one of the applications I have setup allows users to upload as many images (using &lt;a href=&quot;https://github.com/carrierwaveuploader/carrierwave&quot;&gt;Carrierwave&lt;/a&gt;) as they want at any given time. Upon the successful upload of these images the files mime-types and extensions are verified to ensure that malicous files aren’t being uploaded to the server. Than the images are processed to create thumbnails, gallery images, etc. and when you’re processing numerous image files at one time without background processing this absolutely bogs down a server. When you have some a mechanism to do this effecively in the background this doesn’t have such a huge impact. But as of lately with a higher user base the image uploads have begin to display delayes in their processing times.&lt;/p&gt;
 
-&lt;p&gt;It may not seem like much, but when it’s a few images here and there from numerous users at any given time, the processing time begins to add up.&lt;br /&gt;
-Especially when upon upload a thumbnail is generated and expected to be displayed almost immediately showing the available uploads for use.&lt;/p&gt;
+&lt;p&gt;It may not seem like much, but when it’s a few images here and there from numerous users at any given time, the processing time begins to add up. Especially when upon upload a thumbnail is generated and expected to be displayed almost immediately showing the available uploads for use.&lt;/p&gt;
 
-&lt;p&gt;One great thing about Sidekiq is that just like Resque it uses &lt;a href=&quot;http://redis.io/&quot;&gt;Redis&lt;/a&gt;, if you’ve never used Redis before, please do us all a favor and at least give a quick try.&lt;br /&gt;
-Compared to large SQL databases it’s very simple (key/value pair) and extremely fast, &lt;a href=&quot;https://github.com/redis-store/redis-rails&quot;&gt;some people&lt;/a&gt; have gone as far to use it for caching, sessions, and various other tasks.&lt;/p&gt;
+&lt;p&gt;One great thing about Sidekiq is that just like Resque it uses &lt;a href=&quot;http://redis.io/&quot;&gt;Redis&lt;/a&gt;, if you’ve never used Redis before, please do us all a favor and at least give a quick try. Compared to large SQL databases it’s very simple (key/value pair) and extremely fast, &lt;a href=&quot;https://github.com/redis-store/redis-rails&quot;&gt;some people&lt;/a&gt; have gone as far to use it for caching, sessions, and various other tasks.&lt;/p&gt;
 
-&lt;p&gt;The amazing part that makes this migration from Resque to Sidekiq fast and easy is that both libraries use Redis as their backend database to keep track of queues/tasks.&lt;br /&gt;
-A lot of the gems and initializers just require that you to change the backend from resque to sidekiq, while others just adjust to detecting what’s available.&lt;/p&gt;
+&lt;p&gt;The amazing part that makes this migration from Resque to Sidekiq fast and easy is that both libraries use Redis as their backend database to keep track of queues/tasks. A lot of the gems and initializers just require that you to change the backend from resque to sidekiq, while others just adjust to detecting what’s available.&lt;/p&gt;
 
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;c1&quot;&gt;# carrierwave_backgrounder&lt;/span&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;# carrierwave_backgrounder&lt;/span&gt;
 &lt;span class=&quot;n&quot;&gt;c&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;backend&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:resque&lt;/span&gt;
 &lt;span class=&quot;n&quot;&gt;c&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;backend&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:sidekiq&lt;/span&gt;
 
 &lt;span class=&quot;c1&quot;&gt;# devise-async&lt;/span&gt;
 &lt;span class=&quot;no&quot;&gt;Devise&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;Async&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;backend&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:resque&lt;/span&gt;
-&lt;span class=&quot;no&quot;&gt;Devise&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;Async&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;backend&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:sidekiq&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;span class=&quot;no&quot;&gt;Devise&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;Async&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;backend&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:sidekiq&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
 
 &lt;p&gt;In order to get everything working propely with your gems only slight adjustments are required.&lt;/p&gt;
 
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;c1&quot;&gt;# Gemfile&lt;/span&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;# Gemfile&lt;/span&gt;
 
 &lt;span class=&quot;c1&quot;&gt;#gem &#39;resque&#39;, :require =&amp;gt; &quot;resque/server&quot;&lt;/span&gt;
 &lt;span class=&quot;n&quot;&gt;gem&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&#39;sidekiq&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:github&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&#39;mperham/sidekiq&#39;&lt;/span&gt;
@@ -425,25 +417,14 @@ A lot of the gems and initializers just require that you to change the backend f
 &lt;span class=&quot;n&quot;&gt;gem&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&#39;carrierwave_backgrounder&#39;&lt;/span&gt;
 
 &lt;span class=&quot;c1&quot;&gt;# And if your using it for caching, sessions, etc.&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;gem&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&#39;redis-rails&#39;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;Performance wise, I have have noticed a significant increase in processing speed. Resque and delayed_job were produced when Ruby/Rails was&lt;br /&gt;
-hitting a massive explosion of growth something was needed and needed fast. Don’t get me wrong Resque is an amazing ruby gem, but if your&lt;br /&gt;
-application is using thread-safe libraries Sidekiq will kick quite a punch when it comes to your background processes.&lt;br /&gt;
-Upon benchmarking, Sidekiq tends to significantly outperform Resque when it comes to completing background processes.&lt;/p&gt;
-
-&lt;h3 id=&quot;goworker&quot;&gt;GoWorker&lt;/h3&gt;
-&lt;p&gt;Seeing as how lately I’ve been dealing with &lt;a href=&quot;http://golang.org/&quot;&gt;Go&lt;/a&gt; not only for it smooth edge, but compiled libraries tent to perform significantly faster than interpreted languages, another option I considered (and still am looking into is) &lt;a href=&quot;http://www.goworker.org/&quot;&gt;goworker&lt;/a&gt;.&lt;br /&gt;
-Goworker is pretty much a drop in replacement for Resque and Sidekiq, relies on Redis as well and massively out performed them both.&lt;br /&gt;
-But before I attempt to push this any faster and milk every drop of performance out of the application, I plan to learn quite a bit more about programming with Go.&lt;/p&gt;
+&lt;span class=&quot;n&quot;&gt;gem&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&#39;redis-rails&#39;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
 
 &lt;h3 id=&quot;performance&quot;&gt;Performance&lt;/h3&gt;
-&lt;p&gt;Performance wise, I have have noticed a significant increase in processing speed. Resque and delayed_job were produced when Ruby/Rails was&lt;br /&gt;
-hitting a massive explosion of growth something was needed and needed fast. Don’t get me wrong Resque is an amazing ruby gem, but if your&lt;br /&gt;
-application is using thread-safe libraries Sidekiq will kick quite a punch when it comes to your background processes.&lt;br /&gt;
-Upon benchmarking, Sidekiq tends to significantly outperform Resque when it comes to completing background processes.&lt;/p&gt;
+&lt;p&gt;Performance wise, I have have noticed a significant increase in processing speed. Resque and delayed_job were produced when Ruby/Rails was hitting a massive explosion of growth something was needed and needed fast. Don’t get me wrong Resque is an amazing ruby gem, but if your application is using thread-safe libraries Sidekiq will kick quite a punch when it comes to your background processes. Upon benchmarking, Sidekiq tends to significantly outperform Resque when it comes to completing background processes.&lt;/p&gt;
 
-&lt;h3 id=&quot;goworker-1&quot;&gt;GoWorker&lt;/h3&gt;
+&lt;h3 id=&quot;goworker&quot;&gt;GoWorker&lt;/h3&gt;
 &lt;p&gt;Seeing as how lately I’ve been dealing with &lt;a href=&quot;http://golang.org/&quot;&gt;Go&lt;/a&gt; not only for it smooth edge, but compiled libraries tent to perform significantly faster than interpreted languages, another option I considered (and still am looking into is) &lt;a href=&quot;http://www.goworker.org/&quot;&gt;goworker&lt;/a&gt;.&lt;br /&gt;
 Goworker is pretty much a drop in replacement for Resque and Sidekiq, relies on Redis as well and massively out performed them both.&lt;br /&gt;
 But before I attempt to push this any faster and milk every drop of performance out of the application, I plan to learn quite a bit more about programming with Go.&lt;/p&gt;
@@ -494,22 +475,13 @@ But before I attempt to push this any faster and milk every drop of performance 
     </author>
     <content type="html">&lt;p&gt;&lt;img src=&quot;/img/grape_bunch.png&quot; alt=&quot;Alt text&quot; title=&quot;Kumquat Tree&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;As of recently I have been building and growing a small vegetable garden for my family. My children love the idea of putting&lt;br /&gt;
-work into it something quite so amazing: digging up the dirt, playing the seeds and plant buds, watering, and taking responsibility for a small living object that will someday be rewarding them for their effort.&lt;br /&gt;
-But in the meantime they have to put time, effort, and tender love and care into taking care of the plants.&lt;/p&gt;
+&lt;p&gt;As of recently I have been building and growing a small vegetable garden for my family. My children love the idea of putting work into it something quite so amazing: digging up the dirt, playing the seeds and plant buds, watering, and taking responsibility for a small living object that will someday be rewarding them for their effort. But in the meantime they have to put time, effort, and tender love and care into taking care of the plants.&lt;/p&gt;
 
 &lt;p&gt;This is very much like any project you may work on. It usually starts out as a small idea, like planting a seed in your mind.&lt;/p&gt;
 
-&lt;p&gt;It begins by putting a lot of effort into turning that idea into something real, that idea begins to grow into something fruitful and full of life. But in order for your idea to grow into something big and wonderful you need to take care of it, feed it, nourish it, and look after it until it flourishes into something wonderful.&lt;br /&gt;
-But once it’s alive and growing you can’t just forget about it. You have to look after it, tend to it, make sure it doesn’t get out of control, and is well fed.&lt;/p&gt;
+&lt;p&gt;It begins by putting a lot of effort into turning that idea into something real, that idea begins to grow into something fruitful and full of life. But in order for your idea to grow into something big and wonderful you need to take care of it, feed it, nourish it, and look after it until it flourishes into something wonderful. But once it’s alive and growing you can’t just forget about it. You have to look after it, tend to it, make sure it doesn’t get out of control, and is well fed.&lt;/p&gt;
 
-&lt;p&gt;Once an application has reached a satisifing level of use and income you don’t just forget about it and hope it can maintain&lt;br /&gt;
-itself for the long run. Trends and technology are always advancing, needs, requirements, and desires are always growing.&lt;br /&gt;
-One day your application my be the top of its category and tomorrow it could be a long forgotten memory of the past (just&lt;br /&gt;
-look at how fast the social web has jumped around in the past few years). In other words, if you believe in your idea and&lt;br /&gt;
-dreams don’t let it dwindle and die. Build that idea, make it more than a dream, make it into something that will be used&lt;br /&gt;
-by someone other than yourself. Success isn’t achieved by just planting the seeds, you have to be patient and maintain&lt;br /&gt;
-the foundation of what you’ve build.&lt;/p&gt;
+&lt;p&gt;Once an application has reached a satisifing level of use and income you don’t just forget about it and hope it can maintain itself for the long run. Trends and technology are always advancing, needs, requirements, and desires are always growing. One day your application may be the top of its category and tomorrow it could be a long forgotten memory of the past (just look at how fast the social web has jumped around in the past few years). In other words, if you believe in your idea and dreams don’t let it dwindle and die. Build that idea, make it more than a dream, make it into something that will be used by someone other than yourself. Success isn’t achieved by just planting the seeds, you have to be patient and maintain the foundation of what you’ve build.&lt;/p&gt;
 
 &lt;hr /&gt;
 &lt;p&gt;Image obtained from - &lt;a href=&quot;http://www.sxc.hu/photo/1392865&quot;&gt;stock.xchng&lt;/a&gt;&lt;br /&gt;
@@ -527,23 +499,13 @@ the foundation of what you’ve build.&lt;/p&gt;
       <name>Brandon Hicks</name>
       <uri>http://theworkaround.com</uri>
     </author>
-    <content type="html">&lt;p&gt;We all know it’s been asked time and time again, “What do you want in the long run out of your life?” We all have hopes and dreams we want to fulfill, different routes we&lt;br /&gt;
-want to take through life. But we’re all (well most of us) going to end up the same in the end. We’ll either be stuffed&lt;br /&gt;
-away like a number in a nursing home or living with out children/grandchildren and feeling bad about them having to help&lt;br /&gt;
-manage our lives.&lt;/p&gt;
+    <content type="html">&lt;p&gt;We all know it’s been asked time and time again, “What do you want in the long run out of your life?” We all have hopes and dreams we want to fulfill, different routes we want to take through life. But we’re all (well most of us) going to end up the same in the end. We’ll either be stuffed away like a number in a nursing home or living with out children/grandchildren and feeling bad about them having to help manage our lives.&lt;/p&gt;
 
-&lt;p&gt;The reality of this question is, its’ not as easy of an answer as it seems. And as you live your life and experience new things&lt;br /&gt;
-your answer will change. When your young and stupid you want fame and money, but as you age and become more mature you&lt;br /&gt;
-want happiness and health.&lt;/p&gt;
+&lt;p&gt;The reality of this question is, its’ not as easy of an answer as it seems. And as you live your life and experience new things your answer will change. When your young and stupid you want fame and money, but as you age and become more mature you want happiness and health.&lt;/p&gt;
 
-&lt;p&gt;Our outcome in life isn’t always what we’d want it to be. But in the meantime, it’s about making the most you can out of what you love doing.&lt;br /&gt;
-The reason many people goto college, participate in training seminar, start a hobby, etc. is because they want to spend the bulk of their life doing what they’re passionate about.&lt;br /&gt;
-You don’t necessarily have to be a millionaire living extravagantly or a philanthropist in order to be happy. But you do want to look back and&lt;br /&gt;
-tell people you did something amazing with your life, that you weren’t just a couch potato sitting back coasting through life and always hoping for more.&lt;/p&gt;
+&lt;p&gt;Our outcome in life isn’t always what we’d want it to be. But in the meantime, it’s about making the most you can out of what you love doing. The reason many people goto college, participate in training seminar, start a hobby, etc. is because they want to spend the bulk of their life doing what they’re passionate about. You don’t necessarily have to be a millionaire living extravagantly or a philanthropist in order to be happy. But you do want to look back and tell people you did something amazing with your life, that you weren’t just a couch potato sitting back coasting through life and always hoping for more.&lt;/p&gt;
 
-&lt;p&gt;At the moment my children and fiance, are my number one priorities. But I am still passionate about what makes me happy, with keeps my mind going, and something that pushes my limits.&lt;br /&gt;
-If you’re deeply passionate about an interest, you don’t just make it a hobby, don’t think about pushing it aside and saying it’s just a phase.&lt;br /&gt;
-Think about diving head first into it, make a life out of doing what you enjoy. And creating a stable life for you and your family in the long run.&lt;/p&gt;
+&lt;p&gt;At the moment my children and fiance, are my number one priorities. But I am still passionate about what makes me happy, with keeps my mind going, and something that pushes my limits. If you’re deeply passionate about an interest, you don’t just make it a hobby, don’t think about pushing it aside and saying it’s just a phase. Think about diving head first into it, make a life out of doing what you enjoy. And creating a stable life for you and your family in the long run.&lt;/p&gt;
 </content>
   </entry>
   
