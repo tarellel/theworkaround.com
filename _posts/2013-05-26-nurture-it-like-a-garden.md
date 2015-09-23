@@ -6,7 +6,7 @@ description: "Building a web app is like growing a garden, it takes alot of pati
 tags: [ misc, projects ]
 ---
 
-![Alt text](/img/grape_bunch.png "Kumquat Tree")
+<img src="/img/grape_bunch.png" alt="Kumquat Tree" class="img-responsive">
 
 As of recently I have been building and growing a small vegetable garden for my family. My children love the idea of putting work into it something quite so amazing: digging up the dirt, playing the seeds and plant buds, watering, and taking responsibility for a small living object that will someday be rewarding them for their effort. But in the meantime they have to put time, effort, and tender love and care into taking care of the plants.
 

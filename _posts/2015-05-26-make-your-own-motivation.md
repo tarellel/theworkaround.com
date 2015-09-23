@@ -6,7 +6,7 @@ description: ""
 tags: [life, motivation, work]
 ---
 
-<img src="/img/ground-stones-pebbles.jpg">
+<img src="/img/ground-stones-pebbles.jpg" alt="Barren Rock Bed" class="img-responsive">
 Sometimes we get the point where we experience a level of extreme burnout. We don't want to admit it and we don't want to step down and evaluate our lives to admit it's true. And as humans we don't want to make any extreme changes, especially once we've found a comfort zone. It may be caused by our job, our routine, or extreme stress. The burnout begins to eat away at you, it may feel like nothing and start small but you begin to notice it after a while.
 
 * Fatigue and constant tiredness
