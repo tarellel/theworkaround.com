@@ -4,7 +4,7 @@
   <title>TheWorkAround</title>
   <link href="http://theworkaround.com/"/>
   <link type="application/atom+xml" rel="self" href="http://theworkaround.com/atom.xml"/>
-  <updated>2015-09-23T00:16:15-06:00</updated>
+  <updated>2015-09-23T00:39:26-06:00</updated>
   <id>http://theworkaround.com/</id>
   <author>
     <name>Brandon Hicks</name>
@@ -172,7 +172,7 @@
       <name>Brandon Hicks</name>
       <uri>http://theworkaround.com</uri>
     </author>
-    <content type="html">&lt;p&gt;&lt;img src=&quot;/img/ground-stones-pebbles.jpg&quot; /&gt;&lt;br /&gt;
+    <content type="html">&lt;p&gt;&lt;img src=&quot;/img/ground-stones-pebbles.jpg&quot; alt=&quot;Barren Rock Bed&quot; class=&quot;img-responsive&quot; /&gt;&lt;br /&gt;
 Sometimes we get the point where we experience a level of extreme burnout. We don’t want to admit it and we don’t want to step down and evaluate our lives to admit it’s true. And as humans we don’t want to make any extreme changes, especially once we’ve found a comfort zone. It may be caused by our job, our routine, or extreme stress. The burnout begins to eat away at you, it may feel like nothing and start small but you begin to notice it after a while.&lt;/p&gt;
 
 &lt;ul&gt;
@@ -473,7 +473,7 @@ But before I attempt to push this any faster and milk every drop of performance 
       <name>Brandon Hicks</name>
       <uri>http://theworkaround.com</uri>
     </author>
-    <content type="html">&lt;p&gt;&lt;img src=&quot;/img/grape_bunch.png&quot; alt=&quot;Alt text&quot; title=&quot;Kumquat Tree&quot; /&gt;&lt;/p&gt;
+    <content type="html">&lt;p&gt;&lt;img src=&quot;/img/grape_bunch.png&quot; alt=&quot;Kumquat Tree&quot; class=&quot;img-responsive&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;As of recently I have been building and growing a small vegetable garden for my family. My children love the idea of putting work into it something quite so amazing: digging up the dirt, playing the seeds and plant buds, watering, and taking responsibility for a small living object that will someday be rewarding them for their effort. But in the meantime they have to put time, effort, and tender love and care into taking care of the plants.&lt;/p&gt;
 

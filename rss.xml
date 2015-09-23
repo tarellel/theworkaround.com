@@ -6,8 +6,8 @@
     <atom:link href="http://theworkaround.com/rss.xml" rel="self" type="application/rss+xml" />
     <description>The infinate rambelings and ideas of Brandon Hicks</description>
     <language>en-us</language>
-    <pubDate>Wed, 23 Sep 2015 00:16:15 -0600</pubDate>
-    <lastBuildDate>Wed, 23 Sep 2015 00:16:15 -0600</lastBuildDate>
+    <pubDate>Wed, 23 Sep 2015 00:39:26 -0600</pubDate>
+    <lastBuildDate>Wed, 23 Sep 2015 00:39:26 -0600</lastBuildDate>
 
     
     <item>
@@ -162,7 +162,7 @@
       <pubDate>Tue, 26 May 2015 00:00:00 -0600</pubDate>
       <author> ( {"email"=>"tarellel@gmail.com", "name"=>"Brandon Hicks", "github"=>"tarellel", "twitter"=>"tarellel"} )</author>
       <guid>http://theworkaround.com/2015/05/26/make-your-own-motivation</guid>
-      <description>&lt;p&gt;&lt;img src=&quot;/img/ground-stones-pebbles.jpg&quot; /&gt;&lt;br /&gt;
+      <description>&lt;p&gt;&lt;img src=&quot;/img/ground-stones-pebbles.jpg&quot; alt=&quot;Barren Rock Bed&quot; class=&quot;img-responsive&quot; /&gt;&lt;br /&gt;
 Sometimes we get the point where we experience a level of extreme burnout. We don’t want to admit it and we don’t want to step down and evaluate our lives to admit it’s true. And as humans we don’t want to make any extreme changes, especially once we’ve found a comfort zone. It may be caused by our job, our routine, or extreme stress. The burnout begins to eat away at you, it may feel like nothing and start small but you begin to notice it after a while.&lt;/p&gt;
 
 &lt;ul&gt;
@@ -439,7 +439,7 @@ But before I attempt to push this any faster and milk every drop of performance 
       <pubDate>Sun, 26 May 2013 00:00:00 -0600</pubDate>
       <author> ( {"email"=>"tarellel@gmail.com", "name"=>"Brandon Hicks", "github"=>"tarellel", "twitter"=>"tarellel"} )</author>
       <guid>http://theworkaround.com/2013/05/26/nurture-it-like-a-garden</guid>
-      <description>&lt;p&gt;&lt;img src=&quot;/img/grape_bunch.png&quot; alt=&quot;Alt text&quot; title=&quot;Kumquat Tree&quot; /&gt;&lt;/p&gt;
+      <description>&lt;p&gt;&lt;img src=&quot;/img/grape_bunch.png&quot; alt=&quot;Kumquat Tree&quot; class=&quot;img-responsive&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;As of recently I have been building and growing a small vegetable garden for my family. My children love the idea of putting work into it something quite so amazing: digging up the dirt, playing the seeds and plant buds, watering, and taking responsibility for a small living object that will someday be rewarding them for their effort. But in the meantime they have to put time, effort, and tender love and care into taking care of the plants.&lt;/p&gt;
 
