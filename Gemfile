@@ -4,7 +4,7 @@ gem 'jekyll'
 # Plugins
 gem 'jekyll-assets'#, :git -> 'git://github.com/ixti/jekyll-assets.git'
 #gem 'jekyll-asset-pipeline'# https://github.com/matthodan/jekyll-asset-pipeline
-gem 'jekyll-tagging', :git => 'git://github.com/pattex/jekyll-tagging.git'
+gem 'jekyll-tagging', github: 'pattex/jekyll-tagging'
 # possible tag alternative - https://github.com/charliepark/charliepark.github.com/blob/master/_plugins/tag_gen.rb
 
 # http://realjenius.com/2012/12/01/jekyll-category-tag-paging-feeds/
@@ -18,3 +18,8 @@ gem 'kramdown'
 #gem 'coderay_bash' # :bash :erb_bash
 gem 'rouge' # http://rouge.jayferd.us/demo
             # http://rouge.jneen.net/
+
+####################
+# Assets and View related gems
+####################
+gem 'bourbon'
