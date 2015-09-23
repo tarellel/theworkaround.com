@@ -6,17 +6,14 @@
     <title>{% if page.tag %}Tagged with: {{page.tag}} {% else %}{{ page.title }}{% endif %} - {{ site.title }}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,600' rel='stylesheet' type='text/css'>
-    <link href='http://fonts.googleapis.com/css?family=Inconsolata:400,700' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    <link href='https://fonts.googleapis.com/css?family=Roboto:400,400italic,500,500italic,700,700italic,300,300italic' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
     {{ 'app' | stylesheet }}
 
     <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
-      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-    <!--[if IE 7]>
-      <script src="/assets/css/font-awesome-ie7.css"></script>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 
     <link href="/atom.xml" rel="alternate" title="Atom" type="application/atom+xml">
@@ -35,7 +32,7 @@
   <div class="container">
     <div class="site">
       <div class="row">
-        <div class="span2 text-right">
+        <div class="col-md-2 text-right">
           <div class="social-icons">
           <p>
             <a href="/" title="Return to Homepage">/</a>
@@ -55,7 +52,7 @@
             <a href="/archive">Archive</a>
           </div>
         </div>
-        <div class="span9 content">
+        <div class="col-md-10 content">
           {{ content }}
         </div>
       </div>

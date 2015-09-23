@@ -1,0 +1,91 @@
+// Gradient Sample - http://www.gibbon.co/
+
+$txt-color: #73879C;
+$monospace-font: Menlo, Monaco, 'Courier New', monospace;
+// 'Inconsolata', 'Courier New', 'Courier', 'monospace'
+
+/********************
+ * Attributes
+ ********************/
+ html{
+  font-size: 16px;
+  line-height: 1.5em;
+}
+ body{
+  border-top: 1em solid #4cb8c4;
+  color: $txt-color;
+  font: 400 16px/1.5 'Roboto','Helvetica Neue', Helvetica, Arial, sans-serif;
+  padding: 1em 0 2.5em 0;
+
+  /* Antialias the font  for smooth text rendering */
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-font-smoothing: grayscale;
+  -moz-osx-font-smoothing: grayscale;
+  font-smoothing: antialiased;
+  font-smooth: always;
+}
+
+a, a:link, a:active, a:visited { color: #4dbeba; }
+a:hover { color: #4EA7BF; }
+
+h1, h2, h3, h4, h5 {
+  color: darken($txt-color, 10%);
+  font-family: 'Roboto','Helvetica Neue', Helvetica, Arial, sans-serif;
+  //font-weight:300;
+  font-weight: 400;
+}
+
+.centered-text { text-align: center; }
+
+/********************
+ * Layout
+ ********************/
+ul.posts {
+  margin: 0; padding: 0;
+  list-style-type: none;
+}
+
+.posts {
+  font-size: 115%;
+
+  li{
+    margin-bottom: 1em; // .75em
+  }
+}
+
+.post-title {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+
+/***** Highlight first sentence of the post
+.post>p:first-child{font-size:20px;font-size:1.25rem}
+*/
+.meta { color: #a8a8a8; }
+
+
+.social-icons {
+  text-align: center;
+
+  a {
+    margin-left: .5em;
+    color: #bdbdbd;
+    font-size: 1.45em;
+
+    &:hover{
+      color: #7e7e7e;
+      text-decoration: none;
+    }
+  }
+}
+
+.navlinks {
+  font-size: 1.15em;
+  padding-right: 1em;
+}
+
+.content {
+  padding: 0 1em 0 1em;
+}

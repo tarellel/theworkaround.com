@@ -5,28 +5,15 @@
 #safe: true
 encoding:     "utf-8"
 lsi: false
-#pygments: true
-#highlighter: pygments
-#highlighter: coderay
+
 highlighter: rouge
 markdown: kramdown
 kramdown:
   input: GFM
   syntax_highlighter: rouge
 
-#
-#  use_coderay: true
-#  coderay:
-#    coderay_wrap: div
-#    # coderay_line_numbers: table
-#    coderay_line_numbers: nil
-#    coderay_tab_width: 4
-#    coderay_bold_every: 10
-#    coderay_css: class
 
-
-
-exclude: [ "README.md", "Rakefile", 'ideas.md', 'misc.md']
+exclude: ['.gitignore', 'README.md', "Rakefile", 'ideas.md', 'misc.md']
 permalink:  /:year/:month/:day/:title.html
 
 title: 'TheWorkAround'
@@ -56,13 +43,15 @@ assets:
   #baseurl: /assets/
 
   compress:
-    css:  sass
+    css:  scss
     js:   uglifier
 
   # Pathnames where to find assets relative to the root of the site.
   sources:
-    - _assets/js
-    - _assets/css
-    - _assets/img
+    - _assets
+    - _assets/javascripts
+    - _assets/stylesheets
+    - _assets/images
     #- _assets/fonts
   gzip: [ text/css, application/javascript ]
+

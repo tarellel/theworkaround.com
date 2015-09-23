@@ -1,0 +1,15 @@
+@import 'bootstrap'; // bootstrap w/jekyll: http://kvurd.com/blog/my-jekyll-blog-setup-bootstrap-sass-pygments/
+@import 'style';
+@import 'syntax/syntax';
+@import 'syntax/darky';
+
+
+ pre, code, pre.highlight code{
+  font-family: $monospace-font;
+  font-size: .9rem; // .9em
+ }
+
+//pre.highlight code{
+//  font-family: $monospace-font;
+//  font-size:15px;
+//}
