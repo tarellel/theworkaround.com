@@ -79,5 +79,6 @@ end # task :page
 
 desc "Launch preview environment"
 task :preview do
-  system "jekyll --auto --server"
+  #system "jekyll --auto --server"
+  system "jekyll serve --watch"
 end
