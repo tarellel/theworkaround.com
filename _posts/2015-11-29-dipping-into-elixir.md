@@ -4,6 +4,7 @@ title: "Dipping into Elixir"
 date: 2015-11-29 22-11-58
 description: ""
 tags: [development, elixir, programming]
+comments: true
 ---
 
 ### Elixir

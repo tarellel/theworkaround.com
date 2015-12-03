@@ -1,6 +1,6 @@
 # src : https://github.com/plusjade/jekyll-bootstrap/blob/master/Rakefile
 # GOOD ONE - https://raw.github.com/pattex/kleinerdrei.net/master/Rakefile
-require "rubygems"
+require 'rubygems'
 require 'rake'
 require 'yaml'
 require 'time'
@@ -37,16 +37,17 @@ task :post do
 
   puts "Creating new post: #{filename}"
   open(filename, 'w') do |post|
-    post.puts "---"
-    post.puts "layout: post"
+    post.puts '---'
+    post.puts 'layout: post'
     post.puts "title: \"#{title.gsub(/-/,' ')}\""
     post.puts "date: #{postdate.strftime("%Y-%m-%d %H-%m-%S")}"
     post.puts 'description: ""'
     #post.puts "category: "
-    post.puts "tags: []"
-    post.puts "---"
-    #post.puts "{% include JB/setup %}"
-    post.puts "Lorem Ipsum"
+    post.puts 'tags: []'
+    post.puts 'comments: true'
+    post.puts '---'
+    # post.puts "{% include JB/setup %}"
+    post.puts 'Lorem Ipsum'
   end
 end # task :post
 
@@ -66,14 +67,14 @@ task :page do
   mkdir_p File.dirname(filename)
   puts "Creating new page: #{filename}"
   open(filename, 'w') do |post|
-    post.puts "---"
+    post.puts '---'
     post.puts "layout: page"
     post.puts "title: \"#{title}\""
     post.puts "date: #{postdate.strftime("%Y-%m-%d %H-%m-%S")}"
     post.puts 'description: ""'
-    post.puts "---"
+    post.puts '---'
     #post.puts "{% include JB/setup %}"
-    post.puts "Lorem Ipsum"
+    post.puts 'Lorem Ipsum'
   end
 end # task :page
 
