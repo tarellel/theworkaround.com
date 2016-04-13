@@ -42,3 +42,5 @@ dwsync.xml
 intermediate
 publish
 .idea
+.asset-cache
+.asset-cache/*
