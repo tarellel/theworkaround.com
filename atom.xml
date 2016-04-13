@@ -4,7 +4,7 @@
   <title>TheWorkAround</title>
   <link href="http://theworkaround.com/"/>
   <link type="application/atom+xml" rel="self" href="http://theworkaround.com/atom.xml"/>
-  <updated>2015-12-06T16:31:10-07:00</updated>
+  <updated>2016-04-12T23:35:39-06:00</updated>
   <id>http://theworkaround.com/</id>
   <author>
     <name>Brandon Hicks</name>
@@ -434,7 +434,7 @@
       <name>Brandon Hicks</name>
       <uri>http://theworkaround.com</uri>
     </author>
-    <content type="html">&lt;p&gt;&lt;img src=&quot;/img/ground-stones-pebbles.jpg&quot; alt=&quot;Barren Rock Bed&quot; class=&quot;img-responsive&quot; /&gt;&lt;br /&gt;
+    <content type="html">&lt;p&gt;&lt;img src=&quot;/img/ground-stones-pebbles.jpg&quot; alt=&quot;Barren Rock Bed&quot; class=&quot;img-responsive&quot; /&gt;
 Sometimes we get the point where we experience a level of extreme burnout. We don’t want to admit it and we don’t want to step down and evaluate our lives to admit it’s true. And as humans we don’t want to make any extreme changes, especially once we’ve found a comfort zone. It may be caused by our job, our routine, or extreme stress. The burnout begins to eat away at you, it may feel like nothing and start small but you begin to notice it after a while.&lt;/p&gt;
 
 &lt;ul&gt;
@@ -687,8 +687,8 @@ Sometimes we get the point where we experience a level of extreme burnout. We do
 &lt;p&gt;Performance wise, I have have noticed a significant increase in processing speed. Resque and delayed_job were produced when Ruby/Rails was hitting a massive explosion of growth something was needed and needed fast. Don’t get me wrong Resque is an amazing ruby gem, but if your application is using thread-safe libraries Sidekiq will kick quite a punch when it comes to your background processes. Upon benchmarking, Sidekiq tends to significantly outperform Resque when it comes to completing background processes.&lt;/p&gt;
 
 &lt;h3 id=&quot;goworker&quot;&gt;GoWorker&lt;/h3&gt;
-&lt;p&gt;Seeing as how lately I’ve been dealing with &lt;a href=&quot;http://golang.org/&quot;&gt;Go&lt;/a&gt; not only for it smooth edge, but compiled libraries tent to perform significantly faster than interpreted languages, another option I considered (and still am looking into is) &lt;a href=&quot;http://www.goworker.org/&quot;&gt;goworker&lt;/a&gt;.&lt;br /&gt;
-Goworker is pretty much a drop in replacement for Resque and Sidekiq, relies on Redis as well and massively out performed them both.&lt;br /&gt;
+&lt;p&gt;Seeing as how lately I’ve been dealing with &lt;a href=&quot;http://golang.org/&quot;&gt;Go&lt;/a&gt; not only for it smooth edge, but compiled libraries tent to perform significantly faster than interpreted languages, another option I considered (and still am looking into is) &lt;a href=&quot;http://www.goworker.org/&quot;&gt;goworker&lt;/a&gt;.
+Goworker is pretty much a drop in replacement for Resque and Sidekiq, relies on Redis as well and massively out performed them both.
 But before I attempt to push this any faster and milk every drop of performance out of the application, I plan to learn quite a bit more about programming with Go.&lt;/p&gt;
 </content>
   </entry>
@@ -746,7 +746,7 @@ But before I attempt to push this any faster and milk every drop of performance 
 &lt;p&gt;Once an application has reached a satisifing level of use and income you don’t just forget about it and hope it can maintain itself for the long run. Trends and technology are always advancing, needs, requirements, and desires are always growing. One day your application may be the top of its category and tomorrow it could be a long forgotten memory of the past (just look at how fast the social web has jumped around in the past few years). In other words, if you believe in your idea and dreams don’t let it dwindle and die. Build that idea, make it more than a dream, make it into something that will be used by someone other than yourself. Success isn’t achieved by just planting the seeds, you have to be patient and maintain the foundation of what you’ve build.&lt;/p&gt;
 
 &lt;hr /&gt;
-&lt;p&gt;Image obtained from - &lt;a href=&quot;http://www.sxc.hu/photo/1392865&quot;&gt;stock.xchng&lt;/a&gt;&lt;br /&gt;
+&lt;p&gt;Image obtained from - &lt;a href=&quot;http://www.sxc.hu/photo/1392865&quot;&gt;stock.xchng&lt;/a&gt;
 &lt;!-- Image obtained from - [stock.xchng](http://www.sxc.hu/photo/1402199/) --&gt;&lt;/p&gt;
 </content>
   </entry>
@@ -781,7 +781,7 @@ But before I attempt to push this any faster and milk every drop of performance 
       <name>Brandon Hicks</name>
       <uri>http://theworkaround.com</uri>
     </author>
-    <content type="html">&lt;p&gt;Yum, a fresh new reset blog is like a fresh new package of bacon.&lt;br /&gt;
+    <content type="html">&lt;p&gt;Yum, a fresh new reset blog is like a fresh new package of bacon.
 You don’t know exactly what it’s going to taste like, but you know it’s going to be delicious and full of delight.&lt;/p&gt;
 </content>
   </entry>

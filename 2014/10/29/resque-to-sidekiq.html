@@ -8,7 +8,7 @@
 
     <link href='https://fonts.googleapis.com/css?family=Roboto:400,400italic,500,500italic,700,700italic,300,300italic' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="/assets/app-196daeaaac8a90593facac81c332ea73.css">
+    <link type="text/css" rel="stylesheet" href="/assets/stylesheets/app.css">
 
     <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
@@ -119,8 +119,8 @@
 <p>Performance wise, I have have noticed a significant increase in processing speed. Resque and delayed_job were produced when Ruby/Rails was hitting a massive explosion of growth something was needed and needed fast. Don’t get me wrong Resque is an amazing ruby gem, but if your application is using thread-safe libraries Sidekiq will kick quite a punch when it comes to your background processes. Upon benchmarking, Sidekiq tends to significantly outperform Resque when it comes to completing background processes.</p>
 
 <h3 id="goworker">GoWorker</h3>
-<p>Seeing as how lately I’ve been dealing with <a href="http://golang.org/">Go</a> not only for it smooth edge, but compiled libraries tent to perform significantly faster than interpreted languages, another option I considered (and still am looking into is) <a href="http://www.goworker.org/">goworker</a>.<br />
-Goworker is pretty much a drop in replacement for Resque and Sidekiq, relies on Redis as well and massively out performed them both.<br />
+<p>Seeing as how lately I’ve been dealing with <a href="http://golang.org/">Go</a> not only for it smooth edge, but compiled libraries tent to perform significantly faster than interpreted languages, another option I considered (and still am looking into is) <a href="http://www.goworker.org/">goworker</a>.
+Goworker is pretty much a drop in replacement for Resque and Sidekiq, relies on Redis as well and massively out performed them both.
 But before I attempt to push this any faster and milk every drop of performance out of the application, I plan to learn quite a bit more about programming with Go.</p>
 
 </div>
