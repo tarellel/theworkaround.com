@@ -6,6 +6,7 @@
 encoding:     "utf-8"
 lsi: false
 
+# Conversion
 highlighter: rouge
 markdown: kramdown
 kramdown:
@@ -36,6 +37,7 @@ apis:
 # tagging - https://github.com/pattex/jekyll-tagging
 tag_page_layout: tag_page
 tag_page_dir: tag
+tag_permalink_style: pretty
 
 # for jekyll-assets
 assets:
@@ -54,4 +56,3 @@ assets:
     - _assets/images
     #- _assets/fonts
   gzip: [ text/css, application/javascript ]
-
