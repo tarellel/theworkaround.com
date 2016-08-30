@@ -74,7 +74,7 @@
   </div>
   <div class="col-md-6 text-right">
     
-      Tags: <a href="/tag/ruby.html" rel="tag">ruby</a>, <a href="/tag/rails.html" rel="tag">rails</a>, <a href="/tag/redis.html" rel="tag">redis</a>
+      Tags: <a href="/tag/ruby/" rel="tag">ruby</a>, <a href="/tag/rails/" rel="tag">rails</a>, <a href="/tag/redis/" rel="tag">redis</a>
     
   </div>
 </div>
@@ -91,7 +91,7 @@
 
 <p>The amazing part that makes this migration from Resque to Sidekiq fast and easy is that both libraries use Redis as their backend database to keep track of queues/tasks. A lot of the gems and initializers just require that you to change the backend from resque to sidekiq, while others just adjust to detecting what’s available.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="c1"># carrierwave_backgrounder</span>
+<div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="c1"># carrierwave_backgrounder</span>
 <span class="n">c</span><span class="p">.</span><span class="nf">backend</span> <span class="ss">:resque</span>
 <span class="n">c</span><span class="p">.</span><span class="nf">backend</span> <span class="ss">:sidekiq</span>
 
@@ -103,7 +103,7 @@
 
 <p>In order to get everything working propely with your gems only slight adjustments are required.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="c1"># Gemfile</span>
+<div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="c1"># Gemfile</span>
 
 <span class="c1">#gem 'resque', :require =&gt; "resque/server"</span>
 <span class="n">gem</span> <span class="s1">'sidekiq'</span><span class="p">,</span> <span class="ss">:github</span> <span class="o">=&gt;</span> <span class="s1">'mperham/sidekiq'</span>

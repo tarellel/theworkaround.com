@@ -74,7 +74,7 @@
   </div>
   <div class="col-md-6 text-right">
     
-      Tags: <a href="/tag/ruby.html" rel="tag">ruby</a>, <a href="/tag/rails.html" rel="tag">rails</a>
+      Tags: <a href="/tag/ruby/" rel="tag">ruby</a>, <a href="/tag/rails/" rel="tag">rails</a>
     
   </div>
 </div>
@@ -89,19 +89,19 @@
 
 <p>With Foreman all you need to do is install the gem, create a <code class="highlighter-rouge">Procfile</code> and put your desired tasks in it. A Profile will contain the designated tasks which you wish to have initiated when you begin the application. An example of starting the rails server with foreman could look something similar to the following</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="ss">web: </span><span class="n">bundle</span> <span class="nb">exec</span> <span class="n">rails</span> <span class="n">server</span>
+<div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="ss">web: </span><span class="n">bundle</span> <span class="nb">exec</span> <span class="n">rails</span> <span class="n">server</span>
 </code></pre>
 </div>
 
 <p>Or if you wish to call you server application specifically you can use something similar to the example below.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="ss">web: </span><span class="n">bundle</span> <span class="nb">exec</span> <span class="n">thin</span> <span class="n">start</span>
+<div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="ss">web: </span><span class="n">bundle</span> <span class="nb">exec</span> <span class="n">thin</span> <span class="n">start</span>
 </code></pre>
 </div>
 
 <p>I know what you’re thinking, “But wait this doesn’t change anything, this is just another file to put into my Rails applications directory.” But let me explain a little bit, every new line that you add to the Profile can have a task followed by it’s specific command that you would normally use in the command line. For example say you run Resque, Solr, Guard, or a number of other tasks when you run your server, add these tasks and they will start with the server when you run the foreman command.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="ss">web:    </span><span class="n">bundle</span> <span class="nb">exec</span> <span class="n">thin</span> <span class="n">start</span>
+<div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="ss">web:    </span><span class="n">bundle</span> <span class="nb">exec</span> <span class="n">thin</span> <span class="n">start</span>
 <span class="ss">solr:   </span><span class="n">rake</span> <span class="n">sunspot</span><span class="ss">:solr:run</span>
 <span class="ss">worker: </span><span class="n">bundle</span> <span class="nb">exec</span> <span class="n">rake</span> <span class="n">resque</span><span class="ss">:work</span> <span class="no">QUEUE</span><span class="o">=*</span>
 <span class="ss">guard:  </span><span class="n">bundle</span> <span class="nb">exec</span> <span class="n">guard</span>
@@ -110,7 +110,7 @@
 
 <p>So now instead of having 4 or 5 different tabs open for your terminal all you need to type in the command line is <code class="highlighter-rouge">foreman start</code> and you are ready to go. Below is an example of something similar that you will be output when setup and ran properly.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="gp">master!$ </span>foreman start
+<div class="language-shell highlighter-rouge"><pre class="highlight"><code><span class="gp">master!$ </span>foreman start
 18:14:06 web.1     | started with pid 1247
 18:14:06 sidekiq.1 | started with pid 1248
 18:14:12 web.1     | <span class="o">=</span>&gt; Booting Thin

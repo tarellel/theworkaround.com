@@ -74,7 +74,7 @@
   </div>
   <div class="col-md-6 text-right">
     
-      Tags: <a href="/tag/database.html" rel="tag">database</a>, <a href="/tag/development.html" rel="tag">development</a>, <a href="/tag/rails.html" rel="tag">rails</a>, <a href="/tag/ruby.html" rel="tag">ruby</a>
+      Tags: <a href="/tag/database/" rel="tag">database</a>, <a href="/tag/development/" rel="tag">development</a>, <a href="/tag/rails/" rel="tag">rails</a>, <a href="/tag/ruby/" rel="tag">ruby</a>
     
   </div>
 </div>
@@ -84,7 +84,7 @@
 
 <p>Lets say you’ve got 3 servers running the actual application, each one chugging along running serveral instances of your web application. Now say it’s a basic CRUD application if you’ve got several instances writing to the database at once you will have a conflict. If you’ve got a table named books and a few rows are being added at once by seperate visitors, you’re auto incrimenting the rows and lets say on each one it creates row id: 72. Now when they combine their information together you’re going to have an issue with inconsistent data trying to overlap.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="ss">id: </span><span class="mi">72</span><span class="p">,</span> <span class="ss">title: </span><span class="no">The</span> <span class="no">Raven</span>
+<div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="ss">id: </span><span class="mi">72</span><span class="p">,</span> <span class="ss">title: </span><span class="no">The</span> <span class="no">Raven</span>
 <span class="ss">id: </span><span class="mi">72</span><span class="p">,</span> <span class="ss">title: </span><span class="no">My</span> <span class="no">Side</span> <span class="n">of</span> <span class="n">the</span> <span class="no">Mountain</span>
 <span class="ss">id: </span><span class="mi">72</span><span class="p">,</span> <span class="ss">title: </span><span class="no">The</span> <span class="no">Giver</span>
 </code></pre>
@@ -92,7 +92,7 @@
 
 <p>Now if we were inserting these datasets into the different database servers while using UUIDs we may could up with something to the following example below.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="ss">id: </span><span class="mi">898</span><span class="n">f73bc</span><span class="o">-</span><span class="mi">290</span><span class="n">c</span><span class="o">-</span><span class="mi">4427</span><span class="o">-</span><span class="n">b75a</span><span class="o">-</span><span class="mi">68</span><span class="n">f34464e188</span><span class="p">,</span> <span class="ss">title: </span><span class="no">The</span> <span class="no">Raven</span>
+<div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="ss">id: </span><span class="mi">898</span><span class="n">f73bc</span><span class="o">-</span><span class="mi">290</span><span class="n">c</span><span class="o">-</span><span class="mi">4427</span><span class="o">-</span><span class="n">b75a</span><span class="o">-</span><span class="mi">68</span><span class="n">f34464e188</span><span class="p">,</span> <span class="ss">title: </span><span class="no">The</span> <span class="no">Raven</span>
 <span class="ss">id: </span><span class="n">dd126f47</span><span class="o">-</span><span class="n">de45</span><span class="o">-</span><span class="mi">4</span><span class="n">cbe</span><span class="o">-</span><span class="n">aa1c</span><span class="o">-</span><span class="mi">8</span><span class="n">b052693498e</span><span class="p">,</span> <span class="ss">title: </span><span class="no">My</span> <span class="no">Side</span> <span class="n">of</span> <span class="n">the</span> <span class="no">Mountain</span>
 <span class="ss">id: </span><span class="mi">479</span><span class="n">af9a8</span><span class="o">-</span><span class="n">c096</span><span class="o">-</span><span class="mi">42</span><span class="n">e2</span><span class="o">-</span><span class="mi">8</span><span class="n">a29</span><span class="o">-</span><span class="mi">4</span><span class="n">a321cdd5f7c</span><span class="p">,</span> <span class="ss">title: </span><span class="no">The</span> <span class="no">Giver</span>
 </code></pre>
@@ -103,7 +103,7 @@
 <h3 id="how-can-i-do-this-is-rails">How can I do this is Rails?</h3>
 <p>When you are generating models and scaffolds the <code class="highlighter-rouge">id</code> column is usually automatically generated with every table (unless specified), this is a feature build into Rails to make it easier and faster to develop.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="n">create_table</span> <span class="s2">"books"</span><span class="p">,</span> <span class="ss">force: :cascade</span> <span class="k">do</span> <span class="o">|</span><span class="n">t</span><span class="o">|</span>
+<div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="n">create_table</span> <span class="s2">"books"</span><span class="p">,</span> <span class="ss">force: :cascade</span> <span class="k">do</span> <span class="o">|</span><span class="n">t</span><span class="o">|</span>
   <span class="n">t</span><span class="p">.</span><span class="nf">string</span>   <span class="s2">"title"</span>
   <span class="n">t</span><span class="p">.</span><span class="nf">timestamps</span> <span class="ss">null: </span><span class="kp">false</span>
 <span class="k">end</span>
@@ -121,13 +121,13 @@
 <h3 id="postgresql">Postgresql</h3>
 <p>The method in order to get uuids to work with Postgres tends to be quite a bit easier (in my opinion), because Postgres has a built in method for generating unique uuids for row ids.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>rails g migration enable_uuid_extension
+<div class="language-shell highlighter-rouge"><pre class="highlight"><code>rails g migration enable_uuid_extension
 </code></pre>
 </div>
 
 <p>In the migration we tell the Postgres database to use the uuid extension, we do this in order to have the database automatically generate UUIDs on the objects creation rather than having the Rails Application generate the UUIDs and adding additional process time to the server.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="k">class</span> <span class="nc">EnableUuidExtension</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Migration</span>
+<div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="k">class</span> <span class="nc">EnableUuidExtension</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Migration</span>
   <span class="k">def</span> <span class="nf">change</span>
     <span class="n">enable_extension</span> <span class="s1">'uuid-ossp'</span>
   <span class="k">end</span>
@@ -137,13 +137,13 @@
 
 <p>Now lets generate a book model and get started on adjusting the migration to allow the application to generate a UUID for the id instead of a basic integer.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="n">rails</span> <span class="n">g</span> <span class="n">model</span> <span class="no">Book</span> <span class="n">title</span><span class="ss">:string</span>
+<div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="n">rails</span> <span class="n">g</span> <span class="n">model</span> <span class="no">Book</span> <span class="n">title</span><span class="ss">:string</span>
 </code></pre>
 </div>
 
 <p>Now we also need to change id: to use the :uuid datatype instead of letting the application automatically assigning it.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="k">class</span> <span class="nc">CreateBooks</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Migration</span>
+<div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="k">class</span> <span class="nc">CreateBooks</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Migration</span>
   <span class="k">def</span> <span class="nf">change</span>
     <span class="n">create_table</span> <span class="ss">:books</span><span class="p">,</span> <span class="ss">id: :uuid</span>  <span class="k">do</span> <span class="o">|</span><span class="n">t</span><span class="o">|</span>
       <span class="n">t</span><span class="p">.</span><span class="nf">string</span> <span class="ss">:title</span>
@@ -156,7 +156,7 @@
 
 <p>Now access the rails console <code class="highlighter-rouge">rails c</code> in order to verifiy that UUIDs are being generated upon the models object creation. At this point in time the default version of UUID generation used by Rails is <code class="highlighter-rouge">uuid_generate_v4()</code> which seems to be quite sufficient to avoiding collisions.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="mi">2</span><span class="o">.</span><span class="mi">2</span><span class="o">.</span><span class="mi">1</span> <span class="p">:</span><span class="mo">001</span> <span class="o">&gt;</span> <span class="no">Book</span><span class="p">.</span><span class="nf">create</span><span class="p">(</span><span class="ss">title: </span><span class="s1">'The Raven'</span><span class="p">)</span>
+<div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="mi">2</span><span class="o">.</span><span class="mi">2</span><span class="o">.</span><span class="mi">1</span> <span class="p">:</span><span class="mo">001</span> <span class="o">&gt;</span> <span class="no">Book</span><span class="p">.</span><span class="nf">create</span><span class="p">(</span><span class="ss">title: </span><span class="s1">'The Raven'</span><span class="p">)</span>
 <span class="p">(</span><span class="mi">0</span><span class="o">.</span><span class="mi">4</span><span class="n">ms</span><span class="p">)</span>  <span class="k">BEGIN</span>
   <span class="no">SQL</span> <span class="p">(</span><span class="mi">35</span><span class="o">.</span><span class="mi">2</span><span class="n">ms</span><span class="p">)</span>  <span class="no">INSERT</span> <span class="no">INTO</span> <span class="s2">"books"</span> <span class="p">(</span><span class="s2">"title"</span><span class="p">,</span> <span class="s2">"created_at"</span><span class="p">,</span> <span class="s2">"updated_at"</span><span class="p">)</span> <span class="no">VALUES</span> <span class="p">(</span><span class="vg">$1</span><span class="p">,</span> <span class="vg">$2</span><span class="p">,</span> <span class="vg">$3</span><span class="p">)</span> <span class="no">RETURNING</span> <span class="s2">"id"</span>  <span class="p">[[</span><span class="s2">"title"</span><span class="p">,</span> <span class="s2">"The Raven"</span><span class="p">],</span> <span class="p">[</span><span class="s2">"created_at"</span><span class="p">,</span> <span class="s2">"2015-06-13 05:31:03.762157"</span><span class="p">],</span> <span class="p">[</span><span class="s2">"updated_at"</span><span class="p">,</span> <span class="s2">"2015-06-13 05:31:03.762157"</span><span class="p">]]</span>
    <span class="p">(</span><span class="mi">197</span><span class="o">.</span><span class="mi">1</span><span class="n">ms</span><span class="p">)</span>  <span class="no">COMMIT</span>
@@ -169,14 +169,14 @@
 
 <p>To begin using UUIDs with sqlite you will need to install the <a href="https://github.com/jashmenn/activeuuid"><code class="highlighter-rouge">activeuuid</code></a> gem, when using this gem it will save the uuid: as a binary(16) datatype. I haven’t dug around to much into the gem, but it does seem to work quite effectively for it’s purpose.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="c1"># Gemfile</span>
+<div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="c1"># Gemfile</span>
 <span class="n">gem</span> <span class="s1">'activeuuid'</span>  <span class="c1"># https://github.com/jashmenn/activeuuid</span>
 </code></pre>
 </div>
 
 <p>We will now need to adjust the migration to explicity use the uuid: datatype for :id and completely disregard using the default :id dataset and configuration.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="c1"># migrations</span>
+<div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="c1"># migrations</span>
 <span class="k">class</span> <span class="nc">CreateBooks</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Migration</span>
   <span class="k">def</span> <span class="nf">change</span>
     <span class="n">create_table</span> <span class="ss">:books</span><span class="p">,</span> <span class="ss">:id</span> <span class="o">=&gt;</span> <span class="kp">false</span> <span class="k">do</span> <span class="o">|</span><span class="n">t</span><span class="o">|</span>
@@ -192,7 +192,7 @@
 
 <p>You will also need to include <code class="highlighter-rouge">ActiveUUID::UUID</code> in your model to enable UUID generation, you will need to specify a <code class="highlighter-rouge">natural_key</code> to supply a dataset in order to generate a UUID. If this step is not included the application will throw a heap of errors about the books.id using an invalid uuid datatype.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="c1">#models/book.rb</span>
+<div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="c1">#models/book.rb</span>
 <span class="k">class</span> <span class="nc">Book</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span>
   <span class="kp">include</span> <span class="no">ActiveUUID</span><span class="o">::</span><span class="no">UUID</span>
   <span class="n">natural_key</span> <span class="ss">:created_at</span>
@@ -202,7 +202,7 @@
 
 <p>Upon creating a book object, you should recieve output with something similar to the example shown below.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="mi">2</span><span class="o">.</span><span class="mi">2</span><span class="o">.</span><span class="mi">1</span> <span class="p">:</span><span class="mo">002</span> <span class="o">&gt;</span> <span class="no">Book</span><span class="p">.</span><span class="nf">create</span><span class="p">(</span><span class="ss">title: </span><span class="s1">'The Raven'</span><span class="p">)</span>
+<div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="mi">2</span><span class="o">.</span><span class="mi">2</span><span class="o">.</span><span class="mi">1</span> <span class="p">:</span><span class="mo">002</span> <span class="o">&gt;</span> <span class="no">Book</span><span class="p">.</span><span class="nf">create</span><span class="p">(</span><span class="ss">title: </span><span class="s1">'The Raven'</span><span class="p">)</span>
    <span class="p">(</span><span class="mi">0</span><span class="o">.</span><span class="mi">1</span><span class="n">ms</span><span class="p">)</span>  <span class="k">begin</span> <span class="n">transaction</span>
   <span class="no">SQL</span> <span class="p">(</span><span class="mi">0</span><span class="o">.</span><span class="mi">5</span><span class="n">ms</span><span class="p">)</span>  <span class="no">INSERT</span> <span class="no">INTO</span> <span class="s2">"books"</span> <span class="p">(</span><span class="s2">"id"</span><span class="p">,</span> <span class="s2">"title"</span><span class="p">,</span> <span class="s2">"created_at"</span><span class="p">,</span> <span class="s2">"updated_at"</span><span class="p">)</span> <span class="no">VALUES</span> <span class="p">(</span><span class="sc">?,</span> <span class="sc">?,</span> <span class="sc">?,</span> <span class="sc">?)</span>  <span class="p">[[</span><span class="s2">"id"</span><span class="p">,</span> <span class="s2">"&lt;16 bytes of binary data&gt;"</span><span class="p">],</span> <span class="p">[</span><span class="s2">"title"</span><span class="p">,</span> <span class="s2">"The Raven"</span><span class="p">],</span> <span class="p">[</span><span class="s2">"created_at"</span><span class="p">,</span> <span class="s2">"2015-06-13 05:57:45.728134"</span><span class="p">],</span> <span class="p">[</span><span class="s2">"updated_at"</span><span class="p">,</span> <span class="s2">"2015-06-13 05:57:45.728134"</span><span class="p">]]</span>
    <span class="p">(</span><span class="mi">3</span><span class="o">.</span><span class="mi">4</span><span class="n">ms</span><span class="p">)</span>  <span class="n">commit</span> <span class="n">transaction</span>

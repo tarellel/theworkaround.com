@@ -74,7 +74,7 @@
   </div>
   <div class="col-md-6 text-right">
     
-      Tags: <a href="/tag/rails.html" rel="tag">rails</a>, <a href="/tag/ruby.html" rel="tag">ruby</a>, <a href="/tag/slim.html" rel="tag">slim</a>
+      Tags: <a href="/tag/rails/" rel="tag">rails</a>, <a href="/tag/ruby/" rel="tag">ruby</a>, <a href="/tag/slim/" rel="tag">slim</a>
     
   </div>
 </div>
@@ -84,7 +84,7 @@
 <h3 id="setup">Setup</h3>
 <p>In order to been using Slim with your Rails application, simple add the following line to your Gemfile.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="n">gem</span> <span class="s2">"slim-rails"</span>
+<div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="n">gem</span> <span class="s2">"slim-rails"</span>
 </code></pre>
 </div>
 
@@ -93,7 +93,7 @@
 <h3 id="comparing-erb-and-slim">Comparing ERB and Slim</h3>
 <p>Not only is Slim fast and clean, it’s quite a bit less cluttered than using erb. When using slim you simplify and clean up your templates and allow for a much more readable structure and tag hierarchy. For example compare the following examples</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code># ERB
+<div class="language-erb highlighter-rouge"><pre class="highlight"><code># ERB
 <span class="nt">&lt;ul</span> <span class="na">class=</span><span class="s">"candylist"</span><span class="nt">&gt;</span>
   <span class="cp">&lt;%</span> <span class="vi">@candy</span><span class="p">.</span><span class="nf">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">candy</span><span class="o">|</span> <span class="cp">%&gt;</span>
     <span class="nt">&lt;li&gt;</span><span class="cp">&lt;%=</span> <span class="n">candy</span><span class="p">.</span><span class="nf">type</span> <span class="cp">%&gt;</span><span class="nt">&lt;/li&gt;</span>
@@ -102,7 +102,7 @@
 </code></pre>
 </div>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="c1"># Slim</span>
+<div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="c1"># Slim</span>
 <span class="n">ul</span><span class="p">.</span><span class="nf">candylist</span>
   <span class="o">-</span> <span class="vi">@candy</span><span class="p">.</span><span class="nf">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">candy</span><span class="o">|</span>
     <span class="n">li</span> <span class="o">=</span> <span class="n">candy</span><span class="p">.</span><span class="nf">type</span>
@@ -111,7 +111,7 @@
 
 <p>And no matter which option you choose to go with, they both output the exact same thing.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;ul</span> <span class="na">class=</span><span class="s">"candylist"</span><span class="nt">&gt;</span>
+<div class="language-html highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;ul</span> <span class="na">class=</span><span class="s">"candylist"</span><span class="nt">&gt;</span>
   <span class="nt">&lt;li&gt;</span>Jaw Breaker<span class="nt">&lt;/li&gt;</span>
   <span class="nt">&lt;li&gt;</span>Lollipop<span class="nt">&lt;/li&gt;</span>
   <span class="nt">&lt;li&gt;</span>Pop Rocks<span class="nt">&lt;/li&gt;</span>
@@ -123,7 +123,7 @@
 <p>The Slim template engine removes the complexities and unnecessary clustering of tags associated with using ERB. Slim is very concise, free flowing, and easy to read. Look at the example above and tell me it isn’t dead simple to understand exactly what is going on without a ton of extra tags. Another great thing I absolutely love is, Whitespace Matters! Some may argue “blah blah blah, this is to much like Python and kills the whole concept of ERB/Ruby”. Well if you’re already writing legible and structured code in the first place, than you should already be indenting and tabbing to begin with.</p>
 
 <h4 id="bad-example">Bad Example</h4>
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="c1"># Slim</span>
+<div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="c1"># Slim</span>
 <span class="n">ul</span>
 <span class="n">li</span>
 <span class="nb">p</span><span class="p">.</span><span class="nf">splash</span>
@@ -137,7 +137,7 @@
 </div>
 
 <h4 id="better-example">Better Example</h4>
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="c1"># Slim</span>
+<div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="c1"># Slim</span>
 <span class="n">ul</span>
   <span class="n">li</span>
     <span class="nb">p</span><span class="p">.</span><span class="nf">splash</span>

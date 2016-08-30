@@ -74,7 +74,7 @@
   </div>
   <div class="col-md-6 text-right">
     
-      Tags: <a href="/tag/development.html" rel="tag">development</a>, <a href="/tag/elixir.html" rel="tag">elixir</a>, <a href="/tag/programming.html" rel="tag">programming</a>
+      Tags: <a href="/tag/development/" rel="tag">development</a>, <a href="/tag/elixir/" rel="tag">elixir</a>, <a href="/tag/programming/" rel="tag">programming</a>
     
   </div>
 </div>
@@ -95,7 +95,7 @@
 
 <p>I have never really worked with a purely Function Programming Language before. Sure I’ve checked out samples here and there, but everything I’ve generally played with has been primarily Object-Oriented. For those who don’t know exactly what I’m talking about, below is an example showing comparative differences between the two types.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="n">str</span> <span class="o">=</span> <span class="s2">"Hello World"</span>
+<div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="n">str</span> <span class="o">=</span> <span class="s2">"Hello World"</span>
 
 <span class="c1"># Functional</span>
 <span class="no">String</span><span class="p">.</span><span class="nf">length</span><span class="p">(</span><span class="n">str</span><span class="p">)</span>  <span class="c1"># -&gt; 11</span>
@@ -109,7 +109,7 @@
 
 <p>Another way to look at it in a tree view is similar to the example shown:</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="c1"># Elixir string namespace and functions: http://elixir-lang.org/docs/stable/elixir/String.html</span>
+<div class="language-elixir highlighter-rouge"><pre class="highlight"><code><span class="c1"># Elixir string namespace and functions: http://elixir-lang.org/docs/stable/elixir/String.html</span>
 <span class="k">defmodule</span> <span class="no">String</span> <span class="k">do</span>
   <span class="k">def</span> <span class="n">length</span><span class="p">(</span><span class="n">str</span><span class="p">)</span> <span class="k">do</span>
     <span class="c1"># ...</span>
@@ -124,14 +124,14 @@
 
 <p>Elixir also has the ability to assign anonymous functions, which has it’s uses once you’ve gotten to know the basics of the language.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="n">foo</span> <span class="o">=</span> <span class="k">fn</span> <span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="sd">"</span><span class="s2">Hello </span><span class="si">#{</span><span class="n">x</span><span class="si">}</span><span class="s2">!"</span> <span class="k">end</span>
+<div class="language-elixir highlighter-rouge"><pre class="highlight"><code><span class="n">foo</span> <span class="o">=</span> <span class="k">fn</span> <span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="sd">"</span><span class="s2">Hello </span><span class="si">#{</span><span class="n">x</span><span class="si">}</span><span class="s2">!"</span> <span class="k">end</span>
 <span class="n">foo</span><span class="o">.</span><span class="p">(</span><span class="sd">"</span><span class="s2">Rick"</span><span class="p">)</span>
 </code></pre>
 </div>
 
 <p>Another very appealing set of features that Elixir has is that it has the ability to conditionally process functions based on the supplied values.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="k">defmodule</span> <span class="no">Foo</span> <span class="k">do</span>
+<div class="language-elixir highlighter-rouge"><pre class="highlight"><code><span class="k">defmodule</span> <span class="no">Foo</span> <span class="k">do</span>
   <span class="k">def</span> <span class="n">bar</span><span class="p">(</span><span class="m">0</span><span class="p">),</span> <span class="k">do</span><span class="p">:</span> <span class="m">0</span>
   <span class="k">def</span> <span class="n">bar</span><span class="p">(</span><span class="n">n</span><span class="p">),</span> <span class="k">do</span><span class="p">:</span> <span class="no">IO</span><span class="o">.</span><span class="n">puts</span> <span class="n">n</span>
 
@@ -148,7 +148,7 @@
 
 <p>This may not be seem like much but it’s an amazing feature rather than having to stack you’re program full of <a href="http://refactoring.com/catalog/replaceNestedConditionalWithGuardClauses.html">guard clauses</a>, you can have each and every conditionally matched value processed in a different manner. This also cleans up your function by drawing out the guard clauses and as you learn Elixir this works greatly to your advantage when processing values using a recursion based method. (A guard claus is used to prevent your function from building a nest of conditions and creating an ugly mess.)</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="c1"># something similar in Ruby using inline guard functions</span>
+<div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="c1"># something similar in Ruby using inline guard functions</span>
 <span class="k">class</span> <span class="nc">Foo</span>
   <span class="k">def</span> <span class="nf">bar</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
     <span class="k">return</span> <span class="mi">0</span> <span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">0</span>
@@ -165,7 +165,7 @@
 <h3 id="looping">Looping</h3>
 <p>One thing that completely blows my mind with Elixir is there’s no actual build in loops ie: <code class="highlighter-rouge">while, unless, until, for, each, and many others</code>. If you want to loop through a value, hash, string, or data of some kind it’s up to you to to process these using a form of recursion. Other than the occasional exercise involving <a href="https://en.wikipedia.org/wiki/Fizz_buzz">FizzBuzz</a>, <a href="https://en.wikipedia.org/wiki/Fibonacci_number">Fibonacci sequence</a>, or build some sort of state-machine looping through until an event happens, the concept of processing based on recursion may have been more of a theoretical concept that we haven’t used much. If you’re like me you’ve enjoyed the spenders of using Object-Oriented code to loop through data. And I’m fully aware that even with ruby our simple loops and blocks are based on conditional recursion build with C.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="k">defmodule</span> <span class="no">Foo</span> <span class="k">do</span>
+<div class="language-elixir highlighter-rouge"><pre class="highlight"><code><span class="k">defmodule</span> <span class="no">Foo</span> <span class="k">do</span>
   <span class="k">def</span> <span class="n">bar</span><span class="p">(</span><span class="m">0</span><span class="p">),</span> <span class="k">do</span><span class="p">:</span> <span class="m">0</span>
   <span class="k">def</span> <span class="n">bar</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="ow">when</span> <span class="n">n</span> <span class="o">&gt;</span> <span class="m">0</span> <span class="k">do</span>
     <span class="no">IO</span><span class="o">.</span><span class="n">puts</span> <span class="n">n</span>
@@ -181,7 +181,7 @@
 <h3 id="immutable-data">Immutable Data</h3>
 <p>Another feature that makes Elixir so appealing to some people is that date is immutable. Who? What? Who? This means unlike numerous object-oriented languages in order to change a variables data it must be assigned. Rather than with ruby that once it’s been processed, the processed data is now the new value. You may ask yourself why? Well it’s a great safety mechanism to protect and retain your datas original value when processing it. Shown below is are two examples showing the different between immutable and mutable data-types.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="c1"># Elixir</span>
+<div class="language-elixir highlighter-rouge"><pre class="highlight"><code><span class="c1"># Elixir</span>
 <span class="n">list</span> <span class="o">=</span> <span class="p">[</span><span class="ss">:a</span><span class="p">,</span> <span class="ss">:b</span><span class="p">,</span> <span class="ss">:c</span><span class="p">]</span> <span class="c1"># =&gt; [:a, :b, :c]</span>
 <span class="no">List</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="n">list</span><span class="p">,</span> <span class="ss">:b</span><span class="p">)</span> <span class="c1"># =&gt; [:a, :c]</span>
 <span class="n">list</span>  <span class="c1"># =&gt; [:a, :b, :c]</span>
@@ -191,7 +191,7 @@
 </code></pre>
 </div>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="c1"># Ruby</span>
+<div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="c1"># Ruby</span>
 <span class="n">a</span> <span class="o">=</span> <span class="p">[</span><span class="ss">:a</span><span class="o">.</span> <span class="ss">:b</span><span class="p">,</span> <span class="ss">:c</span><span class="p">]</span>  <span class="c1"># =&gt; [:a, :b, :c]</span>
 <span class="n">a</span><span class="p">.</span><span class="nf">delete</span><span class="p">(</span><span class="ss">:b</span><span class="p">)</span>  <span class="c1"># =&gt; [:a, :c]</span>
 <span class="n">a</span> <span class="c1">#[:a, :c]</span>

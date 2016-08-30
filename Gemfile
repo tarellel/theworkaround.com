@@ -23,3 +23,4 @@ gem 'rouge' # http://rouge.jayferd.us/demo
 # Assets and View related gems
 ####################
 gem 'bourbon'
+gem 'rake'
