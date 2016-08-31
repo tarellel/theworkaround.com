@@ -42,6 +42,9 @@ Instead of using `brew`, you will be making the installs with
 Lets begin by install tmux
 ```shell
 brew install tmux
+
+# allows you to access OSx clipboard (pbcopy & pbpaste) through tmux
+brew install reattach-to-user-namespace
 ```
 
 Now if this is your first time installing tmux we'll need to create a `.tmux.conf` file.
@@ -70,7 +73,8 @@ values, bindings, etc. that will make tmux easier to use. The best part of this
 plugin, is that it's not supposed to overwrite any config values you may have in
 you `~/.tmux.conf` file. No add the following to very bottom of your `~/.tmux.conf` file.
 ```conf
-set -g @plugin 'tmux-plugins/tmux-sensible'
+set -g @plugin 'tmux-plugins/tmux-sensible' # recommened tmux defaults
+set -g @plugin 'tmux-plugins/tmux-yank' # allows copying to system vie tmux
 
 # Initialize TMUX plugin manager (keep this line at the very bottom of tmux.conf)
 run '~/.tmux/plugins/tpm/tpm'
