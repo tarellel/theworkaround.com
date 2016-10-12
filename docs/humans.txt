@@ -1,0 +1,15 @@
+/* TEAM */
+  Designer/Author: Brandon Hicks [tarellel]
+  Site: theworkaround.com
+  Twitter: @tarellel
+  From: United States
+
+/* SITE */
+  Last updated: 11/05/2014
+  Language: English
+  Doctype: HTML5
+  Standards:  HTML, CSS3
+  Components: Twitter Bootstrap, Awesome-Font, Jekyll
+  IDE:      SublimeText2
+
+HumansTXT is a ingenious method to allow developers to establish who contributed to a websites creation.

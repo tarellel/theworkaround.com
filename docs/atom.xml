@@ -1,0 +1,1339 @@
+<?xml version="1.0"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title>TheWorkAround</title>
+  <link href="http://localhost:4000/"/>
+  <link type="application/atom+xml" rel="self" href="http://localhost:4000/atom.xml"/>
+  <updated>2016-10-12T01:40:26-06:00</updated>
+  <id>http://localhost:4000/</id>
+  <author>
+    <name>Brandon Hicks</name>
+    <email>tarellel@gmail.com</email>
+  </author>
+
+  
+  <entry>
+    <id>http://localhost:4000/2016/10/11/installing-fish-on-osx</id>
+    <link type="text/html" rel="alternate" href="http://example.com/2016/10/11/installing-fish-on-osx.html"/>
+    <title>Installing Fish on OSx</title>
+    <published>2016-10-11T00:00:00-06:00</published>
+    <updated>2016-10-11T00:00:00-06:00</updated>
+    <author>
+      <name>Brandon Hicks</name>
+      <uri>http://localhost:4000</uri>
+    </author>
+    <content type="html">&lt;p&gt;As developers we all use the command line, to make things happen.
+And by now you know there’s several shell environments ranging from &lt;a href=&quot;http://www.zsh.org/&quot;&gt;zsh&lt;/a&gt;,
+&lt;a href=&quot;http://www.kornshell.com/&quot;&gt;kornshell&lt;/a&gt;, &lt;a href=&quot;http://www.grymoire.com/Unix/Csh.html&quot;&gt;C-Shell&lt;/a&gt;,
+&lt;a href=&quot;https://www.gnu.org/software/bash/&quot;&gt;bash&lt;/a&gt; and to who knows what variants of there out there.
+Some of these shells are complicated beasts and some of them include a scripting language of their own.
+But they all have a purpose and they have their dedicated users.
+I for one can say for the past several years I’ve been a heavy user of zsh along with the addition of
+&lt;a href=&quot;http://ohmyz.sh/&quot;&gt;oh-my-zsh&lt;/a&gt; for the customization, easy plugins, and user friendly terminal.&lt;/p&gt;
+
+&lt;p&gt;From what I could find the majority of POSIX developers tend to stick with BASH
+which is very universal, widely used, and easy to learn. And mac OS users,
+tend to stick with either bash or zsh, I mean why change what’s not broken, right?
+Well it never hurts to try something new, I don’t mean the newest shiniest toy that’s available.
+And who know’s it could always make a huge difference in your productivity.
+Well after hearing quite a bit of hype from various developers
+about the &lt;a href=&quot;https://fishshell.com/&quot;&gt;fish&lt;/a&gt; shell I decided to give it a try.
+And thus far, I’m loving it. It’s very smooth, has a quick response time, seems less bogged down like
+various other shells. It also has an amazing auto-complete/command prediction behavior that
+makes things quite a bit easier and faster for the user.&lt;/p&gt;
+
+&lt;p&gt;In this article, I am going to show you how I documented installing the fish terminal,
+numerous of it’s extensions, and themes.&lt;/p&gt;
+
+&lt;h1 id=&quot;installing-fish-on-osx&quot;&gt;Installing Fish on OSx&lt;/h1&gt;
+&lt;p&gt;First of all if your a mac OS developer and looking to install custom software,
+you more than likely already have &lt;a href=&quot;http://brew.sh/&quot;&gt;homebrew&lt;/a&gt;. Brew makes installing
+programs through the command-line a heck of a lot easier than building with a makefile,
+or having to bundle dependencies and packages. And than having the compilation fail on you.&lt;/p&gt;
+
+&lt;p&gt;To install fish it’s quite simple, just begin by issuing the following commands:&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;brew update
+brew install fish
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Now you’re not quite ready to go, you need to add Fish to your systems shell listing
+in &lt;code class=&quot;highlighter-rouge&quot;&gt;/etc/shells&lt;/code&gt;, this does require administrative access.&lt;/p&gt;
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo &lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'/usr/local/bin/fish'&lt;/span&gt; &amp;gt; /etc/shells
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Now that fish is installed, in order to use it lets begin by setting it as your default terminal shell environment.&lt;/p&gt;
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;chsh -s /usr/local/bin/fish
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;p&gt;Now in order to load fish as your shell you’ll need to either open a new window, tab, session, etc.
+It may look like the same old terminal that your used to, but it’s not.
+If you would like to see some of the features fish offers, I’d suggest checking out their &lt;a href=&quot;https://fishshell.com/docs/current/tutorial.html&quot;&gt;tutorials&lt;/a&gt; page. Now for some reason
+when I first installed fish it didn’t update/load the autocompletions, if this is the case for you
+issue the following command &lt;code class=&quot;highlighter-rouge&quot;&gt;fish_update_completions&lt;/code&gt;, it’ll take a moment because there’s quite a few to download.
+If your looking for a rough idea of what they have autocompletions consist of, I’d suggest checking out their list of &lt;a href=&quot;https://github.com/fish-shell/fish-shell/tree/master/share/completions&quot;&gt;autocompletion&lt;/a&gt; files.&lt;/p&gt;
+
+&lt;h3 id=&quot;lets-talk-plugins&quot;&gt;Lets talk plugins&lt;/h3&gt;
+&lt;p&gt;Part of using fish it make life easier on you, to get things done faster and more efficient.
+That’s why no matter what we do, we’re always looking for plugins, shortcuts, and extensions.
+Just like using brew, well install a fish plugin manager in order to make installing plugins as smooth as possible.
+At the moment there’s a variety of fish plugin in manager including:
+&lt;a href=&quot;http://fisherman.sh/&quot;&gt;fisherman&lt;/a&gt;, &lt;a href=&quot;https://github.com/tuvistavie/fundle&quot;&gt;fundle&lt;/a&gt;, &lt;a href=&quot;http://oh-my.fish/&quot;&gt;oh-my-fish&lt;/a&gt;
+and a few others. In my opinion the more mature one seems to be fisherman,
+which is what quite a few fish users seem to prefer using. On the other hand,
+I chose oh-my-fish because of it’s ease of use and simple commands.
+I mean as developers we’ve learned 100’s of linux commands, functions, methods,
+attributes, etc. who wants to complicate our lives and add even more to memorize.
+So lets install oh-my-fish to get the customization started.&lt;/p&gt;
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;curl -L http://get.oh-my.fish | fish
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Now if would like to get a rough idea of the oh-my-fish commands available, lets just issue the &lt;code class=&quot;highlighter-rouge&quot;&gt;omf&lt;/code&gt; command.&lt;/p&gt;
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$:&lt;/span&gt; omf
+
+Usage:
+  omf install &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&amp;lt;name&amp;gt;|&amp;lt;url&amp;gt;]
+  omf theme &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&amp;lt;name&amp;gt;]
+  omf remove &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&amp;lt;name&amp;gt;]
+  omf search &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&amp;lt;name&amp;gt;]
+  omf update
+  omf &lt;span class=&quot;nb&quot;&gt;help&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&amp;lt;&lt;span class=&quot;nb&quot;&gt;command&lt;/span&gt;&amp;gt;]
+
+Commands:
+  list      List &lt;span class=&quot;nb&quot;&gt;local &lt;/span&gt;packages.
+  describe  Get information about what packages &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;.
+  install   Install one or more packages.
+  theme     List / Use themes.
+  remove    Remove a theme or package.
+  update    Update Oh My Fish.
+  &lt;span class=&quot;nb&quot;&gt;cd        &lt;/span&gt;Change directory to plugin/theme directory.
+  new       Create a new package from a template.
+  search    Search &lt;span class=&quot;k&quot;&gt;for &lt;/span&gt;a package or theme.
+  submit    Submit a package to the registry.
+  destroy   Uninstall Oh My Fish.
+  doctor    Troubleshoot Oh My Fish.
+  &lt;span class=&quot;nb&quot;&gt;help      &lt;/span&gt;Shows &lt;span class=&quot;nb&quot;&gt;help &lt;/span&gt;about a specific action.
+
+Options:
+  --help     Display this help.
+  --version  Display version.
+
+For more information visit → git.io/oh-my-fish
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;By now you’ve probably installed several programs that generate several .dotfile folder
+directories in your &lt;code class=&quot;highlighter-rouge&quot;&gt;$HOME&lt;/code&gt; directory. Fish/oh-my-fish is no different, except instead of
+piling up even more in your &lt;code class=&quot;highlighter-rouge&quot;&gt;$HOME&lt;/code&gt; directory, fish config files will be stored in &lt;code class=&quot;highlighter-rouge&quot;&gt;~/.config/fish&lt;/code&gt;.
+The .config path is used by several programs in order to reduce clutter being built up in your $HOME directory.
+Because I’m sure if you entered in ‘ls -alH’ in the prompt you get something similar to the following.&lt;/p&gt;
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;.oh-my-zsh
+.rbenv
+.rvm
+.vim
+.tux
+.ssh
+.npm
+.irbrc
+&lt;span class=&quot;c&quot;&gt;# And tons of others as well&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Now let it be a new install or not, I always suggest updating your package managers
+to have the newest database and latest packages available.Lets issue the
+&lt;code class=&quot;highlighter-rouge&quot;&gt;omf update&lt;/code&gt; command and continue on. By now, you’ve probably noticed that OMF will
+generate an entire set of config files of its own. I believe it’s best practice
+to use the OMF config files for your aliases, functions, etc. But I stuck with using the
+basic fish configure directory/files. I guarentee you will have to set several of your $PATH
+directories to access your programs. If you wish to see those in which are
+currently set use printf &lt;code class=&quot;highlighter-rouge&quot;&gt;printf &quot;%s\n&quot; $PATH&lt;/code&gt; to print out what you have access to executing.&lt;/p&gt;
+
+&lt;p&gt;Now lets begin installing plugins&lt;/p&gt;
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;# fish supports atom out of the box, but I also use SublimeText as well&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# this enables the sublime command 'subl', if it can be found&lt;/span&gt;
+omf install sublime
+
+&lt;span class=&quot;c&quot;&gt;# To enable quick access to your rbenv without doing anything extra&lt;/span&gt;
+omf install rbenv
+
+&lt;span class=&quot;c&quot;&gt;# https://github.com/oh-my-fish/plugin-osx&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# enables OSx based commands: flushdns, showhidden, trash, updatedb, etc.&lt;/span&gt;
+omf install osx
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;You may or may not want to install grc, it is used for highlighting output command for specified commands.
+But I believe it comes in handy for various commands and makes reading output easier.&lt;/p&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;brew install grc
+omf install grc
+&lt;span class=&quot;c&quot;&gt;# this should automatically load grc to highlight fields rather than having to issue the following command&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;source&lt;/span&gt; /usr/local/etc/grc.bashrc
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;If you install it, you can verify it’s working properly by issuing a command with assorted output, ie: &lt;code class=&quot;highlighter-rouge&quot;&gt;ps au&lt;/code&gt;.
+You should get a colorized version of something similar to the below table.&lt;/p&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;USER       PID  %CPU %MEM      VSZ    RSS   TT  STAT STARTED      TIME COMMAND
+Tarellel 17590   5.2  0.0  2446204   4976 s005  S+   12:16AM   0:00.04 /usr/bin/python /usr/local/bin/grc -es --colour&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;auto ps au
+Tarellel 14325   1.5  0.0  2500316   5860 s005  S    11:13PM   0:00.73 -fish
+root     17591   0.0  0.0  2444720   1172 s005  R+   12:16AM   0:00.00 ps au
+Tarellel 15150   0.0  0.0  2492120   5428 s002  S+   11:36PM   0:00.40 -fish
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Now back to installing some essential plugins:&lt;/p&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;# similar to zsh term, allows u to open new tab with current directory&lt;/span&gt;
+omf install tab
+
+&lt;span class=&quot;c&quot;&gt;# Add all brew paths to fish $PATH&lt;/span&gt;
+omf install brew
+
+&lt;span class=&quot;c&quot;&gt;# used to help enfore 256 color terminal support&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# https://github.com/oh-my-fish/plugin-ssh&lt;/span&gt;
+omf install ssh
+
+&lt;span class=&quot;c&quot;&gt;# used to make ssh term colors consistent&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# https://github.com/oh-my-fish/plugin-ssh&lt;/span&gt;
+omg install ssh-term-helper
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Now if you’re like me, I had several aliases, custom functions, variables and config in my zsh settings.
+Fish’s function and alias declarations are slightly different than zsh and bash but not to hard to understand.
+And now would be the perfect time to begin adding them before attempt to do a heck of a lot more.
+A basic example of variable declarations below, is assigning the $EDITOR variable to use atom.&lt;/p&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;# -U makes it a univerasal variable&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;set&lt;/span&gt; -U EDITOR atom
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h3 id=&quot;lets-make-it-beautiful&quot;&gt;Lets make it beautiful&lt;/h3&gt;
+&lt;p&gt;Now you may thing it’s hipster as hell to want custom colors, fonts, and outputs in your terminal.
+But you want whats comfortable for you, whats easy on the eyes, and is easy to read.&lt;/p&gt;
+
+&lt;p&gt;For all I know you may like the default colors and theme that you have setup for your terminal.
+But you want to spruce it up, I suggest taking a look at the oh-my-zsh &lt;a href=&quot;https://github.com/oh-my-fish/oh-my-fish/blob/master/docs/Themes.md&quot;&gt;theme&lt;/a&gt; page,
+several of them are very similar to their oh-my-zsh counterparts.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Powerline&lt;/strong&gt; - As you browse through the themes you’ll notice several of the themes require powerline installed in order to fully function.
+This is a python package and python comes installed by default on most *nix and POSIX operating systems.
+Depending on your operating system and setup you may want to look at the powerline &lt;a href=&quot;https://powerline.readthedocs.io/en/latest/installation/osx.html&quot;&gt;installation instructions&lt;/a&gt;.&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;pip install --user powerline-status
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Now powerline uses HD fonts with special characters for its stylized output, so you’ll need to
+install various powerline fonts and symbols.&lt;/p&gt;
+
+&lt;p&gt;Downloads/Install powerline &lt;a href=&quot;https://github.com/powerline/powerline/raw/develop/font/PowerlineSymbols.otf&quot;&gt;symbols&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;You can either install it through the Font-Book app or by moving it to &lt;code class=&quot;highlighter-rouge&quot;&gt;~/Library/Fonts/&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;Next lets install all the available powerline fonts, each one looks amazing and adds a whole new experience to your terminal.&lt;/p&gt;
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;git clone https://github.com/powerline/fonts.git
+sudo ./fonts/install.sh
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Now if you’re using one of those themes that does require powerline and a powerline font.
+You’ll need to set your terminal applications font to use the powerline fonts.
+In order to do this in iTerm2 goto the following menus &lt;code class=&quot;highlighter-rouge&quot;&gt;iterm &amp;gt; prefernces &amp;gt; profiles &amp;gt; text&lt;/code&gt;
+and make sure the fonts used are ones with a powerline tag on in.
+Plain old &lt;code class=&quot;highlighter-rouge&quot;&gt;Courier&lt;/code&gt; or &lt;code class=&quot;highlighter-rouge&quot;&gt;Monaco&lt;/code&gt; font just won’t cut it.&lt;/p&gt;
+
+&lt;h3 id=&quot;my-setup&quot;&gt;My setup&lt;/h3&gt;
+&lt;p&gt;oh-my-fish theme: &lt;a href=&quot;https://github.com/oh-my-fish/oh-my-fish/blob/master/docs/Themes.md#bobthefish&quot;&gt;bobthefish&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;iTerm theme colors: &lt;a href=&quot;https://github.com/chriskempson/base16-iterm2&quot;&gt;base16-ocean-dark.256&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Terminal fonts used&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Regular Font: &lt;code class=&quot;highlighter-rouge&quot;&gt;14pt Inconsolata for Powerline&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;Non-ASCII font: &lt;code class=&quot;highlighter-rouge&quot;&gt;12pt Sauce Code Powerline&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;As you can see below, I tend to enjoy using smooth charcoal gray themes, with colors that aren’t to vibrant.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/img/installing_fish_on_OSx/smooth_fish_terminal.png&quot; alt=&quot;iTerm with Multitabs&quot; class=&quot;img-responsive center-block&quot; /&gt;&lt;/p&gt;
+
+&lt;hr /&gt;
+&lt;h3 id=&quot;resources&quot;&gt;Resources;&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/fisherman/awesome-fish&quot;&gt;Awesome-fish&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://ohmyz.sh/&quot;&gt;oh-my-fish&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;iTerm2 theme colors:
+    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;https://github.com/chriskempson/base16-iterm2&quot;&gt;base16&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;https://draculatheme.com/iterm/&quot;&gt;dracula&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;https://github.com/romainl/flattened&quot;&gt;flattened&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;https://github.com/altercation/solarized/tree/master/iterm2-colors-solarized&quot;&gt;solarized-dark&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;http://color.smyck.org/&quot;&gt;smych&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;https://github.com/chriskempson/tomorrow-theme&quot;&gt;tomorrow theme&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;http://iterm2colorschemes.com/&quot;&gt;Iterm2-color-schemes&lt;/a&gt; (big list of colors)&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;https://github.com/MartinSeeler/iterm2-material-design&quot;&gt;iterm2-material-design&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;https://github.com/ahmetsulek/flat-terminal&quot;&gt;flat-terminal&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;https://github.com/raphamorim/lucario&quot;&gt;lucario&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;https://terminal.sexy/&quot;&gt;terminal.sexy&lt;/a&gt; : terminal color schemer&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <id>http://localhost:4000/2016/08/29/setting-up-tmux-with-rails</id>
+    <link type="text/html" rel="alternate" href="http://example.com/2016/08/29/setting-up-tmux-with-rails.html"/>
+    <title>Setting up tmux with Rails</title>
+    <published>2016-08-29T00:00:00-06:00</published>
+    <updated>2016-08-29T00:00:00-06:00</updated>
+    <author>
+      <name>Brandon Hicks</name>
+      <uri>http://localhost:4000</uri>
+    </author>
+    <content type="html">&lt;h2 id=&quot;why-use-tmux&quot;&gt;Why use tmux?&lt;/h2&gt;
+
+&lt;p&gt;You may have a similar workflow the way I do. When I’m working on a rails
+project I tend to have several tabs and/or windows open in the terminal. After a
+while it tends  to be a heaping mess and I end up having to close the terminal
+down and start all over again. And other times, I have just became tired of
+having to switch between different tabs and windows, trying to find the one that I need.&lt;/p&gt;
+
+&lt;p&gt;As you can see from the image below, this method works.
+But having to switch from tab to tab, just to view your output logs or guard
+builds/tests gets to be a pain after a while.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/img/tmux_wRails/multitabs.png&quot; alt=&quot;iTerm with Multitabs&quot; class=&quot;img-responsive center-block&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;So what is tmux? It’s a mutliplex and very similar to the *nix screen process.
+It allows you to perform several processes all within the same screen, without
+having to switch tabs or windows. And there are tons more applications you can
+do with than building a rails application, but at the moment it’s a great
+example of why it makes such a great tool.&lt;/p&gt;
+
+&lt;p&gt;I can tell you this much, so far I’ve only used tmux for a short period of time
+but it has become an essential tool in my development workflow. Tmux’s window and
+session management makes it very easy to get started and increase my productivity.&lt;/p&gt;
+
+&lt;h3 id=&quot;setting-up-tmux&quot;&gt;Setting up tmux&lt;/h3&gt;
+
+&lt;p&gt;I’m just going to assume you’re on OSx, with homebrew installed. If you are
+using Debian, Ubuntu, or some other distro it’s pretty close the same commands.
+You’ll just be using different package manager commands.
+Instead of using &lt;code class=&quot;highlighter-rouge&quot;&gt;brew&lt;/code&gt;, you will be making the installs with
+&lt;code class=&quot;highlighter-rouge&quot;&gt;apt-get&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;pacman&lt;/code&gt;, etc.&lt;/p&gt;
+
+&lt;p&gt;Lets begin by install tmux&lt;/p&gt;
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;brew install tmux
+
+&lt;span class=&quot;c&quot;&gt;# allows you to access OSx clipboard (pbcopy &amp;amp; pbpaste) through tmux&lt;/span&gt;
+brew install reattach-to-user-namespace
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Now if this is your first time installing tmux we’ll need to create a &lt;code class=&quot;highlighter-rouge&quot;&gt;.tmux.conf&lt;/code&gt; file.&lt;/p&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;# this will contain colors, settings, key-bindings, etc.&lt;/span&gt;
+touch ~/.tmux.conf
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Now lets install the tux Plugin Manager (yes I know another one).&lt;/p&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;# make a .tmux directory to store everything&lt;/span&gt;
+mkdir -p ~/.tmux/plugins
+
+&lt;span class=&quot;c&quot;&gt;# While we're at it, lets install tmux package manager&lt;/span&gt;
+git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;The tmux plugin manager, makes it easy to install, update, and remove any and
+all plugins you may wish to use.&lt;/p&gt;
+
+&lt;p&gt;Lets begin by adding our first plugin to tmux, tmux-sensible.
+You you dive in, it won’t seem like much but it contains various handy default
+values, bindings, etc. that will make tmux easier to use. The best part of this
+plugin, is that it’s not supposed to overwrite any config values you may have in
+you &lt;code class=&quot;highlighter-rouge&quot;&gt;~/.tmux.conf&lt;/code&gt; file. No add the following to very bottom of your &lt;code class=&quot;highlighter-rouge&quot;&gt;~/.tmux.conf&lt;/code&gt; file.&lt;/p&gt;
+&lt;div class=&quot;language-conf highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;set&lt;/span&gt; -&lt;span class=&quot;n&quot;&gt;g&lt;/span&gt; @&lt;span class=&quot;n&quot;&gt;plugin&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'tmux-plugins/tmux-sensible'&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;# recommened tmux defaults
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;set&lt;/span&gt; -&lt;span class=&quot;n&quot;&gt;g&lt;/span&gt; @&lt;span class=&quot;n&quot;&gt;plugin&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'tmux-plugins/tmux-yank'&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;# allows copying to system vie tmux
+&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# Initialize TMUX plugin manager (keep this line at the very bottom of tmux.conf)
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;run&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'~/.tmux/plugins/tpm/tpm'&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Now is where it gets tricky, with tmux you have a prefix-key combo that you have
+ to use in order issue particular commands. By default the prefix keys are &lt;code class=&quot;highlighter-rouge&quot;&gt;CTRL+b&lt;/code&gt;.
+  With some commands/key-combos it makes a difference between &lt;code class=&quot;highlighter-rouge&quot;&gt;b&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;B&lt;/code&gt; or &lt;code class=&quot;highlighter-rouge&quot;&gt;T&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;t&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;Now lets fire up, tmux first the first time. At first it won’t be anything we
+haven’t seen before. But once you learn the keys and get the right plugins,
+it’ll be a whole new experience.&lt;/p&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;# fire up tmux by issuing the following command&lt;/span&gt;
+tmux
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;You’ll terminal will flicker for a second and you have a very generic/ASCII
+based status bar appear at the bottom. This means you’re doing great. Now lets
+install the tmux plugins by doing the following key combo &lt;code class=&quot;highlighter-rouge&quot;&gt;CTRL+b I&lt;/code&gt;. You may
+have to wait a few minutes, but it’ll install all specified plugins in the
+bottom of the tmux.conf file.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/img/tmux_wRails/basic_tmux.png&quot; alt=&quot;Basic tmux&quot; class=&quot;img-responsive center-block&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Now if you want to play around with tmux, to get additional windows, panes,
+sessions, etc. Great. As you can see from the image, tmux is a multiplexer which
+means it allows you to have several processes all running within a single terminal screen/tab.&lt;/p&gt;
+
+&lt;h3 id=&quot;setup-and-install-tmuxinator&quot;&gt;Setup and Install Tmuxinator&lt;/h3&gt;
+
+&lt;p&gt;Now I’m going to assume you have some version of ruby installed already
+(various *nix OS’s are coming with it preinstalled). So up next, we will will
+install &lt;a href=&quot;https://github.com/tmuxinator/tmuxinator&quot;&gt;tmuxinator&lt;/a&gt;, this is ruby gem
+that makes it a heck of a lot easier to make preconfigured panes and windows
+with default commands that run when they’re created.&lt;/p&gt;
+
+&lt;p&gt;We first need to install tmuxinator and verifiy all the required requirements
+are met in order to use it.&lt;/p&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;# install tmuxinator&lt;/span&gt;
+gem install tmuxinator
+
+&lt;span class=&quot;c&quot;&gt;# verify everything is ready&lt;/span&gt;
+tmuxinator doctor
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;You will now need to add tmuxinator to your shell, for consistency sake I’ll
+just assume your using zsh/oh-my-zsh.
+You will need to add &lt;code class=&quot;highlighter-rouge&quot;&gt;source ~/.bin/tmuxinator.zsh&lt;/code&gt; to your .zshrc file.&lt;/p&gt;
+
+&lt;p&gt;Now you’ll be thinking, but no file by the name &lt;code class=&quot;highlighter-rouge&quot;&gt;~/.bin/tmuxinator.zsh&lt;/code&gt; even
+exists. What gives? Well lets download the required completion file and get started.
+And if you’re not using zsh, there’s files for bash and fish as well.&lt;/p&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;# Download zsh completion file&lt;/span&gt;
+curl -O https://raw.githubusercontent.com/tmuxinator/tmuxinator/master/completion/tmuxinator.zsh
+mkdir ~/.bin
+mv tmuxinator.zsh ~/.bin/
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;p&gt;Now in order to make sure everything is loaded and configured, reload the current terminal.&lt;/p&gt;
+
+&lt;h3 id=&quot;lets-create-a-tmuxinator-project&quot;&gt;Lets create a tmuxinator project&lt;/h3&gt;
+&lt;p&gt;Tmuxinator projects let us setup a predefined layout, with panes performing specific tasks.
+Rather than mess around and build a layout every time we want to open up tmux.&lt;/p&gt;
+
+&lt;p&gt;To create a tmuxinator project, lets issue the following command:&lt;/p&gt;
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;tmuxinator new &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;project_name]
+
+&lt;span class=&quot;c&quot;&gt;# for example&lt;/span&gt;
+tmuxinator new red_willow
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;This will generate a project.yml file in the &lt;code class=&quot;highlighter-rouge&quot;&gt;~/.tmuxinator&lt;/code&gt; folder.
+It should also open up your specified $EDITOR allowing you to get a rough idea
+on what tmuxinator’s configuration looks. It’s very basic theres panes, windows,
+even layouts, the &lt;code class=&quot;highlighter-rouge&quot;&gt;root: ~/[project_name]&lt;/code&gt; at the top is the folder you specify
+for tmuxinator to open up all the tmux terminals to.&lt;/p&gt;
+
+&lt;p&gt;Below is an example of a pretty basic rails based tmux session, built with tmuxinator.&lt;/p&gt;
+
+&lt;div class=&quot;language-yaml highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;# ~/.tmuxinator/tasky.yml&lt;/span&gt;
+&lt;span class=&quot;s&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;tasky&lt;/span&gt;
+&lt;span class=&quot;s&quot;&gt;root&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;~/Desktop/red_willow&lt;/span&gt;
+
+&lt;span class=&quot;s&quot;&gt;windows&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+  &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+      &lt;span class=&quot;c1&quot;&gt;# http://stackoverflow.com/questions/9812000/specify-pane-percentage-in-tmuxinator-project&lt;/span&gt;
+      &lt;span class=&quot;c1&quot;&gt;# use: tmux list-windows to get coords and window sizes&lt;/span&gt;
+      &lt;span class=&quot;s&quot;&gt;layout&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;b147,208x73,0,0[208x62,0,0,208x10,0,63{104x10,0,63,103x10,105,63}]&lt;/span&gt;
+      &lt;span class=&quot;s&quot;&gt;panes&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+        &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;rails server thin&lt;/span&gt;
+        &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;guard&lt;/span&gt;
+        &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;atom .&lt;/span&gt;
+        &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;sleep 7 &amp;amp;&amp;amp; rails -t&lt;/span&gt;
+        &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;rails c&lt;/span&gt;
+        &lt;span class=&quot;c1&quot;&gt;# - foreman start&lt;/span&gt;
+  &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;logs&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;tail -f log/development.log&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Now issue the following command to initiate the tmux session &lt;code class=&quot;highlighter-rouge&quot;&gt;tmuxinator [project_name]&lt;/code&gt;
+From here it may take a few seconds for everything to load up and start running.
+You should now have terminal session similar to the image below.
+Your sessions colors, panes, and windows may be a bit different from what it looks like.
+That’s because you will need to setup your tmux config
+and trust me figuring out all the settings to use can be a major beast to deal with.
+So to make things a little easier and somewhere to start from, here’s a copy of my current &lt;a href=&quot;https://raw.githubusercontent.com/tarellel/dotfiles/master/rc/tmux.conf&quot;&gt;tmux.conf&lt;/a&gt;.
+And if your lazy, you can always search &lt;a href=&quot;https://github.com/&quot;&gt;github&lt;/a&gt; for .dotfile repositories
+because there are tons and tons of tmux.conf files listed.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/img/tmux_wRails/tmuxinator_wRails.png&quot; alt=&quot;tmuxinator with Rails&quot; class=&quot;img-responsive center-block&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;How it’s time to let you loose on your own and see what kind of project configure best suites your needs.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;tmux-commandsshortcuts&quot;&gt;tmux commands/shortcuts&lt;/h3&gt;
+
+&lt;p&gt;Your prefix key can be configured in &lt;code class=&quot;highlighter-rouge&quot;&gt;~/.tmux.conf&lt;/code&gt;, but I’ve chose to leave it
+as &lt;code class=&quot;highlighter-rouge&quot;&gt;CTRL+b&lt;/code&gt;, because it means there’s no way I will accidentally close or move
+between a window, pane, session, etc. And this is just a small batch of commands
+you can do, tmux is a massive program with tons of features I haven’t even begin to think about.&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;#All of these require you to first initiate the prefix key combo:&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# Default Prefix: CTRL+B and than whatever you want it to do&lt;/span&gt;
+
+&lt;span class=&quot;s2&quot;&gt;&quot; - Horizontal split
+% - Vertical split
+&amp;lt;arrow buttom&amp;gt; - moves between session panes
+z - loads window focus to current tmux panel
+c - load up new tmux window
+&amp;lt;window number&amp;gt; - switches between specified window
+d - detach current tmux session
+x - kill current pane in focus
+[space] - toggle between layouts
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;And here a few essential tmux console commands:&lt;/p&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;# to view list of current tmux sessions&lt;/span&gt;
+tmux ls
+
+&lt;span class=&quot;c&quot;&gt;# to reattach tmux panels (number specified will be specified tmux session from tmux ls)&lt;/span&gt;
+tmux attach -t 0
+
+&lt;span class=&quot;c&quot;&gt;#To kill specific tmux session&lt;/span&gt;
+tmux &lt;span class=&quot;nb&quot;&gt;kill&lt;/span&gt;-session -t 0
+
+&lt;span class=&quot;c&quot;&gt;# kills the last tmux session on the list&lt;/span&gt;
+tmux &lt;span class=&quot;nb&quot;&gt;kill&lt;/span&gt;-session
+
+&lt;span class=&quot;c&quot;&gt;# to completely kill tmux&lt;/span&gt;
+tmux &lt;span class=&quot;nb&quot;&gt;kill&lt;/span&gt;-server
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;a href=&quot;http://hyperpolyglot.org/multiplexers&quot;&gt;Terminal Multiplexers commands and shortcuts&lt;/a&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;a href=&quot;https://tmuxcheatsheet.com/&quot;&gt;tmux cheatsheet&lt;/a&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;a href=&quot;tmux &amp;amp; screen cheat-sheet&quot;&gt;tmux and screen cheatsheet&lt;/a&gt;&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;additional-resources&quot;&gt;Additional Resources&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;a href=&quot;http://manpages.ubuntu.com/manpages/precise/en/man1/tmux.1.html&quot;&gt;tmux man page&lt;/a&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;a href=&quot;https://robots.thoughtbot.com/a-tmux-crash-course&quot;&gt;A tmux crash course&lt;/a&gt; : thoughtbot&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;a href=&quot;https://www.sitepoint.com/tmux-a-simple-start/&quot;&gt;Tmux: A Simple Start&lt;/a&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;a href=&quot;http://www.hamvocke.com/blog/a-guide-to-customizing-your-tmux-conf/&quot;&gt;Making tmux Pretty and Usable&lt;/a&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;a href=&quot;https://github.com/tmuxinator/tmuxinator&quot;&gt;tmuxinator&lt;/a&gt;&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <id>http://localhost:4000/2015/12/06/elixir-pattern-matching</id>
+    <link type="text/html" rel="alternate" href="http://example.com/2015/12/06/elixir-pattern-matching.html"/>
+    <title>Elixir Pattern Matching</title>
+    <published>2015-12-06T00:00:00-07:00</published>
+    <updated>2015-12-06T00:00:00-07:00</updated>
+    <author>
+      <name>Brandon Hicks</name>
+      <uri>http://localhost:4000</uri>
+    </author>
+    <content type="html">&lt;h2 id=&quot;special-characters-have-meaning-as-well&quot;&gt;Special Characters have meaning as well&lt;/h2&gt;
+
+&lt;p&gt;Learning any new programming language is a always a great challenge. There’s always new techniques, methods, and syntax to learn. But it is also a great experience to expand you knowledge and learn new tricks and with Elixir this is also the case. As with many programming languages there are numerous keywords and special characters that have meaning. They can assign a value, perform some sort of logic test, run a method, etc. And in this article we will taking a brief look at Elixir based Pattern Matching.&lt;/p&gt;
+
+&lt;h3 id=&quot;pattern-matching&quot;&gt;Pattern matching&lt;/h3&gt;
+
+&lt;p&gt;In numerous programming languages the equal symbol &lt;code class=&quot;highlighter-rouge&quot;&gt;=&lt;/code&gt; is generally an assignment operator. Which means you set XYZ variable to the value of JKL &lt;code class=&quot;highlighter-rouge&quot;&gt;xyz = 'FooBar'&lt;/code&gt;. You can usually assign an object, a value, a function, or many other datatypes to a variable. With Elixir this is still the case, but with exceptions. In Elixir, the equals operator means to match the left side of the &lt;code class=&quot;highlighter-rouge&quot;&gt;=&lt;/code&gt; sign to the the right side.&lt;/p&gt;
+
+&lt;div class=&quot;language-elixir highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;iex&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;7&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;# =&amp;gt; 7&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;iex&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;y&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;5&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;# =&amp;gt; 5&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;iex&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;7&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;y&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;# =&amp;gt; ** (MatchError) no match of right hand side value: 5&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;You may be wondering what this error is about. Well the variable &lt;code class=&quot;highlighter-rouge&quot;&gt;y&lt;/code&gt; was assigned the value of 5, meaning that in the last line you are stating that 7 = 5. This value should always be false. Now if the variable was on the left side of the equal sign the value of 7 would have been assigned the variable.&lt;/p&gt;
+
+&lt;h3 id=&quot;taking-it-a-step-farther&quot;&gt;Taking it a step farther&lt;/h3&gt;
+&lt;p&gt;Once you begin using pattern matching, it can become a very powerful feature in you application. Not only can you do pattern matching with basic variables and datatypes, you can also match values with tuples and lists. This can be a double edged sword, it can either complicate the heck out of your program or make things work extremely effectively. Pattern matching assignment is a great tool when working with tuples/lists, because it allows us to pick which values we wish to assign and use.&lt;/p&gt;
+
+&lt;div class=&quot;language-elixir highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;costanza&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;%{&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;name:&lt;/span&gt; &lt;span class=&quot;sd&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;George&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;age:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;27&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;likes:&lt;/span&gt; &lt;span class=&quot;sd&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;Sports&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;# =&amp;gt; %{age: 27, likes: &quot;Sports&quot;, name: &quot;George&quot;}&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;# lets verify name is an unassigned variable&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;# =&amp;gt; ** (CompileError) iex:2: undefined function name/0&lt;/span&gt;
+
+&lt;span class=&quot;p&quot;&gt;%{&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;name:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;costanza&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;# =&amp;gt; %{age: 27, likes: &quot;Sports&quot;, name: &quot;George&quot;}&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;# =&amp;gt; &quot;George&quot;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Lets put this in prospective of an HTTP request/response, to assign&lt;/p&gt;
+
+&lt;div class=&quot;language-elixir highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;result&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:error&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;404&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;# =&amp;gt; {:error, 404}&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;result&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;# =&amp;gt; :error&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Now rather than assigning values, lets look at an example of pattern matching based on conditional comparisons.&lt;/p&gt;
+
+&lt;div class=&quot;language-elixir highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:ok&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;reponse&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:error&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;404&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;# =&amp;gt; ** (MatchError) no match of right hand side value: {:error, 404}&lt;/span&gt;
+
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:status&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;reponse&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:status&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;200&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;# =&amp;gt; {:status, 200}&lt;/span&gt;
+
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;200&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;response&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;200&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;sd&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;html/text;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;# =&amp;gt; {200, &quot;html/text;&quot;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;p&gt;In the first example you can see the left hand and right hand of the &lt;code class=&quot;highlighter-rouge&quot;&gt;=&lt;/code&gt; operator are not equal and do not having matching :atoms so they can not be assigned values to their corresponding variables. But the second example does have matching atoms/object so their values can be associated with one another. By using this pattern matching techniques, you are not solely limited to using :atoms to match the values, you can use various data types. If you look at the third example you can see that they correspond with each other with an integer that has the value of &lt;code class=&quot;highlighter-rouge&quot;&gt;200&lt;/code&gt;. This may look like a mess, why would you want to do this? Well the sample below might shine some like on this. With pattern matching you could assign the values based on a functions response values, using a simple HTTP request I will try to show you that it isn’t so hard to understand how and why these values may be passed.&lt;/p&gt;
+
+&lt;div class=&quot;language-elixir highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;defmodule&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;Http&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;request&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;# ...&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:status&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;404&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:status&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;response&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;Http&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;request&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;# =&amp;gt; {:status, 404}&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;response&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;# =&amp;gt; 404&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h3 id=&quot;functional-pattern-matching&quot;&gt;Functional Pattern Matching&lt;/h3&gt;
+
+&lt;p&gt;When declaring and calling functions you can continue to do pattern matching based on the declared values without using the equals &lt;code class=&quot;highlighter-rouge&quot;&gt;=&lt;/code&gt; assignment operator. Generally function pattern matching is used for with making recursion effective and manageable.&lt;/p&gt;
+
+&lt;div class=&quot;language-elixir highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;defmodule&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;Seinfield&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;cast&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([],&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;_&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;# STOP: when end of list has been reached&lt;/span&gt;
+
+  &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;cast&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;list&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;cast&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;list&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;# start count from 1 when begin to look the the list&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;cast&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;head&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;tail&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;count&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
+    &lt;span class=&quot;no&quot;&gt;IO&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;puts&lt;/span&gt; &lt;span class=&quot;sd&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;#{&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;count&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;: &lt;/span&gt;&lt;span class=&quot;si&quot;&gt;#{&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;head&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;cast&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;tail&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;count&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;characters&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;sd&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;George&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;sd&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;Jerry&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;sd&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;Kramer&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;sd&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;Elaine&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;sd&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;Newman&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;# =&amp;gt; [&quot;George&quot;, &quot;Jerry&quot;, &quot;Kramer&quot;, &quot;Elaine&quot;, &quot;Newman&quot;]&lt;/span&gt;
+
+&lt;span class=&quot;no&quot;&gt;Seinfield&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;cast&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;characters&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;# =&amp;gt; George&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;# Jerry&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;# Kramer&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;# Elaine&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;# Newman&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;I know this is an extreme example jumping from basic variable declarations to module/function matching. But if you look at the cast function, you’ll notice that when passing parameters using a list Elixir will match to the lists &lt;code class=&quot;highlighter-rouge&quot;&gt;[head |tail]&lt;/code&gt; to make break down in forms of context here is what it would look like with the characters list passed through it.&lt;/p&gt;
+
+&lt;div class=&quot;language-elixir highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;head&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;tail&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;sd&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;George&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;sd&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;Jerry&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;sd&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;Kramer&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;sd&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;Elaine&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;sd&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;Newman&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h3 id=&quot;clearing-it-up&quot;&gt;Clearing it up&lt;/h3&gt;
+&lt;p&gt;I hope you have better understanding of Elixirs pattern matching capabilities and that the equal sign is not just an assignment operator in Elixir. Elixir has a massive amount of capabilities and some of these may be confusing as hell, but pattern matching helps bring it one step closer to help make everything easier to understand and use.&lt;/p&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <id>http://localhost:4000/2015/11/29/dipping-into-elixir</id>
+    <link type="text/html" rel="alternate" href="http://example.com/2015/11/29/dipping-into-elixir.html"/>
+    <title>Dipping into Elixir</title>
+    <published>2015-11-29T00:00:00-07:00</published>
+    <updated>2015-11-29T00:00:00-07:00</updated>
+    <author>
+      <name>Brandon Hicks</name>
+      <uri>http://localhost:4000</uri>
+    </author>
+    <content type="html">&lt;h3 id=&quot;elixir&quot;&gt;Elixir&lt;/h3&gt;
+
+&lt;p&gt;Elixir seems to be next big craze among a portion of the Ruby community, everyone is migrating to try and find out what’s cool. First is was &lt;a href=&quot;https://nodejs.org/en/&quot;&gt;node&lt;/a&gt;, than &lt;a href=&quot;https://golang.org/&quot;&gt;GO&lt;/a&gt;, and now it’s &lt;a href=&quot;http://elixir-lang.org/&quot;&gt;Elixir&lt;/a&gt;. The ruby community always seems to be in a state of flux with it’s developers wanting the latest and greatest technologies. They’ll try the latest new programming language because it’s faster, supports XYZ functionality, or has feature JKL. But there’s no beating the readability of ruby code and it’s easy to learn for a beginner. Elixir does come close in many ways, seeing as how &lt;a href=&quot;http://blog.plataformatec.com.br/&quot;&gt;the creator&lt;/a&gt; of Elixir was also a Core RubyOnRails developer, I’m sure he took a load of inspiration from programming in Ruby to make Elixir as readable and DRY as possible.&lt;/p&gt;
+
+&lt;p&gt;At the moment there seems to be a noticeable movement in the Ruby Community to try out and use Elixir. I believe this migration isn’t just because it’s the hip-new programming language to try. Elixir is a shiny new toy, but it’s built upon a stable and time tested programming language - &lt;a href=&quot;http://www.erlang.org/&quot;&gt;Erlang&lt;/a&gt; which is a 30 year old language. Erlang is proven and tested to run readability, seeing as how some of it’s features make it scalable and fault tolerant. Another very noticeable feature build into Erlang/Elixir is they support concurrency a heck of a lot better than Ruby does. We do have &lt;a href=&quot;http://ruby-doc.org/core-2.2.2/Thread.html&quot;&gt;threads&lt;/a&gt; and &lt;a href=&quot;http://sidekiq.org/&quot;&gt;sidekiq&lt;/a&gt; that we can use, but that gets messy, can cause memory leaks, and complicate your application. I also know for a fact several people have taken the dive because &lt;a href=&quot;http://blog.plataformatec.com.br/&quot;&gt;José Valim&lt;/a&gt; a major core developer and contributor in the Ruby/Rails scene is also the primary creator of the Elixir Programming language.&lt;/p&gt;
+
+&lt;p&gt;I for one can say, I have also spent a large amount of time lately looking into building with and learning the Elixir language. I’m not saying I’m completely giving up on using Ruby or switching my programming languages of preference. The reason I looked into Elixir is to broaden my perspectives, it’s always good for a programmer to try new languages, new programming concepts, and learn new techniques on how things are done.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;lets-take-a-look-at-elixir&quot;&gt;Let’s take a look at Elixir&lt;/h2&gt;
+
+&lt;h3 id=&quot;this-isnt-an-object-oriented-language&quot;&gt;This isn’t an Object-Oriented language&lt;/h3&gt;
+
+&lt;p&gt;I have never really worked with a purely Function Programming Language before. Sure I’ve checked out samples here and there, but everything I’ve generally played with has been primarily Object-Oriented. For those who don’t know exactly what I’m talking about, below is an example showing comparative differences between the two types.&lt;/p&gt;
+
+&lt;div class=&quot;language-ruby highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;str&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;Hello World&quot;&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;# Functional&lt;/span&gt;
+&lt;span class=&quot;no&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;length&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;str&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;  &lt;span class=&quot;c1&quot;&gt;# -&amp;gt; 11&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;# Object-Oriented&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;str&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;length&lt;/span&gt;  &lt;span class=&quot;c1&quot;&gt;# -&amp;gt; 11&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;The line &lt;code class=&quot;highlighter-rouge&quot;&gt;String.length&lt;/code&gt; may look like a basic usage of object-orientation, but Elixir uses modules which to put it simple is using functional namespaces to assign the functions. This makes it easy to distinguish how your function and it’s data will be processed &lt;code class=&quot;highlighter-rouge&quot;&gt;String.blah, Enum.blah, System.blah, etc&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;Another way to look at it in a tree view is similar to the example shown:&lt;/p&gt;
+
+&lt;div class=&quot;language-elixir highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;# Elixir string namespace and functions: http://elixir-lang.org/docs/stable/elixir/String.html&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;defmodule&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;length&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;str&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;# ...&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+
+  &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;strip&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;str&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;# ...&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Elixir also has the ability to assign anonymous functions, which has it’s uses once you’ve gotten to know the basics of the language.&lt;/p&gt;
+
+&lt;div class=&quot;language-elixir highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;foo&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;fn&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;sd&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;Hello &lt;/span&gt;&lt;span class=&quot;si&quot;&gt;#{&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;!&quot;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;foo&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;sd&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;Rick&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Another very appealing set of features that Elixir has is that it has the ability to conditionally process functions based on the supplied values.&lt;/p&gt;
+
+&lt;div class=&quot;language-elixir highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;defmodule&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;Foo&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;bar&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;bar&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;n&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;IO&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;puts&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;n&lt;/span&gt;
+
+  &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;bar&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;n&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;when&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;n&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;100&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
+    &lt;span class=&quot;no&quot;&gt;IO&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;puts&lt;/span&gt; &lt;span class=&quot;sd&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;We've got a big number here!&quot;&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+
+&lt;span class=&quot;no&quot;&gt;Foo&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;bar&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;    &lt;span class=&quot;c1&quot;&gt;# =&amp;gt; 0&lt;/span&gt;
+&lt;span class=&quot;no&quot;&gt;Foo&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;bar&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;   &lt;span class=&quot;c1&quot;&gt;# =&amp;gt; 10&lt;/span&gt;
+&lt;span class=&quot;no&quot;&gt;Foo&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;bar&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;172&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;  &lt;span class=&quot;c1&quot;&gt;# =&amp;gt; We've got a big number here!&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;This may not be seem like much but it’s an amazing feature rather than having to stack you’re program full of &lt;a href=&quot;http://refactoring.com/catalog/replaceNestedConditionalWithGuardClauses.html&quot;&gt;guard clauses&lt;/a&gt;, you can have each and every conditionally matched value processed in a different manner. This also cleans up your function by drawing out the guard clauses and as you learn Elixir this works greatly to your advantage when processing values using a recursion based method. (A guard claus is used to prevent your function from building a nest of conditions and creating an ugly mess.)&lt;/p&gt;
+
+&lt;div class=&quot;language-ruby highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;# something similar in Ruby using inline guard functions&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Foo&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;bar&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;n&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;n&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;We've got a big number here!&quot;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;n&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;100&lt;/span&gt;
+    &lt;span class=&quot;nb&quot;&gt;puts&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;n&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;task&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;Foo&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;new&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;task&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;bar&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;72&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;  &lt;span class=&quot;c1&quot;&gt;# =&amp;gt; 72&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h3 id=&quot;looping&quot;&gt;Looping&lt;/h3&gt;
+&lt;p&gt;One thing that completely blows my mind with Elixir is there’s no actual build in loops ie: &lt;code class=&quot;highlighter-rouge&quot;&gt;while, unless, until, for, each, and many others&lt;/code&gt;. If you want to loop through a value, hash, string, or data of some kind it’s up to you to to process these using a form of recursion. Other than the occasional exercise involving &lt;a href=&quot;https://en.wikipedia.org/wiki/Fizz_buzz&quot;&gt;FizzBuzz&lt;/a&gt;, &lt;a href=&quot;https://en.wikipedia.org/wiki/Fibonacci_number&quot;&gt;Fibonacci sequence&lt;/a&gt;, or build some sort of state-machine looping through until an event happens, the concept of processing based on recursion may have been more of a theoretical concept that we haven’t used much. If you’re like me you’ve enjoyed the spenders of using Object-Oriented code to loop through data. And I’m fully aware that even with ruby our simple loops and blocks are based on conditional recursion build with C.&lt;/p&gt;
+
+&lt;div class=&quot;language-elixir highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;defmodule&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;Foo&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;bar&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;bar&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;n&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;when&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;n&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;0&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
+    &lt;span class=&quot;no&quot;&gt;IO&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;puts&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;n&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;bar&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;n&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+
+&lt;span class=&quot;no&quot;&gt;Foo&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;bar&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;# =&amp;gt; 10 9 8 7 6 5 4 3 2 1&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h3 id=&quot;immutable-data&quot;&gt;Immutable Data&lt;/h3&gt;
+&lt;p&gt;Another feature that makes Elixir so appealing to some people is that date is immutable. Who? What? Who? This means unlike numerous object-oriented languages in order to change a variables data it must be assigned. Rather than with ruby that once it’s been processed, the processed data is now the new value. You may ask yourself why? Well it’s a great safety mechanism to protect and retain your datas original value when processing it. Shown below is are two examples showing the different between immutable and mutable data-types.&lt;/p&gt;
+
+&lt;div class=&quot;language-elixir highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;# Elixir&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;list&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:b&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:c&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;# =&amp;gt; [:a, :b, :c]&lt;/span&gt;
+&lt;span class=&quot;no&quot;&gt;List&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;delete&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;list&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:b&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;# =&amp;gt; [:a, :c]&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;list&lt;/span&gt;  &lt;span class=&quot;c1&quot;&gt;# =&amp;gt; [:a, :b, :c]&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;list&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;List&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;delete&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;list&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:b&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;# =&amp;gt; [:a, :c]&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;list&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;# =&amp;gt; [:a, :c]&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;language-ruby highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;# Ruby&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;a&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:a&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:b&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:c&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;  &lt;span class=&quot;c1&quot;&gt;# =&amp;gt; [:a, :b, :c]&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;delete&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:b&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;  &lt;span class=&quot;c1&quot;&gt;# =&amp;gt; [:a, :c]&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;a&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;#[:a, :c]&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h3 id=&quot;my-opinion&quot;&gt;My Opinion&lt;/h3&gt;
+
+&lt;p&gt;This doesn’t even begin to scratch the surface, there are so many great features that are built into Elixir that make it an great language to learn. If you’re looking to learn a programming language with the ease of use that ruby has and the performance of a compile language this may be what your looking for. There is a lot to learn and using recursion can get complicated. But if you’re like me and you’ve been part of the ruby block for the last several years this makes you feel like your actually programming again rather than building eloquent code. In my opinion Ruby is great for making easy to read and maintainable code. Elixir on the other hand is great for getting things done the way you want it, you can also create high performance and concurrent applications; which will free up various bottlenecks with memory and processing time. Yes Elixirs code may be quite a bit harder to read and occasionally requires you to resort to using barebones Erlang every now and than, but it’s still got a ways to go. Unlike Ruby which has had years to mature, Elixir is still a young language finding it’s place in the programming community.&lt;/p&gt;
+
+&lt;p&gt;~ This doesn’t mean I’ve given up on using ruby, it’s my tool of trade. But it never hurts to see what else is out there and to try new things along the way.&lt;/p&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <id>http://localhost:4000/2015/06/12/using-uuids-in-rails</id>
+    <link type="text/html" rel="alternate" href="http://example.com/2015/06/12/using-uuids-in-rails.html"/>
+    <title>Using UUIDs in Rails</title>
+    <published>2015-06-12T00:00:00-06:00</published>
+    <updated>2015-06-12T00:00:00-06:00</updated>
+    <author>
+      <name>Brandon Hicks</name>
+      <uri>http://localhost:4000</uri>
+    </author>
+    <content type="html">&lt;h3 id=&quot;why-use-uuids&quot;&gt;Why use UUIDs?&lt;/h3&gt;
+&lt;p&gt;It may seem like a trivial decision at first glance, but using UUIDs can have an intricate effect on your applications design structure. If you are building an application and have an &lt;code class=&quot;highlighter-rouge&quot;&gt;id:integer&lt;/code&gt; column that auto increments with the creation of every item you add to that table you could end up with some sever issues. As applications grow in size we end up having to seperate parts of the application into different servers: a cluster of database servers, background, jobs, cache server, an httpd server, and throw in a few servers for actual application and you’ve got a whole cluster of services to deal with.&lt;/p&gt;
+
+&lt;p&gt;Lets say you’ve got 3 servers running the actual application, each one chugging along running serveral instances of your web application. Now say it’s a basic CRUD application if you’ve got several instances writing to the database at once you will have a conflict. If you’ve got a table named books and a few rows are being added at once by seperate visitors, you’re auto incrimenting the rows and lets say on each one it creates row id: 72. Now when they combine their information together you’re going to have an issue with inconsistent data trying to overlap.&lt;/p&gt;
+
+&lt;div class=&quot;language-ruby highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;ss&quot;&gt;id: &lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;72&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;title: &lt;/span&gt;&lt;span class=&quot;no&quot;&gt;The&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;Raven&lt;/span&gt;
+&lt;span class=&quot;ss&quot;&gt;id: &lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;72&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;title: &lt;/span&gt;&lt;span class=&quot;no&quot;&gt;My&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;Side&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;of&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;the&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;Mountain&lt;/span&gt;
+&lt;span class=&quot;ss&quot;&gt;id: &lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;72&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;title: &lt;/span&gt;&lt;span class=&quot;no&quot;&gt;The&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;Giver&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Now if we were inserting these datasets into the different database servers while using UUIDs we may could up with something to the following example below.&lt;/p&gt;
+
+&lt;div class=&quot;language-ruby highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;ss&quot;&gt;id: &lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;898&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;f73bc&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;290&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;c&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;4427&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;b75a&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;68&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;f34464e188&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;title: &lt;/span&gt;&lt;span class=&quot;no&quot;&gt;The&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;Raven&lt;/span&gt;
+&lt;span class=&quot;ss&quot;&gt;id: &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;dd126f47&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;de45&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;cbe&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;aa1c&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;8&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;b052693498e&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;title: &lt;/span&gt;&lt;span class=&quot;no&quot;&gt;My&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;Side&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;of&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;the&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;Mountain&lt;/span&gt;
+&lt;span class=&quot;ss&quot;&gt;id: &lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;479&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;af9a8&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;c096&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;42&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;e2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;8&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;a29&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;a321cdd5f7c&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;title: &lt;/span&gt;&lt;span class=&quot;no&quot;&gt;The&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;Giver&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;UUIDs are simple 128-bit generated values and only consisting of formated using hexadecimal text. Depending on &lt;a href=&quot;https://en.wikipedia.org/wiki/Universally_unique_identifier#Variants_and_versions&quot;&gt;how they’re being generated&lt;/a&gt; their values are generally a random value that will rarely have a collision value. It’s generally safe to say that you can use a distributed application and have several servers generating rows of data and almost never have the same UUID generated (I’m not saying it can’t happen, it’s just a lot less likely to happen).&lt;/p&gt;
+
+&lt;h3 id=&quot;how-can-i-do-this-is-rails&quot;&gt;How can I do this is Rails?&lt;/h3&gt;
+&lt;p&gt;When you are generating models and scaffolds the &lt;code class=&quot;highlighter-rouge&quot;&gt;id&lt;/code&gt; column is usually automatically generated with every table (unless specified), this is a feature build into Rails to make it easier and faster to develop.&lt;/p&gt;
+
+&lt;div class=&quot;language-ruby highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;create_table&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;books&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;force: :cascade&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;string&lt;/span&gt;   &lt;span class=&quot;s2&quot;&gt;&quot;title&quot;&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;timestamps&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;null: &lt;/span&gt;&lt;span class=&quot;kp&quot;&gt;false&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;# Generates&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:integer&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;PRIMARY&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;KEY&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;auto_increment&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;title&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:string&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;created_at&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:datetime&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;created_at&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;null: &lt;/span&gt;&lt;span class=&quot;kp&quot;&gt;false&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;updated_at&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:datetime&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;updated_at&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;null: &lt;/span&gt;&lt;span class=&quot;kp&quot;&gt;false&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Now depending on what database you are using to test, develop, and deploy you application there are different steps that are required in order to get your application to properly recognize and use the UUID datatype. I have seperated into different sections how I got UUIDs to work in both Postgresql and the SQLite databases.&lt;/p&gt;
+
+&lt;h3 id=&quot;postgresql&quot;&gt;Postgresql&lt;/h3&gt;
+&lt;p&gt;The method in order to get uuids to work with Postgres tends to be quite a bit easier (in my opinion), because Postgres has a built in method for generating unique uuids for row ids.&lt;/p&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;rails g migration enable_uuid_extension
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;In the migration we tell the Postgres database to use the uuid extension, we do this in order to have the database automatically generate UUIDs on the objects creation rather than having the Rails Application generate the UUIDs and adding additional process time to the server.&lt;/p&gt;
+
+&lt;div class=&quot;language-ruby highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;EnableUuidExtension&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;ActiveRecord&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;Migration&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;change&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;enable_extension&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'uuid-ossp'&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Now lets generate a book model and get started on adjusting the migration to allow the application to generate a UUID for the id instead of a basic integer.&lt;/p&gt;
+
+&lt;div class=&quot;language-ruby highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;rails&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;g&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;model&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;Book&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;title&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:string&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Now we also need to change id: to use the :uuid datatype instead of letting the application automatically assigning it.&lt;/p&gt;
+
+&lt;div class=&quot;language-ruby highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;CreateBooks&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;ActiveRecord&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;Migration&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;change&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;create_table&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:books&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;id: :uuid&lt;/span&gt;  &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;
+      &lt;span class=&quot;n&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;string&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:title&lt;/span&gt;
+      &lt;span class=&quot;n&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;timestamps&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;null: &lt;/span&gt;&lt;span class=&quot;kp&quot;&gt;false&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Now access the rails console &lt;code class=&quot;highlighter-rouge&quot;&gt;rails c&lt;/code&gt; in order to verifiy that UUIDs are being generated upon the models object creation. At this point in time the default version of UUID generation used by Rails is &lt;code class=&quot;highlighter-rouge&quot;&gt;uuid_generate_v4()&lt;/code&gt; which seems to be quite sufficient to avoiding collisions.&lt;/p&gt;
+
+&lt;div class=&quot;language-ruby highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;mo&quot;&gt;001&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;Book&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;create&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;title: &lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'The Raven'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ms&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;  &lt;span class=&quot;k&quot;&gt;BEGIN&lt;/span&gt;
+  &lt;span class=&quot;no&quot;&gt;SQL&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;35&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ms&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;  &lt;span class=&quot;no&quot;&gt;INSERT&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;INTO&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;books&quot;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;title&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;created_at&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;updated_at&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;VALUES&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;vg&quot;&gt;$1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;vg&quot;&gt;$2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;vg&quot;&gt;$3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;RETURNING&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;id&quot;&lt;/span&gt;  &lt;span class=&quot;p&quot;&gt;[[&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;title&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;The Raven&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;created_at&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;2015-06-13 05:31:03.762157&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;updated_at&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;2015-06-13 05:31:03.762157&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]]&lt;/span&gt;
+   &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;197&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ms&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;  &lt;span class=&quot;no&quot;&gt;COMMIT&lt;/span&gt;
+ &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;#&amp;lt;Book id: &quot;f55ea573-1eec-4053-b7f5-7b693b344da9&quot;, title: &quot;The Raven&quot;, created_at: &quot;2015-06-13 05:31:03&quot;, updated_at: &quot;2015-06-13 05:31:03&quot;&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;p&gt;If you look closely you will notice that the Book.id is no longer being generated a basic integer, it is not being generating a Hex based text string. As show above: &lt;code class=&quot;highlighter-rouge&quot;&gt;Book[id]: f55ea573-1eec-4053-b7f5-7b693b344da9&lt;/code&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;sqlite&quot;&gt;SQLite&lt;/h3&gt;
+
+&lt;p&gt;To begin using UUIDs with sqlite you will need to install the &lt;a href=&quot;https://github.com/jashmenn/activeuuid&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;activeuuid&lt;/code&gt;&lt;/a&gt; gem, when using this gem it will save the uuid: as a binary(16) datatype. I haven’t dug around to much into the gem, but it does seem to work quite effectively for it’s purpose.&lt;/p&gt;
+
+&lt;div class=&quot;language-ruby highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;# Gemfile&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;gem&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'activeuuid'&lt;/span&gt;  &lt;span class=&quot;c1&quot;&gt;# https://github.com/jashmenn/activeuuid&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;We will now need to adjust the migration to explicity use the uuid: datatype for :id and completely disregard using the default :id dataset and configuration.&lt;/p&gt;
+
+&lt;div class=&quot;language-ruby highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;# migrations&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;CreateBooks&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;ActiveRecord&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;Migration&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;change&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;create_table&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:books&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:id&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;kp&quot;&gt;false&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;
+      &lt;span class=&quot;n&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;uuid&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:id&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:primary_key&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;kp&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;null: &lt;/span&gt;&lt;span class=&quot;kp&quot;&gt;false&lt;/span&gt;
+      &lt;span class=&quot;n&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;string&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:title&lt;/span&gt;
+
+      &lt;span class=&quot;n&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;timestamps&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;null: &lt;/span&gt;&lt;span class=&quot;kp&quot;&gt;false&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;You will also need to include &lt;code class=&quot;highlighter-rouge&quot;&gt;ActiveUUID::UUID&lt;/code&gt; in your model to enable UUID generation, you will need to specify a &lt;code class=&quot;highlighter-rouge&quot;&gt;natural_key&lt;/code&gt; to supply a dataset in order to generate a UUID. If this step is not included the application will throw a heap of errors about the books.id using an invalid uuid datatype.&lt;/p&gt;
+
+&lt;div class=&quot;language-ruby highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;#models/book.rb&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Book&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;ActiveRecord&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;Base&lt;/span&gt;
+  &lt;span class=&quot;kp&quot;&gt;include&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;ActiveUUID&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;UUID&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;natural_key&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:created_at&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Upon creating a book object, you should recieve output with something similar to the example shown below.&lt;/p&gt;
+
+&lt;div class=&quot;language-ruby highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;mo&quot;&gt;002&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;Book&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;create&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;title: &lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'The Raven'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+   &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ms&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;  &lt;span class=&quot;k&quot;&gt;begin&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;transaction&lt;/span&gt;
+  &lt;span class=&quot;no&quot;&gt;SQL&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ms&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;  &lt;span class=&quot;no&quot;&gt;INSERT&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;INTO&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;books&quot;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;id&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;title&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;created_at&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;updated_at&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;VALUES&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;sc&quot;&gt;?,&lt;/span&gt; &lt;span class=&quot;sc&quot;&gt;?,&lt;/span&gt; &lt;span class=&quot;sc&quot;&gt;?,&lt;/span&gt; &lt;span class=&quot;sc&quot;&gt;?)&lt;/span&gt;  &lt;span class=&quot;p&quot;&gt;[[&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;id&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&amp;lt;16 bytes of binary data&amp;gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;title&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;The Raven&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;created_at&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;2015-06-13 05:57:45.728134&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;updated_at&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;2015-06-13 05:57:45.728134&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]]&lt;/span&gt;
+   &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ms&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;  &lt;span class=&quot;n&quot;&gt;commit&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;transaction&lt;/span&gt;
+ &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;#&amp;lt;Book id: #&amp;lt;UUID:0x3feef3549684 UUID:a5093dd9-cb33-5783-b01c-0d0d381490f1&amp;gt;, title: &quot;The Raven&quot;, created_at: &quot;2015-06-13 05:57:45&quot;, updated_at: &quot;2015-06-13 05:57:45&quot;&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h4 id=&quot;resources&quot;&gt;Resources&lt;/h4&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/jashmenn/activeuuid&quot;&gt;activeuuid&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.postgresql.org/docs/9.3/static/datatype-uuid.html&quot;&gt;PostgreSQL UUID type&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.postgresql.org/docs/9.3/static/uuid-ossp.html&quot;&gt;PostgreSQL uuid-ossp extensions&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <id>http://localhost:4000/2015/05/26/make-your-own-motivation</id>
+    <link type="text/html" rel="alternate" href="http://example.com/2015/05/26/make-your-own-motivation.html"/>
+    <title>Make your own Motivation</title>
+    <published>2015-05-26T00:00:00-06:00</published>
+    <updated>2015-05-26T00:00:00-06:00</updated>
+    <author>
+      <name>Brandon Hicks</name>
+      <uri>http://localhost:4000</uri>
+    </author>
+    <content type="html">&lt;p&gt;&lt;img src=&quot;/img/ground-stones-pebbles.jpg&quot; alt=&quot;Barren Rock Bed&quot; class=&quot;img-responsive&quot; /&gt;
+Sometimes we get the point where we experience a level of extreme burnout. We don’t want to admit it and we don’t want to step down and evaluate our lives to admit it’s true. And as humans we don’t want to make any extreme changes, especially once we’ve found a comfort zone. It may be caused by our job, our routine, or extreme stress. The burnout begins to eat away at you, it may feel like nothing and start small but you begin to notice it after a while.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Fatigue and constant tiredness&lt;/li&gt;
+  &lt;li&gt;Stress&lt;/li&gt;
+  &lt;li&gt;Easily aggravated&lt;/li&gt;
+  &lt;li&gt;Inability to sleep&lt;/li&gt;
+  &lt;li&gt;Easily Sick and a weakened immune system&lt;/li&gt;
+  &lt;li&gt;And the big one - Depression&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;But when we hit that breaking point in our burnout our world begins to spiral out of control. Once we hit that point nothing in our lives seems to bring much joy, you have make an extreme change in order to get a purpose back into your life. Sometimes you just need a new job, sometimes you need to move, usually it’s not exactly you but what is going on around you.&lt;/p&gt;
+
+&lt;p&gt;I for one have experienced the job ambition part, first let me say that in this town I am absolutely thankful that I even have a job. Where I live is a town that relies heavily on the oilfield and gas prices to keep it afloat. And over the past year since prices and profits have been down. And doesn’t just affect a few people here and there, the whole town has had to readjust their lives and make huge differences in way they spend their money. At the moment I am lucky to even have a job in this town with a shrinking market, let alone a job where I can support my family.&lt;/p&gt;
+
+&lt;p&gt;At my current job I’ve reached the peak, locally I can’t be promoted any higher. And my days seem to just blend together, I do almost the same thing every day. I’m on a continuous repeat cycle and after a few years of doing it really begins to get to you. I’ve been working here long enough to be able to get the majority of my tasks down and out the way within a few hours. The rest of the day I’m manning the office and doing what I want. I’m not saying it’s like this all day, every day. But in order to completely avoid being burnt out I have spend a few hours here and there learning, coding, trying to get out of the loop trying to continuously do something new. But it starts to get to you after a while and you begin to question yourself “Am I happy with my life? Am I happy with what I’m doing? Is this what I want to be doing a year from now? Or maybe even 5 or 10 years from now?”.&lt;/p&gt;
+
+&lt;p&gt;No of course now, everyone has a passion and some of us have the motivation and drive to turn it into a career. But others spend their lives working and wishing they had done more with their lives, but once they reached that point where the found that groove at their job they settle and figured they might as well ride it out as long as they can. But why would someone settle with what they feel comfortable with, when they have potential to achieve so much more with their lives. Many people don’t want to take the risks, I know it’s scary to look around say “What if I fail at this? What will I do?”, well you’ll pick yourself back up and start over again, but this time you know where you went wrong.&lt;/p&gt;
+
+&lt;p&gt;My point to this post is, you don’t want to wait until you’re in an absolute state of despair to make changes in your life. If you’re feeling like your current place isn’t doing it for you anymore try to move on, do what you need to do in order to make you and those around you happy. Sometimes it’s as simple as starting to go on a walk during your lunch break in order to clear your mind. And other times it’s everything around you, because you’ve exposed yourself to a toxic environment and you need to make a major change in your career, your home, or your routine. Make your own motivation! Do something drastic, reach for those dreams and change your life. Even it’s just something simple as doing something you’re passionate at, make a change in your life even little things can make a huge difference in your view of life.&lt;/p&gt;
+
+</content>
+  </entry>
+  
+  <entry>
+    <id>http://localhost:4000/2015/03/16/working-with-the-foreman</id>
+    <link type="text/html" rel="alternate" href="http://example.com/2015/03/16/working-with-the-foreman.html"/>
+    <title>Working with the Foreman</title>
+    <published>2015-03-16T00:00:00-06:00</published>
+    <updated>2015-03-16T00:00:00-06:00</updated>
+    <author>
+      <name>Brandon Hicks</name>
+      <uri>http://localhost:4000</uri>
+    </author>
+    <content type="html">&lt;p&gt;Lets to work on using &lt;a href=&quot;https://github.com/ddollar/foreman&quot;&gt;Foreman&lt;/a&gt; and when I say Foreman I’m not referring to Eric Forman the goof for a son on &lt;a href=&quot;http://www.imdb.com/title/tt0165598/?ref_=nv_sr_1&quot;&gt;The 70’s Show&lt;/a&gt;. I’m talking about the Ruby gem Foreman for making your applications easier to manage and deploy.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://i.imgur.com/vlQFjab.jpg&quot; alt=&quot;Eric Forman&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;For those unfamiliar with Foreman it is a way to initialize your application and its components without making a mess. Before I started using this wonderful gem, whenever I would want to test and/or run an application I would have numerous tabs open and start numerous tasks in order to even get started (Rails Server, Sidekiq, etc.). But with foreman this can all be done with a single command.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/img/before_foreman_tabs.png&quot; alt=&quot;Before Foreman&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;With Foreman all you need to do is install the gem, create a &lt;code class=&quot;highlighter-rouge&quot;&gt;Procfile&lt;/code&gt; and put your desired tasks in it. A Profile will contain the designated tasks which you wish to have initiated when you begin the application. An example of starting the rails server with foreman could look something similar to the following&lt;/p&gt;
+
+&lt;div class=&quot;language-ruby highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;ss&quot;&gt;web: &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;bundle&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;exec&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;rails&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;server&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Or if you wish to call you server application specifically you can use something similar to the example below.&lt;/p&gt;
+
+&lt;div class=&quot;language-ruby highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;ss&quot;&gt;web: &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;bundle&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;exec&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;thin&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;start&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;I know what you’re thinking, “But wait this doesn’t change anything, this is just another file to put into my Rails applications directory.” But let me explain a little bit, every new line that you add to the Profile can have a task followed by it’s specific command that you would normally use in the command line. For example say you run Resque, Solr, Guard, or a number of other tasks when you run your server, add these tasks and they will start with the server when you run the foreman command.&lt;/p&gt;
+
+&lt;div class=&quot;language-ruby highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;ss&quot;&gt;web:    &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;bundle&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;exec&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;thin&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;start&lt;/span&gt;
+&lt;span class=&quot;ss&quot;&gt;solr:   &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;rake&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sunspot&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:solr:run&lt;/span&gt;
+&lt;span class=&quot;ss&quot;&gt;worker: &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;bundle&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;exec&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;rake&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;resque&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:work&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;QUEUE&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=*&lt;/span&gt;
+&lt;span class=&quot;ss&quot;&gt;guard:  &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;bundle&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;exec&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;guard&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;So now instead of having 4 or 5 different tabs open for your terminal all you need to type in the command line is &lt;code class=&quot;highlighter-rouge&quot;&gt;foreman start&lt;/code&gt; and you are ready to go. Below is an example of something similar that you will be output when setup and ran properly.&lt;/p&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;master!$ &lt;/span&gt;foreman start
+18:14:06 web.1     | started with pid 1247
+18:14:06 sidekiq.1 | started with pid 1248
+18:14:12 web.1     | &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&amp;gt; Booting Thin
+18:14:12 web.1     | &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&amp;gt; Rails 4.2.0 application starting &lt;span class=&quot;k&quot;&gt;in &lt;/span&gt;development on http://localhost:3000
+18:14:12 web.1     | &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&amp;gt; Run &lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;rails server -h&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;for &lt;/span&gt;more startup options
+18:14:12 web.1     | &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&amp;gt; Ctrl-C to shutdown server
+18:14:12 web.1     | Thin web server &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;v1.6.3 codename Protein Powder&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+18:14:12 web.1     | Maximum connections &lt;span class=&quot;nb&quot;&gt;set &lt;/span&gt;to 1024
+18:14:12 web.1     | Listening on localhost:3000, CTRL+C to stop
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h3 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h3&gt;
+&lt;p&gt;Using Foreman has been a wonderful resource for developing applications and initiating everything I need in order to jump into development mode. Foremen is not only used for development, it also has numerous features built in it for &lt;a href=&quot;https://github.com/ddollar/foreman/wiki/Exporting-for-production&quot;&gt;production&lt;/a&gt; uses as well. Including but not limited to the &lt;code class=&quot;highlighter-rouge&quot;&gt;foreman export&lt;/code&gt; commands which creates application initialization for upstart and linux (using /etc/init) upon starting or rebooting of your computer.&lt;/p&gt;
+
+&lt;h3 id=&quot;references&quot;&gt;References&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;http://blog.crowdint.com/2012/03/01/rails-tdd-environment-setup-with-guard-and-foreman.html&quot;&gt;Rails TDD environment setup with Guard and Foreman&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.ralphonrails.com/rails/2014/02/04/new-rails-4-project.html&quot;&gt;Rails 4 with Unicorn &amp;amp; Foreman&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://blog.daviddollar.org/2011/05/06/introducing-foreman.html&quot;&gt;Introducing Foreman&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/ddollar/foreman/wiki&quot;&gt;Foreman Wiki&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <id>http://localhost:4000/2014/12/27/setting-goals-for-2015</id>
+    <link type="text/html" rel="alternate" href="http://example.com/2014/12/27/setting-goals-for-2015.html"/>
+    <title>Setting Goals for 2015</title>
+    <published>2014-12-27T00:00:00-07:00</published>
+    <updated>2014-12-27T00:00:00-07:00</updated>
+    <author>
+      <name>Brandon Hicks</name>
+      <uri>http://localhost:4000</uri>
+    </author>
+    <content type="html">&lt;p&gt;Once again the new year is upon us, goals should be set in order to help us look forward to achieving something rather than just watching time pass us by. We also need to sit down and look at what we’ve actually done within the last year. Have I wasted more time that I should have, of course we all have. But have we taken the necessary steps to get done what we wanted to? Probably not, we’ve started in the right direction.&lt;/p&gt;
+
+&lt;h3 id=&quot;writing&quot;&gt;Writing&lt;/h3&gt;
+&lt;p&gt;Within the next year I plan on increasing my blgo posts dramatically. I plan on going from a skimming post every few months, to hopefully as much as a I can. I’m setting a goal of one every few weeks. And not just when I want to express myself, but when I learn and/or try something new that may help other people as well.&lt;/p&gt;
+
+&lt;h3 id=&quot;productivity&quot;&gt;Productivity&lt;/h3&gt;
+&lt;p&gt;We all do it, we get out of our groove and get stuck in a rut, so we play games, read blog posts, browe reddit,twitter, facebook, or whatever else. And it takes an actual act of God to get us back to what needs to be done. And after those hours, days, and/or weeks were wasted we have huge regets or not having anything to show for it. I plan on managing my time better, getting more done, and actually releasing a few of my projects into production stage. Rather than working late nights, getting nothing done, and having nothing to show for all my time.&lt;/p&gt;
+
+&lt;h3 id=&quot;family&quot;&gt;Family&lt;/h3&gt;
+&lt;p&gt;We’ve all got family (well a lot of us), we know how it feels having to drop everying in the middle of a project, right when your getting your groove. Just to find out you were called away just to see someones XBOX instant replay or tie a shoe. I love my kids and plan on trying to give them the utmost attention and love that I can this year. Even if it takes away from my productivity and/or learning. They don’t stay young forever and once they hit their teen years who wants to spent time with their parents anyways, right? I want to enjoy my children while I can.&lt;/p&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <id>http://localhost:4000/2014/11/05/slimming-down</id>
+    <link type="text/html" rel="alternate" href="http://example.com/2014/11/05/slimming-down.html"/>
+    <title>Slimming Down</title>
+    <published>2014-11-05T00:00:00-07:00</published>
+    <updated>2014-11-05T00:00:00-07:00</updated>
+    <author>
+      <name>Brandon Hicks</name>
+      <uri>http://localhost:4000</uri>
+    </author>
+    <content type="html">&lt;p&gt;I have used Slim on various projects and have grown to thoroughly enjoy using it. &lt;a href=&quot;http://slim-lang.com/index.html&quot;&gt;Slim&lt;/a&gt; is a simple, lightweight, and fast Rails templating alternative to ERB or HAML. I prefer it over HAML because of it’s use of use and it takes almost nothing to get started.&lt;/p&gt;
+
+&lt;h3 id=&quot;setup&quot;&gt;Setup&lt;/h3&gt;
+&lt;p&gt;In order to been using Slim with your Rails application, simple add the following line to your Gemfile.&lt;/p&gt;
+
+&lt;div class=&quot;language-ruby highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;gem&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;slim-rails&quot;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;And continue making your views as usual, but instead of using the file extension of &lt;code&gt;*.html.erb&lt;/code&gt; your being the file extension &lt;code&gt;*.html.slim&lt;/code&gt;. Than you can  begin formatting your views using the Slim syntax right away. It doesn’t take a magician playing tricks all night in order to get running, it has a very simple setup and the syntax is quite easy to grasp and get started on. If you know how to format views (using ruby and HTML) using Rails basic templating engine ERB, switch to Slim will be a piece of cake. And what makes it even easier is you can render layouts, partials, includes, etc. with both erb and Slim interchangeably. Say for example your applications primary layout is &lt;code&gt;application.html.erb&lt;/code&gt; you can include a partial: &lt;code&gt;header.html.slim&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h3 id=&quot;comparing-erb-and-slim&quot;&gt;Comparing ERB and Slim&lt;/h3&gt;
+&lt;p&gt;Not only is Slim fast and clean, it’s quite a bit less cluttered than using erb. When using slim you simplify and clean up your templates and allow for a much more readable structure and tag hierarchy. For example compare the following examples&lt;/p&gt;
+
+&lt;div class=&quot;language-erb highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;# ERB
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;ul&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;candylist&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;cp&quot;&gt;&amp;lt;%&lt;/span&gt; &lt;span class=&quot;vi&quot;&gt;@candy&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;each&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;candy&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;cp&quot;&gt;%&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;li&amp;gt;&lt;/span&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;%=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;candy&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;type&lt;/span&gt; &lt;span class=&quot;cp&quot;&gt;%&amp;gt;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;/li&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;cp&quot;&gt;&amp;lt;%&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt; &lt;span class=&quot;cp&quot;&gt;%&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/ul&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;language-ruby highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;# Slim&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;ul&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;candylist&lt;/span&gt;
+  &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;vi&quot;&gt;@candy&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;each&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;candy&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;li&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;candy&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;type&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;And no matter which option you choose to go with, they both output the exact same thing.&lt;/p&gt;
+
+&lt;div class=&quot;language-html highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;ul&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;candylist&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;li&amp;gt;&lt;/span&gt;Jaw Breaker&lt;span class=&quot;nt&quot;&gt;&amp;lt;/li&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;li&amp;gt;&lt;/span&gt;Lollipop&lt;span class=&quot;nt&quot;&gt;&amp;lt;/li&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;li&amp;gt;&lt;/span&gt;Pop Rocks&lt;span class=&quot;nt&quot;&gt;&amp;lt;/li&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;li&amp;gt;&lt;/span&gt;Skittles&lt;span class=&quot;nt&quot;&gt;&amp;lt;/li&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/ul&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;The Slim template engine removes the complexities and unnecessary clustering of tags associated with using ERB. Slim is very concise, free flowing, and easy to read. Look at the example above and tell me it isn’t dead simple to understand exactly what is going on without a ton of extra tags. Another great thing I absolutely love is, Whitespace Matters! Some may argue “blah blah blah, this is to much like Python and kills the whole concept of ERB/Ruby”. Well if you’re already writing legible and structured code in the first place, than you should already be indenting and tabbing to begin with.&lt;/p&gt;
+
+&lt;h4 id=&quot;bad-example&quot;&gt;Bad Example&lt;/h4&gt;
+&lt;div class=&quot;language-ruby highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;# Slim&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;ul&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;li&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;p&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;splash&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;Hello&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;World&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;# Outputs&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ul&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ul&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;li&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;/li&amp;gt;
+&amp;lt;p class=&quot;splash&quot;&amp;gt;Hello World&amp;lt;/&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;p&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h4 id=&quot;better-example&quot;&gt;Better Example&lt;/h4&gt;
+&lt;div class=&quot;language-ruby highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;# Slim&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;ul&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;li&lt;/span&gt;
+    &lt;span class=&quot;nb&quot;&gt;p&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;splash&lt;/span&gt;
+      &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;Hello&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;World&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;# Outputs&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ul&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;li&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;p&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;class&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;splash&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;Hello&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;World&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;/p&amp;gt;
+  &amp;lt;li&amp;gt;
+&amp;lt;ul&amp;gt;
+
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;For those of you into all the big buzz words flying around, just think of it as the CoffeeScript, Sass, Less, or any other abstraction engine except for HTML. It’s quick, clean, and easy to use.&lt;/p&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <id>http://localhost:4000/2014/10/29/resque-to-sidekiq</id>
+    <link type="text/html" rel="alternate" href="http://example.com/2014/10/29/resque-to-sidekiq.html"/>
+    <title>Resque to Sidekiq</title>
+    <published>2014-10-29T00:00:00-06:00</published>
+    <updated>2014-10-29T00:00:00-06:00</updated>
+    <author>
+      <name>Brandon Hicks</name>
+      <uri>http://localhost:4000</uri>
+    </author>
+    <content type="html">&lt;p&gt;Background processing is an important feature with any web application to improve performance. Not only does it free up your application for requests, it can be used to prioritize tasks and delay processes until your system has available resources.&lt;/p&gt;
+
+&lt;p&gt;This post is not about &lt;a href=&quot;https://github.com/collectiveidea/delayed_job&quot;&gt;delayed_job&lt;/a&gt;, &lt;a href=&quot;https://kr.github.io/beanstalkd/&quot;&gt;beanstalkd&lt;/a&gt;, &lt;a href=&quot;https://github.com/mperham/girl_friday&quot;&gt;girl_friday&lt;/a&gt;, &lt;a href=&quot;https://github.com/brandonhilkert/sucker_punch&quot;&gt;sucker_punch&lt;/a&gt;, or a &lt;a href=&quot;https://www.ruby-toolbox.com/categories/Background_Jobs&quot;&gt;wide selection&lt;/a&gt; of other background processors. Even though I’ve used delayed_job which is amazingly easy to setup and use, I don’t exactly want to clog up my ActiveRecord database with database queries. The use of a key-value store tends to make things fast and simple as it is. For background jobs, caching, and various other tasks Redis does an amazing job: it’s fast, reliable, and does over complicate the application.&lt;/p&gt;
+
+&lt;p&gt;Until recently I had been using &lt;a href=&quot;https://github.com/resque/resque&quot;&gt;Resque&lt;/a&gt; the Holy Grail of Ruby based background processors and it has worked flawlessly to the needs I required. But one of the applications I have setup allows users to upload as many images (using &lt;a href=&quot;https://github.com/carrierwaveuploader/carrierwave&quot;&gt;Carrierwave&lt;/a&gt;) as they want at any given time. Upon the successful upload of these images the files mime-types and extensions are verified to ensure that malicous files aren’t being uploaded to the server. Than the images are processed to create thumbnails, gallery images, etc. and when you’re processing numerous image files at one time without background processing this absolutely bogs down a server. When you have some a mechanism to do this effecively in the background this doesn’t have such a huge impact. But as of lately with a higher user base the image uploads have begin to display delayes in their processing times.&lt;/p&gt;
+
+&lt;p&gt;It may not seem like much, but when it’s a few images here and there from numerous users at any given time, the processing time begins to add up. Especially when upon upload a thumbnail is generated and expected to be displayed almost immediately showing the available uploads for use.&lt;/p&gt;
+
+&lt;p&gt;One great thing about Sidekiq is that just like Resque it uses &lt;a href=&quot;http://redis.io/&quot;&gt;Redis&lt;/a&gt;, if you’ve never used Redis before, please do us all a favor and at least give a quick try. Compared to large SQL databases it’s very simple (key/value pair) and extremely fast, &lt;a href=&quot;https://github.com/redis-store/redis-rails&quot;&gt;some people&lt;/a&gt; have gone as far to use it for caching, sessions, and various other tasks.&lt;/p&gt;
+
+&lt;p&gt;The amazing part that makes this migration from Resque to Sidekiq fast and easy is that both libraries use Redis as their backend database to keep track of queues/tasks. A lot of the gems and initializers just require that you to change the backend from resque to sidekiq, while others just adjust to detecting what’s available.&lt;/p&gt;
+
+&lt;div class=&quot;language-ruby highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;# carrierwave_backgrounder&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;c&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;backend&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:resque&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;c&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;backend&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:sidekiq&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;# devise-async&lt;/span&gt;
+&lt;span class=&quot;no&quot;&gt;Devise&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;Async&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;backend&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:resque&lt;/span&gt;
+&lt;span class=&quot;no&quot;&gt;Devise&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;Async&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;backend&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:sidekiq&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;In order to get everything working propely with your gems only slight adjustments are required.&lt;/p&gt;
+
+&lt;div class=&quot;language-ruby highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;# Gemfile&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;#gem 'resque', :require =&amp;gt; &quot;resque/server&quot;&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;gem&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'sidekiq'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:github&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'mperham/sidekiq'&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;gem&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'devise-async'&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;gem&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'carrierwave_backgrounder'&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;# And if your using it for caching, sessions, etc.&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;gem&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'redis-rails'&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h3 id=&quot;performance&quot;&gt;Performance&lt;/h3&gt;
+&lt;p&gt;Performance wise, I have have noticed a significant increase in processing speed. Resque and delayed_job were produced when Ruby/Rails was hitting a massive explosion of growth something was needed and needed fast. Don’t get me wrong Resque is an amazing ruby gem, but if your application is using thread-safe libraries Sidekiq will kick quite a punch when it comes to your background processes. Upon benchmarking, Sidekiq tends to significantly outperform Resque when it comes to completing background processes.&lt;/p&gt;
+
+&lt;h3 id=&quot;goworker&quot;&gt;GoWorker&lt;/h3&gt;
+&lt;p&gt;Seeing as how lately I’ve been dealing with &lt;a href=&quot;http://golang.org/&quot;&gt;Go&lt;/a&gt; not only for it smooth edge, but compiled libraries tent to perform significantly faster than interpreted languages, another option I considered (and still am looking into is) &lt;a href=&quot;http://www.goworker.org/&quot;&gt;goworker&lt;/a&gt;.
+Goworker is pretty much a drop in replacement for Resque and Sidekiq, relies on Redis as well and massively out performed them both.
+But before I attempt to push this any faster and milk every drop of performance out of the application, I plan to learn quite a bit more about programming with Go.&lt;/p&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <id>http://localhost:4000/2014/07/06/the-saturation-of-technologies</id>
+    <link type="text/html" rel="alternate" href="http://example.com/2014/07/06/the-saturation-of-technologies.html"/>
+    <title>The Saturation of a Technologies</title>
+    <published>2014-07-06T00:00:00-06:00</published>
+    <updated>2014-07-06T00:00:00-06:00</updated>
+    <author>
+      <name>Brandon Hicks</name>
+      <uri>http://localhost:4000</uri>
+    </author>
+    <content type="html">&lt;p&gt;When I first started coding I was quite a bit younger, and has a passion to learn every possible tech related thing I possibly could. I was going to school, working a part time job, needed very little sleep, and quite the introvert. I had a programmers dream environment build up around myself. It was a genuine passion to learn, learn, and learn some more.&lt;/p&gt;
+
+&lt;p&gt;When I was going to college, I saw people who were going through the Computer Science/IT programs that had never even viewed a script other than to copy and paste to modify their MySpace. These people thought they were amazing, they could change the background or font-color of their profile page. They suddenly thought they were gifted prodigies with computers, hoping to be amazing programmers.&lt;/p&gt;
+
+&lt;p&gt;In class a few of them stuck with the material, but very few of them enjoyed it. Even fewer of these people actually practiced any sort of coding outside of the school material. Almost no one ever went in depth to learn the languages, linux systems, or every got curious about the systems we were working with.&lt;/p&gt;
+
+&lt;p&gt;This was in the very least, quite a disturbing revelation. You want to make a career out of developing software, yet you don’t want to learn anything other than the skimmed examples in the book?&lt;/p&gt;
+
+&lt;p&gt;I do understand that not everyone has the time to heavily dedicate to a given subject. (I have a family, kids, and a job this is fully understandable). Sometimes I get so tired of work, chores, worries, and everything I can’t even sit down and look at code. It’s nice to sometimes just burn everything away and fidget with a hobby or stare in my massive fish tank and relax for a bit. And sometimes just coding or refactoring a few lines of code is enough to relax my like a good nights sleep and I’ll spring to life.&lt;/p&gt;
+
+&lt;p&gt;But when you’re trying to make a career in a specific field, I honestly believe you need to have a passion for it in the first place. I understand that when you’re in the technology field there’s alot of pressure to spend every waking moment learning, studing, and creating in your field of expertise. Some technologist only learn what is required of them at their jobs, the bare minimum. And what works for them may not work for others, obviously the passion and desire isn’t always there. They’ve got job security until they’ve got the train that new college grad years down the road and be their manager, switch fields, or retire. And some people try to learn and create in every little nitch that they can.&lt;/p&gt;
+
+&lt;p&gt;As I’ve grown older I’ve learned it not solely about dedicating every moment you’ve got to your studies, it’s about learning to sift to sift through all the fads and learn what is required to work for you. Let it be: Swift, Dart, Go, Angular, Ember, AWS, one of the dozens of NoSQL databases coming out each weel, Python, Ruby, the newest Web Framework and flashiest, Responsive Design, the list could go on forever.&lt;/p&gt;
+
+&lt;p&gt;I’ve learned you need to focus on learning the big picture, you don’t need to learn every language out there. It’s important to stick to a language you like or need and get to be good at it. Especially considering once you’ve learned the the concepts of on language very well, you generally understand the basics of numerous other technologies and languages. And once you have got a fine grasp on things, it’s quite  easier to begin learning other things. Just don’t overwhelm yourself with fads, trends, the newest and coolest language. And before you jump into a new technology, take a moment to think: where do you think it’ll be in 5, 7, or even 10 years from now.&lt;/p&gt;
+
+&lt;p&gt;Will learning X or Y give you an “in-demand” skill? Will JavaScript continue to take over the development world or will there be something new to push it aside? Will those late nights pay off? Have we reached our saturation point, where we no longer want to learn the newest tool and only stick to what we know?&lt;/p&gt;
+
+&lt;p&gt;We can only hope the paths we have chosen to follow, the skills we have learned, and technologies we have adapted won’t be the thing that causes us regret and worries years down the road. And that the skills what we’ve decided to learn we’ll still be able to pay the bills, support our families, and enjoy our careers with.&lt;/p&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <id>http://localhost:4000/2013/05/26/nurture-it-like-a-garden</id>
+    <link type="text/html" rel="alternate" href="http://example.com/2013/05/26/nurture-it-like-a-garden.html"/>
+    <title>Nurture It Like a Garden</title>
+    <published>2013-05-26T00:00:00-06:00</published>
+    <updated>2013-05-26T00:00:00-06:00</updated>
+    <author>
+      <name>Brandon Hicks</name>
+      <uri>http://localhost:4000</uri>
+    </author>
+    <content type="html">&lt;p&gt;&lt;img src=&quot;/img/grape_bunch.png&quot; alt=&quot;Kumquat Tree&quot; class=&quot;img-responsive&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;As of recently I have been building and growing a small vegetable garden for my family. My children love the idea of putting work into it something quite so amazing: digging up the dirt, playing the seeds and plant buds, watering, and taking responsibility for a small living object that will someday be rewarding them for their effort. But in the meantime they have to put time, effort, and tender love and care into taking care of the plants.&lt;/p&gt;
+
+&lt;p&gt;This is very much like any project you may work on. It usually starts out as a small idea, like planting a seed in your mind.&lt;/p&gt;
+
+&lt;p&gt;It begins by putting a lot of effort into turning that idea into something real, that idea begins to grow into something fruitful and full of life. But in order for your idea to grow into something big and wonderful you need to take care of it, feed it, nourish it, and look after it until it flourishes into something wonderful. But once it’s alive and growing you can’t just forget about it. You have to look after it, tend to it, make sure it doesn’t get out of control, and is well fed.&lt;/p&gt;
+
+&lt;p&gt;Once an application has reached a satisifing level of use and income you don’t just forget about it and hope it can maintain itself for the long run. Trends and technology are always advancing, needs, requirements, and desires are always growing. One day your application may be the top of its category and tomorrow it could be a long forgotten memory of the past (just look at how fast the social web has jumped around in the past few years). In other words, if you believe in your idea and dreams don’t let it dwindle and die. Build that idea, make it more than a dream, make it into something that will be used by someone other than yourself. Success isn’t achieved by just planting the seeds, you have to be patient and maintain the foundation of what you’ve build.&lt;/p&gt;
+
+&lt;hr /&gt;
+&lt;p&gt;Image obtained from - &lt;a href=&quot;http://www.sxc.hu/photo/1392865&quot;&gt;stock.xchng&lt;/a&gt;
+&lt;!-- Image obtained from - [stock.xchng](http://www.sxc.hu/photo/1402199/) --&gt;&lt;/p&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <id>http://localhost:4000/2013/05/20/the-truth-of-it-all</id>
+    <link type="text/html" rel="alternate" href="http://example.com/2013/05/20/the-truth-of-it-all.html"/>
+    <title>The Truth of It All</title>
+    <published>2013-05-20T00:00:00-06:00</published>
+    <updated>2013-05-20T00:00:00-06:00</updated>
+    <author>
+      <name>Brandon Hicks</name>
+      <uri>http://localhost:4000</uri>
+    </author>
+    <content type="html">&lt;p&gt;We all know it’s been asked time and time again, “What do you want in the long run out of your life?” We all have hopes and dreams we want to fulfill, different routes we want to take through life. But we’re all (well most of us) going to end up the same in the end. We’ll either be stuffed away like a number in a nursing home or living with out children/grandchildren and feeling bad about them having to help manage our lives.&lt;/p&gt;
+
+&lt;p&gt;The reality of this question is, its’ not as easy of an answer as it seems. And as you live your life and experience new things your answer will change. When your young and stupid you want fame and money, but as you age and become more mature you want happiness and health.&lt;/p&gt;
+
+&lt;p&gt;Our outcome in life isn’t always what we’d want it to be. But in the meantime, it’s about making the most you can out of what you love doing. The reason many people goto college, participate in training seminar, start a hobby, etc. is because they want to spend the bulk of their life doing what they’re passionate about. You don’t necessarily have to be a millionaire living extravagantly or a philanthropist in order to be happy. But you do want to look back and tell people you did something amazing with your life, that you weren’t just a couch potato sitting back coasting through life and always hoping for more.&lt;/p&gt;
+
+&lt;p&gt;At the moment my children and fiance, are my number one priorities. But I am still passionate about what makes me happy, with keeps my mind going, and something that pushes my limits. If you’re deeply passionate about an interest, you don’t just make it a hobby, don’t think about pushing it aside and saying it’s just a phase. Think about diving head first into it, make a life out of doing what you enjoy. And creating a stable life for you and your family in the long run.&lt;/p&gt;
+</content>
+  </entry>
+  
+  <entry>
+    <id>http://localhost:4000/2013/05/19/fresh-bacon</id>
+    <link type="text/html" rel="alternate" href="http://example.com/2013/05/19/fresh-bacon.html"/>
+    <title>Fresh Bacon</title>
+    <published>2013-05-19T00:00:00-06:00</published>
+    <updated>2013-05-19T00:00:00-06:00</updated>
+    <author>
+      <name>Brandon Hicks</name>
+      <uri>http://localhost:4000</uri>
+    </author>
+    <content type="html">&lt;p&gt;Yum, a fresh new reset blog is like a fresh new package of bacon.
+You don’t know exactly what it’s going to taste like, but you know it’s going to be delicious and full of delight.&lt;/p&gt;
+</content>
+  </entry>
+  
+
+</feed>

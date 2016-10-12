@@ -1,6 +1,6 @@
 GIT
-  remote: git://github.com/pattex/jekyll-tagging.git
-  revision: c000c98b18f702f4b212d5f98f74bc078a5c5f89
+  remote: https://github.com/pattex/jekyll-tagging.git
+  revision: a981f786b161938a871195afc8d19e129f13fb49
   specs:
     jekyll-tagging (1.0.1)
       ruby-nuggets
@@ -21,7 +21,8 @@ GEM
       addressable (~> 2)
     ffi (1.9.14)
     forwardable-extended (2.6.0)
-    jekyll (3.2.1)
+    jekyll (3.3.0)
+      addressable (~> 2.4)
       colorator (~> 1.0)
       jekyll-sass-converter (~> 1.0)
       jekyll-watch (~> 1.1)
@@ -52,7 +53,7 @@ GEM
     pathutil (0.14.0)
       forwardable-extended (~> 2.6)
     rack (1.6.4)
-    rake (11.2.2)
+    rake (11.3.0)
     rb-fsevent (0.9.7)
     rb-inotify (0.9.7)
       ffi (>= 0.5.0)
@@ -83,4 +84,4 @@ DEPENDENCIES
   uglifier
 
 BUNDLED WITH
-   1.12.5
+   1.13.3

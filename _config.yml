@@ -6,6 +6,8 @@
 encoding:     "utf-8"
 lsi: false
 
+destination: docs/
+
 # Conversion
 highlighter: rouge
 markdown: kramdown
