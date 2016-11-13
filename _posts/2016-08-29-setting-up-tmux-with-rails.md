@@ -4,7 +4,7 @@ title: "Setting up tmux with Rails"
 date: 2016-08-29 16-08-09
 description: "A walk through on how to setup tmux for Rails development"
 tags: [development, programming, terminal, tmux]
-comments: false
+comments: true
 ---
 
 ## Why use tmux?

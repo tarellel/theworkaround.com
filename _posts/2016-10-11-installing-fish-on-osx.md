@@ -4,7 +4,7 @@ title: "Installing Fish on OSx"
 date: 2016-10-11 22-10-10
 description: ""
 tags: [fish, terminal, osx]
-comments: false
+comments: true
 ---
 As developers we all use the command line, to make things happen.
 And by now you know there's several shell environments ranging from [zsh](http://www.zsh.org/),

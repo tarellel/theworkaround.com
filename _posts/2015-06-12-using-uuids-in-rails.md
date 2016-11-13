@@ -4,6 +4,7 @@ title: "Using UUIDs in Rails"
 date: 2015-06-12 20-06-35
 description: "A quick explanation on how to generate UUIDs in Rails while using the Postgres and SQLite databases"
 tags: [database, development, rails, ruby]
+comments: true
 ---
 
 ### Why use UUIDs?

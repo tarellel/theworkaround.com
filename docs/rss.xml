@@ -6,9 +6,114 @@
     <atom:link href="http://localhost:4000/rss.xml" rel="self" type="application/rss+xml" />
     <description>The infinate rambelings and ideas of Brandon Hicks</description>
     <language>en-us</language>
-    <pubDate>Wed, 12 Oct 2016 01:40:26 -0600</pubDate>
-    <lastBuildDate>Wed, 12 Oct 2016 01:40:26 -0600</lastBuildDate>
+    <pubDate>Sun, 13 Nov 2016 00:22:24 -0700</pubDate>
+    <lastBuildDate>Sun, 13 Nov 2016 00:22:24 -0700</lastBuildDate>
 
+    
+    <item>
+      <title>Enhancing SSH Security</title>
+      <link>http://localhost:4000/2016/11/11/enhancing-ssh-security.html</link>
+      <pubDate>Fri, 11 Nov 2016 00:00:00 -0700</pubDate>
+      <author> ( {"email"=>"tarellel@gmail.com", "name"=>"Brandon Hicks", "github"=>"tarellel", "twitter"=>"tarellel"} )</author>
+      <guid>http://localhost:4000/2016/11/11/enhancing-ssh-security</guid>
+      <description>&lt;p&gt;With the whole security/privacy revolution rolling throughout the internet, it has recently come to my attention
+that specific services are being heavily focused on, while others are completely neglected.
+When securing your server and it’s services you need to attempt to secure the whole stack rather than a few specific services.
+For example lets take a look at web servers, they’re full of new ideas and
+technology, innovative, and always changing. And recently the world was recently introduced to &lt;a href=&quot;https://letsencrypt.org/&quot;&gt;Lets Encrypt&lt;/a&gt;
+which makes them and your data a magnitude of times more secure using HTTPS (when properly configured).&lt;/p&gt;
+
+&lt;p&gt;Another very important service that I’d like you to really think about is SSH.
+It’s another service that we use for tons of uses, but you don’t think “Does it need secured”,
+because everyone automatically seems to assume that it’s hardened by default.
+But in my own words, I’d say “It’s easy to use by default, but not necessarily ready for use”.&lt;/p&gt;
+
+&lt;p&gt;I’m going to assume you’ve already hardened your SSH config with the basic settings (disable root login, AllowUsers, AllowGroups, MaxRetries, Fail2ban, LoginGraceTime, etc.) There’s tons of variable configurations to setup, one place I would suggest starting at would be &lt;a href=&quot;http://tldp.org/LDP/solrhe/Securing-Optimizing-Linux-RH-Edition-v1.3/chap15sec122.html&quot;&gt;Securing and Optimizing Linux&lt;/a&gt; to get a basic configuration setup.&lt;/p&gt;
+
+&lt;p&gt;Now lets get to the main topic of this post, enhanced security.
+Lately, I’ve seen quite a bit of talk suggesting everyone disable password
+authentication and only using key and/or certificate encryptions to secure SSH connections.
+I mean, really how probable is it that someone will be able to generate your exact ssh-key similar to the one below?&lt;/p&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC4MCqOxhfmNP/uv8sl5EYSIqQSGuV4v17B50xMWXMcwTJrriOi9W6nNfxF8wu/i2HB1/nUUuSu+ZxQdYaD2cRkelzSGcq191z+b8lNY2lz+bxB547H465U5EQPlxJ5w7WU6QOV1hrZ7quWh/GYrDnU1aZrhEQ++EV5chQIUxoP3YgBSSb8D5Bpns9gR0IZVtlEqhF8eyCypZSiyKumQxK8e/W8Y8iHWCtRfvZbh+bnemCkHrXI/xc+CuCY9TQmWZkwFfTRBJQo3pmoRSZAZpqwYSl1kySrasw771rfy2rowFiCogkBYu2W9FTR2kMwB4btBrpA4Af97AjxwzkHyXUt sample_user@gmail.com
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Well, lets take a look how vulnerable your keys actually are.
+If you’re like the vast majority of developers just using a &lt;code class=&quot;highlighter-rouge&quot;&gt;id_rsa.pub&lt;/code&gt; or &lt;code class=&quot;highlighter-rouge&quot;&gt;id_dsa.pub&lt;/code&gt; key for the vast majority of your logins and connections, than you may already be an easy target. You may be asking, how and why? Well let’s take a look at some keys people use with github.
+If for example you use Github, or a number of services your public key is already out in the open. This is mainly for system wide user verification purposes. For example lets take a moment to look at user &lt;a href=&quot;https://github.com/GrahamCampbell.keys&quot;&gt;GrahamCampbell’s publickey&lt;/a&gt;, now is his key is available what about &lt;a href=&quot;https://gist.github.com/paulmillr/2657075/&quot;&gt;everyone else’s&lt;/a&gt;. If you still don’t trust me try it out with your own profile/username &lt;a href=&quot;https://github.com/username.keys&quot;&gt;https://github.com/username.keys&lt;/a&gt;. Now tell me, how many services do you actually user ur id_rsa key with? If your using this one key for DigitalOcean, GitHub, Google Cloud, AWS, your companies servers, your local NAS, vagrant/Docker and who knows what else, than your services are ready for the taking. Now the simple questions is: How can we fix this?
+Well, to begin we can begin by using the &lt;a href=&quot;https://linux.die.net/man/5/ssh_config&quot;&gt;ssh_config&lt;/a&gt; file ‘~/.ssh/config’.
+This allows us to assign the appropriate keys to be used when trying to access specific services/addresses.
+This is part of the security method known as “security by obscurity”, you reduce the amount of parameters an attacker can access
+by making things more complicated. If someone managers to get ahold of one of your keys, they won’t have access to every single web service you use.&lt;/p&gt;
+
+&lt;p&gt;An example of how of how you can specify ssh to connect to specific services:&lt;/p&gt;
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Host github.com
+  user sample_user
+  HostName github.com
+  IdentityFile ~/.ssh/github_rsa
+  IdentitiesOnly yes
+
+Host digitalocean.com
+  HostName digitalocean.com
+  IdentityFile ~/.ssh/digitalocean_key
+  IdentitiesOnly yes
+
+And the list goes on...
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Another step in order to make things a bit more complicated is to add a password to your SSH-keys.&lt;/p&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;ssh-keygen -t rsa -q -N &lt;span class=&quot;s1&quot;&gt;'sample_password'&lt;/span&gt; -f ~/.ssh/sample_id -C &lt;span class=&quot;s2&quot;&gt;&quot;sample_user@gmail.com&quot;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;You probably know by now, that by adding a password to your keys can be a pain in the butt.
+Because every time you connect to a service or do a push request, etc. it’ll ask you for that crazy password you used &lt;code class=&quot;highlighter-rouge&quot;&gt;XL7pa5wnV/nQgUqi5mf7oQ6uG0hk5NwGh+5OYU+Mu6&lt;/code&gt;. Well you can solve this by using a service such as &lt;a href=&quot;http://www.funtoo.org/Keychain&quot;&gt;keychain&lt;/a&gt; and/or using your ssh-agent with the &lt;a href=&quot;https://linux.die.net/man/1/ssh-add&quot;&gt;ssh-add&lt;/a&gt; command.
+If configured properly, they require to only input the password once person login session.
+So in other words, you won’t have to re-input your crazy password until your next reboot.&lt;/p&gt;
+
+&lt;h3 id=&quot;newer-key-types&quot;&gt;Newer Key types&lt;/h3&gt;
+&lt;p&gt;Another very important thing to look as is your key encryption method if your still using id_dsa and/or id_rsa, please update to using &lt;a href=&quot;https://ed25519.cr.yp.to/&quot;&gt;Ed25519&lt;/a&gt; immediately. I admit, some services like GitHub and DigitalOcean may have issues when with this encryption type, but if your connecting to ssh I’d highly suggest it.
+I’m no Cryptologist and I can’t tell you how and why a shorter key is more secure, other than it uses Elliptic curve cryptography methods.
+But at the moment ED25519 is the recommended standard and as we know the higher the bit length and more rounds we encrypt the key, the more secure it’ll be.&lt;/p&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;ssh-keygen -o -a 100 -b 4096 -t ed25519 -q -f ~/.ssh/dev_key -N &lt;span class=&quot;s1&quot;&gt;'sample_password123'&lt;/span&gt; -C &lt;span class=&quot;s1&quot;&gt;'sample_user'&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;# ~/.ssh/dev_key&lt;/span&gt;
+ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBCz0L+cnm3RSHawNK/h7hkCs7ZQIeeAyjKs4S+tHnPF sample_user
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h3 id=&quot;duel-method-authentication&quot;&gt;Duel Method Authentication&lt;/h3&gt;
+&lt;p&gt;Another enhancement you may wish to add to your SSH connections is requiring two forms of authentication.
+This a technique in which you can also require a two methods of encryption in order to connect to the server (publickey and password).
+In other words if a hacker “somehow” manages to get ahold of your publickey or your password, you’re server won’t be completely vulnerable to be victimized. Now let me warn you, this may cause issues with Capistrano, Ansible, Vagrant, or various other services.
+Because the majority of them attempt to authenticate with the server by password or by publickey and not both.
+But if that’s not that case and you’re really wanting to secure your SSH connections, this can be achieved with ease.
+This is because we’ll be using &lt;a href=&quot;https://www.kernel.org/pub/linux/libs/pam/whatispam.html&quot;&gt;PAM&lt;/a&gt; which should be fairly straight forward because most modern Linux installations have various PAM modules installed by default. This can be achieved by changing your AuthenticationMethods used in /etc/ssh/sshd_config to something similar to the following:&lt;/p&gt;
+
+&lt;div class=&quot;language-config highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;AuthenticationMethods&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;publickey&lt;/span&gt;,&lt;span class=&quot;n&quot;&gt;keyboard&lt;/span&gt;-&lt;span class=&quot;n&quot;&gt;interactive&lt;/span&gt;:&lt;span class=&quot;n&quot;&gt;pam&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;In other words, in order to connect the the specified server you will be required
+to supply the proper publickey as well a valid password.
+It also helps to enforce higher levels of encryption, using modern cyphers, and locking down specific users and/or groups.
+If you’re looking to properly secure your SSH server, I suggest you begin is by taking a very thorough look at Mozilla’s &lt;a href=&quot;https://wiki.mozilla.org/Security/Guidelines/OpenSSH&quot;&gt;OpenSSH Guidelines&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h3 id=&quot;important&quot;&gt;Important&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;Please note&lt;/em&gt;&lt;/strong&gt; that the methods suggested for securing your SSH in this post
+are not the only methods required in order to properly secure your SSH server.
+They mostly consist of method to enhance existing security methods for your SSH connections.&lt;/p&gt;
+
+&lt;h3 id=&quot;references&quot;&gt;References&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://wiki.mozilla.org/Security/Guidelines/OpenSSH&quot;&gt;Mozilla SSH Guidelines&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
     
     <item>
       <title>Installing Fish on OSx</title>
