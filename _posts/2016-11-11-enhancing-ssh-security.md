@@ -2,7 +2,7 @@
 layout: post
 title: "Enhancing SSH Security"
 date: 2016-11-11 21-11-22
-description: ""
+description: "SSH is an important multipurpose service, that we need to properly secure."
 tags: [security, ssh, terminal]
 comments: false
 ---

@@ -2,7 +2,7 @@
 layout: post
 title: "Installing Fish on OSx"
 date: 2016-10-11 22-10-10
-description: ""
+description: "Enhance your terminal with the fish shell"
 tags: [fish, terminal, osx]
 comments: true
 ---
