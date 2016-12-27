@@ -1,15 +1,16 @@
 /* TEAM */
-  Designer/Author: Brandon Hicks [tarellel]
-  Site: theworkaround.com
-  Twitter: @tarellel
-  From: United States
+  Developer:  Brandon Hicks [tarellel]
+  Blog:       http://theworkaround.com/
+  Website:    http://brandonhicks.me/
+  Twitter:    @tarellel
+  Location:   New Mexico, USA
 
 /* SITE */
-  Last updated: 11/05/2014
-  Language: English
-  Doctype: HTML5
+  Last updated: 12/15/2016
+  Language:   English
+  Doctype:    HTML5
   Standards:  HTML, CSS3
-  Components: Twitter Bootstrap, Awesome-Font, Jekyll
-  IDE:      SublimeText2
+  Components: Bootstrap, FontAwesome, Jekyll, and Google WebFonts
+  IDE:        SublimeText2, Atom
 
 HumansTXT is a ingenious method to allow developers to establish who contributed to a websites creation.
