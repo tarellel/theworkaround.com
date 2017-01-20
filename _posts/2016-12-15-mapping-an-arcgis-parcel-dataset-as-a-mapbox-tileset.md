@@ -26,7 +26,7 @@ Now that know it a GIS dataset, who wants to pay [hundreds](http://www.arcgis.co
 
 Now comes to fun part, we'll begin with starting up QGIS and opening up the `.dbx` as stated before. When you load this database table, it may table a few moments because it will also try to load all of it's other component files as well. Once the parcel project loads, you may be faced with a map that looks similar to CAD wireframe, except very intricate. But slow down, your on the right path. Just consider this as vector points similar to using the Pen Tool to build shapes in Adobe Illustrator.
 
-![GIS Grid](/img/mapping_arcgis/GIS_grid500.jpg){: .img-responsive .center-block }
+![GIS Grid](/img/mapping_arcgis/gis_grid500.jpg){: .img-responsive .center-block }
 
 Except the GIS map doesn't just include points to create a layout of buildings.
 If you zoom in and switch to the Identify Features/vector information tool and click individual plots or buildings notice it allows you to view information for each parcel. Which consists of tons of information used by the county to identify the area (PARCELNO, GrossAcres, PhysAddr, ACCTTYPE, etc.). Now this doesn't seem like it'll be anything important, but when we convert the dBase table to a PostGIS table each one of these attributes will be used as a column to identify each and every building in the county.
