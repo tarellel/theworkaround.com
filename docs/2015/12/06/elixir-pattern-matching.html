@@ -1,37 +1,45 @@
 <!DOCTYPE html>
 <html lang="en-US">
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Elixir Pattern Matching - TheWorkAround</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Prefectch to Optimize Site Loading - src: http://csswizardry.com/ -->
-    <link rel="dns-prefetch" href="https://fonts.googleapis.com/">
-    <link rel="dns-prefetch" href="https://www.google-analytics.com/">
-    <link rel="dns-prefetch" href="https://ajax.googleapis.com/">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Elixir Pattern Matching - TheWorkAround</title>
+  <meta name="google" content="notranslate">
+  <meta name="robots" content="index, follow">
+  <meta http-equiv="Content-Language" content="en">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Prefectch to Optimize Site Loading - src: http://csswizardry.com/ -->
+  <link rel="preconnect" href="https://fonts.googleapis.com/" crossorigin>
+  <link rel="preconnect" href="https://www.google-analytics.com/" crossorigin>
+  <link rel="preconnect" href="https://ajax.googleapis.com/" crossorigin>
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com/" crossorigin>
+  <link rel="dns-prefetch" href="https://fonts.googleapis.com/">
+  <link rel="dns-prefetch" href="https://www.google-analytics.com/">
+  <link rel="dns-prefetch" href="https://ajax.googleapis.com/">
+  <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com/">
+  <meta name="theme-color" content="#4cb8c4">
+  <link href='https://fonts.googleapis.com/css?family=Roboto:400,400italic,500,500italic,700,700italic,300,300italic' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/assets/stylesheets/app-2f8dcde3ec3d31a47409c6e0384d17f6f14293be3c79175275a24b7d98786d35.css">
 
-    <link href='https://fonts.googleapis.com/css?family=Roboto:400,400italic,500,500italic,700,700italic,300,300italic' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
-    <link type="text/css" rel="stylesheet" href="/assets/stylesheets/app.css">
+  <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+  <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+  <![endif]-->
+  <link href="/atom.xml" rel="alternate" title="Atom" type="application/atom+xml">
+  <link href="/rss.xml" rel="alternate" title="RSS" type="application/rss+xml">
+  <link href="/sitemap.xml" rel="sitemap" title="Sitemap" type="application/xml">
+  <link href="/humans.txt" rel="author" type="text/plain">
+  <meta name='title' content='Elixir Pattern Matching - TheWorkAround'>
+  <meta name='og:title' content='Elixir Pattern Matching - TheWorkAround'>
+  <meta property='og:url' content='http://theworkaround.com/2015/12/06/elixir-pattern-matching.html'>
 
-    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
-    <link href="/atom.xml" rel="alternate" title="Atom" type="application/atom+xml">
-    <link href="/rss.xml" rel="alternate" title="RSS" type="application/rss+xml">
-    <link href="/sitemap.xml" rel="sitemap" title="Sitemap" type="application/xml">
-    <link href="/humans.txt" rel="author" type="text/plain">
-    <meta name='title' content='Elixir Pattern Matching - TheWorkAround'>
-    <meta name='og:title' content='Elixir Pattern Matching - TheWorkAround'>
-    <meta property='og:url' content='http://localhost:4000/2015/12/06/elixir-pattern-matching.html'>
+  <meta content="article" property="og:type">
+  <meta name="author" content="Brandon Hicks">
 
-    <meta content="article" property="og:type">
-    <meta name="author" content="Brandon Hicks">
-
-    <meta name="description" content="A brief look at Elixirs Pattern matching and the power the equal sign operator.">
-    <meta name="keywords" content="development,elixir,programming">
+  <meta name="description" content="A brief look at Elixirs Pattern matching and the power the equal sign operator.">
+  <meta name="keywords" content="development,elixir,programming">
 
 </head>
 <body>
@@ -79,21 +87,20 @@
 
 <p>In numerous programming languages the equal symbol <code class="highlighter-rouge">=</code> is generally an assignment operator. Which means you set XYZ variable to the value of JKL <code class="highlighter-rouge">xyz = 'FooBar'</code>. You can usually assign an object, a value, a function, or many other datatypes to a variable. With Elixir this is still the case, but with exceptions. In Elixir, the equals operator means to match the left side of the <code class="highlighter-rouge">=</code> sign to the the right side.</p>
 
-<div class="language-elixir highlighter-rouge"><pre class="highlight"><code><span class="n">iex</span><span class="o">&gt;</span> <span class="n">x</span> <span class="o">=</span> <span class="m">7</span>
+<div class="language-elixir highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">iex</span><span class="o">&gt;</span> <span class="n">x</span> <span class="o">=</span> <span class="m">7</span>
 <span class="c1"># =&gt; 7</span>
 <span class="n">iex</span><span class="o">&gt;</span> <span class="n">y</span> <span class="o">=</span> <span class="m">5</span>
 <span class="c1"># =&gt; 5</span>
 <span class="n">iex</span><span class="o">&gt;</span> <span class="m">7</span> <span class="o">=</span> <span class="n">y</span>
 <span class="c1"># =&gt; ** (MatchError) no match of right hand side value: 5</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>You may be wondering what this error is about. Well the variable <code class="highlighter-rouge">y</code> was assigned the value of 5, meaning that in the last line you are stating that 7 = 5. This value should always be false. Now if the variable was on the left side of the equal sign the value of 7 would have been assigned the variable.</p>
 
 <h3 id="taking-it-a-step-farther">Taking it a step farther</h3>
 <p>Once you begin using pattern matching, it can become a very powerful feature in you application. Not only can you do pattern matching with basic variables and datatypes, you can also match values with tuples and lists. This can be a double edged sword, it can either complicate the heck out of your program or make things work extremely effectively. Pattern matching assignment is a great tool when working with tuples/lists, because it allows us to pick which values we wish to assign and use.</p>
 
-<div class="language-elixir highlighter-rouge"><pre class="highlight"><code><span class="n">costanza</span> <span class="o">=</span> <span class="p">%{</span><span class="ss">name:</span> <span class="sd">"</span><span class="s2">George"</span><span class="p">,</span> <span class="ss">age:</span> <span class="m">27</span><span class="p">,</span> <span class="ss">likes:</span> <span class="sd">"</span><span class="s2">Sports"</span><span class="p">}</span>
+<div class="language-elixir highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">costanza</span> <span class="o">=</span> <span class="p">%{</span><span class="ss">name:</span> <span class="sd">"</span><span class="s2">George"</span><span class="p">,</span> <span class="ss">age:</span> <span class="m">27</span><span class="p">,</span> <span class="ss">likes:</span> <span class="sd">"</span><span class="s2">Sports"</span><span class="p">}</span>
 <span class="c1"># =&gt; %{age: 27, likes: "Sports", name: "George"}</span>
 
 <span class="c1"># lets verify name is an unassigned variable</span>
@@ -105,22 +112,20 @@
 
 <span class="n">name</span>
 <span class="c1"># =&gt; "George"</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>Lets put this in prospective of an HTTP request/response, to assign</p>
 
-<div class="language-elixir highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="n">result</span><span class="p">,</span> <span class="n">value</span><span class="p">}</span> <span class="o">=</span> <span class="p">{</span><span class="ss">:error</span><span class="p">,</span> <span class="m">404</span><span class="p">}</span>
+<div class="language-elixir highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="n">result</span><span class="p">,</span> <span class="n">value</span><span class="p">}</span> <span class="o">=</span> <span class="p">{</span><span class="ss">:error</span><span class="p">,</span> <span class="m">404</span><span class="p">}</span>
 <span class="c1"># =&gt; {:error, 404}</span>
 
 <span class="n">result</span>
 <span class="c1"># =&gt; :error</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>Now rather than assigning values, lets look at an example of pattern matching based on conditional comparisons.</p>
 
-<div class="language-elixir highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="ss">:ok</span><span class="p">,</span> <span class="n">reponse</span><span class="p">}</span> <span class="o">=</span> <span class="p">{</span><span class="ss">:error</span><span class="p">,</span> <span class="m">404</span><span class="p">}</span>
+<div class="language-elixir highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="ss">:ok</span><span class="p">,</span> <span class="n">reponse</span><span class="p">}</span> <span class="o">=</span> <span class="p">{</span><span class="ss">:error</span><span class="p">,</span> <span class="m">404</span><span class="p">}</span>
 <span class="c1"># =&gt; ** (MatchError) no match of right hand side value: {:error, 404}</span>
 
 <span class="p">{</span><span class="ss">:status</span><span class="p">,</span> <span class="n">reponse</span><span class="p">}</span> <span class="o">=</span> <span class="p">{</span><span class="ss">:status</span><span class="p">,</span> <span class="m">200</span><span class="p">}</span>
@@ -128,11 +133,10 @@
 
 <span class="p">{</span><span class="m">200</span><span class="p">,</span> <span class="n">response</span><span class="p">}</span> <span class="o">=</span> <span class="p">{</span><span class="m">200</span><span class="p">,</span> <span class="sd">"</span><span class="s2">html/text;"</span><span class="p">}</span>
 <span class="c1"># =&gt; {200, "html/text;"}</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 <p>In the first example you can see the left hand and right hand of the <code class="highlighter-rouge">=</code> operator are not equal and do not having matching :atoms so they can not be assigned values to their corresponding variables. But the second example does have matching atoms/object so their values can be associated with one another. By using this pattern matching techniques, you are not solely limited to using :atoms to match the values, you can use various data types. If you look at the third example you can see that they correspond with each other with an integer that has the value of <code class="highlighter-rouge">200</code>. This may look like a mess, why would you want to do this? Well the sample below might shine some like on this. With pattern matching you could assign the values based on a functions response values, using a simple HTTP request I will try to show you that it isn’t so hard to understand how and why these values may be passed.</p>
 
-<div class="language-elixir highlighter-rouge"><pre class="highlight"><code><span class="k">defmodule</span> <span class="no">Http</span> <span class="k">do</span>
+<div class="language-elixir highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">defmodule</span> <span class="no">Http</span> <span class="k">do</span>
   <span class="k">def</span> <span class="n">request</span> <span class="k">do</span>
     <span class="c1"># ...</span>
     <span class="p">{</span><span class="ss">:status</span><span class="p">,</span> <span class="m">404</span><span class="p">}</span>
@@ -144,14 +148,13 @@
 
 <span class="n">response</span>
 <span class="c1"># =&gt; 404</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h3 id="functional-pattern-matching">Functional Pattern Matching</h3>
 
 <p>When declaring and calling functions you can continue to do pattern matching based on the declared values without using the equals <code class="highlighter-rouge">=</code> assignment operator. Generally function pattern matching is used for with making recursion effective and manageable.</p>
 
-<div class="language-elixir highlighter-rouge"><pre class="highlight"><code><span class="k">defmodule</span> <span class="no">Seinfield</span> <span class="k">do</span>
+<div class="language-elixir highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">defmodule</span> <span class="no">Seinfield</span> <span class="k">do</span>
   <span class="k">def</span> <span class="n">cast</span><span class="p">([],</span> <span class="n">_</span><span class="p">),</span> <span class="k">do</span><span class="p">:</span> <span class="p">[]</span> <span class="c1"># STOP: when end of list has been reached</span>
 
   <span class="k">def</span> <span class="n">cast</span><span class="p">(</span><span class="n">list</span><span class="p">),</span> <span class="k">do</span><span class="p">:</span> <span class="n">cast</span><span class="p">(</span><span class="n">list</span><span class="p">,</span> <span class="m">1</span><span class="p">)</span> <span class="c1"># start count from 1 when begin to look the the list</span>
@@ -171,15 +174,13 @@
 <span class="c1"># Kramer</span>
 <span class="c1"># Elaine</span>
 <span class="c1"># Newman</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>I know this is an extreme example jumping from basic variable declarations to module/function matching. But if you look at the cast function, you’ll notice that when passing parameters using a list Elixir will match to the lists <code class="highlighter-rouge">[head |tail]</code> to make break down in forms of context here is what it would look like with the characters list passed through it.</p>
 
-<div class="language-elixir highlighter-rouge"><pre class="highlight"><code><span class="p">[</span><span class="n">head</span> <span class="o">|</span> <span class="n">tail</span><span class="p">]</span>
+<div class="language-elixir highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">[</span><span class="n">head</span> <span class="o">|</span> <span class="n">tail</span><span class="p">]</span>
 <span class="p">[</span><span class="sd">"</span><span class="s2">George"</span> <span class="o">|</span> <span class="sd">"</span><span class="s2">Jerry"</span><span class="p">,</span><span class="sd">"</span><span class="s2">Kramer"</span><span class="p">,</span><span class="sd">"</span><span class="s2">Elaine"</span><span class="p">,</span><span class="sd">"</span><span class="s2">Newman"</span><span class="p">]</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h3 id="clearing-it-up">Clearing it up</h3>
 <p>I hope you have better understanding of Elixirs pattern matching capabilities and that the equal sign is not just an assignment operator in Elixir. Elixir has a massive amount of capabilities and some of these may be confusing as hell, but pattern matching helps bring it one step closer to help make everything easier to understand and use.</p>

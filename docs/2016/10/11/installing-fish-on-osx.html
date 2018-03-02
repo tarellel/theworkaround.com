@@ -1,37 +1,45 @@
 <!DOCTYPE html>
 <html lang="en-US">
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Installing Fish on OSx - TheWorkAround</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Prefectch to Optimize Site Loading - src: http://csswizardry.com/ -->
-    <link rel="dns-prefetch" href="https://fonts.googleapis.com/">
-    <link rel="dns-prefetch" href="https://www.google-analytics.com/">
-    <link rel="dns-prefetch" href="https://ajax.googleapis.com/">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Installing Fish on OSx - TheWorkAround</title>
+  <meta name="google" content="notranslate">
+  <meta name="robots" content="index, follow">
+  <meta http-equiv="Content-Language" content="en">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Prefectch to Optimize Site Loading - src: http://csswizardry.com/ -->
+  <link rel="preconnect" href="https://fonts.googleapis.com/" crossorigin>
+  <link rel="preconnect" href="https://www.google-analytics.com/" crossorigin>
+  <link rel="preconnect" href="https://ajax.googleapis.com/" crossorigin>
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com/" crossorigin>
+  <link rel="dns-prefetch" href="https://fonts.googleapis.com/">
+  <link rel="dns-prefetch" href="https://www.google-analytics.com/">
+  <link rel="dns-prefetch" href="https://ajax.googleapis.com/">
+  <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com/">
+  <meta name="theme-color" content="#4cb8c4">
+  <link href='https://fonts.googleapis.com/css?family=Roboto:400,400italic,500,500italic,700,700italic,300,300italic' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/assets/stylesheets/app-2f8dcde3ec3d31a47409c6e0384d17f6f14293be3c79175275a24b7d98786d35.css">
 
-    <link href='https://fonts.googleapis.com/css?family=Roboto:400,400italic,500,500italic,700,700italic,300,300italic' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
-    <link type="text/css" rel="stylesheet" href="/assets/stylesheets/app.css">
+  <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+  <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+  <![endif]-->
+  <link href="/atom.xml" rel="alternate" title="Atom" type="application/atom+xml">
+  <link href="/rss.xml" rel="alternate" title="RSS" type="application/rss+xml">
+  <link href="/sitemap.xml" rel="sitemap" title="Sitemap" type="application/xml">
+  <link href="/humans.txt" rel="author" type="text/plain">
+  <meta name='title' content='Installing Fish on OSx - TheWorkAround'>
+  <meta name='og:title' content='Installing Fish on OSx - TheWorkAround'>
+  <meta property='og:url' content='http://theworkaround.com/2016/10/11/installing-fish-on-osx.html'>
 
-    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
-    <link href="/atom.xml" rel="alternate" title="Atom" type="application/atom+xml">
-    <link href="/rss.xml" rel="alternate" title="RSS" type="application/rss+xml">
-    <link href="/sitemap.xml" rel="sitemap" title="Sitemap" type="application/xml">
-    <link href="/humans.txt" rel="author" type="text/plain">
-    <meta name='title' content='Installing Fish on OSx - TheWorkAround'>
-    <meta name='og:title' content='Installing Fish on OSx - TheWorkAround'>
-    <meta property='og:url' content='http://localhost:4000/2016/10/11/installing-fish-on-osx.html'>
+  <meta content="article" property="og:type">
+  <meta name="author" content="Brandon Hicks">
 
-    <meta content="article" property="og:type">
-    <meta name="author" content="Brandon Hicks">
-
-    <meta name="description" content="Enhance your terminal with the fish shell">
-    <meta name="keywords" content="fish,terminal,osx">
+  <meta name="description" content="Enhance your terminal with the fish shell">
+  <meta name="keywords" content="fish,terminal,osx">
 
 </head>
 <body>
@@ -101,21 +109,18 @@ programs through the command-line a heck of a lot easier than building with a ma
 or having to bundle dependencies and packages. And than having the compilation fail on you.</p>
 
 <p>To install fish it’s quite simple, just begin by issuing the following commands:</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>brew update
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>brew update
 brew install fish
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>Now you’re not quite ready to go, you need to add Fish to your systems shell listing
 in <code class="highlighter-rouge">/etc/shells</code>, this does require administrative access.</p>
-<div class="language-shell highlighter-rouge"><pre class="highlight"><code>sudo <span class="nb">echo</span> <span class="s1">'/usr/local/bin/fish'</span> &gt; /etc/shells
-</code></pre>
-</div>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo echo</span> <span class="s1">'/usr/local/bin/fish'</span> <span class="o">&gt;&gt;</span> /etc/shells
+</code></pre></div></div>
 
 <p>Now that fish is installed, in order to use it lets begin by setting it as your default terminal shell environment.</p>
-<div class="language-shell highlighter-rouge"><pre class="highlight"><code>chsh -s /usr/local/bin/fish
-</code></pre>
-</div>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>chsh <span class="nt">-s</span> /usr/local/bin/fish
+</code></pre></div></div>
 <p>Now in order to load fish as your shell you’ll need to either open a new window, tab, session, etc.
 It may look like the same old terminal that your used to, but it’s not.
 If you would like to see some of the features fish offers, I’d suggest checking out their <a href="https://fishshell.com/docs/current/tutorial.html">tutorials</a> page. Now for some reason
@@ -135,25 +140,24 @@ I chose oh-my-fish because of it’s ease of use and simple commands.
 I mean as developers we’ve learned 100’s of linux commands, functions, methods,
 attributes, etc. who wants to complicate our lives and add even more to memorize.
 So lets install oh-my-fish to get the customization started.</p>
-<div class="language-shell highlighter-rouge"><pre class="highlight"><code>curl -L http://get.oh-my.fish | fish
-</code></pre>
-</div>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl <span class="nt">-L</span> http://get.oh-my.fish | fish
+</code></pre></div></div>
 
 <p>Now if would like to get a rough idea of the oh-my-fish commands available, lets just issue the <code class="highlighter-rouge">omf</code> command.</p>
-<div class="language-shell highlighter-rouge"><pre class="highlight"><code><span class="nv">$:</span> omf
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$:</span> omf
 
 Usage:
-  omf install <span class="o">[</span>&lt;name&gt;|&lt;url&gt;]
+  omf <span class="nb">install</span> <span class="o">[</span>&lt;name&gt;|&lt;url&gt;]
   omf theme <span class="o">[</span>&lt;name&gt;]
   omf remove <span class="o">[</span>&lt;name&gt;]
   omf search <span class="o">[</span>&lt;name&gt;]
   omf update
-  omf <span class="nb">help</span> <span class="o">[</span>&lt;<span class="nb">command</span>&gt;]
+  omf <span class="nb">help</span> <span class="o">[</span>&lt;<span class="nb">command</span><span class="o">&gt;]</span>
 
 Commands:
   list      List <span class="nb">local </span>packages.
-  describe  Get information about what packages <span class="k">do</span>.
-  install   Install one or more packages.
+  describe  Get information about what packages <span class="k">do</span><span class="nb">.</span>
+  <span class="nb">install   </span>Install one or more packages.
   theme     List / Use themes.
   remove    Remove a theme or package.
   update    Update Oh My Fish.
@@ -166,19 +170,18 @@ Commands:
   <span class="nb">help      </span>Shows <span class="nb">help </span>about a specific action.
 
 Options:
-  --help     Display this help.
-  --version  Display version.
+  <span class="nt">--help</span>     Display this help.
+  <span class="nt">--version</span>  Display version.
 
 For more information visit → git.io/oh-my-fish
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>By now you’ve probably installed several programs that generate several .dotfile folder
 directories in your <code class="highlighter-rouge">$HOME</code> directory. Fish/oh-my-fish is no different, except instead of
 piling up even more in your <code class="highlighter-rouge">$HOME</code> directory, fish config files will be stored in <code class="highlighter-rouge">~/.config/fish</code>.
 The .config path is used by several programs in order to reduce clutter being built up in your $HOME directory.
 Because I’m sure if you entered in ‘ls -alH’ in the prompt you get something similar to the following.</p>
-<div class="language-shell highlighter-rouge"><pre class="highlight"><code>.oh-my-zsh
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>.oh-my-zsh
 .rbenv
 .rvm
 .vim
@@ -187,8 +190,7 @@ Because I’m sure if you entered in ‘ls -alH’ in the prompt you get somethi
 .npm
 .irbrc
 <span class="c"># And tons of others as well</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>Now let it be a new install or not, I always suggest updating your package managers
 to have the newest database and latest packages available.Lets issue the
@@ -200,67 +202,62 @@ directories to access your programs. If you wish to see those in which are
 currently set use printf <code class="highlighter-rouge">printf "%s\n" $PATH</code> to print out what you have access to executing.</p>
 
 <p>Now lets begin installing plugins</p>
-<div class="language-shell highlighter-rouge"><pre class="highlight"><code><span class="c"># fish supports atom out of the box, but I also use SublimeText as well</span>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># fish supports atom out of the box, but I also use SublimeText as well</span>
 <span class="c"># this enables the sublime command 'subl', if it can be found</span>
-omf install sublime
+omf <span class="nb">install </span>sublime
 
 <span class="c"># To enable quick access to your rbenv without doing anything extra</span>
-omf install rbenv
+omf <span class="nb">install </span>rbenv
 
 <span class="c"># https://github.com/oh-my-fish/plugin-osx</span>
 <span class="c"># enables OSx based commands: flushdns, showhidden, trash, updatedb, etc.</span>
-omf install osx
-</code></pre>
-</div>
+omf <span class="nb">install </span>osx
+</code></pre></div></div>
 
 <p>You may or may not want to install grc, it is used for highlighting output command for specified commands.
 But I believe it comes in handy for various commands and makes reading output easier.</p>
 
-<div class="language-shell highlighter-rouge"><pre class="highlight"><code>brew install grc
-omf install grc
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>brew <span class="nb">install </span>grc
+omf <span class="nb">install </span>grc
 <span class="c"># this should automatically load grc to highlight fields rather than having to issue the following command</span>
 <span class="nb">source</span> /usr/local/etc/grc.bashrc
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>If you install it, you can verify it’s working properly by issuing a command with assorted output, ie: <code class="highlighter-rouge">ps au</code>.
 You should get a colorized version of something similar to the below table.</p>
 
-<div class="language-shell highlighter-rouge"><pre class="highlight"><code>USER       PID  %CPU %MEM      VSZ    RSS   TT  STAT STARTED      TIME COMMAND
-Tarellel 17590   5.2  0.0  2446204   4976 s005  S+   12:16AM   0:00.04 /usr/bin/python /usr/local/bin/grc -es --colour<span class="o">=</span>auto ps au
-Tarellel 14325   1.5  0.0  2500316   5860 s005  S    11:13PM   0:00.73 -fish
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>USER       PID  %CPU %MEM      VSZ    RSS   TT  STAT STARTED      TIME COMMAND
+Tarellel 17590   5.2  0.0  2446204   4976 s005  S+   12:16AM   0:00.04 /usr/bin/python /usr/local/bin/grc <span class="nt">-es</span> <span class="nt">--colour</span><span class="o">=</span>auto ps au
+Tarellel 14325   1.5  0.0  2500316   5860 s005  S    11:13PM   0:00.73 <span class="nt">-fish</span>
 root     17591   0.0  0.0  2444720   1172 s005  R+   12:16AM   0:00.00 ps au
-Tarellel 15150   0.0  0.0  2492120   5428 s002  S+   11:36PM   0:00.40 -fish
-</code></pre>
-</div>
+Tarellel 15150   0.0  0.0  2492120   5428 s002  S+   11:36PM   0:00.40 <span class="nt">-fish</span>
+</code></pre></div></div>
 
 <p>Now back to installing some essential plugins:</p>
 
-<div class="language-shell highlighter-rouge"><pre class="highlight"><code><span class="c"># similar to zsh term, allows u to open new tab with current directory</span>
-omf install tab
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># similar to zsh term, allows u to open new tab with current directory</span>
+omf <span class="nb">install </span>tab
 
 <span class="c"># Add all brew paths to fish $PATH</span>
-omf install brew
+omf <span class="nb">install </span>brew
 
 <span class="c"># used to help enfore 256 color terminal support</span>
 <span class="c"># https://github.com/oh-my-fish/plugin-ssh</span>
-omf install ssh
+omf <span class="nb">install </span>ssh
 
 <span class="c"># used to make ssh term colors consistent</span>
 <span class="c"># https://github.com/oh-my-fish/plugin-ssh</span>
-omg install ssh-term-helper
-</code></pre>
-</div>
+omg <span class="nb">install </span>ssh-term-helper
+</code></pre></div></div>
 
 <p>Now if you’re like me, I had several aliases, custom functions, variables and config in my zsh settings.
 Fish’s function and alias declarations are slightly different than zsh and bash but not to hard to understand.
 And now would be the perfect time to begin adding them before attempt to do a heck of a lot more.
 A basic example of variable declarations below, is assigning the $EDITOR variable to use atom.</p>
 
-<div class="language-shell highlighter-rouge"><pre class="highlight"><code><span class="c"># -U makes it a univerasal variable</span>
-<span class="nb">set</span> -U EDITOR atom
-</code></pre>
-</div>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># -U makes it a univerasal variable</span>
+<span class="nb">set</span> <span class="nt">-U</span> EDITOR atom
+</code></pre></div></div>
 
 <h3 id="lets-make-it-beautiful">Lets make it beautiful</h3>
 <p>Now you may thing it’s hipster as hell to want custom colors, fonts, and outputs in your terminal.
@@ -273,9 +270,8 @@ several of them are very similar to their oh-my-zsh counterparts.</p>
 <p><strong>Powerline</strong> - As you browse through the themes you’ll notice several of the themes require powerline installed in order to fully function.
 This is a python package and python comes installed by default on most *nix and POSIX operating systems.
 Depending on your operating system and setup you may want to look at the powerline <a href="https://powerline.readthedocs.io/en/latest/installation/osx.html">installation instructions</a>.</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>pip install --user powerline-status
-</code></pre>
-</div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pip install --user powerline-status
+</code></pre></div></div>
 
 <p>Now powerline uses HD fonts with special characters for its stylized output, so you’ll need to
 install various powerline fonts and symbols.</p>
@@ -285,10 +281,9 @@ install various powerline fonts and symbols.</p>
 <p>You can either install it through the Font-Book app or by moving it to <code class="highlighter-rouge">~/Library/Fonts/</code></p>
 
 <p>Next lets install all the available powerline fonts, each one looks amazing and adds a whole new experience to your terminal.</p>
-<div class="language-shell highlighter-rouge"><pre class="highlight"><code>git clone https://github.com/powerline/fonts.git
-sudo ./fonts/install.sh
-</code></pre>
-</div>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git clone https://github.com/powerline/fonts.git
+<span class="nb">sudo</span> ./fonts/install.sh
+</code></pre></div></div>
 
 <p>Now if you’re using one of those themes that does require powerline and a powerline font.
 You’ll need to set your terminal applications font to use the powerline fonts.

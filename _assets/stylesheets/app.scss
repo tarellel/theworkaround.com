@@ -5,6 +5,7 @@
 
 
  pre, code, pre.highlight code{
+  border: 0;
   font-family: $monospace-font;
   font-size: .9rem; // .9em
  }
@@ -17,7 +18,32 @@
    font-size: 85%;
  }
 
+div.highlight{
+  padding: 0 !important;
+}
+ .highlight pre {
+   border: 0 !important;
+ }
+
+.header{
+  background-origin: padding-box;
+  background-size: cover;
+  background-repeat: no-repeat;
+  border-radius: 0;
+  display: block;
+  margin: 0 0 1.5em 0;
+  min-height: 250px;
+  text-align: center;
+}
+
 //pre.highlight code{
 //  font-family: $monospace-font;
 //  font-size:15px;
 //}
+
+// widen content block
+@media (min-width: 1200px){
+  .container{
+    width: 90% !important;
+  }
+}

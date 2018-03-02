@@ -4,6 +4,8 @@ _site/
 _site/*/**
 ideas.md
 misc.md
+.jekyll-cache
+.jekyll-cache/*
 
 #stuff from h5bp's gitignore
 
@@ -21,6 +23,7 @@ misc.md
 
 # OS or Editor folders
 .DS_Store
+*/.DS_Store
 .cache
 .project
 .settings

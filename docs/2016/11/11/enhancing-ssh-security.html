@@ -1,37 +1,45 @@
 <!DOCTYPE html>
 <html lang="en-US">
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Enhancing SSH Security - TheWorkAround</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Prefectch to Optimize Site Loading - src: http://csswizardry.com/ -->
-    <link rel="dns-prefetch" href="https://fonts.googleapis.com/">
-    <link rel="dns-prefetch" href="https://www.google-analytics.com/">
-    <link rel="dns-prefetch" href="https://ajax.googleapis.com/">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Enhancing SSH Security - TheWorkAround</title>
+  <meta name="google" content="notranslate">
+  <meta name="robots" content="index, follow">
+  <meta http-equiv="Content-Language" content="en">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Prefectch to Optimize Site Loading - src: http://csswizardry.com/ -->
+  <link rel="preconnect" href="https://fonts.googleapis.com/" crossorigin>
+  <link rel="preconnect" href="https://www.google-analytics.com/" crossorigin>
+  <link rel="preconnect" href="https://ajax.googleapis.com/" crossorigin>
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com/" crossorigin>
+  <link rel="dns-prefetch" href="https://fonts.googleapis.com/">
+  <link rel="dns-prefetch" href="https://www.google-analytics.com/">
+  <link rel="dns-prefetch" href="https://ajax.googleapis.com/">
+  <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com/">
+  <meta name="theme-color" content="#4cb8c4">
+  <link href='https://fonts.googleapis.com/css?family=Roboto:400,400italic,500,500italic,700,700italic,300,300italic' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/assets/stylesheets/app-2f8dcde3ec3d31a47409c6e0384d17f6f14293be3c79175275a24b7d98786d35.css">
 
-    <link href='https://fonts.googleapis.com/css?family=Roboto:400,400italic,500,500italic,700,700italic,300,300italic' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
-    <link type="text/css" rel="stylesheet" href="/assets/stylesheets/app.css">
+  <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+  <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+  <![endif]-->
+  <link href="/atom.xml" rel="alternate" title="Atom" type="application/atom+xml">
+  <link href="/rss.xml" rel="alternate" title="RSS" type="application/rss+xml">
+  <link href="/sitemap.xml" rel="sitemap" title="Sitemap" type="application/xml">
+  <link href="/humans.txt" rel="author" type="text/plain">
+  <meta name='title' content='Enhancing SSH Security - TheWorkAround'>
+  <meta name='og:title' content='Enhancing SSH Security - TheWorkAround'>
+  <meta property='og:url' content='http://theworkaround.com/2016/11/11/enhancing-ssh-security.html'>
 
-    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
-    <link href="/atom.xml" rel="alternate" title="Atom" type="application/atom+xml">
-    <link href="/rss.xml" rel="alternate" title="RSS" type="application/rss+xml">
-    <link href="/sitemap.xml" rel="sitemap" title="Sitemap" type="application/xml">
-    <link href="/humans.txt" rel="author" type="text/plain">
-    <meta name='title' content='Enhancing SSH Security - TheWorkAround'>
-    <meta name='og:title' content='Enhancing SSH Security - TheWorkAround'>
-    <meta property='og:url' content='http://localhost:4000/2016/11/11/enhancing-ssh-security.html'>
+  <meta content="article" property="og:type">
+  <meta name="author" content="Brandon Hicks">
 
-    <meta content="article" property="og:type">
-    <meta name="author" content="Brandon Hicks">
-
-    <meta name="description" content="SSH is an important multipurpose service, that we need to properly secure.">
-    <meta name="keywords" content="security,ssh,terminal">
+  <meta name="description" content="SSH is an important multipurpose service, that we need to properly secure.">
+  <meta name="keywords" content="security,ssh,terminal">
 
 </head>
 <body>
@@ -90,9 +98,8 @@ Lately, I’ve seen quite a bit of talk suggesting everyone disable password
 authentication and only using key and/or certificate encryptions to secure SSH connections.
 I mean, really how probable is it that someone will be able to generate your exact ssh-key similar to the one below?</p>
 
-<div class="language-shell highlighter-rouge"><pre class="highlight"><code>ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC4MCqOxhfmNP/uv8sl5EYSIqQSGuV4v17B50xMWXMcwTJrriOi9W6nNfxF8wu/i2HB1/nUUuSu+ZxQdYaD2cRkelzSGcq191z+b8lNY2lz+bxB547H465U5EQPlxJ5w7WU6QOV1hrZ7quWh/GYrDnU1aZrhEQ++EV5chQIUxoP3YgBSSb8D5Bpns9gR0IZVtlEqhF8eyCypZSiyKumQxK8e/W8Y8iHWCtRfvZbh+bnemCkHrXI/xc+CuCY9TQmWZkwFfTRBJQo3pmoRSZAZpqwYSl1kySrasw771rfy2rowFiCogkBYu2W9FTR2kMwB4btBrpA4Af97AjxwzkHyXUt sample_user@gmail.com
-</code></pre>
-</div>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC4MCqOxhfmNP/uv8sl5EYSIqQSGuV4v17B50xMWXMcwTJrriOi9W6nNfxF8wu/i2HB1/nUUuSu+ZxQdYaD2cRkelzSGcq191z+b8lNY2lz+bxB547H465U5EQPlxJ5w7WU6QOV1hrZ7quWh/GYrDnU1aZrhEQ++EV5chQIUxoP3YgBSSb8D5Bpns9gR0IZVtlEqhF8eyCypZSiyKumQxK8e/W8Y8iHWCtRfvZbh+bnemCkHrXI/xc+CuCY9TQmWZkwFfTRBJQo3pmoRSZAZpqwYSl1kySrasw771rfy2rowFiCogkBYu2W9FTR2kMwB4btBrpA4Af97AjxwzkHyXUt sample_user@gmail.com
+</code></pre></div></div>
 
 <p>Well, lets take a look how vulnerable your keys actually are.
 If you’re like the vast majority of developers just using a <code class="highlighter-rouge">id_rsa.pub</code> or <code class="highlighter-rouge">id_dsa.pub</code> key for the vast majority of your logins and connections, than you may already be an easy target. You may be asking, how and why? Well let’s take a look at some keys people use with github.
@@ -103,26 +110,24 @@ This is part of the security method known as “security by obscurity”, you re
 by making things more complicated. If someone managers to get ahold of one of your keys, they won’t have access to every single web service you use.</p>
 
 <p>An example of how of how you can specify ssh to connect to specific services:</p>
-<div class="language-shell highlighter-rouge"><pre class="highlight"><code>Host github.com
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Host github.com
   user sample_user
   HostName github.com
   IdentityFile ~/.ssh/github_rsa
-  IdentitiesOnly yes
+  IdentitiesOnly <span class="nb">yes
 
-Host digitalocean.com
+</span>Host digitalocean.com
   HostName digitalocean.com
   IdentityFile ~/.ssh/digitalocean_key
-  IdentitiesOnly yes
+  IdentitiesOnly <span class="nb">yes
 
-And the list goes on...
-</code></pre>
-</div>
+</span>And the list goes on...
+</code></pre></div></div>
 
 <p>Another step in order to make things a bit more complicated is to add a password to your SSH-keys.</p>
 
-<div class="language-shell highlighter-rouge"><pre class="highlight"><code>ssh-keygen -t rsa -q -N <span class="s1">'sample_password'</span> -f ~/.ssh/sample_id -C <span class="s2">"sample_user@gmail.com"</span>
-</code></pre>
-</div>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ssh-keygen <span class="nt">-t</span> rsa <span class="nt">-q</span> <span class="nt">-N</span> <span class="s1">'sample_password'</span> <span class="nt">-f</span> ~/.ssh/sample_id <span class="nt">-C</span> <span class="s2">"sample_user@gmail.com"</span>
+</code></pre></div></div>
 
 <p>You probably know by now, that by adding a password to your keys can be a pain in the butt.
 Because every time you connect to a service or do a push request, etc. it’ll ask you for that crazy password you used <code class="highlighter-rouge">XL7pa5wnV/nQgUqi5mf7oQ6uG0hk5NwGh+5OYU+Mu6</code>. Well you can solve this by using a service such as <a href="http://www.funtoo.org/Keychain">keychain</a> and/or using your ssh-agent with the <a href="https://linux.die.net/man/1/ssh-add">ssh-add</a> command.
@@ -134,12 +139,11 @@ So in other words, you won’t have to re-input your crazy password until your n
 I’m no Cryptologist and I can’t tell you how and why a shorter key is more secure, other than it uses Elliptic curve cryptography methods.
 But at the moment ED25519 is the recommended standard and as we know the higher the bit length and more rounds we encrypt the key, the more secure it’ll be.</p>
 
-<div class="language-shell highlighter-rouge"><pre class="highlight"><code>ssh-keygen -o -a 100 -b 4096 -t ed25519 -q -f ~/.ssh/dev_key -N <span class="s1">'sample_password123'</span> -C <span class="s1">'sample_user'</span>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ssh-keygen <span class="nt">-o</span> <span class="nt">-a</span> 100 <span class="nt">-b</span> 4096 <span class="nt">-t</span> ed25519 <span class="nt">-q</span> <span class="nt">-f</span> ~/.ssh/dev_key <span class="nt">-N</span> <span class="s1">'sample_password123'</span> <span class="nt">-C</span> <span class="s1">'sample_user'</span>
 
 <span class="c"># ~/.ssh/dev_key</span>
 ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBCz0L+cnm3RSHawNK/h7hkCs7ZQIeeAyjKs4S+tHnPF sample_user
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h3 id="duel-method-authentication">Duel Method Authentication</h3>
 <p>Another enhancement you may wish to add to your SSH connections is requiring two forms of authentication.
@@ -149,9 +153,8 @@ Because the majority of them attempt to authenticate with the server by password
 But if that’s not that case and you’re really wanting to secure your SSH connections, this can be achieved with ease.
 This is because we’ll be using <a href="https://www.kernel.org/pub/linux/libs/pam/whatispam.html">PAM</a> which should be fairly straight forward because most modern Linux installations have various PAM modules installed by default. This can be achieved by changing your AuthenticationMethods used in /etc/ssh/sshd_config to something similar to the following:</p>
 
-<div class="language-config highlighter-rouge"><pre class="highlight"><code><span class="n">AuthenticationMethods</span> <span class="n">publickey</span>,<span class="n">keyboard</span>-<span class="n">interactive</span>:<span class="n">pam</span>
-</code></pre>
-</div>
+<div class="language-config highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">AuthenticationMethods</span> <span class="n">publickey</span>,<span class="n">keyboard</span>-<span class="n">interactive</span>:<span class="n">pam</span>
+</code></pre></div></div>
 
 <p>In other words, in order to connect the the specified server you will be required
 to supply the proper publickey as well a valid password.

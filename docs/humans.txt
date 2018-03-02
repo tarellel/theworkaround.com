@@ -6,7 +6,7 @@
   Location:   New Mexico, USA
 
 /* SITE */
-  Last updated: 12/15/2016
+  Last updated: 3/1/2018
   Language:   English
   Doctype:    HTML5
   Standards:  HTML, CSS3

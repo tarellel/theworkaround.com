@@ -1,37 +1,45 @@
 <!DOCTYPE html>
 <html lang="en-US">
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Setting up tmux with Rails - TheWorkAround</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Prefectch to Optimize Site Loading - src: http://csswizardry.com/ -->
-    <link rel="dns-prefetch" href="https://fonts.googleapis.com/">
-    <link rel="dns-prefetch" href="https://www.google-analytics.com/">
-    <link rel="dns-prefetch" href="https://ajax.googleapis.com/">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Setting up tmux with Rails - TheWorkAround</title>
+  <meta name="google" content="notranslate">
+  <meta name="robots" content="index, follow">
+  <meta http-equiv="Content-Language" content="en">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Prefectch to Optimize Site Loading - src: http://csswizardry.com/ -->
+  <link rel="preconnect" href="https://fonts.googleapis.com/" crossorigin>
+  <link rel="preconnect" href="https://www.google-analytics.com/" crossorigin>
+  <link rel="preconnect" href="https://ajax.googleapis.com/" crossorigin>
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com/" crossorigin>
+  <link rel="dns-prefetch" href="https://fonts.googleapis.com/">
+  <link rel="dns-prefetch" href="https://www.google-analytics.com/">
+  <link rel="dns-prefetch" href="https://ajax.googleapis.com/">
+  <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com/">
+  <meta name="theme-color" content="#4cb8c4">
+  <link href='https://fonts.googleapis.com/css?family=Roboto:400,400italic,500,500italic,700,700italic,300,300italic' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/assets/stylesheets/app-2f8dcde3ec3d31a47409c6e0384d17f6f14293be3c79175275a24b7d98786d35.css">
 
-    <link href='https://fonts.googleapis.com/css?family=Roboto:400,400italic,500,500italic,700,700italic,300,300italic' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
-    <link type="text/css" rel="stylesheet" href="/assets/stylesheets/app.css">
+  <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+  <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+  <![endif]-->
+  <link href="/atom.xml" rel="alternate" title="Atom" type="application/atom+xml">
+  <link href="/rss.xml" rel="alternate" title="RSS" type="application/rss+xml">
+  <link href="/sitemap.xml" rel="sitemap" title="Sitemap" type="application/xml">
+  <link href="/humans.txt" rel="author" type="text/plain">
+  <meta name='title' content='Setting up tmux with Rails - TheWorkAround'>
+  <meta name='og:title' content='Setting up tmux with Rails - TheWorkAround'>
+  <meta property='og:url' content='http://theworkaround.com/2016/08/29/setting-up-tmux-with-rails.html'>
 
-    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
-    <link href="/atom.xml" rel="alternate" title="Atom" type="application/atom+xml">
-    <link href="/rss.xml" rel="alternate" title="RSS" type="application/rss+xml">
-    <link href="/sitemap.xml" rel="sitemap" title="Sitemap" type="application/xml">
-    <link href="/humans.txt" rel="author" type="text/plain">
-    <meta name='title' content='Setting up tmux with Rails - TheWorkAround'>
-    <meta name='og:title' content='Setting up tmux with Rails - TheWorkAround'>
-    <meta property='og:url' content='http://localhost:4000/2016/08/29/setting-up-tmux-with-rails.html'>
+  <meta content="article" property="og:type">
+  <meta name="author" content="Brandon Hicks">
 
-    <meta content="article" property="og:type">
-    <meta name="author" content="Brandon Hicks">
-
-    <meta name="description" content="A walk through on how to setup tmux for Rails development">
-    <meta name="keywords" content="development,programming,terminal,tmux">
+  <meta name="description" content="A walk through on how to setup tmux for Rails development">
+  <meta name="keywords" content="development,programming,terminal,tmux">
 
 </head>
 <body>
@@ -104,29 +112,26 @@ Instead of using <code class="highlighter-rouge">brew</code>, you will be making
 <code class="highlighter-rouge">apt-get</code>, <code class="highlighter-rouge">pacman</code>, etc.</p>
 
 <p>Lets begin by install tmux</p>
-<div class="language-shell highlighter-rouge"><pre class="highlight"><code>brew install tmux
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>brew <span class="nb">install </span>tmux
 
 <span class="c"># allows you to access OSx clipboard (pbcopy &amp; pbpaste) through tmux</span>
-brew install reattach-to-user-namespace
-</code></pre>
-</div>
+brew <span class="nb">install </span>reattach-to-user-namespace
+</code></pre></div></div>
 
 <p>Now if this is your first time installing tmux we’ll need to create a <code class="highlighter-rouge">.tmux.conf</code> file.</p>
 
-<div class="language-shell highlighter-rouge"><pre class="highlight"><code><span class="c"># this will contain colors, settings, key-bindings, etc.</span>
-touch ~/.tmux.conf
-</code></pre>
-</div>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># this will contain colors, settings, key-bindings, etc.</span>
+<span class="nb">touch</span> ~/.tmux.conf
+</code></pre></div></div>
 
 <p>Now lets install the tux Plugin Manager (yes I know another one).</p>
 
-<div class="language-shell highlighter-rouge"><pre class="highlight"><code><span class="c"># make a .tmux directory to store everything</span>
-mkdir -p ~/.tmux/plugins
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># make a .tmux directory to store everything</span>
+<span class="nb">mkdir</span> <span class="nt">-p</span> ~/.tmux/plugins
 
 <span class="c"># While we're at it, lets install tmux package manager</span>
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>The tmux plugin manager, makes it easy to install, update, and remove any and
 all plugins you may wish to use.</p>
@@ -136,13 +141,12 @@ You you dive in, it won’t seem like much but it contains various handy default
 values, bindings, etc. that will make tmux easier to use. The best part of this
 plugin, is that it’s not supposed to overwrite any config values you may have in
 you <code class="highlighter-rouge">~/.tmux.conf</code> file. No add the following to very bottom of your <code class="highlighter-rouge">~/.tmux.conf</code> file.</p>
-<div class="language-conf highlighter-rouge"><pre class="highlight"><code><span class="n">set</span> -<span class="n">g</span> @<span class="n">plugin</span> <span class="s1">'tmux-plugins/tmux-sensible'</span> <span class="c"># recommened tmux defaults
+<div class="language-conf highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">set</span> -<span class="n">g</span> @<span class="n">plugin</span> <span class="s1">'tmux-plugins/tmux-sensible'</span> <span class="c"># recommened tmux defaults
 </span><span class="n">set</span> -<span class="n">g</span> @<span class="n">plugin</span> <span class="s1">'tmux-plugins/tmux-yank'</span> <span class="c"># allows copying to system vie tmux
 </span>
 <span class="c"># Initialize TMUX plugin manager (keep this line at the very bottom of tmux.conf)
 </span><span class="n">run</span> <span class="s1">'~/.tmux/plugins/tpm/tpm'</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>Now is where it gets tricky, with tmux you have a prefix-key combo that you have
  to use in order issue particular commands. By default the prefix keys are <code class="highlighter-rouge">CTRL+b</code>.
@@ -152,10 +156,9 @@ you <code class="highlighter-rouge">~/.tmux.conf</code> file. No add the followi
 haven’t seen before. But once you learn the keys and get the right plugins,
 it’ll be a whole new experience.</p>
 
-<div class="language-shell highlighter-rouge"><pre class="highlight"><code><span class="c"># fire up tmux by issuing the following command</span>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># fire up tmux by issuing the following command</span>
 tmux
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>You’ll terminal will flicker for a second and you have a very generic/ASCII
 based status bar appear at the bottom. This means you’re doing great. Now lets
@@ -179,13 +182,12 @@ with default commands that run when they’re created.</p>
 
 <p>We first need to install tmuxinator and verifiy all the required requirements
 are met in order to use it.</p>
-<div class="language-bash highlighter-rouge"><pre class="highlight"><code><span class="c"># install tmuxinator</span>
-gem install tmuxinator
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># install tmuxinator</span>
+gem <span class="nb">install </span>tmuxinator
 
 <span class="c"># verify everything is ready</span>
 tmuxinator doctor
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>You will now need to add tmuxinator to your shell, for consistency sake I’ll
 just assume your using zsh/oh-my-zsh.
@@ -195,12 +197,11 @@ You will need to add <code class="highlighter-rouge">source ~/.bin/tmuxinator.zs
 exists. What gives? Well lets download the required completion file and get started.
 And if you’re not using zsh, there’s files for bash and fish as well.</p>
 
-<div class="language-shell highlighter-rouge"><pre class="highlight"><code><span class="c"># Download zsh completion file</span>
-curl -O https://raw.githubusercontent.com/tmuxinator/tmuxinator/master/completion/tmuxinator.zsh
-mkdir ~/.bin
-mv tmuxinator.zsh ~/.bin/
-</code></pre>
-</div>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Download zsh completion file</span>
+curl <span class="nt">-O</span> https://raw.githubusercontent.com/tmuxinator/tmuxinator/master/completion/tmuxinator.zsh
+<span class="nb">mkdir</span> ~/.bin
+<span class="nb">mv </span>tmuxinator.zsh ~/.bin/
+</code></pre></div></div>
 <p>Now in order to make sure everything is loaded and configured, reload the current terminal.</p>
 
 <h3 id="lets-create-a-tmuxinator-project">Lets create a tmuxinator project</h3>
@@ -208,12 +209,11 @@ mv tmuxinator.zsh ~/.bin/
 Rather than mess around and build a layout every time we want to open up tmux.</p>
 
 <p>To create a tmuxinator project, lets issue the following command:</p>
-<div class="language-shell highlighter-rouge"><pre class="highlight"><code>tmuxinator new <span class="o">[</span>project_name]
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>tmuxinator new <span class="o">[</span>project_name]
 
 <span class="c"># for example</span>
 tmuxinator new red_willow
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>This will generate a project.yml file in the <code class="highlighter-rouge">~/.tmuxinator</code> folder.
 It should also open up your specified $EDITOR allowing you to get a rough idea
@@ -223,25 +223,24 @@ for tmuxinator to open up all the tmux terminals to.</p>
 
 <p>Below is an example of a pretty basic rails based tmux session, built with tmuxinator.</p>
 
-<div class="language-yaml highlighter-rouge"><pre class="highlight"><code><span class="c1"># ~/.tmuxinator/tasky.yml</span>
-<span class="s">name</span><span class="pi">:</span> <span class="s">tasky</span>
-<span class="s">root</span><span class="pi">:</span> <span class="s">~/Desktop/red_willow</span>
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># ~/.tmuxinator/tasky.yml</span>
+<span class="na">name</span><span class="pi">:</span> <span class="s">tasky</span>
+<span class="na">root</span><span class="pi">:</span> <span class="s">~/Desktop/red_willow</span>
 
-<span class="s">windows</span><span class="pi">:</span>
-  <span class="pi">-</span> <span class="s">main</span><span class="pi">:</span>
+<span class="na">windows</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="na">main</span><span class="pi">:</span>
       <span class="c1"># http://stackoverflow.com/questions/9812000/specify-pane-percentage-in-tmuxinator-project</span>
       <span class="c1"># use: tmux list-windows to get coords and window sizes</span>
-      <span class="s">layout</span><span class="pi">:</span> <span class="s">b147,208x73,0,0[208x62,0,0,208x10,0,63{104x10,0,63,103x10,105,63}]</span>
-      <span class="s">panes</span><span class="pi">:</span>
+      <span class="na">layout</span><span class="pi">:</span> <span class="s">b147,208x73,0,0[208x62,0,0,208x10,0,63{104x10,0,63,103x10,105,63}]</span>
+      <span class="na">panes</span><span class="pi">:</span>
         <span class="pi">-</span> <span class="s">rails server thin</span>
         <span class="pi">-</span> <span class="s">guard</span>
         <span class="pi">-</span> <span class="s">atom .</span>
         <span class="pi">-</span> <span class="s">sleep 7 &amp;&amp; rails -t</span>
         <span class="pi">-</span> <span class="s">rails c</span>
         <span class="c1"># - foreman start</span>
-  <span class="pi">-</span> <span class="s">logs</span><span class="pi">:</span> <span class="s">tail -f log/development.log</span>
-</code></pre>
-</div>
+  <span class="pi">-</span> <span class="na">logs</span><span class="pi">:</span> <span class="s">tail -f log/development.log</span>
+</code></pre></div></div>
 
 <p>Now issue the following command to initiate the tmux session <code class="highlighter-rouge">tmuxinator [project_name]</code>
 From here it may take a few seconds for everything to load up and start running.
@@ -266,7 +265,7 @@ as <code class="highlighter-rouge">CTRL+b</code>, because it means there’s no 
 between a window, pane, session, etc. And this is just a small batch of commands
 you can do, tmux is a massive program with tons of features I haven’t even begin to think about.</p>
 
-<div class="language-bash highlighter-rouge"><pre class="highlight"><code><span class="c">#All of these require you to first initiate the prefix key combo:</span>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#All of these require you to first initiate the prefix key combo:</span>
 <span class="c"># Default Prefix: CTRL+B and than whatever you want it to do</span>
 
 <span class="s2">" - Horizontal split
@@ -278,26 +277,24 @@ c - load up new tmux window
 d - detach current tmux session
 x - kill current pane in focus
 [space] - toggle between layouts
-</span></code></pre>
-</div>
+</span></code></pre></div></div>
 
 <p>And here a few essential tmux console commands:</p>
-<div class="language-bash highlighter-rouge"><pre class="highlight"><code><span class="c"># to view list of current tmux sessions</span>
-tmux ls
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># to view list of current tmux sessions</span>
+tmux <span class="nb">ls</span>
 
 <span class="c"># to reattach tmux panels (number specified will be specified tmux session from tmux ls)</span>
-tmux attach -t 0
+tmux attach <span class="nt">-t</span> 0
 
 <span class="c">#To kill specific tmux session</span>
-tmux <span class="nb">kill</span>-session -t 0
+tmux kill-session <span class="nt">-t</span> 0
 
 <span class="c"># kills the last tmux session on the list</span>
-tmux <span class="nb">kill</span>-session
+tmux kill-session
 
 <span class="c"># to completely kill tmux</span>
-tmux <span class="nb">kill</span>-server
-</code></pre>
-</div>
+tmux kill-server
+</code></pre></div></div>
 
 <ul>
   <li>

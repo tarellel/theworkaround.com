@@ -1,37 +1,45 @@
 <!DOCTYPE html>
 <html lang="en-US">
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Mapping an ArcGIS Parcel dataset as a Mapbox tileset - TheWorkAround</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Prefectch to Optimize Site Loading - src: http://csswizardry.com/ -->
-    <link rel="dns-prefetch" href="https://fonts.googleapis.com/">
-    <link rel="dns-prefetch" href="https://www.google-analytics.com/">
-    <link rel="dns-prefetch" href="https://ajax.googleapis.com/">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Mapping an ArcGIS Parcel dataset as a Mapbox tileset - TheWorkAround</title>
+  <meta name="google" content="notranslate">
+  <meta name="robots" content="index, follow">
+  <meta http-equiv="Content-Language" content="en">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Prefectch to Optimize Site Loading - src: http://csswizardry.com/ -->
+  <link rel="preconnect" href="https://fonts.googleapis.com/" crossorigin>
+  <link rel="preconnect" href="https://www.google-analytics.com/" crossorigin>
+  <link rel="preconnect" href="https://ajax.googleapis.com/" crossorigin>
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com/" crossorigin>
+  <link rel="dns-prefetch" href="https://fonts.googleapis.com/">
+  <link rel="dns-prefetch" href="https://www.google-analytics.com/">
+  <link rel="dns-prefetch" href="https://ajax.googleapis.com/">
+  <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com/">
+  <meta name="theme-color" content="#4cb8c4">
+  <link href='https://fonts.googleapis.com/css?family=Roboto:400,400italic,500,500italic,700,700italic,300,300italic' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/assets/stylesheets/app-2f8dcde3ec3d31a47409c6e0384d17f6f14293be3c79175275a24b7d98786d35.css">
 
-    <link href='https://fonts.googleapis.com/css?family=Roboto:400,400italic,500,500italic,700,700italic,300,300italic' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
-    <link type="text/css" rel="stylesheet" href="/assets/stylesheets/app.css">
+  <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+  <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+  <![endif]-->
+  <link href="/atom.xml" rel="alternate" title="Atom" type="application/atom+xml">
+  <link href="/rss.xml" rel="alternate" title="RSS" type="application/rss+xml">
+  <link href="/sitemap.xml" rel="sitemap" title="Sitemap" type="application/xml">
+  <link href="/humans.txt" rel="author" type="text/plain">
+  <meta name='title' content='Mapping an ArcGIS Parcel dataset as a Mapbox tileset - TheWorkAround'>
+  <meta name='og:title' content='Mapping an ArcGIS Parcel dataset as a Mapbox tileset - TheWorkAround'>
+  <meta property='og:url' content='http://theworkaround.com/2016/12/15/mapping-an-arcgis-parcel-dataset-as-a-mapbox-tileset.html'>
 
-    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
-    <link href="/atom.xml" rel="alternate" title="Atom" type="application/atom+xml">
-    <link href="/rss.xml" rel="alternate" title="RSS" type="application/rss+xml">
-    <link href="/sitemap.xml" rel="sitemap" title="Sitemap" type="application/xml">
-    <link href="/humans.txt" rel="author" type="text/plain">
-    <meta name='title' content='Mapping an ArcGIS Parcel dataset as a Mapbox tileset - TheWorkAround'>
-    <meta name='og:title' content='Mapping an ArcGIS Parcel dataset as a Mapbox tileset - TheWorkAround'>
-    <meta property='og:url' content='http://localhost:4000/2016/12/15/mapping-an-arcgis-parcel-dataset-as-a-mapbox-tileset.html'>
+  <meta content="article" property="og:type">
+  <meta name="author" content="Brandon Hicks">
 
-    <meta content="article" property="og:type">
-    <meta name="author" content="Brandon Hicks">
-
-    <meta name="description" content="This is how I mapped a ArcGIS dataset as a mapbox vector tileset.">
-    <meta name="keywords" content="database,gis,mapbox,postgres,postgis,ruby">
+  <meta name="description" content="This is how I mapped a ArcGIS dataset as a mapbox vector tileset.">
+  <meta name="keywords" content="database,gis,mapbox,postgres,postgis,ruby">
 
 </head>
 <body>
@@ -127,9 +135,8 @@ No matter what sort of map is used, they have always been an important asset for
 QGIS will display this and various other attributes when loading up the vector map projection.
 You should see something similar to the following attributes upon loading up the map.</p>
 
-<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="nx">USER</span><span class="err">:</span><span class="mi">1000001</span> <span class="p">(</span><span class="o">*</span> <span class="nx">Generated</span> <span class="nx">CRS</span> <span class="p">(</span><span class="o">+</span><span class="nx">proj</span><span class="o">=</span><span class="nx">tmerc</span> <span class="o">+</span><span class="nx">lat_0</span><span class="o">=</span><span class="mi">31</span> <span class="o">+</span><span class="nx">lon_0</span><span class="o">=-</span><span class="mf">107.8333333333333</span> <span class="o">+</span><span class="nx">k</span><span class="o">=</span><span class="mf">0.9999166666666667</span> <span class="o">+</span><span class="nx">x_0</span><span class="o">=</span><span class="mf">829999.9999999998</span> <span class="o">+</span><span class="nx">y_0</span><span class="o">=</span><span class="mi">0</span> <span class="o">+</span><span class="nx">ellps</span><span class="o">=</span><span class="nx">GRS80</span> <span class="o">+</span><span class="nx">towgs84</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span> <span class="o">+</span><span class="nx">units</span><span class="o">=</span><span class="nx">us</span><span class="o">-</span><span class="nx">ft</span> <span class="o">+</span><span class="nx">no_defs</span><span class="p">))</span>
-</code></pre>
-</div>
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">USER</span><span class="p">:</span><span class="mi">1000001</span> <span class="p">(</span><span class="o">*</span> <span class="nx">Generated</span> <span class="nx">CRS</span> <span class="p">(</span><span class="o">+</span><span class="nx">proj</span><span class="o">=</span><span class="nx">tmerc</span> <span class="o">+</span><span class="nx">lat_0</span><span class="o">=</span><span class="mi">31</span> <span class="o">+</span><span class="nx">lon_0</span><span class="o">=-</span><span class="mf">107.8333333333333</span> <span class="o">+</span><span class="nx">k</span><span class="o">=</span><span class="mf">0.9999166666666667</span> <span class="o">+</span><span class="nx">x_0</span><span class="o">=</span><span class="mf">829999.9999999998</span> <span class="o">+</span><span class="nx">y_0</span><span class="o">=</span><span class="mi">0</span> <span class="o">+</span><span class="nx">ellps</span><span class="o">=</span><span class="nx">GRS80</span> <span class="o">+</span><span class="nx">towgs84</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span> <span class="o">+</span><span class="nx">units</span><span class="o">=</span><span class="nx">us</span><span class="o">-</span><span class="nx">ft</span> <span class="o">+</span><span class="nx">no_defs</span><span class="p">))</span>
+</code></pre></div></div>
 
 <p>We now very much on our way to having a data projection of usable data for mapping out San Juan County.
 The only issue we are going to have at this point is the majority of online mapping tools use the <a href="https://confluence.qps.nl/pages/viewpage.action?pageId=29855173">EPSG:4326/WGS84</a> standard for projecting data.
@@ -155,23 +162,21 @@ If you’ve never used it, it lets you print column names, convert CSV to JSON, 
 
 <p>Now normally we’d just attempt to build the database scheme with the following command.</p>
 
-<div class="language-shell highlighter-rouge"><pre class="highlight"><code>csvsql -i postgresql Buildings.csv
-</code></pre>
-</div>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>csvsql <span class="nt">-i</span> postgresql Buildings.csv
+</code></pre></div></div>
 
 <p>But since there are so many rows, the python script will probably freeze up or start consuming a HUGE amount of memory.
 So in order to make it more efficient, we’ll get the first 20 rows of data.
 And using command line piping we’ll send the data to the csv tool for processing.</p>
 
-<div class="language-shell highlighter-rouge"><pre class="highlight"><code>head -n 20 Buildings.csv | csvsql --no-constraints --table buildings
-</code></pre>
-</div>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">head</span> <span class="nt">-n</span> 20 Buildings.csv | csvsql <span class="nt">--no-constraints</span> <span class="nt">--table</span> buildings
+</code></pre></div></div>
 
 <p>Depending on the information available, your SQL output should be something similar to the following.
 Several of these columns we’ll never even use, but for now it’s better to not chance corrupting any of our fields.
 Before you go any father be sure the change the geometry field names to geom and if CSVKIT labels geom as a VARCHAR change it to use the geometry property type.</p>
 
-<div class="language-sql highlighter-rouge"><pre class="highlight"><code><span class="k">CREATE</span> <span class="k">TABLE</span> <span class="nv">"buildings"</span> <span class="p">(</span>
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">CREATE</span> <span class="k">TABLE</span> <span class="nv">"buildings"</span> <span class="p">(</span>
   <span class="n">geom</span> <span class="n">geometry</span><span class="p">,</span>
   <span class="n">ogc_fid</span> <span class="n">INTEGER</span><span class="p">,</span>
   <span class="n">parcelno</span> <span class="n">BIGINT</span><span class="p">,</span>
@@ -192,8 +197,7 @@ Before you go any father be sure the change the geometry field names to geom and
   <span class="n">physcity</span> <span class="n">VARCHAR</span><span class="p">,</span>
   <span class="n">physzip</span> <span class="n">VARCHAR</span>
 <span class="p">);</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p><strong>NOTE</strong>: depending on the GIS software you used, I had various issues with the CSV file that I needed to correct before importing it.
 The issues that we’ll encounter involve the geometry field. Since CSV fields are separated by commas Postgres tries to import the polygons coordinates as separate columns as well.</p>
@@ -212,31 +216,27 @@ Out of 81000 or so columns, there were a few hundred rows with with this issue t
 
 <p>Now before we import the dataset, lets enable the <a href="http://postgis.net/">PostGIS</a> extension so the database can process the buildings vectors properly.</p>
 
-<div class="language-sql highlighter-rouge"><pre class="highlight"><code><span class="k">CREATE</span> <span class="n">EXTENSION</span> <span class="n">postgis</span><span class="p">;</span>
-</code></pre>
-</div>
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">CREATE</span> <span class="n">EXTENSION</span> <span class="n">postgis</span><span class="p">;</span>
+</code></pre></div></div>
 
 <p>Now depending on how your managing your database, you either import the CSV file through pgAdmin or through the command line.
 I chose the the command line, because of its speed and convenience.</p>
-<div class="language-sql highlighter-rouge"><pre class="highlight"><code><span class="k">copy</span> <span class="n">buildings</span> <span class="k">FROM</span> <span class="s1">'/Users/Tarellel/Desktop/SJC_GIS/Exported/Buildings.csv'</span> <span class="k">DELIMITER</span> <span class="s1">','</span> <span class="n">CSV</span> <span class="n">HEADER</span><span class="p">;</span>
-</code></pre>
-</div>
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">copy</span> <span class="n">buildings</span> <span class="k">FROM</span> <span class="s1">'/Users/Tarellel/Desktop/SJC_GIS/Exported/Buildings.csv'</span> <span class="k">DELIMITER</span> <span class="s1">','</span> <span class="n">CSV</span> <span class="n">HEADER</span><span class="p">;</span>
+</code></pre></div></div>
 <p>Now compared to loading data in IDE’s and/or Excel, Postgres is extremely fast at accessing, modifying, and deleting rows, columns, and fields.
 Depending on what data you plan on mapping may be set. I’m going to be mapping out all building ages in the county, so lets add the <code class="highlighter-rouge">built_in</code> column to the table, for the year in which the stucture was built.</p>
-<div class="language-sql highlighter-rouge"><pre class="highlight"><code><span class="k">ALTER</span> <span class="k">TABLE</span> <span class="n">buildings</span> <span class="k">ADD</span> <span class="n">built_in</span> <span class="n">integer</span><span class="p">;</span>
-</code></pre>
-</div>
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">ALTER</span> <span class="k">TABLE</span> <span class="n">buildings</span> <span class="k">ADD</span> <span class="n">built_in</span> <span class="n">integer</span><span class="p">;</span>
+</code></pre></div></div>
 
 <p>If you’re like my, you instantly started doing queries to verify the integrity of the information imported.
 Something you may notice is that the structures geometry field no longer looks like <code class="highlighter-rouge">"POLYGON ((-108.195455993822 36.979941009114,-108.195717330387 36.987213809214,-108.19557299488 36.987214765187))"</code>. That is because PostGIS stores the locations as a binary specification, but when queried the information is viewed as a hex-encoded string. This makes it easier for storing and manipulation into various data projection formats.</p>
 
-<div class="language-sql highlighter-rouge"><pre class="highlight"><code><span class="k">SELECT</span> <span class="n">geom</span> <span class="k">FROM</span> <span class="n">buildings</span> <span class="k">LIMIT</span> <span class="mi">1</span><span class="p">;</span>
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SELECT</span> <span class="n">geom</span> <span class="k">FROM</span> <span class="n">buildings</span> <span class="k">LIMIT</span> <span class="mi">1</span><span class="p">;</span>
 <span class="c1">--------------------</span>
 <span class="mi">01030000000100000005000000</span><span class="n">F9A232DD00065BC034E0D442D7594240F0567E50FB055BC094B9B760D55942409E97C29CFE055BC0CAC4E0D8BB594240080B801404065BC0440327CEBD594240F9A232DD00065BC034E0D442D7594240</span>
 <span class="p">(</span><span class="mi">1</span> <span class="k">row</span><span class="p">)</span>
 <span class="c1">--------------------</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h3 id="lets-fetch-the-buildproperties-initial-build-date">Lets fetch the build/properties initial build date</h3>
 
@@ -249,7 +249,7 @@ So, I used the next best thing, the counties web site for getting property listi
 <p><em>For warning,</em> this script was build to be quick and effective,
 rather than being well formatted and following best practices.</p>
 
-<div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="nb">require</span> <span class="s1">'pg'</span>
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">require</span> <span class="s1">'pg'</span>
 <span class="nb">require</span> <span class="s1">'open-uri'</span>
 <span class="nb">require</span> <span class="s1">'nokogiri'</span>
 <span class="nb">require</span> <span class="s1">'restclient'</span>
@@ -397,8 +397,7 @@ rather than being well formatted and following best practices.</p>
 <span class="mi">500</span><span class="p">.</span><span class="nf">times</span> <span class="k">do</span> <span class="o">|</span><span class="n">x</span><span class="o">|</span>
   <span class="n">fetch</span><span class="p">.</span><span class="nf">fetch_buildings</span>
 <span class="k">end</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>I ran this script over night and came back with a fully populated database and ready for to be fully utilized.
 Depending on the server load, each request usually took a few seconds for each building/property.
@@ -434,7 +433,7 @@ But in the end, I ended up with a swatch of subqueries and assignments that ende
 As you can see below, the query may look like a complicated mess.
 The funny thing is, it’s a heck of a lot simpler than some of the other query selections I ended up trying to come up with.</p>
 
-<div class="language-sql highlighter-rouge"><pre class="highlight"><code><span class="k">COPY</span> <span class="p">(</span>
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">COPY</span> <span class="p">(</span>
   <span class="k">SELECT</span>
     <span class="n">row_to_json</span><span class="p">(</span><span class="n">collection</span><span class="p">)</span>
   <span class="k">FROM</span><span class="p">(</span>
@@ -456,55 +455,52 @@ The funny thing is, it’s a heck of a lot simpler than some of the other query 
       <span class="p">)</span> <span class="k">AS</span> <span class="n">feature</span>
   <span class="p">)</span> <span class="k">AS</span> <span class="n">collection</span>
 <span class="p">)</span> <span class="k">TO</span> <span class="s1">'/Users/Tarellel/Desktop/buildings.json'</span><span class="p">;</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>But just a heads up you may be expecting a nice and beautiful json structure similar to the following.</p>
 
 <p><small>Example from <em><a href="http://geojson.org/geojson-spec.html">geojson-spec data</a></em></small></p>
-<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w"> </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"FeatureCollection"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"features"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-      </span><span class="p">{</span><span class="w"> </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Feature"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"geometry"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Point"</span><span class="p">,</span><span class="w"> </span><span class="nt">"coordinates"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mf">102.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.5</span><span class="p">]},</span><span class="w">
-        </span><span class="nt">"properties"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">"prop0"</span><span class="p">:</span><span class="w"> </span><span class="s2">"value0"</span><span class="p">}</span><span class="w">
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w"> </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"FeatureCollection"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"features"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="p">{</span><span class="w"> </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Feature"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"geometry"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Point"</span><span class="p">,</span><span class="w"> </span><span class="s2">"coordinates"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mf">102.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.5</span><span class="p">]},</span><span class="w">
+        </span><span class="s2">"properties"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="s2">"prop0"</span><span class="p">:</span><span class="w"> </span><span class="s2">"value0"</span><span class="p">}</span><span class="w">
         </span><span class="p">},</span><span class="w">
-      </span><span class="p">{</span><span class="w"> </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Feature"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"geometry"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-          </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"LineString"</span><span class="p">,</span><span class="w">
-          </span><span class="nt">"coordinates"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="p">{</span><span class="w"> </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Feature"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"geometry"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"LineString"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"coordinates"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
             </span><span class="p">[</span><span class="mf">102.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="mf">103.0</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="mf">104.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="mf">105.0</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0</span><span class="p">]</span><span class="w">
             </span><span class="p">]</span><span class="w">
           </span><span class="p">},</span><span class="w">
-        </span><span class="nt">"properties"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-          </span><span class="nt">"prop0"</span><span class="p">:</span><span class="w"> </span><span class="s2">"value0"</span><span class="p">,</span><span class="w">
-          </span><span class="nt">"prop1"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="w">
+        </span><span class="s2">"properties"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="s2">"prop0"</span><span class="p">:</span><span class="w"> </span><span class="s2">"value0"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"prop1"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="w">
           </span><span class="p">}</span><span class="w">
         </span><span class="p">},</span><span class="w">
-      </span><span class="p">{</span><span class="w"> </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Feature"</span><span class="p">,</span><span class="w">
-         </span><span class="nt">"geometry"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-           </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Polygon"</span><span class="p">,</span><span class="w">
-           </span><span class="nt">"coordinates"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="p">{</span><span class="w"> </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Feature"</span><span class="p">,</span><span class="w">
+         </span><span class="s2">"geometry"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+           </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Polygon"</span><span class="p">,</span><span class="w">
+           </span><span class="s2">"coordinates"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
              </span><span class="p">[</span><span class="w"> </span><span class="p">[</span><span class="mf">100.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="mf">101.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="mf">101.0</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0</span><span class="p">],</span><span class="w">
                </span><span class="p">[</span><span class="mf">100.0</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="mf">100.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">]</span><span class="w"> </span><span class="p">]</span><span class="w">
              </span><span class="p">]</span><span class="w">
          </span><span class="p">},</span><span class="w">
-         </span><span class="nt">"properties"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-           </span><span class="nt">"prop0"</span><span class="p">:</span><span class="w"> </span><span class="s2">"value0"</span><span class="p">,</span><span class="w">
-           </span><span class="nt">"prop1"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">"this"</span><span class="p">:</span><span class="w"> </span><span class="s2">"that"</span><span class="p">}</span><span class="w">
+         </span><span class="s2">"properties"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+           </span><span class="s2">"prop0"</span><span class="p">:</span><span class="w"> </span><span class="s2">"value0"</span><span class="p">,</span><span class="w">
+           </span><span class="s2">"prop1"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="s2">"this"</span><span class="p">:</span><span class="w"> </span><span class="s2">"that"</span><span class="p">}</span><span class="w">
            </span><span class="p">}</span><span class="w">
          </span><span class="p">}</span><span class="w">
        </span><span class="p">]</span><span class="w">
      </span><span class="p">}</span><span class="w">
-</span></code></pre>
-</div>
+</span></code></pre></div></div>
 
 <p>The query I used ends exporting the data more like a crunched dataset.
 Which is great because it dramatically reduces filesize and is a must when optimizing for loading on webpages.
 Plus no matter how you use it, it’s not like whatever processor your using is really going to worry about how beautiful your file is, as long as the data is valid.</p>
 
-<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="nt">"type"</span><span class="p">:</span><span class="s2">"FeatureCollection"</span><span class="p">,</span><span class="nt">"features"</span><span class="p">:[{</span><span class="nt">"type"</span><span class="p">:</span><span class="s2">"Feature"</span><span class="p">,</span><span class="nt">"geometry"</span><span class="p">:{</span><span class="nt">"type"</span><span class="p">:</span><span class="s2">"Point"</span><span class="p">,</span><span class="nt">"coordinates"</span><span class="p">:[</span><span class="mi">102</span><span class="p">,</span><span class="mf">0.5</span><span class="p">]},</span><span class="nt">"properties"</span><span class="p">:{</span><span class="nt">"prop0"</span><span class="p">:</span><span class="s2">"value0"</span><span class="p">}},{</span><span class="nt">"type"</span><span class="p">:</span><span class="s2">"Feature"</span><span class="p">,</span><span class="nt">"geometry"</span><span class="p">:{</span><span class="nt">"type"</span><span class="p">:</span><span class="s2">"LineString"</span><span class="p">,</span><span class="nt">"coordinates"</span><span class="p">:[[</span><span class="mi">102</span><span class="p">,</span><span class="mi">0</span><span class="p">],[</span><span class="mi">103</span><span class="p">,</span><span class="mi">1</span><span class="p">],[</span><span class="mi">104</span><span class="p">,</span><span class="mi">0</span><span class="p">],[</span><span class="mi">105</span><span class="p">,</span><span class="mi">1</span><span class="p">]]},</span><span class="nt">"properties"</span><span class="p">:{</span><span class="nt">"prop0"</span><span class="p">:</span><span class="s2">"value0"</span><span class="p">,</span><span class="nt">"prop1"</span><span class="p">:</span><span class="mi">0</span><span class="p">}},{</span><span class="nt">"type"</span><span class="p">:</span><span class="s2">"Feature"</span><span class="p">,</span><span class="nt">"geometry"</span><span class="p">:{</span><span class="nt">"type"</span><span class="p">:</span><span class="s2">"Polygon"</span><span class="p">,</span><span class="nt">"coordinates"</span><span class="p">:[[[</span><span class="mi">100</span><span class="p">,</span><span class="mi">0</span><span class="p">],[</span><span class="mi">101</span><span class="p">,</span><span class="mi">0</span><span class="p">],[</span><span class="mi">101</span><span class="p">,</span><span class="mi">1</span><span class="p">],[</span><span class="mi">100</span><span class="p">,</span><span class="mi">1</span><span class="p">],[</span><span class="mi">100</span><span class="p">,</span><span class="mi">0</span><span class="p">]]]},</span><span class="nt">"properties"</span><span class="p">:{</span><span class="nt">"prop0"</span><span class="p">:</span><span class="s2">"value0"</span><span class="p">,</span><span class="nt">"prop1"</span><span class="p">:{</span><span class="nt">"this"</span><span class="p">:</span><span class="s2">"that"</span><span class="p">}}}]}</span><span class="w">
-</span></code></pre>
-</div>
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="s2">"type"</span><span class="p">:</span><span class="s2">"FeatureCollection"</span><span class="p">,</span><span class="s2">"features"</span><span class="p">:[{</span><span class="s2">"type"</span><span class="p">:</span><span class="s2">"Feature"</span><span class="p">,</span><span class="s2">"geometry"</span><span class="p">:{</span><span class="s2">"type"</span><span class="p">:</span><span class="s2">"Point"</span><span class="p">,</span><span class="s2">"coordinates"</span><span class="p">:[</span><span class="mi">102</span><span class="p">,</span><span class="mf">0.5</span><span class="p">]},</span><span class="s2">"properties"</span><span class="p">:{</span><span class="s2">"prop0"</span><span class="p">:</span><span class="s2">"value0"</span><span class="p">}},{</span><span class="s2">"type"</span><span class="p">:</span><span class="s2">"Feature"</span><span class="p">,</span><span class="s2">"geometry"</span><span class="p">:{</span><span class="s2">"type"</span><span class="p">:</span><span class="s2">"LineString"</span><span class="p">,</span><span class="s2">"coordinates"</span><span class="p">:[[</span><span class="mi">102</span><span class="p">,</span><span class="mi">0</span><span class="p">],[</span><span class="mi">103</span><span class="p">,</span><span class="mi">1</span><span class="p">],[</span><span class="mi">104</span><span class="p">,</span><span class="mi">0</span><span class="p">],[</span><span class="mi">105</span><span class="p">,</span><span class="mi">1</span><span class="p">]]},</span><span class="s2">"properties"</span><span class="p">:{</span><span class="s2">"prop0"</span><span class="p">:</span><span class="s2">"value0"</span><span class="p">,</span><span class="s2">"prop1"</span><span class="p">:</span><span class="mi">0</span><span class="p">}},{</span><span class="s2">"type"</span><span class="p">:</span><span class="s2">"Feature"</span><span class="p">,</span><span class="s2">"geometry"</span><span class="p">:{</span><span class="s2">"type"</span><span class="p">:</span><span class="s2">"Polygon"</span><span class="p">,</span><span class="s2">"coordinates"</span><span class="p">:[[[</span><span class="mi">100</span><span class="p">,</span><span class="mi">0</span><span class="p">],[</span><span class="mi">101</span><span class="p">,</span><span class="mi">0</span><span class="p">],[</span><span class="mi">101</span><span class="p">,</span><span class="mi">1</span><span class="p">],[</span><span class="mi">100</span><span class="p">,</span><span class="mi">1</span><span class="p">],[</span><span class="mi">100</span><span class="p">,</span><span class="mi">0</span><span class="p">]]]},</span><span class="s2">"properties"</span><span class="p">:{</span><span class="s2">"prop0"</span><span class="p">:</span><span class="s2">"value0"</span><span class="p">,</span><span class="s2">"prop1"</span><span class="p">:{</span><span class="s2">"this"</span><span class="p">:</span><span class="s2">"that"</span><span class="p">}}}]}</span><span class="w">
+</span></code></pre></div></div>
 
 <p>Now that you’ve exported the dataset as a GeoJson file, it’s all downhill from here.
 You’ll just need to use the Mapbox <a href="https://www.mapbox.com/api-documentation/#uploads">upload API</a> to upload the file.

@@ -2,8 +2,9 @@ source 'https://rubygems.org'
 
 gem 'jekyll'
 # Plugins
-gem 'jekyll-assets'#, :git -> 'git://github.com/ixti/jekyll-assets.git'
-#gem 'jekyll-asset-pipeline'# https://github.com/matthodan/jekyll-asset-pipeline
+gem 'jekyll-assets', '~> 3.0.6'
+# gem "sprockets", "~> 4.0.beta", { require: false }
+# gem 'jekyll-asset-pipeline'# https://github.com/matthodan/jekyll-asset-pipeline
 gem 'jekyll-tagging', git: 'https://github.com/pattex/jekyll-tagging.git'
 # possible tag alternative - https://github.com/charliepark/charliepark.github.com/blob/master/_plugins/tag_gen.rb
 
@@ -11,13 +12,11 @@ gem 'jekyll-tagging', git: 'https://github.com/pattex/jekyll-tagging.git'
 # https://github.com/realjenius/realjenius.com/blob/master/_plugins/cat_and_tag_generator.rb
 
 # Formatting/Structure/Etc.
-gem 'uglifier'
-gem "sass"
 gem 'kramdown'
-#gem 'coderay'
-#gem 'coderay_bash' # :bash :erb_bash
 gem 'rouge' # http://rouge.jayferd.us/demo
             # http://rouge.jneen.net/
+gem 'sass'
+gem 'uglifier'
 
 ####################
 # Assets and View related gems

@@ -44,7 +44,7 @@ brew install fish
 Now you're not quite ready to go, you need to add Fish to your systems shell listing
 in `/etc/shells`, this does require administrative access.
 ```shell
-sudo echo '/usr/local/bin/fish' > /etc/shells
+sudo echo '/usr/local/bin/fish' >> /etc/shells
 ```
 
 Now that fish is installed, in order to use it lets begin by setting it as your default terminal shell environment.

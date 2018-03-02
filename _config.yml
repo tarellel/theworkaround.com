@@ -15,7 +15,6 @@ kramdown:
   input: GFM
   syntax_highlighter: rouge
 
-
 exclude: ['.gitignore', 'README.md', "Rakefile", 'ideas.md', 'misc.md']
 permalink:  /:year/:month/:day/:title.html
 
@@ -43,12 +42,14 @@ tag_permalink_style: pretty
 
 # for jekyll-assets
 assets:
+  source_maps: false
   dirname: assets
   #baseurl: /assets/
 
-  compress:
-    css:  scss
-    js:   uglifier
+  # compress:
+  #   css:  scss
+  #   js:   uglifier
+  compression: true
 
   # Pathnames where to find assets relative to the root of the site.
   sources:
