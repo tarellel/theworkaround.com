@@ -27,13 +27,14 @@ div.highlight{
 
 .header{
   background-origin: padding-box;
-  background-size: cover;
-  background-repeat: no-repeat;
+  background-size: cover !important;
+  background-repeat: no-repeat !important;
   border-radius: 0;
   display: block;
   margin: 0 0 1.5em 0;
   min-height: 250px;
   text-align: center;
+  width: 100%;
 }
 
 //pre.highlight code{
