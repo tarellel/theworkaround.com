@@ -32,10 +32,16 @@ task :post do
 
   filename = File.join(CONFIG['posts'], "#{date}-#{slug}.#{CONFIG['post_ext']}")
   if File.exist?(filename)
-    abort("rake aborted!") if ask("#{filename} already exists. Do you want to overwrite?", ['y', 'n']) == 'n'
+    puts "#{filename} already exists. Do you want to overwrite? (y or n)"
+    prompt = STDIN.gets.chomp
+    abort unless prompt == 'y'
   end
 
   postdate = Time.new
+
+
+    # if tags are specified, sort them in Alphabetical order
+  tags = tags.split(',').map(&:strip).sort.join(', ') if !tags.empty?
 
   puts "Creating new post: #{filename}"
   open(filename, 'w') do |post|
@@ -45,7 +51,7 @@ task :post do
     post.puts "date: #{postdate.strftime("%Y-%m-%d %H-%m-%S")}"
     post.puts 'description: ""'
     #post.puts "category: "
-    post.puts 'tags: []'
+    post.puts "tags: [#{tags}]"
     post.puts 'comments: true'
     post.puts '---'
     # post.puts "{% include JB/setup %}"
@@ -63,7 +69,9 @@ task :page do
   filename = File.join(filename, "index.html") if File.extname(filename) == ""
   title = File.basename(filename, File.extname(filename)).gsub(/[\W\_]/, " ").gsub(/\b\w/){$&.upcase}
   if File.exist?(filename)
-    abort("rake aborted!") if ask("#{filename} already exists. Do you want to overwrite?", ['y', 'n']) == 'n'
+    puts "#{filename} already exists. Do you want to overwrite? (y or n)"
+    prompt = STDIN.gets.chomp
+    abort unless prompt == 'y'
   end
 
   mkdir_p File.dirname(filename)
