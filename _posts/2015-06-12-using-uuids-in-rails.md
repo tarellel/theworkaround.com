@@ -58,8 +58,9 @@ rails g migration enable_uuid_extension
 In the migration we tell the Postgres database to use the uuid extension, we do this in order to have the database automatically generate UUIDs on the objects creation rather than having the Rails Application generate the UUIDs and adding additional process time to the server.
 
 ~~~ ruby
-class EnableUuidExtension < ActiveRecord::Migration
+class EnableUuidExtension < ActiveRecord::Migration[5.1]
   def change
+    enable_extension 'pgcrypto'
     enable_extension 'uuid-ossp'
   end
 end

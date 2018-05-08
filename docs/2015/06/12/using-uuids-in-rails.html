@@ -123,8 +123,9 @@
 
 <p>In the migration we tell the Postgres database to use the uuid extension, we do this in order to have the database automatically generate UUIDs on the objects creation rather than having the Rails Application generate the UUIDs and adding additional process time to the server.</p>
 
-<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">EnableUuidExtension</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Migration</span>
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">EnableUuidExtension</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Migration</span><span class="p">[</span><span class="mf">5.1</span><span class="p">]</span>
   <span class="k">def</span> <span class="nf">change</span>
+    <span class="n">enable_extension</span> <span class="s1">'pgcrypto'</span>
     <span class="n">enable_extension</span> <span class="s1">'uuid-ossp'</span>
   <span class="k">end</span>
 <span class="k">end</span>

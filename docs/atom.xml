@@ -4,7 +4,7 @@
   <title>TheWorkAround</title>
   <link href="http://theworkaround.com/"/>
   <link type="application/atom+xml" rel="self" href="http://theworkaround.com/atom.xml"/>
-  <updated>2018-05-06T22:43:35-06:00</updated>
+  <updated>2018-05-08T08:26:23-06:00</updated>
   <id>http://theworkaround.com/</id>
   <author>
     <name>Brandon Hicks</name>
@@ -1535,8 +1535,9 @@ tmux kill-server
 
 &lt;p&gt;In the migration we tell the Postgres database to use the uuid extension, we do this in order to have the database automatically generate UUIDs on the objects creation rather than having the Rails Application generate the UUIDs and adding additional process time to the server.&lt;/p&gt;
 
-&lt;div class=&quot;language-ruby highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;EnableUuidExtension&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;ActiveRecord&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;Migration&lt;/span&gt;
+&lt;div class=&quot;language-ruby highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;EnableUuidExtension&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;ActiveRecord&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;Migration&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;5.1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
   &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;change&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;enable_extension&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'pgcrypto'&lt;/span&gt;
     &lt;span class=&quot;n&quot;&gt;enable_extension&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'uuid-ossp'&lt;/span&gt;
   &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
 &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
