@@ -5,12 +5,12 @@ title: TheWorkAround
 <div id="home">
   <ul class="posts">
     {% for post in site.posts %}
-      <li>
+      <li class="p-0 mt-2">
         <div class="row">
-          <div class="col-md-8">
-            <a href="{{ post.url }}">{{ post.title }}</a>
+          <div class="d-flex align-self-center w-100 px-3 py-0 h-entry">
+            <h1 class="w-50 p-name"><a href="{{ post.url }}" class="u-url">{{ post.title }}</a></h1>
+            <div class="meta w-50 text-right dt-published">{{ post.date | date: "%b %d, %Y" }}</div>
           </div>
-          <div class="col-md-2 text-right meta">{{ post.date | date: "%b %d, %Y" }}</div>
         </div>
       </li>
     {% endfor %}

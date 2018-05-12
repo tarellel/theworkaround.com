@@ -47,8 +47,6 @@ ul.posts {
 }
 
 .posts {
-  font-size: 115%;
-
   li{
     margin-bottom: 1em; // .75em
   }
@@ -57,6 +55,12 @@ ul.posts {
 .post-title {
   margin-top: 0;
   padding-top: 0;
+}
+
+.h-entry{
+  h1.p-name {
+    font-size: 1rem !important;
+  }
 }
 
 
