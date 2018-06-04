@@ -34,6 +34,12 @@ h1, h2, h3, h4, h5 {
   font-family: 'Roboto','Helvetica Neue', Helvetica, Arial, sans-serif;
   //font-weight:300;
   font-weight: 400;
+
+  .text-muted{
+    color: #969ea5 !important;
+    font-size: 90% !important;
+    font-style: italic;
+  }
 }
 
 .centered-text { text-align: center; }

@@ -20,7 +20,7 @@
   <meta name="theme-color" content="#4cb8c4">
   <link href='https://fonts.googleapis.com/css?family=Roboto:400,400italic,500,500italic,700,700italic,300,300italic' rel='stylesheet' type='text/css'>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  <link rel="stylesheet" href="/assets/stylesheets/app-89b8991000210de7ff9c964dccb23165e4f9b77f96d27dc53b93e70a1a1128d0.css">
+  <link rel="stylesheet" href="/assets/stylesheets/app-a387f1c77332a432970e720a1afea3916469deb074db18b6ff19fb2b49466eef.css">
 
   <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
   <!--[if lt IE 9]>
@@ -145,6 +145,51 @@ To setup up the regular expression you goto: IP&gt;Firewall&gt; [Tab] layer7 Pro
 <p>This isn’t a fool proof method, but it does catch the vast majority of mobile devices. This is because by default their devices are labeled with their specific manufacturer as part of the device name. And for the most rarely does anyone ever rename their devices hostname. While watching the network traffic, I can say I’ve only saw a handful of mobile devices that haven’t been labeled with either Samsung, Iphone, or Galaxy.</p>
 
 <p>~ <strong>Note:</strong> This may not be the best or the most effective script for what I wanted to achieve, but it accomplished what I needed to do. And it’s been tested and proven to work effectively for exactly what I needed.</p>
+
+<h5 id="updated-53118">UPDATED: <small class="text-muted">5/31/18</small></h5>
+<p>After updating our Routers’ packages and routerboad to v6.42.3, I begun having issues with the script showing above.
+So I removed the Layer7 and revamped the script to use it hostname matches through a variable string. The new revision appears to run a bit faster than the previous version and in my opinion, it seems to be a bit easier to read.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">/</span><span class="nx">queue</span> <span class="nx">simple</span> <span class="nx">remove</span> <span class="p">[</span><span class="sr">/queue simple find</span><span class="err">]
+</span><span class="p">:</span><span class="nb">global</span> <span class="nx">mobileDevices</span> <span class="s2">"android|ANDROID|AppleWatch|BLACKBERRY|Galaxy|HTC|Huawei|iPad|iPhone|iphone|iPhne|Moto|SAMSUNG|Unknown|Xperia"</span>
+<span class="p">:</span><span class="nb">global</span> <span class="nx">mobileLimit</span> <span class="s2">"1024k/1024k"</span>
+<span class="p">:</span><span class="nb">global</span> <span class="nx">pcLimit</span> <span class="s2">"2M/5M"</span>
+
+<span class="p">:</span><span class="nb">global</span> <span class="nx">vipDevices</span> <span class="s2">"VIPdesktops|VIPlaptops|VIPdevice|VIPservers|MikroTik|CapAC"</span>
+<span class="p">:</span><span class="nb">global</span> <span class="nx">vipLimit</span> <span class="s2">"10M/10M"</span>
+
+<span class="o">/</span><span class="nx">ip</span> <span class="nx">dhcp</span><span class="o">-</span><span class="nx">server</span> <span class="nx">lease</span> <span class="p">{</span>
+  <span class="p">:</span><span class="nx">foreach</span> <span class="nx">i</span> <span class="k">in</span><span class="o">=</span><span class="p">[</span><span class="nx">find</span> <span class="p">(</span><span class="nx">dynamic</span> <span class="o">&amp;&amp;</span> <span class="nx">status</span><span class="o">=</span><span class="s2">"bound"</span><span class="p">)]</span> <span class="k">do</span><span class="o">=</span><span class="p">{</span>
+    <span class="p">:</span><span class="nx">local</span> <span class="nx">activeAddress</span> <span class="p">[</span><span class="kd">get</span> <span class="nx">$i</span> <span class="nx">active</span><span class="o">-</span><span class="nx">address</span><span class="p">]</span>
+    <span class="p">:</span><span class="nx">local</span> <span class="nx">activeMacAddress</span> <span class="p">[</span><span class="kd">get</span> <span class="nx">$i</span> <span class="nx">active</span><span class="o">-</span><span class="nx">mac</span><span class="o">-</span><span class="nx">address</span><span class="p">]</span>
+    <span class="p">:</span><span class="nx">local</span> <span class="nx">macAddress</span> <span class="p">[</span><span class="kd">get</span> <span class="nx">$i</span> <span class="nx">mac</span><span class="o">-</span><span class="nx">address</span><span class="p">]</span>
+    <span class="p">:</span><span class="nx">local</span> <span class="nx">hostname</span> <span class="p">[</span><span class="kd">get</span> <span class="nx">$i</span> <span class="nx">host</span><span class="o">-</span><span class="nx">name</span><span class="p">]</span>
+    <span class="p">:</span><span class="nx">local</span> <span class="nx">ipAddr</span> <span class="p">[</span><span class="kd">get</span> <span class="nx">$i</span> <span class="nx">address</span><span class="p">]</span>
+    <span class="p">:</span><span class="nx">local</span> <span class="nx">queueName</span> <span class="s2">"Client - $macAddress"</span>
+
+    <span class="p">:</span><span class="k">if</span> <span class="p">(</span><span class="nx">$hostname</span> <span class="o">~</span> <span class="nx">$mobileDevices</span><span class="o">=</span> <span class="kc">true</span><span class="p">)</span> <span class="k">do</span><span class="o">=</span><span class="p">{</span>
+      <span class="o">/</span><span class="nx">queue</span> <span class="nx">simple</span> <span class="nx">add</span> <span class="nx">name</span><span class="o">=</span><span class="s2">"$queueName"</span> <span class="nx">comment</span><span class="o">=</span><span class="s2">"$hostname"</span> <span class="nx">target</span><span class="o">=</span><span class="s2">"$ipAddr"</span> <span class="nx">max</span><span class="o">-</span><span class="nx">limit</span><span class="o">=</span><span class="s2">"$mobileLimit"</span>
+    <span class="p">}</span> <span class="k">else</span><span class="o">=</span><span class="p">{</span>
+      <span class="o">/</span><span class="nx">queue</span> <span class="nx">simple</span> <span class="nx">add</span> <span class="nx">name</span><span class="o">=</span><span class="s2">"$queueName"</span> <span class="nx">comment</span><span class="o">=</span><span class="s2">"$hostname"</span> <span class="nx">target</span><span class="o">=</span><span class="s2">"$ipAddr"</span> <span class="nx">max</span><span class="o">-</span><span class="nx">limit</span><span class="o">=</span><span class="s2">"$pcLimit"</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+
+  <span class="p">:</span><span class="nx">foreach</span> <span class="nx">i</span> <span class="k">in</span><span class="o">=</span><span class="p">[</span><span class="nx">find</span> <span class="p">(</span><span class="o">!</span><span class="nx">dynamic</span> <span class="o">&amp;&amp;</span> <span class="nx">status</span><span class="o">=</span><span class="s2">"bound"</span><span class="p">)]</span> <span class="k">do</span><span class="o">=</span><span class="p">{</span>
+    <span class="p">:</span><span class="nx">local</span> <span class="nx">activeAddress</span> <span class="p">[</span><span class="kd">get</span> <span class="nx">$i</span> <span class="nx">active</span><span class="o">-</span><span class="nx">address</span><span class="p">]</span>
+    <span class="p">:</span><span class="nx">local</span> <span class="nx">activeMacAddress</span> <span class="p">[</span><span class="kd">get</span> <span class="nx">$i</span> <span class="nx">active</span><span class="o">-</span><span class="nx">mac</span><span class="o">-</span><span class="nx">address</span><span class="p">]</span>
+    <span class="p">:</span><span class="nx">local</span> <span class="nx">macAddress</span> <span class="p">[</span><span class="kd">get</span> <span class="nx">$i</span> <span class="nx">mac</span><span class="o">-</span><span class="nx">address</span><span class="p">]</span>
+    <span class="p">:</span><span class="nx">local</span> <span class="nx">hostname</span> <span class="p">[</span><span class="kd">get</span> <span class="nx">$i</span> <span class="nx">host</span><span class="o">-</span><span class="nx">name</span><span class="p">]</span>
+    <span class="p">:</span><span class="nx">local</span> <span class="nx">ipAddr</span> <span class="p">[</span><span class="kd">get</span> <span class="nx">$i</span> <span class="nx">address</span><span class="p">]</span>
+    <span class="p">:</span><span class="nx">local</span> <span class="nx">queueName</span> <span class="s2">"Client - $macAddress"</span>
+
+   <span class="p">:</span><span class="k">if</span> <span class="p">(</span><span class="nx">$hostname</span> <span class="o">~</span> <span class="nx">$vipDevices</span><span class="o">=</span> <span class="kc">true</span><span class="p">)</span> <span class="k">do</span><span class="o">=</span><span class="p">{</span>
+     <span class="o">/</span><span class="nx">queue</span> <span class="nx">simple</span> <span class="nx">add</span> <span class="nx">name</span><span class="o">=</span><span class="s2">"$queueName"</span> <span class="nx">comment</span><span class="o">=</span><span class="s2">"$hostname"</span> <span class="nx">target</span><span class="o">=</span><span class="s2">"$ipAddr"</span> <span class="nx">max</span><span class="o">-</span><span class="nx">limit</span><span class="o">=</span><span class="s2">"$vipLimit"</span>
+   <span class="p">}</span> <span class="k">else</span><span class="o">=</span><span class="p">{</span>
+     <span class="o">/</span><span class="nx">queue</span> <span class="nx">simple</span> <span class="nx">add</span> <span class="nx">name</span><span class="o">=</span><span class="s2">"$queueName"</span> <span class="nx">comment</span><span class="o">=</span><span class="s2">"$hostname"</span> <span class="nx">target</span><span class="o">=</span><span class="s2">"$ipAddr"</span> <span class="nx">max</span><span class="o">-</span><span class="nx">limit</span><span class="o">=</span><span class="s2">"$pcLimit"</span>
+   <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
 
 </div>
 

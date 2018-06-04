@@ -74,3 +74,49 @@ You'll now create a scheduler by going to System>Scheduler and clicking the blue
 This isn't a fool proof method, but it does catch the vast majority of mobile devices. This is because by default their devices are labeled with their specific manufacturer as part of the device name. And for the most rarely does anyone ever rename their devices hostname. While watching the network traffic, I can say I've only saw a handful of mobile devices that haven't been labeled with either Samsung, Iphone, or Galaxy.
 
 ~ **Note:** This may not be the best or the most effective script for what I wanted to achieve, but it accomplished what I needed to do. And it's been tested and proven to work effectively for exactly what I needed.
+
+##### UPDATED: <small class="text-muted">5/31/18</small>
+After updating our Routers' packages and routerboad to v6.42.3, I begun having issues with the script showing above.
+So I removed the Layer7 and revamped the script to use it hostname matches through a variable string. The new revision appears to run a bit faster than the previous version and in my opinion, it seems to be a bit easier to read.
+
+```javascript
+/queue simple remove [/queue simple find]
+:global mobileDevices "android|ANDROID|AppleWatch|BLACKBERRY|Galaxy|HTC|Huawei|iPad|iPhone|iphone|iPhne|Moto|SAMSUNG|Unknown|Xperia"
+:global mobileLimit "1024k/1024k"
+:global pcLimit "2M/5M"
+
+:global vipDevices "VIPdesktops|VIPlaptops|VIPdevice|VIPservers|MikroTik|CapAC"
+:global vipLimit "10M/10M"
+
+/ip dhcp-server lease {
+  :foreach i in=[find (dynamic && status="bound")] do={
+    :local activeAddress [get $i active-address]
+    :local activeMacAddress [get $i active-mac-address]
+    :local macAddress [get $i mac-address]
+    :local hostname [get $i host-name]
+    :local ipAddr [get $i address]
+    :local queueName "Client - $macAddress"
+
+    :if ($hostname ~ $mobileDevices= true) do={
+      /queue simple add name="$queueName" comment="$hostname" target="$ipAddr" max-limit="$mobileLimit"
+    } else={
+      /queue simple add name="$queueName" comment="$hostname" target="$ipAddr" max-limit="$pcLimit"
+    }
+  }
+
+  :foreach i in=[find (!dynamic && status="bound")] do={
+    :local activeAddress [get $i active-address]
+    :local activeMacAddress [get $i active-mac-address]
+    :local macAddress [get $i mac-address]
+    :local hostname [get $i host-name]
+    :local ipAddr [get $i address]
+    :local queueName "Client - $macAddress"
+
+   :if ($hostname ~ $vipDevices= true) do={
+     /queue simple add name="$queueName" comment="$hostname" target="$ipAddr" max-limit="$vipLimit"
+   } else={
+     /queue simple add name="$queueName" comment="$hostname" target="$ipAddr" max-limit="$pcLimit"
+   }
+  }
+}
+```
