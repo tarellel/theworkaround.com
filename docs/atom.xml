@@ -4,13 +4,88 @@
   <title>TheWorkAround</title>
   <link href="http://theworkaround.com/"/>
   <link type="application/atom+xml" rel="self" href="http://theworkaround.com/atom.xml"/>
-  <updated>2018-06-04T00:10:06-06:00</updated>
+  <updated>2018-06-04T10:37:49-06:00</updated>
   <id>http://theworkaround.com/</id>
   <author>
     <name>Brandon Hicks</name>
     <email>tarellel@gmail.com</email>
   </author>
 
+  
+  <entry>
+    <id>http://theworkaround.com/2018/06/04/rubys-year-of-performance-2018</id>
+    <link type="text/html" rel="alternate" href="http://example.com/2018/06/04/rubys-year-of-performance-2018.html"/>
+    <title>Ruby's Year of Performance (2018)</title>
+    <published>2018-06-04T00:00:00-06:00</published>
+    <updated>2018-06-04T00:00:00-06:00</updated>
+    <author>
+      <name>Brandon Hicks</name>
+      <uri>http://theworkaround.com</uri>
+    </author>
+    <content type="html">&lt;p&gt;Many people claim Ruby is no longer relevant and quite a few people have moved on to Elixir, Go, Rust, and Node.
+This is because Ruby was not originally built for speed, it was built for ease of use.
+It does have its limitations and Rails is a monstrosity with all it’s services, workers, etc.
+But I’ve never had an issue with this, I started using Ruby because of it’s ease of use.
+I can from a world of using PHP and ugly spaghetti code to Ruby where coding is more of a thing of art.&lt;/p&gt;
+
+&lt;p&gt;But 2018 has been a big year for Ruby releases and trying to meet their &lt;a href=&quot;https://blog.heroku.com/ruby-3-by-3&quot;&gt;3x3&lt;/a&gt; performance goals (&lt;a href=&quot;https://developers.redhat.com/blog/2018/03/22/ruby-3x3-performance-goal/&quot;&gt;RedHat Writeup&lt;/a&gt;). And in the last year alone, &lt;a href=&quot;https://twitter.com/tenderlove&quot;&gt;Arron Patterson (tenderlove)&lt;/a&gt; and various contributors have made amazing advances in improving Ruby’s performance. And the addition of a &lt;a href=&quot;https://www.ruby-lang.org/en/news/2018/05/31/ruby-2-6-0-preview2-released/&quot;&gt;JIT compiler&lt;/a&gt; to Ruby is no ease feat that looks like it will also have a HUGE effect on Ruby to regain some ground and no longer be known as a “slow language”.
+I admit &lt;a href=&quot;https://github.com/oracle/truffleruby&quot;&gt;Ruby Truffle&lt;/a&gt; has some extreme potential to improve Rubys performance using the &lt;a href=&quot;https://www.graalvm.org/&quot;&gt;GraalVM&lt;/a&gt; but since Oracle does have a tendency to take people to court and sueing them, for using their various technological components.&lt;/p&gt;
+
+&lt;p&gt;Another modification that I have found that dramatically improves performance and reduces memory usage is by adding &lt;a href=&quot;http://jemalloc.net/&quot;&gt;jemalloc&lt;/a&gt;. By default the MRI version uses the glibc memalloc library.&lt;/p&gt;
+
+&lt;p&gt;To use jemalloc with ruby lets first install the library so we can use it when compiling out ruby binaries.&lt;/p&gt;
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;# OSx&lt;/span&gt;
+brew &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;jemalloc
+
+&lt;span class=&quot;c&quot;&gt;# Ubuntu/Debian&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;apt-get update
+&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;apt-get &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;libjemalloc1 libjemalloc-dev
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Many of people prefer &lt;a href=&quot;https://github.com/rbenv/ruby-build&quot;&gt;ruby-build&lt;/a&gt; for compiling new ruby versions but I prefer &lt;a href=&quot;https://rvm.io/&quot;&gt;RVM&lt;/a&gt; because of it’s ease of use. Now to compile with jemmalloc, we need to add the flags for RVM to compile using the jemalloc library&lt;/p&gt;
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;rvm &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;2.5 &lt;span class=&quot;nt&quot;&gt;-C&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--with-jemalloc&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--autolibs&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;disable
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;I tend to use the &lt;a href=&quot;https://fishshell.com/&quot;&gt;Fish&lt;/a&gt; shell, it has dramatically increased my productivity with its ease of use, auto completion libraries, and great features. So to make compiling a new RVM instance easier I created a function titled &lt;code class=&quot;highlighter-rouge&quot;&gt;rvm_install&lt;/code&gt; so now when I want to compile a new Ruby version with the jemalloc flag I issue a command similar to the following &lt;code class=&quot;highlighter-rouge&quot;&gt;rvm_install 2.6&lt;/code&gt; and wait. Below is a copy of the function I created, I know I should probably issue some validation to verify the value of the argument, but I’m the only one using this on my computer and it’s works wonders for what I need it for.&lt;/p&gt;
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;# Install the specified Ruby version through RVM, with the jemalloc library included&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;function &lt;/span&gt;rvm_install
+  &lt;span class=&quot;c&quot;&gt;# verify a version number was specified&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;if &lt;/span&gt;count &lt;span class=&quot;nv&quot;&gt;$argv&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; /dev/null
+    &lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;Installing Ruby-&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$argv&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt; with jemalloc&quot;&lt;/span&gt;
+    rvm &lt;span class=&quot;nb&quot;&gt;install&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$argv&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-C&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--with-jemalloc&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;else
+    &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;Please specify a version to install.&quot;&lt;/span&gt;
+  end
+end
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Now lets take a look at a few Ruby versions up in the spotlight to test how well they perfor with and without jemalloc. Sam Saffron’s &lt;a href=&quot;https://github.com/SamSaffron/allocator_bench/blob/master/stress_mem.rb&quot;&gt;stress test&lt;/a&gt; is a great way to compare performance gains and memory allocation. And let me reiterate that I didn’t just run this test a single time and compare the results. These use the averages after running each stress test several times.&lt;/p&gt;
+
+&lt;div class=&quot;language-ruby highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;# Results for Ruby_v2.5.0p0&lt;/span&gt;
+&lt;span class=&quot;no&quot;&gt;Duration&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mf&quot;&gt;9.542045&lt;/span&gt;
+&lt;span class=&quot;no&quot;&gt;RSS&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;137860&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;# Ruby_v2.5.0p0 with jemmalloc&lt;/span&gt;
+&lt;span class=&quot;no&quot;&gt;Duration&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mf&quot;&gt;7.420393&lt;/span&gt;
+&lt;span class=&quot;no&quot;&gt;RSS&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;129616&lt;/span&gt;
+
+&lt;span class=&quot;no&quot;&gt;Faster&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;w&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;Jemalloc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+&lt;span class=&quot;mf&quot;&gt;0.222347725251767&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&amp;gt;&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;22&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;%&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;faster&lt;/span&gt;
+
+
+&lt;span class=&quot;c1&quot;&gt;# Ruby_v2.6.0-preview2 with jemalloc&lt;/span&gt;
+&lt;span class=&quot;no&quot;&gt;Duration&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mf&quot;&gt;6.743956&lt;/span&gt;
+&lt;span class=&quot;no&quot;&gt;RSS&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;144108&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;# Faster than 2.5&lt;/span&gt;
+&lt;span class=&quot;mf&quot;&gt;0.09115918792980371&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&amp;gt;&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;9&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;%&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;faster&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;As you can see just adding jemalloc to MRI ruby adds quite a noticeable performance gain. And even when not using a different memory allocator, each new Ruby release has had quite a significant impact on building on on the languages potential.&lt;/p&gt;
+
+&lt;p&gt;~ &lt;strong&gt;NOTE:&lt;/strong&gt; These tests are performed on a MBP with OSx 10.12 with a 2.2ghz i7, 16GB of RAM, and a SSD. So the results may vary device to device.&lt;/p&gt;
+</content>
+  </entry>
   
   <entry>
     <id>http://theworkaround.com/2018/05/05/mikrotik---mobile-rate-limiting</id>
