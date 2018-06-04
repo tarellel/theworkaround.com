@@ -6,18 +6,14 @@ description: ""
 tags: [ruby]
 comments: true
 ---
-Many people claim Ruby is no longer relevant and quite a few people have moved on to Elixir, Go, Rust, and Node.
-This is because Ruby was not originally built for speed, it was built for ease of use.
-It does have its limitations and Rails is a monstrosity with all it's services, workers, etc.
-But I've never had an issue with this, I started using Ruby because of it's ease of use.
-I can from a world of using PHP and ugly spaghetti code to Ruby where coding is more of a thing of art.
+Many people claim Ruby is no longer relevant and quite a few people have moved on to Elixir, Go, Rust, and Node. This is because Ruby was not originally built for speed, it was built for ease of use. It does have its limitations and Rails is a monstrosity with all it’s services, workers, etc. But I’ve never had an issue with this, I started using Ruby because of its ease of use. I can from a world of using PHP and ugly spaghetti code to Ruby where coding is more of a thing of art.
 
 But 2018 has been a big year for Ruby releases and trying to meet their [3x3](https://blog.heroku.com/ruby-3-by-3) performance goals ([RedHat Writeup](https://developers.redhat.com/blog/2018/03/22/ruby-3x3-performance-goal/)). And in the last year alone, [Arron Patterson (tenderlove)](https://twitter.com/tenderlove) and various contributors have made amazing advances in improving Ruby's performance. And the addition of a [JIT compiler](https://www.ruby-lang.org/en/news/2018/05/31/ruby-2-6-0-preview2-released/) to Ruby is no ease feat that looks like it will also have a HUGE effect on Ruby to regain some ground and no longer be known as a "slow language".
-I admit [Ruby Truffle](https://github.com/oracle/truffleruby) has some extreme potential to improve Rubys performance using the [GraalVM](https://www.graalvm.org/) but since Oracle does have a tendency to take people to court and sueing them, for using their various technological components.
+I admit [Ruby Truffle](https://github.com/oracle/truffleruby) has some extreme potential to improve Rubys performance using the [GraalVM](https://www.graalvm.org/) but since Oracle does have a tendency to take people to court and suing them, for using their various technological components.
 
-Another modification that I have found that dramatically improves performance and reduces memory usage is by adding [jemalloc](http://jemalloc.net/). By default the MRI version uses the glibc memalloc library.
+Another modification that I have found that dramatically improves performance and reduces memory usage is by adding [jemalloc](http://jemalloc.net/). By default, the MRI version uses the glibc memalloc library.
 
-To use jemalloc with ruby lets first install the library so we can use it when compiling out ruby binaries.
+To use jemalloc with ruby lets first install the library, so we can use it when compiling out ruby binaries.
 ```shell
 # OSx
 brew install jemalloc
@@ -47,7 +43,7 @@ end
 ```
 
 
-Now lets take a look at a few Ruby versions up in the spotlight to test how well they perfor with and without jemalloc. Sam Saffron's [stress test](https://github.com/SamSaffron/allocator_bench/blob/master/stress_mem.rb) is a great way to compare performance gains and memory allocation. And let me reiterate that I didn't just run this test a single time and compare the results. These use the averages after running each stress test several times.
+Now lets take a look at a few Ruby versions to test how well they perform with and without jemalloc. Sam Saffron's [stress test](https://github.com/SamSaffron/allocator_bench/blob/master/stress_mem.rb) is a great way to compare performance gains and memory allocation. And let me reiterate that I didn't just run this test a single time and compare the results. These use the averages after running each stress test several times.
 
 ```ruby
 # Results for Ruby_v2.5.0p0
@@ -70,6 +66,6 @@ RSS: 144108
 0.09115918792980371 ==> 9% faster
 ```
 
-As you can see just adding jemalloc to MRI ruby adds quite a noticeable performance gain. And even when not using a different memory allocator, each new Ruby release has had quite a significant impact on building on on the languages potential.
+As you can see, just adding jemalloc to MRI ruby adds quite a noticeable performance gain. And even when not using a different memory allocator, each new Ruby release has had quite a significant impact on building on the languages potential.
 
-~ **NOTE:** These tests are performed on a MBP with OSx 10.12 with a 2.2ghz i7, 16GB of RAM, and a SSD. So the results may vary device to device.
+~ **NOTE:** These tests are performed on a MBP with OSx 10.12,  a 2.2ghz i7, 16GB of RAM, and a SSD. So the results may vary from device to device.

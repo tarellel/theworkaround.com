@@ -6,8 +6,8 @@
     <atom:link href="http://theworkaround.com/rss.xml" rel="self" type="application/rss+xml" />
     <description>The infinate rambelings and ideas of Brandon Hicks</description>
     <language>en-us</language>
-    <pubDate>Mon, 04 Jun 2018 10:37:49 -0600</pubDate>
-    <lastBuildDate>Mon, 04 Jun 2018 10:37:49 -0600</lastBuildDate>
+    <pubDate>Mon, 04 Jun 2018 14:25:47 -0600</pubDate>
+    <lastBuildDate>Mon, 04 Jun 2018 14:25:47 -0600</lastBuildDate>
 
     
     <item>
@@ -16,18 +16,14 @@
       <pubDate>Mon, 04 Jun 2018 00:00:00 -0600</pubDate>
       <author> ( {"email"=>"tarellel@gmail.com", "name"=>"Brandon Hicks", "github"=>"tarellel", "twitter"=>"tarellel"} )</author>
       <guid>http://theworkaround.com/2018/06/04/rubys-year-of-performance-2018</guid>
-      <description>&lt;p&gt;Many people claim Ruby is no longer relevant and quite a few people have moved on to Elixir, Go, Rust, and Node.
-This is because Ruby was not originally built for speed, it was built for ease of use.
-It does have its limitations and Rails is a monstrosity with all it’s services, workers, etc.
-But I’ve never had an issue with this, I started using Ruby because of it’s ease of use.
-I can from a world of using PHP and ugly spaghetti code to Ruby where coding is more of a thing of art.&lt;/p&gt;
+      <description>&lt;p&gt;Many people claim Ruby is no longer relevant and quite a few people have moved on to Elixir, Go, Rust, and Node. This is because Ruby was not originally built for speed, it was built for ease of use. It does have its limitations and Rails is a monstrosity with all it’s services, workers, etc. But I’ve never had an issue with this, I started using Ruby because of its ease of use. I can from a world of using PHP and ugly spaghetti code to Ruby where coding is more of a thing of art.&lt;/p&gt;
 
 &lt;p&gt;But 2018 has been a big year for Ruby releases and trying to meet their &lt;a href=&quot;https://blog.heroku.com/ruby-3-by-3&quot;&gt;3x3&lt;/a&gt; performance goals (&lt;a href=&quot;https://developers.redhat.com/blog/2018/03/22/ruby-3x3-performance-goal/&quot;&gt;RedHat Writeup&lt;/a&gt;). And in the last year alone, &lt;a href=&quot;https://twitter.com/tenderlove&quot;&gt;Arron Patterson (tenderlove)&lt;/a&gt; and various contributors have made amazing advances in improving Ruby’s performance. And the addition of a &lt;a href=&quot;https://www.ruby-lang.org/en/news/2018/05/31/ruby-2-6-0-preview2-released/&quot;&gt;JIT compiler&lt;/a&gt; to Ruby is no ease feat that looks like it will also have a HUGE effect on Ruby to regain some ground and no longer be known as a “slow language”.
-I admit &lt;a href=&quot;https://github.com/oracle/truffleruby&quot;&gt;Ruby Truffle&lt;/a&gt; has some extreme potential to improve Rubys performance using the &lt;a href=&quot;https://www.graalvm.org/&quot;&gt;GraalVM&lt;/a&gt; but since Oracle does have a tendency to take people to court and sueing them, for using their various technological components.&lt;/p&gt;
+I admit &lt;a href=&quot;https://github.com/oracle/truffleruby&quot;&gt;Ruby Truffle&lt;/a&gt; has some extreme potential to improve Rubys performance using the &lt;a href=&quot;https://www.graalvm.org/&quot;&gt;GraalVM&lt;/a&gt; but since Oracle does have a tendency to take people to court and suing them, for using their various technological components.&lt;/p&gt;
 
-&lt;p&gt;Another modification that I have found that dramatically improves performance and reduces memory usage is by adding &lt;a href=&quot;http://jemalloc.net/&quot;&gt;jemalloc&lt;/a&gt;. By default the MRI version uses the glibc memalloc library.&lt;/p&gt;
+&lt;p&gt;Another modification that I have found that dramatically improves performance and reduces memory usage is by adding &lt;a href=&quot;http://jemalloc.net/&quot;&gt;jemalloc&lt;/a&gt;. By default, the MRI version uses the glibc memalloc library.&lt;/p&gt;
 
-&lt;p&gt;To use jemalloc with ruby lets first install the library so we can use it when compiling out ruby binaries.&lt;/p&gt;
+&lt;p&gt;To use jemalloc with ruby lets first install the library, so we can use it when compiling out ruby binaries.&lt;/p&gt;
 &lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;# OSx&lt;/span&gt;
 brew &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;jemalloc
 
@@ -53,7 +49,7 @@ brew &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;jemalloc
 end
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;Now lets take a look at a few Ruby versions up in the spotlight to test how well they perfor with and without jemalloc. Sam Saffron’s &lt;a href=&quot;https://github.com/SamSaffron/allocator_bench/blob/master/stress_mem.rb&quot;&gt;stress test&lt;/a&gt; is a great way to compare performance gains and memory allocation. And let me reiterate that I didn’t just run this test a single time and compare the results. These use the averages after running each stress test several times.&lt;/p&gt;
+&lt;p&gt;Now lets take a look at a few Ruby versions to test how well they perform with and without jemalloc. Sam Saffron’s &lt;a href=&quot;https://github.com/SamSaffron/allocator_bench/blob/master/stress_mem.rb&quot;&gt;stress test&lt;/a&gt; is a great way to compare performance gains and memory allocation. And let me reiterate that I didn’t just run this test a single time and compare the results. These use the averages after running each stress test several times.&lt;/p&gt;
 
 &lt;div class=&quot;language-ruby highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;# Results for Ruby_v2.5.0p0&lt;/span&gt;
 &lt;span class=&quot;no&quot;&gt;Duration&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mf&quot;&gt;9.542045&lt;/span&gt;
@@ -75,9 +71,9 @@ end
 &lt;span class=&quot;mf&quot;&gt;0.09115918792980371&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&amp;gt;&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;9&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;%&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;faster&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;As you can see just adding jemalloc to MRI ruby adds quite a noticeable performance gain. And even when not using a different memory allocator, each new Ruby release has had quite a significant impact on building on on the languages potential.&lt;/p&gt;
+&lt;p&gt;As you can see, just adding jemalloc to MRI ruby adds quite a noticeable performance gain. And even when not using a different memory allocator, each new Ruby release has had quite a significant impact on building on the languages potential.&lt;/p&gt;
 
-&lt;p&gt;~ &lt;strong&gt;NOTE:&lt;/strong&gt; These tests are performed on a MBP with OSx 10.12 with a 2.2ghz i7, 16GB of RAM, and a SSD. So the results may vary device to device.&lt;/p&gt;
+&lt;p&gt;~ &lt;strong&gt;NOTE:&lt;/strong&gt; These tests are performed on a MBP with OSx 10.12,  a 2.2ghz i7, 16GB of RAM, and a SSD. So the results may vary from device to device.&lt;/p&gt;
 </description>
     </item>
     
