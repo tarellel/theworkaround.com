@@ -6,8 +6,8 @@
     <atom:link href="http://theworkaround.com/rss.xml" rel="self" type="application/rss+xml" />
     <description>The infinate rambelings and ideas of Brandon Hicks</description>
     <language>en-us</language>
-    <pubDate>Mon, 04 Jun 2018 14:25:47 -0600</pubDate>
-    <lastBuildDate>Mon, 04 Jun 2018 14:25:47 -0600</lastBuildDate>
+    <pubDate>Tue, 05 Jun 2018 10:41:23 -0600</pubDate>
+    <lastBuildDate>Tue, 05 Jun 2018 10:41:23 -0600</lastBuildDate>
 
     
     <item>
@@ -32,7 +32,7 @@ brew &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;jemalloc
 &lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;apt-get &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;libjemalloc1 libjemalloc-dev
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;Many of people prefer &lt;a href=&quot;https://github.com/rbenv/ruby-build&quot;&gt;ruby-build&lt;/a&gt; for compiling new ruby versions but I prefer &lt;a href=&quot;https://rvm.io/&quot;&gt;RVM&lt;/a&gt; because of it’s ease of use. Now to compile with jemmalloc, we need to add the flags for RVM to compile using the jemalloc library&lt;/p&gt;
+&lt;p&gt;Many of people prefer &lt;a href=&quot;https://github.com/rbenv/ruby-build&quot;&gt;ruby-build&lt;/a&gt; for compiling new ruby versions but I prefer &lt;a href=&quot;https://rvm.io/&quot;&gt;RVM&lt;/a&gt; because of it’s ease of use. Now to compile with jemmalloc, we need to add the flags for RVM to compile using the jemalloc library.&lt;/p&gt;
 &lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;rvm &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;2.5 &lt;span class=&quot;nt&quot;&gt;-C&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--with-jemalloc&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--autolibs&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;disable
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 

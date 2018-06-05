@@ -23,7 +23,7 @@ sudo apt-get update
 sudo apt-get install libjemalloc1 libjemalloc-dev
 ```
 
-Many of people prefer [ruby-build](https://github.com/rbenv/ruby-build) for compiling new ruby versions but I prefer [RVM](https://rvm.io/) because of it's ease of use. Now to compile with jemmalloc, we need to add the flags for RVM to compile using the jemalloc library
+Many of people prefer [ruby-build](https://github.com/rbenv/ruby-build) for compiling new ruby versions but I prefer [RVM](https://rvm.io/) because of it's ease of use. Now to compile with jemmalloc, we need to add the flags for RVM to compile using the jemalloc library.
 ```shell
 rvm install 2.5 -C --with-jemalloc --autolibs=disable
 ```
