@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title>TheWorkAround</title>
-  <link href="http://theworkaround.com/"/>
-  <link type="application/atom+xml" rel="self" href="http://theworkaround.com/atom.xml"/>
-  <updated>2018-06-08T12:13:46-06:00</updated>
-  <id>http://theworkaround.com/</id>
+  <link href="http://localhost:4000/"/>
+  <link type="application/atom+xml" rel="self" href="http://localhost:4000/atom.xml"/>
+  <updated>2018-06-08T12:22:22-06:00</updated>
+  <id>http://localhost:4000/</id>
   <author>
     <name>Brandon Hicks</name>
     <email>tarellel@gmail.com</email>
@@ -13,14 +13,14 @@
 
   
   <entry>
-    <id>http://theworkaround.com/2018/06/04/rubys-year-of-performance-2018</id>
+    <id>http://localhost:4000/2018/06/04/rubys-year-of-performance-2018</id>
     <link type="text/html" rel="alternate" href="http://example.com/2018/06/04/rubys-year-of-performance-2018.html"/>
     <title>Ruby's Year of Performance (2018)</title>
     <published>2018-06-04T00:00:00-06:00</published>
     <updated>2018-06-04T00:00:00-06:00</updated>
     <author>
       <name>Brandon Hicks</name>
-      <uri>http://theworkaround.com</uri>
+      <uri>http://localhost:4000</uri>
     </author>
     <content type="html">&lt;p&gt;Many people claim Ruby is no longer relevant and quite a few people have moved on to Elixir, Go, Rust, and Node. This is because Ruby was not originally built for speed, it was built for ease of use. It does have its limitations and Rails is a monstrosity with all it’s services, workers, etc. But I’ve never had an issue with this, I started using Ruby because of its ease of use. I can from a world of using PHP and ugly spaghetti code to Ruby where coding is more of a thing of art.&lt;/p&gt;
 
@@ -84,14 +84,14 @@ end
   </entry>
   
   <entry>
-    <id>http://theworkaround.com/2018/05/05/mikrotik---mobile-rate-limiting</id>
+    <id>http://localhost:4000/2018/05/05/mikrotik---mobile-rate-limiting</id>
     <link type="text/html" rel="alternate" href="http://example.com/2018/05/05/mikrotik-mobile-rate-limiting.html"/>
     <title>MikroTik - Mobile Rate-Limiting</title>
     <published>2018-05-05T00:00:00-06:00</published>
     <updated>2018-05-05T00:00:00-06:00</updated>
     <author>
       <name>Brandon Hicks</name>
-      <uri>http://theworkaround.com</uri>
+      <uri>http://localhost:4000</uri>
     </author>
     <content type="html">&lt;h3 id=&quot;a-brief-intro&quot;&gt;A Brief Intro&lt;/h3&gt;
 &lt;p&gt;I’ve been using Mikrotik routers for about a year now and I’ve had nothing but an amazing experience thus far.
@@ -208,14 +208,14 @@ So I removed the Layer7 and revamped the script to use it hostname matches throu
   </entry>
   
   <entry>
-    <id>http://theworkaround.com/2018/03/01/2017---a-year-of-change</id>
+    <id>http://localhost:4000/2018/03/01/2017---a-year-of-change</id>
     <link type="text/html" rel="alternate" href="http://example.com/2018/03/01/2017-a-year-of-change.html"/>
     <title>2017 - Was a Year of Change</title>
     <published>2018-03-01T00:00:00-07:00</published>
     <updated>2018-03-01T00:00:00-07:00</updated>
     <author>
       <name>Brandon Hicks</name>
-      <uri>http://theworkaround.com</uri>
+      <uri>http://localhost:4000</uri>
     </author>
     <content type="html">&lt;div class=&quot;header&quot; style=&quot;background: url('/img/headers/photo-1472214103451-9374bd1c798e.jpeg') no-repeat center scroll;&quot;&gt;&lt;/div&gt;
 
@@ -238,14 +238,14 @@ So I removed the Layer7 and revamped the script to use it hostname matches throu
   </entry>
   
   <entry>
-    <id>http://theworkaround.com/2016/12/15/mapping-an-arcgis-parcel-dataset-as-a-mapbox-tileset</id>
+    <id>http://localhost:4000/2016/12/15/mapping-an-arcgis-parcel-dataset-as-a-mapbox-tileset</id>
     <link type="text/html" rel="alternate" href="http://example.com/2016/12/15/mapping-an-arcgis-parcel-dataset-as-a-mapbox-tileset.html"/>
     <title>Mapping an ArcGIS Parcel dataset as a Mapbox tileset</title>
     <published>2016-12-15T00:00:00-07:00</published>
     <updated>2016-12-15T00:00:00-07:00</updated>
     <author>
       <name>Brandon Hicks</name>
-      <uri>http://theworkaround.com</uri>
+      <uri>http://localhost:4000</uri>
     </author>
     <content type="html">&lt;p&gt;Before I get begin on how I mapped out several large datasets for &lt;a href=&quot;http://sanjuanmaps.com/&quot;&gt;SanJuanMaps&lt;/a&gt;,
 I would like to say that there was plenty of &lt;a href=&quot;https://www.mapbox.com/gallery/&quot;&gt;inspiration&lt;/a&gt; behind my actions.
@@ -722,14 +722,14 @@ From here you can edit and &lt;a href=&quot;https://www.mapbox.com/help/getting-
   </entry>
   
   <entry>
-    <id>http://theworkaround.com/2016/11/11/enhancing-ssh-security</id>
+    <id>http://localhost:4000/2016/11/11/enhancing-ssh-security</id>
     <link type="text/html" rel="alternate" href="http://example.com/2016/11/11/enhancing-ssh-security.html"/>
     <title>Enhancing SSH Security</title>
     <published>2016-11-11T00:00:00-07:00</published>
     <updated>2016-11-11T00:00:00-07:00</updated>
     <author>
       <name>Brandon Hicks</name>
-      <uri>http://theworkaround.com</uri>
+      <uri>http://localhost:4000</uri>
     </author>
     <content type="html">&lt;p&gt;With the whole security/privacy revolution rolling throughout the internet, it has recently come to my attention
 that specific services are being heavily focused on, while others are completely neglected.
@@ -826,14 +826,14 @@ They mostly consist of method to enhance existing security methods for your SSH 
   </entry>
   
   <entry>
-    <id>http://theworkaround.com/2016/10/11/installing-fish-on-osx</id>
+    <id>http://localhost:4000/2016/10/11/installing-fish-on-osx</id>
     <link type="text/html" rel="alternate" href="http://example.com/2016/10/11/installing-fish-on-osx.html"/>
     <title>Installing Fish on OSx</title>
     <published>2016-10-11T00:00:00-06:00</published>
     <updated>2016-10-11T00:00:00-06:00</updated>
     <author>
       <name>Brandon Hicks</name>
-      <uri>http://theworkaround.com</uri>
+      <uri>http://localhost:4000</uri>
     </author>
     <content type="html">&lt;p&gt;As developers we all use the command line, to make things happen.
 And by now you know there’s several shell environments ranging from &lt;a href=&quot;http://www.zsh.org/&quot;&gt;zsh&lt;/a&gt;,
@@ -1088,14 +1088,14 @@ Plain old &lt;code class=&quot;highlighter-rouge&quot;&gt;Courier&lt;/code&gt; o
   </entry>
   
   <entry>
-    <id>http://theworkaround.com/2016/08/29/setting-up-tmux-with-rails</id>
+    <id>http://localhost:4000/2016/08/29/setting-up-tmux-with-rails</id>
     <link type="text/html" rel="alternate" href="http://example.com/2016/08/29/setting-up-tmux-with-rails.html"/>
     <title>Setting up tmux with Rails</title>
     <published>2016-08-29T00:00:00-06:00</published>
     <updated>2016-08-29T00:00:00-06:00</updated>
     <author>
       <name>Brandon Hicks</name>
-      <uri>http://theworkaround.com</uri>
+      <uri>http://localhost:4000</uri>
     </author>
     <content type="html">&lt;h2 id=&quot;why-use-tmux&quot;&gt;Why use tmux?&lt;/h2&gt;
 
@@ -1351,14 +1351,14 @@ tmux kill-server
   </entry>
   
   <entry>
-    <id>http://theworkaround.com/2015/12/06/elixir-pattern-matching</id>
+    <id>http://localhost:4000/2015/12/06/elixir-pattern-matching</id>
     <link type="text/html" rel="alternate" href="http://example.com/2015/12/06/elixir-pattern-matching.html"/>
     <title>Elixir Pattern Matching</title>
     <published>2015-12-06T00:00:00-07:00</published>
     <updated>2015-12-06T00:00:00-07:00</updated>
     <author>
       <name>Brandon Hicks</name>
-      <uri>http://theworkaround.com</uri>
+      <uri>http://localhost:4000</uri>
     </author>
     <content type="html">&lt;h2 id=&quot;special-characters-have-meaning-as-well&quot;&gt;Special Characters have meaning as well&lt;/h2&gt;
 
@@ -1469,14 +1469,14 @@ tmux kill-server
   </entry>
   
   <entry>
-    <id>http://theworkaround.com/2015/11/29/dipping-into-elixir</id>
+    <id>http://localhost:4000/2015/11/29/dipping-into-elixir</id>
     <link type="text/html" rel="alternate" href="http://example.com/2015/11/29/dipping-into-elixir.html"/>
     <title>Dipping into Elixir</title>
     <published>2015-11-29T00:00:00-07:00</published>
     <updated>2015-11-29T00:00:00-07:00</updated>
     <author>
       <name>Brandon Hicks</name>
-      <uri>http://theworkaround.com</uri>
+      <uri>http://localhost:4000</uri>
     </author>
     <content type="html">&lt;h3 id=&quot;elixir&quot;&gt;Elixir&lt;/h3&gt;
 
@@ -1598,14 +1598,14 @@ tmux kill-server
   </entry>
   
   <entry>
-    <id>http://theworkaround.com/2015/06/12/using-uuids-in-rails</id>
+    <id>http://localhost:4000/2015/06/12/using-uuids-in-rails</id>
     <link type="text/html" rel="alternate" href="http://example.com/2015/06/12/using-uuids-in-rails.html"/>
     <title>Using UUIDs in Rails</title>
     <published>2015-06-12T00:00:00-06:00</published>
     <updated>2015-06-12T00:00:00-06:00</updated>
     <author>
       <name>Brandon Hicks</name>
-      <uri>http://theworkaround.com</uri>
+      <uri>http://localhost:4000</uri>
     </author>
     <content type="html">&lt;h3 id=&quot;why-use-uuids&quot;&gt;Why use UUIDs?&lt;/h3&gt;
 &lt;p&gt;It may seem like a trivial decision at first glance, but using UUIDs can have an intricate effect on your applications design structure. If you are building an application and have an &lt;code class=&quot;highlighter-rouge&quot;&gt;id:integer&lt;/code&gt; column that auto increments with the creation of every item you add to that table you could end up with some sever issues. As applications grow in size we end up having to seperate parts of the application into different servers: a cluster of database servers, background, jobs, cache server, an httpd server, and throw in a few servers for actual application and you’ve got a whole cluster of services to deal with.&lt;/p&gt;
@@ -1737,14 +1737,14 @@ tmux kill-server
   </entry>
   
   <entry>
-    <id>http://theworkaround.com/2015/05/26/make-your-own-motivation</id>
+    <id>http://localhost:4000/2015/05/26/make-your-own-motivation</id>
     <link type="text/html" rel="alternate" href="http://example.com/2015/05/26/make-your-own-motivation.html"/>
     <title>Make your own Motivation</title>
     <published>2015-05-26T00:00:00-06:00</published>
     <updated>2015-05-26T00:00:00-06:00</updated>
     <author>
       <name>Brandon Hicks</name>
-      <uri>http://theworkaround.com</uri>
+      <uri>http://localhost:4000</uri>
     </author>
     <content type="html">&lt;p&gt;&lt;img src=&quot;/img/ground-stones-pebbles.jpg&quot; alt=&quot;Barren Rock Bed&quot; class=&quot;img-responsive&quot; /&gt;
 Sometimes we get the point where we experience a level of extreme burnout. We don’t want to admit it and we don’t want to step down and evaluate our lives to admit it’s true. And as humans we don’t want to make any extreme changes, especially once we’ve found a comfort zone. It may be caused by our job, our routine, or extreme stress. The burnout begins to eat away at you, it may feel like nothing and start small but you begin to notice it after a while.&lt;/p&gt;
@@ -1772,14 +1772,14 @@ Sometimes we get the point where we experience a level of extreme burnout. We do
   </entry>
   
   <entry>
-    <id>http://theworkaround.com/2015/03/16/working-with-the-foreman</id>
+    <id>http://localhost:4000/2015/03/16/working-with-the-foreman</id>
     <link type="text/html" rel="alternate" href="http://example.com/2015/03/16/working-with-the-foreman.html"/>
     <title>Working with the Foreman</title>
     <published>2015-03-16T00:00:00-06:00</published>
     <updated>2015-03-16T00:00:00-06:00</updated>
     <author>
       <name>Brandon Hicks</name>
-      <uri>http://theworkaround.com</uri>
+      <uri>http://localhost:4000</uri>
     </author>
     <content type="html">&lt;p&gt;Lets to work on using &lt;a href=&quot;https://github.com/ddollar/foreman&quot;&gt;Foreman&lt;/a&gt; and when I say Foreman I’m not referring to Eric Forman the goof for a son on &lt;a href=&quot;http://www.imdb.com/title/tt0165598/?ref_=nv_sr_1&quot;&gt;The 70’s Show&lt;/a&gt;. I’m talking about the Ruby gem Foreman for making your applications easier to manage and deploy.&lt;/p&gt;
 
@@ -1835,14 +1835,14 @@ Sometimes we get the point where we experience a level of extreme burnout. We do
   </entry>
   
   <entry>
-    <id>http://theworkaround.com/2014/12/27/setting-goals-for-2015</id>
+    <id>http://localhost:4000/2014/12/27/setting-goals-for-2015</id>
     <link type="text/html" rel="alternate" href="http://example.com/2014/12/27/setting-goals-for-2015.html"/>
     <title>Setting Goals for 2015</title>
     <published>2014-12-27T00:00:00-07:00</published>
     <updated>2014-12-27T00:00:00-07:00</updated>
     <author>
       <name>Brandon Hicks</name>
-      <uri>http://theworkaround.com</uri>
+      <uri>http://localhost:4000</uri>
     </author>
     <content type="html">&lt;p&gt;Once again the new year is upon us, goals should be set in order to help us look forward to achieving something rather than just watching time pass us by. We also need to sit down and look at what we’ve actually done within the last year. Have I wasted more time that I should have, of course we all have. But have we taken the necessary steps to get done what we wanted to? Probably not, we’ve started in the right direction.&lt;/p&gt;
 
@@ -1858,14 +1858,14 @@ Sometimes we get the point where we experience a level of extreme burnout. We do
   </entry>
   
   <entry>
-    <id>http://theworkaround.com/2014/11/05/slimming-down</id>
+    <id>http://localhost:4000/2014/11/05/slimming-down</id>
     <link type="text/html" rel="alternate" href="http://example.com/2014/11/05/slimming-down.html"/>
     <title>Slimming Down</title>
     <published>2014-11-05T00:00:00-07:00</published>
     <updated>2014-11-05T00:00:00-07:00</updated>
     <author>
       <name>Brandon Hicks</name>
-      <uri>http://theworkaround.com</uri>
+      <uri>http://localhost:4000</uri>
     </author>
     <content type="html">&lt;p&gt;I have used Slim on various projects and have grown to thoroughly enjoy using it. &lt;a href=&quot;http://slim-lang.com/index.html&quot;&gt;Slim&lt;/a&gt; is a simple, lightweight, and fast Rails templating alternative to ERB or HAML. I prefer it over HAML because of it’s use of use and it takes almost nothing to get started.&lt;/p&gt;
 
@@ -1940,14 +1940,14 @@ Sometimes we get the point where we experience a level of extreme burnout. We do
   </entry>
   
   <entry>
-    <id>http://theworkaround.com/2014/10/29/resque-to-sidekiq</id>
+    <id>http://localhost:4000/2014/10/29/resque-to-sidekiq</id>
     <link type="text/html" rel="alternate" href="http://example.com/2014/10/29/resque-to-sidekiq.html"/>
     <title>Resque to Sidekiq</title>
     <published>2014-10-29T00:00:00-06:00</published>
     <updated>2014-10-29T00:00:00-06:00</updated>
     <author>
       <name>Brandon Hicks</name>
-      <uri>http://theworkaround.com</uri>
+      <uri>http://localhost:4000</uri>
     </author>
     <content type="html">&lt;p&gt;Background processing is an important feature with any web application to improve performance. Not only does it free up your application for requests, it can be used to prioritize tasks and delay processes until your system has available resources.&lt;/p&gt;
 
@@ -1994,14 +1994,14 @@ But before I attempt to push this any faster and milk every drop of performance 
   </entry>
   
   <entry>
-    <id>http://theworkaround.com/2014/07/06/the-saturation-of-technologies</id>
+    <id>http://localhost:4000/2014/07/06/the-saturation-of-technologies</id>
     <link type="text/html" rel="alternate" href="http://example.com/2014/07/06/the-saturation-of-technologies.html"/>
     <title>The Saturation of a Technologies</title>
     <published>2014-07-06T00:00:00-06:00</published>
     <updated>2014-07-06T00:00:00-06:00</updated>
     <author>
       <name>Brandon Hicks</name>
-      <uri>http://theworkaround.com</uri>
+      <uri>http://localhost:4000</uri>
     </author>
     <content type="html">&lt;p&gt;When I first started coding I was quite a bit younger, and has a passion to learn every possible tech related thing I possibly could. I was going to school, working a part time job, needed very little sleep, and quite the introvert. I had a programmers dream environment build up around myself. It was a genuine passion to learn, learn, and learn some more.&lt;/p&gt;
 
@@ -2026,14 +2026,14 @@ But before I attempt to push this any faster and milk every drop of performance 
   </entry>
   
   <entry>
-    <id>http://theworkaround.com/2013/05/26/nurture-it-like-a-garden</id>
+    <id>http://localhost:4000/2013/05/26/nurture-it-like-a-garden</id>
     <link type="text/html" rel="alternate" href="http://example.com/2013/05/26/nurture-it-like-a-garden.html"/>
     <title>Nurture It Like a Garden</title>
     <published>2013-05-26T00:00:00-06:00</published>
     <updated>2013-05-26T00:00:00-06:00</updated>
     <author>
       <name>Brandon Hicks</name>
-      <uri>http://theworkaround.com</uri>
+      <uri>http://localhost:4000</uri>
     </author>
     <content type="html">&lt;p&gt;&lt;img src=&quot;/img/grape_bunch.png&quot; alt=&quot;Kumquat Tree&quot; class=&quot;img-responsive&quot; /&gt;&lt;/p&gt;
 
@@ -2052,14 +2052,14 @@ But before I attempt to push this any faster and milk every drop of performance 
   </entry>
   
   <entry>
-    <id>http://theworkaround.com/2013/05/20/the-truth-of-it-all</id>
+    <id>http://localhost:4000/2013/05/20/the-truth-of-it-all</id>
     <link type="text/html" rel="alternate" href="http://example.com/2013/05/20/the-truth-of-it-all.html"/>
     <title>The Truth of It All</title>
     <published>2013-05-20T00:00:00-06:00</published>
     <updated>2013-05-20T00:00:00-06:00</updated>
     <author>
       <name>Brandon Hicks</name>
-      <uri>http://theworkaround.com</uri>
+      <uri>http://localhost:4000</uri>
     </author>
     <content type="html">&lt;p&gt;We all know it’s been asked time and time again, “What do you want in the long run out of your life?” We all have hopes and dreams we want to fulfill, different routes we want to take through life. But we’re all (well most of us) going to end up the same in the end. We’ll either be stuffed away like a number in a nursing home or living with out children/grandchildren and feeling bad about them having to help manage our lives.&lt;/p&gt;
 
@@ -2072,14 +2072,14 @@ But before I attempt to push this any faster and milk every drop of performance 
   </entry>
   
   <entry>
-    <id>http://theworkaround.com/2013/05/19/fresh-bacon</id>
+    <id>http://localhost:4000/2013/05/19/fresh-bacon</id>
     <link type="text/html" rel="alternate" href="http://example.com/2013/05/19/fresh-bacon.html"/>
     <title>Fresh Bacon</title>
     <published>2013-05-19T00:00:00-06:00</published>
     <updated>2013-05-19T00:00:00-06:00</updated>
     <author>
       <name>Brandon Hicks</name>
-      <uri>http://theworkaround.com</uri>
+      <uri>http://localhost:4000</uri>
     </author>
     <content type="html">&lt;p&gt;Yum, a fresh new reset blog is like a fresh new package of bacon.
 You don’t know exactly what it’s going to taste like, but you know it’s going to be delicious and full of delight.&lt;/p&gt;

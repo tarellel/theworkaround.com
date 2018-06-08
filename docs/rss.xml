@@ -2,20 +2,20 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>TheWorkAround</title>
-    <link>http://theworkaround.com</link>
-    <atom:link href="http://theworkaround.com/rss.xml" rel="self" type="application/rss+xml" />
+    <link>http://localhost:4000</link>
+    <atom:link href="http://localhost:4000/rss.xml" rel="self" type="application/rss+xml" />
     <description>The infinate rambelings and ideas of Brandon Hicks</description>
     <language>en-us</language>
-    <pubDate>Fri, 08 Jun 2018 12:13:46 -0600</pubDate>
-    <lastBuildDate>Fri, 08 Jun 2018 12:13:46 -0600</lastBuildDate>
+    <pubDate>Fri, 08 Jun 2018 12:22:22 -0600</pubDate>
+    <lastBuildDate>Fri, 08 Jun 2018 12:22:22 -0600</lastBuildDate>
 
     
     <item>
       <title>Ruby's Year of Performance (2018)</title>
-      <link>http://theworkaround.com/2018/06/04/rubys-year-of-performance-2018.html</link>
+      <link>http://localhost:4000/2018/06/04/rubys-year-of-performance-2018.html</link>
       <pubDate>Mon, 04 Jun 2018 00:00:00 -0600</pubDate>
       <author> ( {"email"=>"tarellel@gmail.com", "name"=>"Brandon Hicks", "github"=>"tarellel", "twitter"=>"tarellel"} )</author>
-      <guid>http://theworkaround.com/2018/06/04/rubys-year-of-performance-2018</guid>
+      <guid>http://localhost:4000/2018/06/04/rubys-year-of-performance-2018</guid>
       <description>&lt;p&gt;Many people claim Ruby is no longer relevant and quite a few people have moved on to Elixir, Go, Rust, and Node. This is because Ruby was not originally built for speed, it was built for ease of use. It does have its limitations and Rails is a monstrosity with all it’s services, workers, etc. But I’ve never had an issue with this, I started using Ruby because of its ease of use. I can from a world of using PHP and ugly spaghetti code to Ruby where coding is more of a thing of art.&lt;/p&gt;
 
 &lt;p&gt;But 2018 has been a big year for Ruby releases and trying to meet their &lt;a href=&quot;https://blog.heroku.com/ruby-3-by-3&quot;&gt;3x3&lt;/a&gt; performance goals (&lt;a href=&quot;https://developers.redhat.com/blog/2018/03/22/ruby-3x3-performance-goal/&quot;&gt;RedHat Writeup&lt;/a&gt;). And in the last year alone, &lt;a href=&quot;https://twitter.com/tenderlove&quot;&gt;Arron Patterson (tenderlove)&lt;/a&gt; and various contributors have made amazing advances in improving Ruby’s performance. And the addition of a &lt;a href=&quot;https://www.ruby-lang.org/en/news/2018/05/31/ruby-2-6-0-preview2-released/&quot;&gt;JIT compiler&lt;/a&gt; to Ruby is no ease feat that looks like it will also have a HUGE effect on Ruby to regain some ground and no longer be known as a “slow language”.
@@ -79,10 +79,10 @@ end
     
     <item>
       <title>MikroTik - Mobile Rate-Limiting</title>
-      <link>http://theworkaround.com/2018/05/05/mikrotik-mobile-rate-limiting.html</link>
+      <link>http://localhost:4000/2018/05/05/mikrotik-mobile-rate-limiting.html</link>
       <pubDate>Sat, 05 May 2018 00:00:00 -0600</pubDate>
       <author> ( {"email"=>"tarellel@gmail.com", "name"=>"Brandon Hicks", "github"=>"tarellel", "twitter"=>"tarellel"} )</author>
-      <guid>http://theworkaround.com/2018/05/05/mikrotik---mobile-rate-limiting</guid>
+      <guid>http://localhost:4000/2018/05/05/mikrotik---mobile-rate-limiting</guid>
       <description>&lt;h3 id=&quot;a-brief-intro&quot;&gt;A Brief Intro&lt;/h3&gt;
 &lt;p&gt;I’ve been using Mikrotik routers for about a year now and I’ve had nothing but an amazing experience thus far.
 I haven’t taken any of the &lt;a href=&quot;https://mikrotik.com/training/&quot;&gt;certification&lt;/a&gt; training courses (MTCNA, MTCRE, MTCWE) for the Mikrotik routers and thus far all my learning has been hands more of a hands on experience and following the RouterOS &lt;a href=&quot;https://wiki.mikrotik.com/wiki/Manual:TOC&quot;&gt;documentation&lt;/a&gt;.&lt;/p&gt;
@@ -199,10 +199,10 @@ So I removed the Layer7 and revamped the script to use it hostname matches throu
     
     <item>
       <title>2017 - Was a Year of Change</title>
-      <link>http://theworkaround.com/2018/03/01/2017-a-year-of-change.html</link>
+      <link>http://localhost:4000/2018/03/01/2017-a-year-of-change.html</link>
       <pubDate>Thu, 01 Mar 2018 00:00:00 -0700</pubDate>
       <author> ( {"email"=>"tarellel@gmail.com", "name"=>"Brandon Hicks", "github"=>"tarellel", "twitter"=>"tarellel"} )</author>
-      <guid>http://theworkaround.com/2018/03/01/2017---a-year-of-change</guid>
+      <guid>http://localhost:4000/2018/03/01/2017---a-year-of-change</guid>
       <description>&lt;div class=&quot;header&quot; style=&quot;background: url('/img/headers/photo-1472214103451-9374bd1c798e.jpeg') no-repeat center scroll;&quot;&gt;&lt;/div&gt;
 
 &lt;p&gt;Let me start off by saying, it’s been one heck of a year and so much has changed in my life, it’s almost unrecognizable. To start, I had a few career changes; I went from doing IT support for a car rental agency to being laid off. Being laid off was quite an uncomfortable experience, because I have kids and a family to support. While waiting to get hired I used this downtime as a learning experience and worked on various projects. At least, until I got some contract work. At first, it was a dream come true, working as a developer, getting paid for what I loved. There were several very smart developers in which I was working with and learning from.&lt;/p&gt;
@@ -225,10 +225,10 @@ So I removed the Layer7 and revamped the script to use it hostname matches throu
     
     <item>
       <title>Mapping an ArcGIS Parcel dataset as a Mapbox tileset</title>
-      <link>http://theworkaround.com/2016/12/15/mapping-an-arcgis-parcel-dataset-as-a-mapbox-tileset.html</link>
+      <link>http://localhost:4000/2016/12/15/mapping-an-arcgis-parcel-dataset-as-a-mapbox-tileset.html</link>
       <pubDate>Thu, 15 Dec 2016 00:00:00 -0700</pubDate>
       <author> ( {"email"=>"tarellel@gmail.com", "name"=>"Brandon Hicks", "github"=>"tarellel", "twitter"=>"tarellel"} )</author>
-      <guid>http://theworkaround.com/2016/12/15/mapping-an-arcgis-parcel-dataset-as-a-mapbox-tileset</guid>
+      <guid>http://localhost:4000/2016/12/15/mapping-an-arcgis-parcel-dataset-as-a-mapbox-tileset</guid>
       <description>&lt;p&gt;Before I get begin on how I mapped out several large datasets for &lt;a href=&quot;http://sanjuanmaps.com/&quot;&gt;SanJuanMaps&lt;/a&gt;,
 I would like to say that there was plenty of &lt;a href=&quot;https://www.mapbox.com/gallery/&quot;&gt;inspiration&lt;/a&gt; behind my actions.
 I was especially inspired by &lt;a href=&quot;https://twitter.com/caged&quot;&gt;Justin Palmer’s&lt;/a&gt; - &lt;a href=&quot;http://labratrevenge.com/pdx/#12/45.4800/-122.6706&quot;&gt;The Age of a City&lt;/a&gt;.
@@ -705,10 +705,10 @@ From here you can edit and &lt;a href=&quot;https://www.mapbox.com/help/getting-
     
     <item>
       <title>Enhancing SSH Security</title>
-      <link>http://theworkaround.com/2016/11/11/enhancing-ssh-security.html</link>
+      <link>http://localhost:4000/2016/11/11/enhancing-ssh-security.html</link>
       <pubDate>Fri, 11 Nov 2016 00:00:00 -0700</pubDate>
       <author> ( {"email"=>"tarellel@gmail.com", "name"=>"Brandon Hicks", "github"=>"tarellel", "twitter"=>"tarellel"} )</author>
-      <guid>http://theworkaround.com/2016/11/11/enhancing-ssh-security</guid>
+      <guid>http://localhost:4000/2016/11/11/enhancing-ssh-security</guid>
       <description>&lt;p&gt;With the whole security/privacy revolution rolling throughout the internet, it has recently come to my attention
 that specific services are being heavily focused on, while others are completely neglected.
 When securing your server and it’s services you need to attempt to secure the whole stack rather than a few specific services.
@@ -805,10 +805,10 @@ They mostly consist of method to enhance existing security methods for your SSH 
     
     <item>
       <title>Installing Fish on OSx</title>
-      <link>http://theworkaround.com/2016/10/11/installing-fish-on-osx.html</link>
+      <link>http://localhost:4000/2016/10/11/installing-fish-on-osx.html</link>
       <pubDate>Tue, 11 Oct 2016 00:00:00 -0600</pubDate>
       <author> ( {"email"=>"tarellel@gmail.com", "name"=>"Brandon Hicks", "github"=>"tarellel", "twitter"=>"tarellel"} )</author>
-      <guid>http://theworkaround.com/2016/10/11/installing-fish-on-osx</guid>
+      <guid>http://localhost:4000/2016/10/11/installing-fish-on-osx</guid>
       <description>&lt;p&gt;As developers we all use the command line, to make things happen.
 And by now you know there’s several shell environments ranging from &lt;a href=&quot;http://www.zsh.org/&quot;&gt;zsh&lt;/a&gt;,
 &lt;a href=&quot;http://www.kornshell.com/&quot;&gt;kornshell&lt;/a&gt;, &lt;a href=&quot;http://www.grymoire.com/Unix/Csh.html&quot;&gt;C-Shell&lt;/a&gt;,
@@ -1063,10 +1063,10 @@ Plain old &lt;code class=&quot;highlighter-rouge&quot;&gt;Courier&lt;/code&gt; o
     
     <item>
       <title>Setting up tmux with Rails</title>
-      <link>http://theworkaround.com/2016/08/29/setting-up-tmux-with-rails.html</link>
+      <link>http://localhost:4000/2016/08/29/setting-up-tmux-with-rails.html</link>
       <pubDate>Mon, 29 Aug 2016 00:00:00 -0600</pubDate>
       <author> ( {"email"=>"tarellel@gmail.com", "name"=>"Brandon Hicks", "github"=>"tarellel", "twitter"=>"tarellel"} )</author>
-      <guid>http://theworkaround.com/2016/08/29/setting-up-tmux-with-rails</guid>
+      <guid>http://localhost:4000/2016/08/29/setting-up-tmux-with-rails</guid>
       <description>&lt;h2 id=&quot;why-use-tmux&quot;&gt;Why use tmux?&lt;/h2&gt;
 
 &lt;p&gt;You may have a similar workflow the way I do. When I’m working on a rails
@@ -1322,10 +1322,10 @@ tmux kill-server
     
     <item>
       <title>Elixir Pattern Matching</title>
-      <link>http://theworkaround.com/2015/12/06/elixir-pattern-matching.html</link>
+      <link>http://localhost:4000/2015/12/06/elixir-pattern-matching.html</link>
       <pubDate>Sun, 06 Dec 2015 00:00:00 -0700</pubDate>
       <author> ( {"email"=>"tarellel@gmail.com", "name"=>"Brandon Hicks", "github"=>"tarellel", "twitter"=>"tarellel"} )</author>
-      <guid>http://theworkaround.com/2015/12/06/elixir-pattern-matching</guid>
+      <guid>http://localhost:4000/2015/12/06/elixir-pattern-matching</guid>
       <description>&lt;h2 id=&quot;special-characters-have-meaning-as-well&quot;&gt;Special Characters have meaning as well&lt;/h2&gt;
 
 &lt;p&gt;Learning any new programming language is a always a great challenge. There’s always new techniques, methods, and syntax to learn. But it is also a great experience to expand you knowledge and learn new tricks and with Elixir this is also the case. As with many programming languages there are numerous keywords and special characters that have meaning. They can assign a value, perform some sort of logic test, run a method, etc. And in this article we will taking a brief look at Elixir based Pattern Matching.&lt;/p&gt;
@@ -1436,10 +1436,10 @@ tmux kill-server
     
     <item>
       <title>Dipping into Elixir</title>
-      <link>http://theworkaround.com/2015/11/29/dipping-into-elixir.html</link>
+      <link>http://localhost:4000/2015/11/29/dipping-into-elixir.html</link>
       <pubDate>Sun, 29 Nov 2015 00:00:00 -0700</pubDate>
       <author> ( {"email"=>"tarellel@gmail.com", "name"=>"Brandon Hicks", "github"=>"tarellel", "twitter"=>"tarellel"} )</author>
-      <guid>http://theworkaround.com/2015/11/29/dipping-into-elixir</guid>
+      <guid>http://localhost:4000/2015/11/29/dipping-into-elixir</guid>
       <description>&lt;h3 id=&quot;elixir&quot;&gt;Elixir&lt;/h3&gt;
 
 &lt;p&gt;Elixir seems to be next big craze among a portion of the Ruby community, everyone is migrating to try and find out what’s cool. First is was &lt;a href=&quot;https://nodejs.org/en/&quot;&gt;node&lt;/a&gt;, than &lt;a href=&quot;https://golang.org/&quot;&gt;GO&lt;/a&gt;, and now it’s &lt;a href=&quot;http://elixir-lang.org/&quot;&gt;Elixir&lt;/a&gt;. The ruby community always seems to be in a state of flux with it’s developers wanting the latest and greatest technologies. They’ll try the latest new programming language because it’s faster, supports XYZ functionality, or has feature JKL. But there’s no beating the readability of ruby code and it’s easy to learn for a beginner. Elixir does come close in many ways, seeing as how &lt;a href=&quot;http://blog.plataformatec.com.br/&quot;&gt;the creator&lt;/a&gt; of Elixir was also a Core RubyOnRails developer, I’m sure he took a load of inspiration from programming in Ruby to make Elixir as readable and DRY as possible.&lt;/p&gt;
@@ -1561,10 +1561,10 @@ tmux kill-server
     
     <item>
       <title>Using UUIDs in Rails</title>
-      <link>http://theworkaround.com/2015/06/12/using-uuids-in-rails.html</link>
+      <link>http://localhost:4000/2015/06/12/using-uuids-in-rails.html</link>
       <pubDate>Fri, 12 Jun 2015 00:00:00 -0600</pubDate>
       <author> ( {"email"=>"tarellel@gmail.com", "name"=>"Brandon Hicks", "github"=>"tarellel", "twitter"=>"tarellel"} )</author>
-      <guid>http://theworkaround.com/2015/06/12/using-uuids-in-rails</guid>
+      <guid>http://localhost:4000/2015/06/12/using-uuids-in-rails</guid>
       <description>&lt;h3 id=&quot;why-use-uuids&quot;&gt;Why use UUIDs?&lt;/h3&gt;
 &lt;p&gt;It may seem like a trivial decision at first glance, but using UUIDs can have an intricate effect on your applications design structure. If you are building an application and have an &lt;code class=&quot;highlighter-rouge&quot;&gt;id:integer&lt;/code&gt; column that auto increments with the creation of every item you add to that table you could end up with some sever issues. As applications grow in size we end up having to seperate parts of the application into different servers: a cluster of database servers, background, jobs, cache server, an httpd server, and throw in a few servers for actual application and you’ve got a whole cluster of services to deal with.&lt;/p&gt;
 
@@ -1696,10 +1696,10 @@ tmux kill-server
     
     <item>
       <title>Make your own Motivation</title>
-      <link>http://theworkaround.com/2015/05/26/make-your-own-motivation.html</link>
+      <link>http://localhost:4000/2015/05/26/make-your-own-motivation.html</link>
       <pubDate>Tue, 26 May 2015 00:00:00 -0600</pubDate>
       <author> ( {"email"=>"tarellel@gmail.com", "name"=>"Brandon Hicks", "github"=>"tarellel", "twitter"=>"tarellel"} )</author>
-      <guid>http://theworkaround.com/2015/05/26/make-your-own-motivation</guid>
+      <guid>http://localhost:4000/2015/05/26/make-your-own-motivation</guid>
       <description>&lt;p&gt;&lt;img src=&quot;/img/ground-stones-pebbles.jpg&quot; alt=&quot;Barren Rock Bed&quot; class=&quot;img-responsive&quot; /&gt;
 Sometimes we get the point where we experience a level of extreme burnout. We don’t want to admit it and we don’t want to step down and evaluate our lives to admit it’s true. And as humans we don’t want to make any extreme changes, especially once we’ve found a comfort zone. It may be caused by our job, our routine, or extreme stress. The burnout begins to eat away at you, it may feel like nothing and start small but you begin to notice it after a while.&lt;/p&gt;
 
@@ -1727,10 +1727,10 @@ Sometimes we get the point where we experience a level of extreme burnout. We do
     
     <item>
       <title>Working with the Foreman</title>
-      <link>http://theworkaround.com/2015/03/16/working-with-the-foreman.html</link>
+      <link>http://localhost:4000/2015/03/16/working-with-the-foreman.html</link>
       <pubDate>Mon, 16 Mar 2015 00:00:00 -0600</pubDate>
       <author> ( {"email"=>"tarellel@gmail.com", "name"=>"Brandon Hicks", "github"=>"tarellel", "twitter"=>"tarellel"} )</author>
-      <guid>http://theworkaround.com/2015/03/16/working-with-the-foreman</guid>
+      <guid>http://localhost:4000/2015/03/16/working-with-the-foreman</guid>
       <description>&lt;p&gt;Lets to work on using &lt;a href=&quot;https://github.com/ddollar/foreman&quot;&gt;Foreman&lt;/a&gt; and when I say Foreman I’m not referring to Eric Forman the goof for a son on &lt;a href=&quot;http://www.imdb.com/title/tt0165598/?ref_=nv_sr_1&quot;&gt;The 70’s Show&lt;/a&gt;. I’m talking about the Ruby gem Foreman for making your applications easier to manage and deploy.&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;https://i.imgur.com/vlQFjab.jpg&quot; alt=&quot;Eric Forman&quot; /&gt;&lt;/p&gt;
@@ -1786,10 +1786,10 @@ Sometimes we get the point where we experience a level of extreme burnout. We do
     
     <item>
       <title>Setting Goals for 2015</title>
-      <link>http://theworkaround.com/2014/12/27/setting-goals-for-2015.html</link>
+      <link>http://localhost:4000/2014/12/27/setting-goals-for-2015.html</link>
       <pubDate>Sat, 27 Dec 2014 00:00:00 -0700</pubDate>
       <author> ( {"email"=>"tarellel@gmail.com", "name"=>"Brandon Hicks", "github"=>"tarellel", "twitter"=>"tarellel"} )</author>
-      <guid>http://theworkaround.com/2014/12/27/setting-goals-for-2015</guid>
+      <guid>http://localhost:4000/2014/12/27/setting-goals-for-2015</guid>
       <description>&lt;p&gt;Once again the new year is upon us, goals should be set in order to help us look forward to achieving something rather than just watching time pass us by. We also need to sit down and look at what we’ve actually done within the last year. Have I wasted more time that I should have, of course we all have. But have we taken the necessary steps to get done what we wanted to? Probably not, we’ve started in the right direction.&lt;/p&gt;
 
 &lt;h3 id=&quot;writing&quot;&gt;Writing&lt;/h3&gt;
@@ -1805,10 +1805,10 @@ Sometimes we get the point where we experience a level of extreme burnout. We do
     
     <item>
       <title>Slimming Down</title>
-      <link>http://theworkaround.com/2014/11/05/slimming-down.html</link>
+      <link>http://localhost:4000/2014/11/05/slimming-down.html</link>
       <pubDate>Wed, 05 Nov 2014 00:00:00 -0700</pubDate>
       <author> ( {"email"=>"tarellel@gmail.com", "name"=>"Brandon Hicks", "github"=>"tarellel", "twitter"=>"tarellel"} )</author>
-      <guid>http://theworkaround.com/2014/11/05/slimming-down</guid>
+      <guid>http://localhost:4000/2014/11/05/slimming-down</guid>
       <description>&lt;p&gt;I have used Slim on various projects and have grown to thoroughly enjoy using it. &lt;a href=&quot;http://slim-lang.com/index.html&quot;&gt;Slim&lt;/a&gt; is a simple, lightweight, and fast Rails templating alternative to ERB or HAML. I prefer it over HAML because of it’s use of use and it takes almost nothing to get started.&lt;/p&gt;
 
 &lt;h3 id=&quot;setup&quot;&gt;Setup&lt;/h3&gt;
@@ -1883,10 +1883,10 @@ Sometimes we get the point where we experience a level of extreme burnout. We do
     
     <item>
       <title>Resque to Sidekiq</title>
-      <link>http://theworkaround.com/2014/10/29/resque-to-sidekiq.html</link>
+      <link>http://localhost:4000/2014/10/29/resque-to-sidekiq.html</link>
       <pubDate>Wed, 29 Oct 2014 00:00:00 -0600</pubDate>
       <author> ( {"email"=>"tarellel@gmail.com", "name"=>"Brandon Hicks", "github"=>"tarellel", "twitter"=>"tarellel"} )</author>
-      <guid>http://theworkaround.com/2014/10/29/resque-to-sidekiq</guid>
+      <guid>http://localhost:4000/2014/10/29/resque-to-sidekiq</guid>
       <description>&lt;p&gt;Background processing is an important feature with any web application to improve performance. Not only does it free up your application for requests, it can be used to prioritize tasks and delay processes until your system has available resources.&lt;/p&gt;
 
 &lt;p&gt;This post is not about &lt;a href=&quot;https://github.com/collectiveidea/delayed_job&quot;&gt;delayed_job&lt;/a&gt;, &lt;a href=&quot;https://kr.github.io/beanstalkd/&quot;&gt;beanstalkd&lt;/a&gt;, &lt;a href=&quot;https://github.com/mperham/girl_friday&quot;&gt;girl_friday&lt;/a&gt;, &lt;a href=&quot;https://github.com/brandonhilkert/sucker_punch&quot;&gt;sucker_punch&lt;/a&gt;, or a &lt;a href=&quot;https://www.ruby-toolbox.com/categories/Background_Jobs&quot;&gt;wide selection&lt;/a&gt; of other background processors. Even though I’ve used delayed_job which is amazingly easy to setup and use, I don’t exactly want to clog up my ActiveRecord database with database queries. The use of a key-value store tends to make things fast and simple as it is. For background jobs, caching, and various other tasks Redis does an amazing job: it’s fast, reliable, and does over complicate the application.&lt;/p&gt;
@@ -1933,10 +1933,10 @@ But before I attempt to push this any faster and milk every drop of performance 
     
     <item>
       <title>The Saturation of a Technologies</title>
-      <link>http://theworkaround.com/2014/07/06/the-saturation-of-technologies.html</link>
+      <link>http://localhost:4000/2014/07/06/the-saturation-of-technologies.html</link>
       <pubDate>Sun, 06 Jul 2014 00:00:00 -0600</pubDate>
       <author> ( {"email"=>"tarellel@gmail.com", "name"=>"Brandon Hicks", "github"=>"tarellel", "twitter"=>"tarellel"} )</author>
-      <guid>http://theworkaround.com/2014/07/06/the-saturation-of-technologies</guid>
+      <guid>http://localhost:4000/2014/07/06/the-saturation-of-technologies</guid>
       <description>&lt;p&gt;When I first started coding I was quite a bit younger, and has a passion to learn every possible tech related thing I possibly could. I was going to school, working a part time job, needed very little sleep, and quite the introvert. I had a programmers dream environment build up around myself. It was a genuine passion to learn, learn, and learn some more.&lt;/p&gt;
 
 &lt;p&gt;When I was going to college, I saw people who were going through the Computer Science/IT programs that had never even viewed a script other than to copy and paste to modify their MySpace. These people thought they were amazing, they could change the background or font-color of their profile page. They suddenly thought they were gifted prodigies with computers, hoping to be amazing programmers.&lt;/p&gt;
@@ -1961,10 +1961,10 @@ But before I attempt to push this any faster and milk every drop of performance 
     
     <item>
       <title>Nurture It Like a Garden</title>
-      <link>http://theworkaround.com/2013/05/26/nurture-it-like-a-garden.html</link>
+      <link>http://localhost:4000/2013/05/26/nurture-it-like-a-garden.html</link>
       <pubDate>Sun, 26 May 2013 00:00:00 -0600</pubDate>
       <author> ( {"email"=>"tarellel@gmail.com", "name"=>"Brandon Hicks", "github"=>"tarellel", "twitter"=>"tarellel"} )</author>
-      <guid>http://theworkaround.com/2013/05/26/nurture-it-like-a-garden</guid>
+      <guid>http://localhost:4000/2013/05/26/nurture-it-like-a-garden</guid>
       <description>&lt;p&gt;&lt;img src=&quot;/img/grape_bunch.png&quot; alt=&quot;Kumquat Tree&quot; class=&quot;img-responsive&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;As of recently I have been building and growing a small vegetable garden for my family. My children love the idea of putting work into it something quite so amazing: digging up the dirt, playing the seeds and plant buds, watering, and taking responsibility for a small living object that will someday be rewarding them for their effort. But in the meantime they have to put time, effort, and tender love and care into taking care of the plants.&lt;/p&gt;
@@ -1983,10 +1983,10 @@ But before I attempt to push this any faster and milk every drop of performance 
     
     <item>
       <title>The Truth of It All</title>
-      <link>http://theworkaround.com/2013/05/20/the-truth-of-it-all.html</link>
+      <link>http://localhost:4000/2013/05/20/the-truth-of-it-all.html</link>
       <pubDate>Mon, 20 May 2013 00:00:00 -0600</pubDate>
       <author> ( {"email"=>"tarellel@gmail.com", "name"=>"Brandon Hicks", "github"=>"tarellel", "twitter"=>"tarellel"} )</author>
-      <guid>http://theworkaround.com/2013/05/20/the-truth-of-it-all</guid>
+      <guid>http://localhost:4000/2013/05/20/the-truth-of-it-all</guid>
       <description>&lt;p&gt;We all know it’s been asked time and time again, “What do you want in the long run out of your life?” We all have hopes and dreams we want to fulfill, different routes we want to take through life. But we’re all (well most of us) going to end up the same in the end. We’ll either be stuffed away like a number in a nursing home or living with out children/grandchildren and feeling bad about them having to help manage our lives.&lt;/p&gt;
 
 &lt;p&gt;The reality of this question is, its’ not as easy of an answer as it seems. And as you live your life and experience new things your answer will change. When your young and stupid you want fame and money, but as you age and become more mature you want happiness and health.&lt;/p&gt;
@@ -1999,10 +1999,10 @@ But before I attempt to push this any faster and milk every drop of performance 
     
     <item>
       <title>Fresh Bacon</title>
-      <link>http://theworkaround.com/2013/05/19/fresh-bacon.html</link>
+      <link>http://localhost:4000/2013/05/19/fresh-bacon.html</link>
       <pubDate>Sun, 19 May 2013 00:00:00 -0600</pubDate>
       <author> ( {"email"=>"tarellel@gmail.com", "name"=>"Brandon Hicks", "github"=>"tarellel", "twitter"=>"tarellel"} )</author>
-      <guid>http://theworkaround.com/2013/05/19/fresh-bacon</guid>
+      <guid>http://localhost:4000/2013/05/19/fresh-bacon</guid>
       <description>&lt;p&gt;Yum, a fresh new reset blog is like a fresh new package of bacon.
 You don’t know exactly what it’s going to taste like, but you know it’s going to be delicious and full of delight.&lt;/p&gt;
 </description>
