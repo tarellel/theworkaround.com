@@ -59,3 +59,9 @@ assets:
     - _assets/images
     #- _assets/fonts
   gzip: [ text/css, application/javascript ]
+
+plugins:
+    - jekyll-minifier
+
+# jekyll-minifier:
+#   exclude: ['atom.xml','rss.xml','sitemap.xml'] # Exclude files from processing - file name, glob pattern or array of file names and glob patterns

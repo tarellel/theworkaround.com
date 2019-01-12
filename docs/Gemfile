@@ -7,6 +7,7 @@ gem 'jekyll'
 # Plugins
 gem 'jekyll-assets'
 gem 'jekyll-tagging'
+gem 'jekyll-minifier' # used for compressing the html and reducing the sites size
 
 ########################################
 # Formatting/Structure/Etc.
