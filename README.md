@@ -7,6 +7,22 @@
     Serve Site as changes happen
     jekyll serve --watch
 
+    Build for serving production assets
+    JEKYLL_ENV=production jekyll build
+
+### For generating new posts
+
+```shell
+
+# the only required attribute is titles
+rake post title="A Title" [date="2012-02-09"] [tags=[tag1, tag2]]
+
+rake page  title="Page title" [date="2012-02-09"] [tags=[tag1, tag2]]
+
+# run in watch mode
+rake preview
+```
+
 
 #### For code Synax Highlighting:
 

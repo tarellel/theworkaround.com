@@ -1,25 +1,22 @@
 source 'https://rubygems.org'
 
+########################################
+# Jekyll and jekyll plugins
+########################################
 gem 'jekyll'
 # Plugins
-gem 'jekyll-assets', '~> 3.0.6'
-# gem "sprockets", "~> 4.0.beta", { require: false }
-# gem 'jekyll-asset-pipeline'# https://github.com/matthodan/jekyll-asset-pipeline
-gem 'jekyll-tagging', git: 'https://github.com/pattex/jekyll-tagging.git'
-# possible tag alternative - https://github.com/charliepark/charliepark.github.com/blob/master/_plugins/tag_gen.rb
+gem 'jekyll-assets'
+gem 'jekyll-tagging'
 
-# http://realjenius.com/2012/12/01/jekyll-category-tag-paging-feeds/
-# https://github.com/realjenius/realjenius.com/blob/master/_plugins/cat_and_tag_generator.rb
-
+########################################
 # Formatting/Structure/Etc.
+########################################
 gem 'kramdown'
-gem 'rouge' # http://rouge.jayferd.us/demo
-            # http://rouge.jneen.net/
-gem 'sass'
+gem 'rouge'
 gem 'uglifier'
 
-####################
+########################################
 # Assets and View related gems
-####################
+########################################
 gem 'bourbon'
 gem 'rake'
