@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <title>{% if page.tag %}Tagged with: {{page.tag}} {% else %}{{ page.title }}{% endif %} - {{ site.title }}</title>
+  {% include meta.html -%}
   <meta name="google" content="notranslate">
   <meta name="robots" content="index, follow">
   <meta http-equiv="Content-Language" content="en">
@@ -32,7 +32,7 @@
   <link href="/rss.xml" rel="alternate" title="RSS" type="application/rss+xml">
   <link href="/sitemap.xml" rel="sitemap" title="Sitemap" type="application/xml">
   <link href="/humans.txt" rel="author" type="text/plain">
-  {% include meta.html -%}
+
 </head>
 <body>
   <div class="container">

@@ -93,6 +93,8 @@ GEM
       jekyll (~> 3.1)
     jekyll-sass-converter (1.5.2)
       sass (~> 3.4)
+    jekyll-seo-tag (2.6.0)
+      jekyll (~> 3.3)
     jekyll-watch (2.1.2)
       listen (~> 3.0)
     json (2.2.0)
@@ -146,10 +148,11 @@ PLATFORMS
 DEPENDENCIES
   bourbon
   jekyll
-  jekyll-assets (~> 3.0.6)
+  jekyll-assets
   jekyll-commonmark-ghpages
   jekyll-minifier
   jekyll-sass-converter
+  jekyll-seo-tag
   jekyll-tagging!
   liquid!
   liquid-c!

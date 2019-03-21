@@ -11,11 +11,12 @@ gem 'liquid-c', github: 'Shopify/liquid-c', branch: 'master'
 # Jekyll plugins
 ########################################
 group :jekyll_plugins do
-  gem 'jekyll-assets', '~> 3.0.6'
+  gem 'jekyll-assets'
   # gem 'jekyll-commonmark' # C based markdown compiler
-  gem 'jekyll-minifier' # used for compressing the html and reducing the sites size
   gem 'jekyll-commonmark-ghpages' # github flavor of commonmark (mainly to correct syntax highlighting issues)
+  gem 'jekyll-minifier' # used for compressing the html and reducing the sites size
   gem 'jekyll-sass-converter' # github: 'jekyll/jekyll-sass-converter'
+  gem 'jekyll-seo-tag'
   gem 'jekyll-tagging', github: 'pattex/jekyll-tagging'
 end
 

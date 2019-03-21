@@ -16,6 +16,8 @@ sass:
 exclude: ['.gitignore', 'README.md', "Rakefile", 'ideas.md', 'misc.md']
 permalink:  /:year/:month/:day/:title.html
 
+
+# Site information used by the layouts and SEO
 title: 'TheWorkAround'
 name: TheWorkAround
 url: http://theworkaround.com
@@ -43,7 +45,6 @@ assets:
   source_maps: false
   dirname: assets
   compression: true
-
   # Pathnames where to find assets relative to the root of the site.
   sources:
     - _assets
@@ -55,6 +56,7 @@ assets:
 
 plugins:
     - jekyll-minifier
+    - jekyll-seo-tag
 
 jekyll-minifier:
   exclude: ['atom.xml','rss.xml','sitemap.xml'] # Exclude files from processing - file name, glob pattern or array of file names and glob patterns
