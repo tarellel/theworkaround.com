@@ -8,7 +8,7 @@
   <meta name="robots" content="index, follow">
   <meta http-equiv="Content-Language" content="en">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <!-- Prefectch to Optimize Site Loading - src: http://csswizardry.com/ -->
+  <!-- Prefetch to Optimize Site Loading - src: http://csswizardry.com/ -->
   <link rel="preconnect" href="https://fonts.googleapis.com/" crossorigin>
   <link rel="preconnect" href="https://www.google-analytics.com/" crossorigin>
   <link rel="preconnect" href="https://ajax.googleapis.com/" crossorigin>
@@ -20,17 +20,19 @@
   <meta name="theme-color" content="#4cb8c4">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   {% asset app.css !type %}
-
   <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
   <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
   <![endif]-->
+  <!--[if lte IE 8]>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ie8/0.8.0/ie8.js"></script>
+  <![endif]-->
   <link href="/atom.xml" rel="alternate" title="Atom" type="application/atom+xml">
   <link href="/rss.xml" rel="alternate" title="RSS" type="application/rss+xml">
   <link href="/sitemap.xml" rel="sitemap" title="Sitemap" type="application/xml">
   <link href="/humans.txt" rel="author" type="text/plain">
-  {% include meta.html %}
+  {% include meta.html -%}
 </head>
 <body>
   <div class="container">

@@ -10,10 +10,8 @@ destination: docs/
 
 # Conversion
 highlighter: rouge
-markdown: kramdown
-kramdown:
-  input: GFM
-  syntax_highlighter: rouge
+sass:
+  style: compressed
 
 exclude: ['.gitignore', 'README.md', "Rakefile", 'ideas.md', 'misc.md']
 permalink:  /:year/:month/:day/:title.html
@@ -44,11 +42,6 @@ tag_permalink_style: pretty
 assets:
   source_maps: false
   dirname: assets
-  #baseurl: /assets/
-
-  # compress:
-  #   css:  scss
-  #   js:   uglifier
   compression: true
 
   # Pathnames where to find assets relative to the root of the site.
@@ -63,5 +56,5 @@ assets:
 plugins:
     - jekyll-minifier
 
-# jekyll-minifier:
-#   exclude: ['atom.xml','rss.xml','sitemap.xml'] # Exclude files from processing - file name, glob pattern or array of file names and glob patterns
+jekyll-minifier:
+  exclude: ['atom.xml','rss.xml','sitemap.xml'] # Exclude files from processing - file name, glob pattern or array of file names and glob patterns

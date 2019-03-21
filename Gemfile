@@ -1,19 +1,28 @@
 source 'https://rubygems.org'
+git_source(:github) { |repo| "https://github.com/#{repo}.git" }
+
+gem 'jekyll'
+
+# A C library for faster Liquid template compiling
+gem 'liquid', github: 'Shopify/liquid', branch: 'master'
+gem 'liquid-c', github: 'Shopify/liquid-c', branch: 'master'
 
 ########################################
-# Jekyll and jekyll plugins
+# Jekyll plugins
 ########################################
-gem 'jekyll'
-# Plugins
-gem 'jekyll-assets'
-gem 'jekyll-tagging'
-gem 'jekyll-minifier' # used for compressing the html and reducing the sites size
+group :jekyll_plugins do
+  gem 'jekyll-assets', '~> 3.0.6'
+  # gem 'jekyll-commonmark' # C based markdown compiler
+  gem 'jekyll-minifier' # used for compressing the html and reducing the sites size
+  gem 'jekyll-commonmark-ghpages' # github flavor of commonmark (mainly to correct syntax highlighting issues)
+  gem 'jekyll-sass-converter' # github: 'jekyll/jekyll-sass-converter'
+  gem 'jekyll-tagging', github: 'pattex/jekyll-tagging'
+end
 
 ########################################
 # Formatting/Structure/Etc.
 ########################################
-gem 'kramdown'
-gem 'rouge'
+gem 'rouge' # Syntax Highlighting
 gem 'uglifier'
 
 ########################################
