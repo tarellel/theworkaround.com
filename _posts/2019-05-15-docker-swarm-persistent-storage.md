@@ -4,7 +4,7 @@ title: "Docker Swarm Persistent Storage"
 date: 2019-05-15 19-05-33
 description: "Docker-swarm persistent storage using glusterFS (a network filesystem)"
 tags: [docker, docker-swarm, gluster, linux]
-comments: false
+comments: true
 ---
 Unless you've been living under a rock, you should need no explanation what [Docker](https://www.docker.com/) is.
 Using Docker over the last year has drastically improved my deployment ease and with coupled with [GitLab's](https://about.gitlab.com/) CI/CD has made deployment extremely ease. Mind you, not all our applications being deployed have the same requirements, some are extremely simple and others are extraordinarily complex.
