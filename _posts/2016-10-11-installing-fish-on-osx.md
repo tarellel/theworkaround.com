@@ -15,6 +15,11 @@ But they all have a purpose and they have their dedicated users.
 I for one can say for the past several years I've been a heavy user of zsh along with the addition of
 [oh-my-zsh](http://ohmyz.sh/) for the customization, easy plugins, and user friendly terminal.
 
+
+[![Fish Logo](/img/posts/installing_fish_on_OSx/fish_logo.png){: .img-fluid .mx-auto }](https://github.com/laughedelic/fish_logo)
+
+
+
 From what I could find the majority of POSIX developers tend to stick with BASH
 which is very universal, widely used, and easy to learn. And mac OS users,
 tend to stick with either bash or zsh, I mean why change what's not broken, right?
@@ -245,7 +250,7 @@ Terminal fonts used
 
 As you can see below, I tend to enjoy using smooth charcoal gray themes, with colors that aren't to vibrant.
 
-![iTerm with Multitabs](/img/installing_fish_on_OSx/smooth_fish_terminal.png){: .img-responsive .center-block }
+![iTerm with Multitabs](/img/posts/installing_fish_on_OSx/smooth_fish_terminal.png){: .img-fluid .mx-auto }
 
 
 -----

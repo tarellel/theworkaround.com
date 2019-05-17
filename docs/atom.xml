@@ -4,13 +4,265 @@
   <title>TheWorkAround</title>
   <link href="http://theworkaround.com/"/>
   <link type="application/atom+xml" rel="self" href="http://theworkaround.com/atom.xml"/>
-  <updated>2019-03-21T13:03:45-06:00</updated>
+  <updated>2019-05-16T18:12:57-06:00</updated>
   <id>http://theworkaround.com/</id>
   <author>
     <name>Brandon Hicks</name>
     <email>tarellel@gmail.com</email>
   </author>
 
+  
+  <entry>
+    <id>http://theworkaround.com/2019/05/15/docker-swarm-persistent-storage</id>
+    <link type="text/html" rel="alternate" href="http://example.com/2019/05/15/docker-swarm-persistent-storage.html"/>
+    <title>Docker Swarm Persistent Storage</title>
+    <published>2019-05-15T00:00:00-06:00</published>
+    <updated>2019-05-15T00:00:00-06:00</updated>
+    <author>
+      <name>Brandon Hicks</name>
+      <uri>http://theworkaround.com</uri>
+    </author>
+    <content type="html">&lt;p&gt;Unless you’ve been living under a rock, you should need no explanation what &lt;a href=&quot;https://www.docker.com/&quot;&gt;Docker&lt;/a&gt; is.
+Using Docker over the last year has drastically improved my deployment ease and with coupled with &lt;a href=&quot;https://about.gitlab.com/&quot;&gt;GitLab’s&lt;/a&gt; CI/CD has made deployment extremely ease. Mind you, not all our applications being deployed have the same requirements, some are extremely simple and others are extraordinarily complex.
+So when we start a new project we have a base docker build to begin from and based on the applications requirements we add/remove as needed.&lt;/p&gt;
+
+&lt;h3 id=&quot;a-little-about-docker-swarm&quot;&gt;A little about Docker Swarm&lt;/h3&gt;
+
+&lt;p&gt;For the large majority of most of our applications, having a volume associated with the deployed containers and storing information is the database fits the applications needs.&lt;/p&gt;
+
+&lt;p&gt;In front of all our applications we used to use &lt;a href=&quot;https://proxy.dockerflow.com/&quot;&gt;Docker Flow Proxy&lt;/a&gt; to quickly integrate our application into our deployed environment and assign it a subdomain based on it’s service. For a few months we experienced issues with the proxy hanging up, resources not being cleared, and lots of dropped connections. Since than I have rebuilt our docker infrastructure and now we use &lt;a href=&quot;https://traefik.io/&quot;&gt;Traefik&lt;/a&gt; for our proxy routing and it has been absolutely amazing! It’s extremely fast, very robust and extensible, and easy to manipulate to fit your needs. Heck before even deploying it I was using &lt;a href=&quot;https://docs.docker.com/compose/&quot;&gt;docker-compose&lt;/a&gt; to  build a local network proxy to ensure it was what we needed. While Traefik was running in compose I was hitting domains such as &lt;code class=&quot;highlighter-rouge&quot;&gt;http://whoami.localhost/&lt;/code&gt; and this was a great way to learn the basic configuration before pushing it into a staging/production swarm environment. &lt;em&gt;(That explaing how we got started with Traefik is a whole other post of it’s own.)&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;Now back to our docker swarm, I know the big thing right now is &lt;a href=&quot;https://kubernetes.io/&quot;&gt;Kubernetes&lt;/a&gt;. But every organization has their specific needs, for their different environments, application, types, and deployment mechanisms. In my opinion the current docker environment we’ve got running right now is pretty robust. We’ve got dozens of nodes, a number of deployment environments (cybersec, staging, and production), dozens of applications running at once, and some of then requiring a number of services in order to function properly.&lt;/p&gt;
+
+&lt;p&gt;A few of the things that won me over on the docker swarm in the first place is it’s load balancing capabilities, it’s very fault-tolerant, and the self-healing mechanism that it uses in case a container crashes, a node locks up or drops, or a number of other issues.
+&lt;em&gt;(We’ve had a number of servers go down due to networking issues or a rack server crapping out and with the docker swarm running you could never even tel we were having issues as an end user to our applications.)&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;em class=&quot;small&quot;&gt;(Below is an image showing traffic hitting the swarm. If you have an application replicated upon deployment, traffic will be distributed amongst the nodes to prevent bottle necks.)&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/img/posts/docker-swarm-persistent-storage/SwarmTraffic.svg&quot; alt=&quot;Docker Swarm Traffic&quot; class=&quot;img-fluid&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;why-would-you-need-persistent-storage&quot;&gt;Why would you need persistent storage?&lt;/h3&gt;
+
+&lt;p&gt;Since the majority of our applications are data orientated, (with most of them hitting several databases in a single request) we hadn’t really had to worry about persistent storage.
+This is because once we deployed the applications; their volumes held all of their required assets and any data they needed was fetched from the database.&lt;/p&gt;
+
+&lt;p&gt;The easiest way to explain volumes, is when a container is deployed to a node (if specified) it will put aside a section of storage specifically for that container.
+For example say we have an application called DogTracker the was deployed on node A and B.
+This application can create and store files in their volumes on those nodes.
+But what happens when there’s an issue with the container on node A and the container cycles to node C?
+The data created by the container is left in the volume on node A an no longer available, until that applications container cycles back to node A.&lt;/p&gt;
+
+&lt;p&gt;And from this arises the problem we began to face. We were starting to develop applications that were starting to require files to be shared amongst each other.
+We also have numerous applications that require files to be saved and distributed without them being dumped into the database as a blob.
+And these files were required to be available without cycling volumes and/or dumping them into the containers during build time.
+And because of this, we needed to be able to have some form of persistent and distributed file storage across our containers.&lt;/p&gt;
+
+&lt;p&gt;&lt;em class=&quot;small&quot;&gt;(Below is an image showing how a docker swarms volumes are oriented)&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/img/posts/docker-swarm-persistent-storage/DockerSwarm.svg&quot; alt=&quot;Docker Swarm Diagram&quot; class=&quot;img-fluid&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;how-we-got-around-this&quot;&gt;How we got around this!&lt;/h3&gt;
+
+&lt;p&gt;Now in this day an age there’s got to be ways to get around this.
+There’s at least 101 ways to do just about anything and it doesn’t always have to be newest shiniest toy everyone’s using.
+I know saying this while using Docker is kind of a hypocritical statement, but shared file systems have been around for decades.
+You’ve been able to mount network drives, ftp drives, have organizational based shared folders, the list can go on for days.&lt;/p&gt;
+
+&lt;p&gt;But the big question is, how do we get a container to mount a local shared folder or distribute volumes across all swarm nodes?
+Well, there’s a whole list of distributed filesystems and modern storage mechanisms in the &lt;a href=&quot;https://docs.docker.com/engine/extend/legacy_plugins/&quot;&gt;docker documentation&lt;/a&gt;.
+Below is a list of the top recommended alternatives I found for &lt;a href=&quot;https://en.wikipedia.org/wiki/Distributed_File_System_(Microsoft)&quot;&gt;distributed file systems&lt;/a&gt; or &lt;a href=&quot;https://en.wikipedia.org/wiki/Network_File_System&quot;&gt;NFS’s&lt;/a&gt; for the docker stratosphere around container development.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://ceph.com/&quot;&gt;Ceph&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/rancher/convoy&quot;&gt;Convoy&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/rexray/rexray&quot;&gt;RexRay&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://portworx.com/use-case/docker-persistent-storage/&quot;&gt;PortWorx&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/pvdbleek/storageos&quot;&gt;StorageOS&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.xtreemfs.org/&quot;&gt;xtreemfs&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;I know you’re wondering why we didn’t use &lt;a href=&quot;https://aws.amazon.com/s3/&quot;&gt;S3&lt;/a&gt;, &lt;a href=&quot;https://www.digitalocean.com/products/spaces/&quot;&gt;DigitalOcean Spaces&lt;/a&gt;, &lt;a href=&quot;https://cloud.google.com/storage/docs/&quot;&gt;GCS&lt;/a&gt;, or some other cloud storage.
+But internally we have a finite amount of resources and we can spin up VM’s and be rolling in a matter of moments.
+Especially considering we have build a number of &lt;a href=&quot;https://www.ansible.com/&quot;&gt;Ansible&lt;/a&gt; playbooks to quickly provision our servers.
+Plus, why throw resources out on the cloud, when it’s not needed.
+Especially when we can metaphorically create our own network based file system and have our own cloud based storage system.&lt;/p&gt;
+
+&lt;p&gt;&lt;em class=&quot;small&quot;&gt;(Below is an image showing we want to distribute file system changes)&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/img/posts/docker-swarm-persistent-storage/DockerSwarm_wStorage.svg&quot; alt=&quot;&quot; class=&quot;img-fluid&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;After looking at several methods I settled on &lt;a href=&quot;https://www.gluster.org/&quot;&gt;GlusterFS&lt;/a&gt; a scalable network filesystem.
+Don’t get me wrong, a number of the other alternatives are pretty ground breaking and some amazing work as been put into developing them.
+But I don’t have thousands of dollars to drop on setting up a network file system, that  may or may not work for our needs.
+There were also several others that I did look pretty heavily into, such as &lt;a href=&quot;https://github.com/pvdbleek/storageos&quot;&gt;StorageOS&lt;/a&gt; and &lt;a href=&quot;https://ceph.com/&quot;&gt;Ceph&lt;/a&gt;.
+With StorageOS I really liked the idea of a container based file system that stores, synchronizing, and distributes files to all other storage nodes within the swarm.
+And it may just be me, but Ceph looked like the prime competitor to Gluster. They both have their &lt;a href=&quot;https://technologyadvice.com/blog/information-technology/ceph-vs-gluster/&quot;&gt;high points&lt;/a&gt; and seem to work very reliable.
+But at the time; it wasn’t for me and after using Gluster for a few months, I believe that I made the right choice and it’s served it’s purpose well.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://www.gluster.org/&quot;&gt;&lt;img src=&quot;/img/posts/docker-swarm-persistent-storage/gluster-ant.png&quot; alt=&quot;Gluster Ant&quot; class=&quot;img-fluid w-25&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;h4 id=&quot;gluster-notes&quot;&gt;Gluster Notes&lt;/h4&gt;
+
+&lt;p&gt;&lt;em&gt;(&lt;strong&gt;Note:&lt;/strong&gt; The following steps are to be used on a Debian/Ubuntu based install.)&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;Documentation for using Gluster can be found on their &lt;a href=&quot;https://docs.gluster.org/en/latest/&quot;&gt;docs&lt;/a&gt;. Their installation instructions are very brief and explain how to install the gluster packages, but they don’t go into depth in how to setup a Gluster network. I also suggest thoroughly reading through to documentation to understand Gluster volumes, bricks, pools, etc.&lt;/p&gt;
+
+&lt;h3 id=&quot;installing-glusterfs&quot;&gt;Installing GlusterFS&lt;/h3&gt;
+
+&lt;p&gt;To begin you will need to list all of the Docker Swarm nodes you wish to connect in the &lt;code class=&quot;highlighter-rouge&quot;&gt;/etc/hosts&lt;/code&gt; files of each server.
+On linux (Debian/Ubuntu), you can get the current nodes IP Address run the following command &lt;code class=&quot;highlighter-rouge&quot;&gt;hostname -I | awk '{print $1}'&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;em class=&quot;fa fa-info-circle&quot;&gt; &lt;/em&gt; &lt;em class=&quot;small&quot;&gt;(The majority of the commands listed below need to be ran on each and every node simultaneously unless specified. To do this I opened a number of terminal tabs and connected to each server in a different tab.)&lt;/em&gt;&lt;/p&gt;
+
+&lt;div class=&quot;language-config highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;# /etc/hosts
+&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;10&lt;/span&gt;.&lt;span class=&quot;m&quot;&gt;10&lt;/span&gt;.&lt;span class=&quot;m&quot;&gt;10&lt;/span&gt;.&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;staging1&lt;/span&gt;.&lt;span class=&quot;n&quot;&gt;example&lt;/span&gt;.&lt;span class=&quot;n&quot;&gt;com&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;staging1&lt;/span&gt;
+&lt;span class=&quot;m&quot;&gt;10&lt;/span&gt;.&lt;span class=&quot;m&quot;&gt;10&lt;/span&gt;.&lt;span class=&quot;m&quot;&gt;10&lt;/span&gt;.&lt;span class=&quot;m&quot;&gt;2&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;staging2&lt;/span&gt;.&lt;span class=&quot;n&quot;&gt;example&lt;/span&gt;.&lt;span class=&quot;n&quot;&gt;com&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;staging2&lt;/span&gt;
+&lt;span class=&quot;m&quot;&gt;10&lt;/span&gt;.&lt;span class=&quot;m&quot;&gt;10&lt;/span&gt;.&lt;span class=&quot;m&quot;&gt;10&lt;/span&gt;.&lt;span class=&quot;m&quot;&gt;3&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;staging3&lt;/span&gt;.&lt;span class=&quot;n&quot;&gt;example&lt;/span&gt;.&lt;span class=&quot;n&quot;&gt;com&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;staging3&lt;/span&gt;
+&lt;span class=&quot;m&quot;&gt;10&lt;/span&gt;.&lt;span class=&quot;m&quot;&gt;10&lt;/span&gt;.&lt;span class=&quot;m&quot;&gt;10&lt;/span&gt;.&lt;span class=&quot;m&quot;&gt;4&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;staging4&lt;/span&gt;.&lt;span class=&quot;n&quot;&gt;example&lt;/span&gt;.&lt;span class=&quot;n&quot;&gt;com&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;staging4&lt;/span&gt;
+&lt;span class=&quot;m&quot;&gt;10&lt;/span&gt;.&lt;span class=&quot;m&quot;&gt;10&lt;/span&gt;.&lt;span class=&quot;m&quot;&gt;10&lt;/span&gt;.&lt;span class=&quot;m&quot;&gt;5&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;staging5&lt;/span&gt;.&lt;span class=&quot;n&quot;&gt;example&lt;/span&gt;.&lt;span class=&quot;n&quot;&gt;com&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;staging5&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;# Update &amp;amp; Upgrade all installed packages&lt;/span&gt;
+apt-get update &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; apt-get upgrade &lt;span class=&quot;nt&quot;&gt;-y&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;# Install gluster dependencies&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;apt-get &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;python-software-properties &lt;span class=&quot;nt&quot;&gt;-y&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Add the GlusterFS &lt;a href=&quot;https://itsfoss.com/ppa-guide/&quot;&gt;PPA&lt;/a&gt; package the list of trusted packages to install from a community repository.&lt;/p&gt;
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;add-apt-repository ppa:gluster/glusterfs-3.10&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;apt-get update &lt;span class=&quot;nt&quot;&gt;-y&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;apt-get update
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Now lets install gluster&lt;/p&gt;
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;apt-get &lt;span class=&quot;nb&quot;&gt;install&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-y&lt;/span&gt; glusterfs-server attr
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Now before starting the Gluster service but I had to copy some files into systemd &lt;em&gt;(you may or may not have to do this)&lt;/em&gt;. But since Gluster was developed by &lt;a href=&quot;https://www.redhat.com/en/technologies/storage/gluster&quot;&gt;RedHat&lt;/a&gt; primarily for &lt;a href=&quot;https://www.redhat.com/en/technologies/linux-platforms/enterprise-linux&quot;&gt;RedHat&lt;/a&gt; and &lt;a href=&quot;https://www.centos.org/&quot;&gt;CentOS&lt;/a&gt;, I had a few issues starting the system service.&lt;/p&gt;
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;sudo cp&lt;/span&gt; /etc/init.d/glusterfs-server /etc/systemd/system/
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Let’s start and enable the glusterfs system service&lt;/p&gt;
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;systemctl &lt;span class=&quot;nb&quot;&gt;enable &lt;/span&gt;glusterfs-server&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; systemctl start glusterfs-server
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;This step isn’t necessary, but I like to verify that&lt;/p&gt;
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;# Verify the gluster service is enabled&lt;/span&gt;
+systemctl is-enabled glusterfs-server
+&lt;span class=&quot;c&quot;&gt;# Check the system service status of the gluster-server&lt;/span&gt;
+systemctl status glusterfs-server
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;If for some reason you haven’t done this yet, each and every node should have it’s own ssh key generated.&lt;/p&gt;
+
+&lt;p&gt;&lt;em class=&quot;small&quot;&gt;(The only reason I can think of why they wouldn’t have a different key is if a VM was provisioned and than cloned for similar use across a swarm.)&lt;/em&gt;&lt;/p&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;# This is to generate a very basic SSH key, you may want to specify a key type such as ED25519 or bit length if required.&lt;/span&gt;
+ssh-keygen &lt;span class=&quot;nt&quot;&gt;-t&lt;/span&gt; rsa
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Dependant on your Docker Swarm environment and which server you’re running as a manager; you’ll probably want one of the node managers to also be a gluster node manager as well. I’m going to say server &lt;code class=&quot;highlighter-rouge&quot;&gt;staging1&lt;/code&gt; is one of our node managers, so on this server we’re going to probe all other gluster nodes to add them to the gluster pool. (Probing them essentially is saying this manager is telling all servers on this list to connect to each-other.)&lt;/p&gt;
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;gluster peer probe staging1&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; gluster peer probe staging2&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; gluster peer probe staging3&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; gluster peer probe staging4&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; gluster peer probe staging5&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;It’s not required, but probably good practice to ensure all of the nodes have connected to the pool before setting up the file system.&lt;/p&gt;
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;gluster pool list
+
+&lt;span class=&quot;c&quot;&gt;# =&amp;gt; You should get results similar to the following&lt;/span&gt;
+UUID					Hostname 	State
+a8136a2b-a2e3-437d-a003-b7516df9520e	staging3 	Connected
+2a2f93f6-782c-11e9-8f9e-2a86e4085a59	staging2 	Connected
+79cb7ec0-f337-4798-bde9-dbf148f0da3b	staging4 	Connected
+3cfc23e6-782c-11e9-8f9e-2a86e4085a59	staging5 	Connected
+571bed3f-e4df-4386-bd46-3df6e3e8479f	localhost	Connected
+
+&lt;span class=&quot;c&quot;&gt;# You can also run the following command to another set of results&lt;/span&gt;
+gluster peer status
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Now lets create the gluster data storage directories &lt;em&gt;(&lt;strong&gt;It’s very important you do this on every node.&lt;/strong&gt; This is because this directory is where all gluster nodes will store the distributed files locally.)&lt;/em&gt;&lt;/p&gt;
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;sudo mkdir&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-p&lt;/span&gt; /gluster/brick
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Now lets create a gluster volume across all nodes (again run this on the master node/node manager).&lt;/p&gt;
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;gluster volume create staging-gfs replica 5 staging1:/gluster/brick staging2:/gluster/brick staging3:/gluster/brick staging4:/gluster/brick staging5:/gluster/brick force
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;The next step is to initialize the glusterFS to begin synchronizing across all nodes.&lt;/p&gt;
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;gluster volume start staging-gfs
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;This step is also not required, but I prefer to verify the gluster volume replicated across all of the designated nodes.&lt;/p&gt;
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;gluster volume info
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;No let’s ensure we have gluster mount the &lt;code class=&quot;highlighter-rouge&quot;&gt;/mtn&lt;/code&gt; directory for it’s shared directory especially on a reboot. &lt;strong&gt;&lt;em&gt;(It’s important to run these commands on all gluster nodes.)&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;umount /mnt
+&lt;span class=&quot;nb&quot;&gt;sudo echo&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'localhost:/staging-gfs /mnt glusterfs defaults,_netdev,backupvolfile-server=localhost 0 0'&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&amp;gt;&lt;/span&gt; /etc/fstab
+&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;mount.glusterfs localhost:/staging-gfs /mnt
+&lt;span class=&quot;nb&quot;&gt;sudo chown&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-R&lt;/span&gt; root:docker /mnt
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;&lt;em class=&quot;small&quot;&gt;(You may have noticed the setting of file permissions using &lt;code class=&quot;highlighter-rouge&quot;&gt;chown -R root:docker&lt;/code&gt; this is to ensure docker will have read/write access to the files in the specified directory.)&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;If for some reason you’ve already deployed your staging gluster-fs and need to remount the staging-gfs volume you can run the following command. Otherwise you should be able to skip this step.&lt;/p&gt;
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;umount /mnt&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;mount.glusterfs localhost:/staging-gfs /mnt&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;sudo chown&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-R&lt;/span&gt; root:docker /mnt
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Let’s list all of our mounted partitions and ensure that the &lt;code class=&quot;highlighter-rouge&quot;&gt;staging-gfs&lt;/code&gt; is listed.&lt;/p&gt;
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;df&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-h&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;# =&amp;gt; staging-gfs should be listed in the partitions/disks listed&lt;/span&gt;
+localhost:/staging-gfs              63G   13G   48G  21% /mnt
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Now that all of the work is pretty much done, now comes the fun part lets test to make sure it all works.
+Lets &lt;code class=&quot;highlighter-rouge&quot;&gt;cd&lt;/code&gt; into the &lt;code class=&quot;highlighter-rouge&quot;&gt;/mnt&lt;/code&gt; directory and create a few files to make sure they will sync across all nodes.
+&lt;em&gt;(I know this is one of the first things I wanted to try out.)&lt;/em&gt;
+You can do one of the following commands to generate a random file in the &lt;code class=&quot;highlighter-rouge&quot;&gt;/mnt&lt;/code&gt; directory.
+Now depending on your servers and network connections this should sync up across all nodes almost instantly.
+The way I tested this I was in the &lt;code class=&quot;highlighter-rouge&quot;&gt;/mtn&lt;/code&gt; directory on several nodes in several terminals. And as soon as I issued the command I was running the &lt;code class=&quot;highlighter-rouge&quot;&gt;ls&lt;/code&gt; command in the other tabs.
+And depending on the file size, it may not sync across all nodes instantly, but is at least accessible.&lt;/p&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;# This creates a 24MB file full of zeros&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;dd &lt;/span&gt;&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;/dev/zero &lt;span class=&quot;nv&quot;&gt;of&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;output.dat &lt;span class=&quot;nv&quot;&gt;bs&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;24M  &lt;span class=&quot;nv&quot;&gt;count&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;1
+
+&lt;span class=&quot;c&quot;&gt;# Creates a 2MB file of random characters&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;dd &lt;/span&gt;&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;/dev/urandom &lt;span class=&quot;nv&quot;&gt;of&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;output.log &lt;span class=&quot;nv&quot;&gt;bs&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;1M &lt;span class=&quot;nv&quot;&gt;count&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;2
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;using-glusterfs-with-docker&quot;&gt;Using GlusterFS with Docker&lt;/h3&gt;
+
+&lt;p&gt;Now that all the fun stuff is done if you have looked at docker &lt;a href=&quot;https://docs.docker.com/storage/volumes/&quot;&gt;volumes&lt;/a&gt; or &lt;a href=&quot;https://docs.docker.com/storage/bind-mounts/&quot;&gt;bind&lt;/a&gt; mounts this would probably be a good time.
+Usually docker will store a volumes contents in a folder structure similar to the following: &lt;code class=&quot;highlighter-rouge&quot;&gt;/var/lib/docker/volumes/DogTracker/_data&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;But in your &lt;code class=&quot;highlighter-rouge&quot;&gt;docker-compose.yml&lt;/code&gt; or &lt;code class=&quot;highlighter-rouge&quot;&gt;docker-stack.yml&lt;/code&gt; you can specify specific mount points for the docker volumes.
+If you look at the following &lt;a href=&quot;https://en.wikipedia.org/wiki/YAML&quot;&gt;YAML&lt;/a&gt; snippet you will notice I’m saying to store the containers &lt;code class=&quot;highlighter-rouge&quot;&gt;/opt/couchdb/data&lt;/code&gt; directory on the local mount point &lt;code class=&quot;highlighter-rouge&quot;&gt;/mnt/staging_couch_db&lt;/code&gt;.&lt;/p&gt;
+
+&lt;div class=&quot;language-yml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;na&quot;&gt;version&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;3.7'&lt;/span&gt;
+&lt;span class=&quot;na&quot;&gt;services&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;couchdb&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;image&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;couchdb:2.3.0&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;volumes&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+   &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;type&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;bind&lt;/span&gt;
+     &lt;span class=&quot;na&quot;&gt;source&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;/mnt/staging_couch_db&lt;/span&gt;
+     &lt;span class=&quot;na&quot;&gt;target&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;/opt/couchdb/data&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;networks&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;internal&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;deploy&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;resources&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+      &lt;span class=&quot;na&quot;&gt;limits&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;cpus&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;0.30'&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;memory&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;512M&lt;/span&gt;
+      &lt;span class=&quot;na&quot;&gt;reservations&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;cpus&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;0.15'&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;memory&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;256M&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;Now as we had previously demonstrated any file(s) saved, created, and/or deleted in the &lt;code class=&quot;highlighter-rouge&quot;&gt;/mtn&lt;/code&gt; directory will be synchronized across all of the GlusterFS nodes.&lt;/p&gt;
+
+&lt;p&gt;I’d just like to mention this may not work for everyone, but this is the method that worked best for use.
+We’ve been running a number of different Gluster networks for several months now with no issues &lt;em&gt;thus far&lt;/em&gt;.&lt;/p&gt;
+</content>
+  </entry>
   
   <entry>
     <id>http://theworkaround.com/2018/06/04/rubys-year-of-performance-2018</id>
@@ -93,7 +345,9 @@ end
       <name>Brandon Hicks</name>
       <uri>http://theworkaround.com</uri>
     </author>
-    <content type="html">&lt;h3 id=&quot;a-brief-intro&quot;&gt;A Brief Intro&lt;/h3&gt;
+    <content type="html">&lt;p&gt;&lt;img src=&quot;/img/posts/mikrotik.png&quot; alt=&quot;&quot; class=&quot;img-fluid w-25&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;a-brief-intro&quot;&gt;A Brief Intro&lt;/h3&gt;
 &lt;p&gt;I’ve been using Mikrotik routers for about a year now and I’ve had nothing but an amazing experience thus far.
 I haven’t taken any of the &lt;a href=&quot;https://mikrotik.com/training/&quot;&gt;certification&lt;/a&gt; training courses (MTCNA, MTCRE, MTCWE) for the Mikrotik routers and thus far all my learning has been hands more of a hands on experience and following the RouterOS &lt;a href=&quot;https://wiki.mikrotik.com/wiki/Manual:TOC&quot;&gt;documentation&lt;/a&gt;.&lt;/p&gt;
 
@@ -217,9 +471,7 @@ So I removed the Layer7 and revamped the script to use it hostname matches throu
       <name>Brandon Hicks</name>
       <uri>http://theworkaround.com</uri>
     </author>
-    <content type="html">&lt;div class=&quot;header&quot; style=&quot;background: url('/img/headers/photo-1472214103451-9374bd1c798e.jpeg') no-repeat center scroll;&quot;&gt;&lt;/div&gt;
-
-&lt;p&gt;Let me start off by saying, it’s been one heck of a year and so much has changed in my life, it’s almost unrecognizable. To start, I had a few career changes; I went from doing IT support for a car rental agency to being laid off. Being laid off was quite an uncomfortable experience, because I have kids and a family to support. While waiting to get hired I used this downtime as a learning experience and worked on various projects. At least, until I got some contract work. At first, it was a dream come true, working as a developer, getting paid for what I loved. There were several very smart developers in which I was working with and learning from.&lt;/p&gt;
+    <content type="html">&lt;p&gt;Let me start off by saying, it’s been one heck of a year and so much has changed in my life, it’s almost unrecognizable. To start, I had a few career changes; I went from doing IT support for a car rental agency to being laid off. Being laid off was quite an uncomfortable experience, because I have kids and a family to support. While waiting to get hired I used this downtime as a learning experience and worked on various projects. At least, until I got some contract work. At first, it was a dream come true, working as a developer, getting paid for what I loved. There were several very smart developers in which I was working with and learning from.&lt;/p&gt;
 
 &lt;p&gt;That was until the owner slowly started cutting everyone’s checks back and saying “Oh sorry I’ll add it onto your next check.” And then after a few missed and partial payments, he completely disappeared. Or at least stopped all contact with my team. One-by-one, we were all removed from the various SasS services in which we had used. We were removed from the GitHub repos, time-trackers, invoicing, etc. Luckily I still have a local copy of the git repo, if I ever have to prove any of my work.&lt;/p&gt;
 
@@ -266,7 +518,7 @@ Now that know it a GIS dataset, who wants to pay &lt;a href=&quot;http://www.arc
 
 &lt;p&gt;Now comes to fun part, we’ll begin with starting up QGIS and opening up the &lt;code class=&quot;highlighter-rouge&quot;&gt;.dbx&lt;/code&gt; as stated before. When you load this database table, it may table a few moments because it will also try to load all of it’s other component files as well. Once the parcel project loads, you may be faced with a map that looks similar to CAD wireframe, except very intricate. But slow down, your on the right path. Just consider this as vector points similar to using the Pen Tool to build shapes in Adobe Illustrator.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/img/mapping_arcgis/gis_grid500.jpg&quot; alt=&quot;GIS Grid&quot; class=&quot;img-responsive center-block&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/img/posts/mapping_arcgis/gis_grid500.jpg&quot; alt=&quot;GIS Grid&quot; class=&quot;img-fluid center-block&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Except the GIS map doesn’t just include points to create a layout of buildings.
 If you zoom in and switch to the Identify Features/vector information tool and click individual plots or buildings notice it allows you to view information for each parcel. Which consists of tons of information used by the county to identify the area (PARCELNO, GrossAcres, PhysAddr, ACCTTYPE, etc.). Now this doesn’t seem like it’ll be anything important, but when we convert the dBase table to a PostGIS table each one of these attributes will be used as a column to identify each and every building in the county.&lt;/p&gt;
@@ -312,7 +564,7 @@ This can easy be achieved by reprojecting the layer with WGS84 coordinates.
 &lt;strong&gt;Go To:&lt;/strong&gt; &lt;code class=&quot;highlighter-rouge&quot;&gt;Menu -&amp;gt; Processing -&amp;gt; Toolbox -&amp;gt; QGIS geoalgorithms -&amp;gt; Vector General Tools -&amp;gt; Reproject Layer&lt;/code&gt;.
 Another method is if you have the Toolbox side already open you can just search for the tool &lt;code class=&quot;highlighter-rouge&quot;&gt;Reproject Layer&lt;/code&gt;&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/img/mapping_arcgis/reproject_layer.png&quot; alt=&quot;Reprojected Layer&quot; class=&quot;img-responsive center-block&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/img/posts/mapping_arcgis/reproject_layer.png&quot; alt=&quot;Reprojected Layer&quot; class=&quot;img-fluid center-block&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;You than set the “Target CRS” as EPSG:4326/WGS84 in the dropdown menu, but we warned depending on your computer this may take a while. Because some of the structures have numerous repetitive points, I had to reduce the point precision in order to keep my computer from freezing up when I would reproject the layer. This can be be found in the toolbox under &lt;code class=&quot;highlighter-rouge&quot;&gt;Grass -&amp;gt; Vector -&amp;gt; v.clean&lt;/code&gt;. Be warned if you do need to use this feature, I suggest that you use it sparingly because it can and will readjust the boundaries of various structures.&lt;/p&gt;
 
@@ -844,6 +1096,8 @@ But they all have a purpose and they have their dedicated users.
 I for one can say for the past several years I’ve been a heavy user of zsh along with the addition of
 &lt;a href=&quot;http://ohmyz.sh/&quot;&gt;oh-my-zsh&lt;/a&gt; for the customization, easy plugins, and user friendly terminal.&lt;/p&gt;
 
+&lt;p&gt;&lt;a href=&quot;https://github.com/laughedelic/fish_logo&quot;&gt;&lt;img src=&quot;/img/posts/installing_fish_on_OSx/fish_logo.png&quot; alt=&quot;Fish Logo&quot; class=&quot;img-fluid mx-auto&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
 &lt;p&gt;From what I could find the majority of POSIX developers tend to stick with BASH
 which is very universal, widely used, and easy to learn. And mac OS users,
 tend to stick with either bash or zsh, I mean why change what’s not broken, right?
@@ -1060,7 +1314,7 @@ Plain old &lt;code class=&quot;highlighter-rouge&quot;&gt;Courier&lt;/code&gt; o
 
 &lt;p&gt;As you can see below, I tend to enjoy using smooth charcoal gray themes, with colors that aren’t to vibrant.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/img/installing_fish_on_OSx/smooth_fish_terminal.png&quot; alt=&quot;iTerm with Multitabs&quot; class=&quot;img-responsive center-block&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/img/posts/installing_fish_on_OSx/smooth_fish_terminal.png&quot; alt=&quot;iTerm with Multitabs&quot; class=&quot;img-fluid mx-auto&quot; /&gt;&lt;/p&gt;
 
 &lt;hr /&gt;
 &lt;h3 id=&quot;resources&quot;&gt;Resources;&lt;/h3&gt;
@@ -1109,7 +1363,7 @@ having to switch between different tabs and windows, trying to find the one that
 But having to switch from tab to tab, just to view your output logs or guard
 builds/tests gets to be a pain after a while.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/img/tmux_wRails/multitabs.png&quot; alt=&quot;iTerm with Multitabs&quot; class=&quot;img-responsive center-block&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/img/posts/tmux_wRails/multitabs.png&quot; alt=&quot;iTerm with Multitabs&quot; class=&quot;img-fluid mx-auto&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;So what is tmux? It’s a mutliplex and very similar to the *nix screen process.
 It allows you to perform several processes all within the same screen, without
@@ -1184,7 +1438,7 @@ install the tmux plugins by doing the following key combo &lt;code class=&quot;h
 have to wait a few minutes, but it’ll install all specified plugins in the
 bottom of the tmux.conf file.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/img/tmux_wRails/basic_tmux.png&quot; alt=&quot;Basic tmux&quot; class=&quot;img-responsive center-block&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/img/posts/tmux_wRails/basic_tmux.png&quot; alt=&quot;Basic tmux&quot; class=&quot;img-fluid center-block&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Now if you want to play around with tmux, to get additional windows, panes,
 sessions, etc. Great. As you can see from the image, tmux is a multiplexer which
@@ -1270,7 +1524,7 @@ So to make things a little easier and somewhere to start from, here’s a copy o
 And if your lazy, you can always search &lt;a href=&quot;https://github.com/&quot;&gt;github&lt;/a&gt; for .dotfile repositories
 because there are tons and tons of tmux.conf files listed.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/img/tmux_wRails/tmuxinator_wRails.png&quot; alt=&quot;tmuxinator with Rails&quot; class=&quot;img-responsive center-block&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/img/posts/tmux_wRails/tmuxinator_wRails.png&quot; alt=&quot;tmuxinator with Rails&quot; class=&quot;img-fluid center-block&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;How it’s time to let you loose on your own and see what kind of project configure best suites your needs.&lt;/p&gt;
 
@@ -1746,8 +2000,7 @@ tmux kill-server
       <name>Brandon Hicks</name>
       <uri>http://theworkaround.com</uri>
     </author>
-    <content type="html">&lt;p&gt;&lt;img src=&quot;/img/ground-stones-pebbles.jpg&quot; alt=&quot;Barren Rock Bed&quot; class=&quot;img-responsive&quot; /&gt;
-Sometimes we get the point where we experience a level of extreme burnout. We don’t want to admit it and we don’t want to step down and evaluate our lives to admit it’s true. And as humans we don’t want to make any extreme changes, especially once we’ve found a comfort zone. It may be caused by our job, our routine, or extreme stress. The burnout begins to eat away at you, it may feel like nothing and start small but you begin to notice it after a while.&lt;/p&gt;
+    <content type="html">&lt;p&gt;Sometimes we get the point where we experience a level of extreme burnout. We don’t want to admit it and we don’t want to step down and evaluate our lives to admit it’s true. And as humans we don’t want to make any extreme changes, especially once we’ve found a comfort zone. It may be caused by our job, our routine, or extreme stress. The burnout begins to eat away at you, it may feel like nothing and start small but you begin to notice it after a while.&lt;/p&gt;
 
 &lt;ul&gt;
   &lt;li&gt;Fatigue and constant tiredness&lt;/li&gt;
@@ -1760,14 +2013,13 @@ Sometimes we get the point where we experience a level of extreme burnout. We do
 
 &lt;p&gt;But when we hit that breaking point in our burnout our world begins to spiral out of control. Once we hit that point nothing in our lives seems to bring much joy, you have make an extreme change in order to get a purpose back into your life. Sometimes you just need a new job, sometimes you need to move, usually it’s not exactly you but what is going on around you.&lt;/p&gt;
 
-&lt;p&gt;I for one have experienced the job ambition part, first let me say that in this town I am absolutely thankful that I even have a job. Where I live is a town that relies heavily on the oilfield and gas prices to keep it afloat. And over the past year since prices and profits have been down. And doesn’t just affect a few people here and there, the whole town has had to readjust their lives and make huge differences in way they spend their money. At the moment I am lucky to even have a job in this town with a shrinking market, let alone a job where I can support my family.&lt;/p&gt;
+&lt;p&gt;I for one have experienced the job ambition part, first let me say that in this town I am absolutely thankful that I even have a job. The town in which I live, relies heavily on the oilfield and gas prices to keep it a float. Yet, over the past year since prices and profits have been down. And this doesn’t just affect a few people here and there, the whole town has had to re-adjust their lives and make huge differences in way they spend their money. At the moment, in this shrinking market and in a town bleeding money, I am pretty lucky to even have a job, let alone a fairly decent job in which I can support my family.&lt;/p&gt;
 
 &lt;p&gt;At my current job I’ve reached the peak, locally I can’t be promoted any higher. And my days seem to just blend together, I do almost the same thing every day. I’m on a continuous repeat cycle and after a few years of doing it really begins to get to you. I’ve been working here long enough to be able to get the majority of my tasks down and out the way within a few hours. The rest of the day I’m manning the office and doing what I want. I’m not saying it’s like this all day, every day. But in order to completely avoid being burnt out I have spend a few hours here and there learning, coding, trying to get out of the loop trying to continuously do something new. But it starts to get to you after a while and you begin to question yourself “Am I happy with my life? Am I happy with what I’m doing? Is this what I want to be doing a year from now? Or maybe even 5 or 10 years from now?”.&lt;/p&gt;
 
 &lt;p&gt;No of course now, everyone has a passion and some of us have the motivation and drive to turn it into a career. But others spend their lives working and wishing they had done more with their lives, but once they reached that point where the found that groove at their job they settle and figured they might as well ride it out as long as they can. But why would someone settle with what they feel comfortable with, when they have potential to achieve so much more with their lives. Many people don’t want to take the risks, I know it’s scary to look around say “What if I fail at this? What will I do?”, well you’ll pick yourself back up and start over again, but this time you know where you went wrong.&lt;/p&gt;
 
 &lt;p&gt;My point to this post is, you don’t want to wait until you’re in an absolute state of despair to make changes in your life. If you’re feeling like your current place isn’t doing it for you anymore try to move on, do what you need to do in order to make you and those around you happy. Sometimes it’s as simple as starting to go on a walk during your lunch break in order to clear your mind. And other times it’s everything around you, because you’ve exposed yourself to a toxic environment and you need to make a major change in your career, your home, or your routine. Make your own motivation! Do something drastic, reach for those dreams and change your life. Even it’s just something simple as doing something you’re passionate at, make a change in your life even little things can make a huge difference in your view of life.&lt;/p&gt;
-
 </content>
   </entry>
   
@@ -2035,7 +2287,7 @@ But before I attempt to push this any faster and milk every drop of performance 
       <name>Brandon Hicks</name>
       <uri>http://theworkaround.com</uri>
     </author>
-    <content type="html">&lt;p&gt;&lt;img src=&quot;/img/grape_bunch.png&quot; alt=&quot;Kumquat Tree&quot; class=&quot;img-responsive&quot; /&gt;&lt;/p&gt;
+    <content type="html">&lt;p&gt;&lt;img src=&quot;/img/grape_bunch.png&quot; alt=&quot;Kumquat Tree&quot; class=&quot;img-fluid&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;As of recently I have been building and growing a small vegetable garden for my family. My children love the idea of putting work into it something quite so amazing: digging up the dirt, playing the seeds and plant buds, watering, and taking responsibility for a small living object that will someday be rewarding them for their effort. But in the meantime they have to put time, effort, and tender love and care into taking care of the plants.&lt;/p&gt;
 

@@ -15,6 +15,8 @@ group :jekyll_plugins do
   # gem 'jekyll-commonmark' # C based markdown compiler
   gem 'jekyll-commonmark-ghpages' # github flavor of commonmark (mainly to correct syntax highlighting issues)
   gem 'jekyll-minifier' # used for compressing the html and reducing the sites size
+  gem 'jekyll-compress-images', github: 'valerijaspasojevic/jekyll-compress-images'
+  # Other gem to lookat - https://github.com/chrisanthropic/image_optim-jekyll-plugin
   gem 'jekyll-sass-converter' # github: 'jekyll/jekyll-sass-converter'
   gem 'jekyll-seo-tag'
   gem 'jekyll-tagging', github: 'pattex/jekyll-tagging'

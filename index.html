@@ -3,16 +3,12 @@ layout: default
 title: TheWorkAround
 ---
 <div id="home">
-  <ul class="posts">
+  <div class="posts d-flex flex-column px-2">
     {% for post in site.posts %}
-      <li class="p-0 mt-2">
-        <div class="row">
-          <div class="d-flex align-self-center w-100 px-3 py-0 h-entry">
-            <h1 class="w-50 p-name"><a href="{{ post.url }}" class="u-url">{{ post.title }}</a></h1>
-            <div class="meta w-50 text-right dt-published">{{ post.date | date: "%b %d, %Y" }}</div>
-          </div>
-        </div>
-      </li>
+      <div class="d-flex w-100 p-0 h-entry mt-1 mb-2">
+        <h1 class="p-name mr-auto"><a href="{{ post.url }}" class="u-url">{{ post.title }}</a></h1>
+        <div class="meta text-right dt-published">{{ post.date | date: "%b %d, %Y" }}</div>
+      </div>
     {% endfor %}
-  </ul>
+  </div>
 </div>

@@ -6,6 +6,9 @@ description: ""
 tags: [mikrotik, networking, routers]
 comments: true
 ---
+
+![](/img/posts/mikrotik.png){: .img-fluid .w-25 }
+
 ### A Brief Intro
 I've been using Mikrotik routers for about a year now and I've had nothing but an amazing experience thus far.
 I haven't taken any of the [certification](https://mikrotik.com/training/) training courses (MTCNA, MTCRE, MTCWE) for the Mikrotik routers and thus far all my learning has been hands more of a hands on experience and following the RouterOS [documentation](https://wiki.mikrotik.com/wiki/Manual:TOC).

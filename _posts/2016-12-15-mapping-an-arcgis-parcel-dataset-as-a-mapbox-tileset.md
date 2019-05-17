@@ -26,7 +26,7 @@ Now that know it a GIS dataset, who wants to pay [hundreds](http://www.arcgis.co
 
 Now comes to fun part, we'll begin with starting up QGIS and opening up the `.dbx` as stated before. When you load this database table, it may table a few moments because it will also try to load all of it's other component files as well. Once the parcel project loads, you may be faced with a map that looks similar to CAD wireframe, except very intricate. But slow down, your on the right path. Just consider this as vector points similar to using the Pen Tool to build shapes in Adobe Illustrator.
 
-![GIS Grid](/img/mapping_arcgis/gis_grid500.jpg){: .img-responsive .center-block }
+![GIS Grid](/img/posts/mapping_arcgis/gis_grid500.jpg){: .img-fluid .center-block }
 
 Except the GIS map doesn't just include points to create a layout of buildings.
 If you zoom in and switch to the Identify Features/vector information tool and click individual plots or buildings notice it allows you to view information for each parcel. Which consists of tons of information used by the county to identify the area (PARCELNO, GrossAcres, PhysAddr, ACCTTYPE, etc.). Now this doesn't seem like it'll be anything important, but when we convert the dBase table to a PostGIS table each one of these attributes will be used as a column to identify each and every building in the county.
@@ -77,7 +77,7 @@ This can easy be achieved by reprojecting the layer with WGS84 coordinates.
 **Go To:** `Menu -> Processing -> Toolbox -> QGIS geoalgorithms -> Vector General Tools -> Reproject Layer`.
 Another method is if you have the Toolbox side already open you can just search for the tool `Reproject Layer`
 
-![Reprojected Layer](/img/mapping_arcgis/reproject_layer.png){: .img-responsive .center-block }
+![Reprojected Layer](/img/posts/mapping_arcgis/reproject_layer.png){: .img-fluid .center-block }
 
 You than set the "Target CRS" as EPSG:4326/WGS84 in the dropdown menu, but we warned depending on your computer this may take a while. Because some of the structures have numerous repetitive points, I had to reduce the point precision in order to keep my computer from freezing up when I would reproject the layer. This can be be found in the toolbox under `Grass -> Vector -> v.clean`. Be warned if you do need to use this feature, I suggest that you use it sparingly because it can and will readjust the boundaries of various structures.
 

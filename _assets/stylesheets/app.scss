@@ -11,11 +11,9 @@
 }
 
  code {
-   //background: #f7f7f7;
   background: #f5f5f5;
   color: #bf616a;
   font-size: 85%;
-  padding: .25em .5em;
 }
 
 div.highlight {
@@ -23,6 +21,7 @@ div.highlight {
 }
 .highlight pre {
   border: 0 !important;
+  padding: 1.25em;
 }
 
 .header {
@@ -35,16 +34,4 @@ div.highlight {
   min-height: 250px;
   text-align: center;
   width: 100%;
-}
-
-//pre.highlight code{
-//  font-family: $monospace-font;
-//  font-size:15px;
-//}
-
-// widen content block
-@media (min-width: 1200px){
-  .container {
-    width: 90% !important;
-  }
 }

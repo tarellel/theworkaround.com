@@ -18,7 +18,7 @@
   <link rel="dns-prefetch" href="https://ajax.googleapis.com/">
   <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com/">
   <meta name="theme-color" content="#4cb8c4">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
   {% asset app.css !type %}
   <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
   <!--[if lt IE 9]>
@@ -32,33 +32,30 @@
   <link href="/rss.xml" rel="alternate" title="RSS" type="application/rss+xml">
   <link href="/sitemap.xml" rel="sitemap" title="Sitemap" type="application/xml">
   <link href="/humans.txt" rel="author" type="text/plain">
-
 </head>
 <body>
-  <div class="container">
+  <div class="container-fluid">
     <div class="site">
       <div class="row">
-        <div class="col-md-2 text-right">
-          <div class="social-icons">
-          <p>
-            <a href="/" title="Return to Homepage">/</a>
-            <a href="http://twitter.com/{{ site.author.twitter }}" title="Follow me on Twitter" rel="me">
-              <i class="fa fa-twitter"></i>
+        <div class="col-md-2">
+          <div class="social-icons d-flex justify-content-around justify-content-md-end">
+            <a href="/" title="Return to Homepage" class="mx-2">/</a>
+            <a href="http://twitter.com/{{ site.author.twitter }}" title="Follow me on Twitter" class="mx-2" rel="me">
+              <em class="fab fa-twitter"></em>
             </a>
-            <a href="http://github.com/{{ site.author.github }}" title="View my code on GitHub" rel="me">
-              <i class="fa fa-github"></i>
+            <a href="http://github.com/{{ site.author.github }}" title="View my code on GitHub" class="mx-2" rel="me">
+              <em class="fab fa-github"></em>
             </a>
-            <a href="mailto:&#116;&#097;&#114;&#101;&#108;&#108;&#101;&#108;&#064;&#103;&#109;&#097;&#105;&#108;&#046;&#099;&#111;&#109;" title="Email Me" class="email">
-              <i class="fa fa-envelope"></i>
+            <a href="mailto:&#116;&#097;&#114;&#101;&#108;&#108;&#101;&#108;&#064;&#103;&#109;&#097;&#105;&#108;&#046;&#099;&#111;&#109;" title="Email Me" class="mx-2" rel="email">
+              <em class="fa fa-envelope"></em>
             </a>
-          </p>
           </div>
-          <div class="text-right navlinks">
-            <a href="/about">About</a><br/>
-            <a href="/archive">Archive</a>
+          <div class="text-right navlinks d-flex justify-content-around flex-md-column p-0 my-2">
+            <a href="/about" class="nav-items my-sm-3 my-md-0">About</a>
+            <a href="/archive" class="nav-items my-sm-3 my-md-0">Archive</a>
           </div>
         </div>
-        <div class="col-md-10 content">
+        <div class="col-md-10 px-3">
           {{ content }}
         </div>
       </div>

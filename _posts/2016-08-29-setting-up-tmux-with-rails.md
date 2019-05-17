@@ -19,7 +19,7 @@ As you can see from the image below, this method works.
 But having to switch from tab to tab, just to view your output logs or guard
 builds/tests gets to be a pain after a while.
 
-![iTerm with Multitabs](/img/tmux_wRails/multitabs.png){: .img-responsive .center-block }
+![iTerm with Multitabs](/img/posts/tmux_wRails/multitabs.png){: .img-fluid .mx-auto }
 
 So what is tmux? It's a mutliplex and very similar to the \*nix screen process.
 It allows you to perform several processes all within the same screen, without
@@ -99,7 +99,7 @@ install the tmux plugins by doing the following key combo `CTRL+b I`. You may
 have to wait a few minutes, but it'll install all specified plugins in the
 bottom of the tmux.conf file.
 
-![Basic tmux](/img/tmux_wRails/basic_tmux.png){: .img-responsive .center-block }
+![Basic tmux](/img/posts/tmux_wRails/basic_tmux.png){: .img-fluid .center-block }
 
 Now if you want to play around with tmux, to get additional windows, panes,
 sessions, etc. Great. As you can see from the image, tmux is a multiplexer which
@@ -190,7 +190,7 @@ So to make things a little easier and somewhere to start from, here's a copy of 
 And if your lazy, you can always search [github](https://github.com/) for .dotfile repositories
 because there are tons and tons of tmux.conf files listed.
 
-![tmuxinator with Rails](/img/tmux_wRails/tmuxinator_wRails.png){: .img-responsive .center-block }
+![tmuxinator with Rails](/img/posts/tmux_wRails/tmuxinator_wRails.png){: .img-fluid .center-block }
 
 How it's time to let you loose on your own and see what kind of project configure best suites your needs.
 

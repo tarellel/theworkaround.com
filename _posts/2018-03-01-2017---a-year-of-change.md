@@ -5,9 +5,9 @@ date: 2018-03-01 14-03-43
 description: ""
 tags: [life]
 comments: false
+header: '/img/headers/photo-1472214103451-9374bd1c798e.jpeg'
+header_alt: 'Valley Sunset'
 ---
-
-<div class="header" style="background: url('/img/headers/photo-1472214103451-9374bd1c798e.jpeg') no-repeat center scroll;"></div>
 
 Let me start off by saying, it’s been one heck of a year and so much has changed in my life, it’s almost unrecognizable. To start, I had a few career changes; I went from doing IT support for a car rental agency to being laid off. Being laid off was quite an uncomfortable experience, because I have kids and a family to support. While waiting to get hired I used this downtime as a learning experience and worked on various projects. At least, until I got some contract work. At first, it was a dream come true, working as a developer, getting paid for what I loved. There were several very smart developers in which I was working with and learning from.
 

@@ -1,19 +1,17 @@
 ---
 layout: default
 ---
-{% if page.tag %}
-  <h2>Posts tagged with: {{ page.tag }}</h2>
-{% endif %}
+<section class="article-list">
+  {% if page.tag %}
+    <h2>Posts tagged with: {{ page.tag }}</h2>
+  {% endif %}
 
-<ul class="posts">
-  {% for post in page.posts %}
-    <li>
-      <div class="row">
-        <div class="col-md-6">
-          <a href="{{ post.url }}">{{ post.title }}</a>
-        </div>
-        <div class="col-md-2 text-right meta">{{ post.date | date: "%b %d, %Y" }}</div>
-      </div>
-    </li>
-  {% endfor %}
-</ul>
+  <div class="posts">
+    {% for post in page.posts %}
+    <div class="d-flex w-100 p-0 h-entry mt-1 mb-2">
+      <h1 class="p-name mr-auto"><a href="{{ post.url }}" class="u-url">{{ post.title }}</a></h1>
+      <div class="meta text-right dt-published">{{ post.date | date: "%b %d, %Y" }}</div>
+    </div>
+    {% endfor %}
+  </div>
+</section>
