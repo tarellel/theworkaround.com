@@ -4,7 +4,7 @@
   <title>TheWorkAround</title>
   <link href="https://theworkaround.com/"/>
   <link type="application/atom+xml" rel="self" href="https://theworkaround.com/atom.xml"/>
-  <updated>2020-02-15T22:55:45-07:00</updated>
+  <updated>2020-02-15T23:08:44-07:00</updated>
   <id>https://theworkaround.com/</id>
   <author>
     <name>Brandon Hicks</name>
@@ -14,7 +14,7 @@
   
   <entry>
     <id>https://theworkaround.com/2019/08/27/setting-up-pi-hole</id>
-    <link type="text/html" rel="alternate" href="http://example.com/2019/08/27/setting-up-pi-hole.html"/>
+    <link type="text/html" rel="alternate" href="https://theworkaround.com/2019/08/27/setting-up-pi-hole.html"/>
     <title>Setting up a Pi-Hole</title>
     <published>2019-08-27T00:00:00-06:00</published>
     <updated>2019-08-27T00:00:00-06:00</updated>
@@ -487,7 +487,7 @@ If you are using an iPhone you’ll need to use &lt;a href=&quot;https://apps.ap
   
   <entry>
     <id>https://theworkaround.com/2019/05/15/docker-swarm-persistent-storage</id>
-    <link type="text/html" rel="alternate" href="http://example.com/2019/05/15/docker-swarm-persistent-storage.html"/>
+    <link type="text/html" rel="alternate" href="https://theworkaround.com/2019/05/15/docker-swarm-persistent-storage.html"/>
     <title>Docker Swarm Persistent Storage</title>
     <published>2019-05-15T00:00:00-06:00</published>
     <updated>2019-05-15T00:00:00-06:00</updated>
@@ -739,7 +739,7 @@ We’ve been running a number of different Gluster networks for several months n
   
   <entry>
     <id>https://theworkaround.com/2018/06/04/rubys-year-of-performance-2018</id>
-    <link type="text/html" rel="alternate" href="http://example.com/2018/06/04/rubys-year-of-performance-2018.html"/>
+    <link type="text/html" rel="alternate" href="https://theworkaround.com/2018/06/04/rubys-year-of-performance-2018.html"/>
     <title>Ruby's Year of Performance (2018)</title>
     <published>2018-06-04T00:00:00-06:00</published>
     <updated>2018-06-04T00:00:00-06:00</updated>
@@ -811,7 +811,7 @@ end
   
   <entry>
     <id>https://theworkaround.com/2018/05/05/mikrotik---mobile-rate-limiting</id>
-    <link type="text/html" rel="alternate" href="http://example.com/2018/05/05/mikrotik-mobile-rate-limiting.html"/>
+    <link type="text/html" rel="alternate" href="https://theworkaround.com/2018/05/05/mikrotik-mobile-rate-limiting.html"/>
     <title>MikroTik - Mobile Rate-Limiting</title>
     <published>2018-05-05T00:00:00-06:00</published>
     <updated>2018-05-05T00:00:00-06:00</updated>
@@ -937,7 +937,7 @@ So I removed the Layer7 and revamped the script to use it hostname matches throu
   
   <entry>
     <id>https://theworkaround.com/2018/03/01/2017---a-year-of-change</id>
-    <link type="text/html" rel="alternate" href="http://example.com/2018/03/01/2017-a-year-of-change.html"/>
+    <link type="text/html" rel="alternate" href="https://theworkaround.com/2018/03/01/2017-a-year-of-change.html"/>
     <title>2017 - Was a Year of Change</title>
     <published>2018-03-01T00:00:00-07:00</published>
     <updated>2018-03-01T00:00:00-07:00</updated>
@@ -965,7 +965,7 @@ So I removed the Layer7 and revamped the script to use it hostname matches throu
   
   <entry>
     <id>https://theworkaround.com/2016/12/15/mapping-an-arcgis-parcel-dataset-as-a-mapbox-tileset</id>
-    <link type="text/html" rel="alternate" href="http://example.com/2016/12/15/mapping-an-arcgis-parcel-dataset-as-a-mapbox-tileset.html"/>
+    <link type="text/html" rel="alternate" href="https://theworkaround.com/2016/12/15/mapping-an-arcgis-parcel-dataset-as-a-mapbox-tileset.html"/>
     <title>Mapping an ArcGIS Parcel dataset as a Mapbox tileset</title>
     <published>2016-12-15T00:00:00-07:00</published>
     <updated>2016-12-15T00:00:00-07:00</updated>
@@ -1452,7 +1452,7 @@ From here you can edit and &lt;a href=&quot;https://www.mapbox.com/help/getting-
   
   <entry>
     <id>https://theworkaround.com/2016/11/11/enhancing-ssh-security</id>
-    <link type="text/html" rel="alternate" href="http://example.com/2016/11/11/enhancing-ssh-security.html"/>
+    <link type="text/html" rel="alternate" href="https://theworkaround.com/2016/11/11/enhancing-ssh-security.html"/>
     <title>Enhancing SSH Security</title>
     <published>2016-11-11T00:00:00-07:00</published>
     <updated>2016-11-11T00:00:00-07:00</updated>
@@ -1556,7 +1556,7 @@ They mostly consist of method to enhance existing security methods for your SSH 
   
   <entry>
     <id>https://theworkaround.com/2016/10/11/installing-fish-on-osx</id>
-    <link type="text/html" rel="alternate" href="http://example.com/2016/10/11/installing-fish-on-osx.html"/>
+    <link type="text/html" rel="alternate" href="https://theworkaround.com/2016/10/11/installing-fish-on-osx.html"/>
     <title>Installing Fish on OSx</title>
     <published>2016-10-11T00:00:00-06:00</published>
     <updated>2016-10-11T00:00:00-06:00</updated>
@@ -1820,7 +1820,7 @@ Plain old &lt;code class=&quot;highlighter-rouge&quot;&gt;Courier&lt;/code&gt; o
   
   <entry>
     <id>https://theworkaround.com/2016/08/29/setting-up-tmux-with-rails</id>
-    <link type="text/html" rel="alternate" href="http://example.com/2016/08/29/setting-up-tmux-with-rails.html"/>
+    <link type="text/html" rel="alternate" href="https://theworkaround.com/2016/08/29/setting-up-tmux-with-rails.html"/>
     <title>Setting up tmux with Rails</title>
     <published>2016-08-29T00:00:00-06:00</published>
     <updated>2016-08-29T00:00:00-06:00</updated>
@@ -2083,7 +2083,7 @@ tmux kill-server
   
   <entry>
     <id>https://theworkaround.com/2015/12/06/elixir-pattern-matching</id>
-    <link type="text/html" rel="alternate" href="http://example.com/2015/12/06/elixir-pattern-matching.html"/>
+    <link type="text/html" rel="alternate" href="https://theworkaround.com/2015/12/06/elixir-pattern-matching.html"/>
     <title>Elixir Pattern Matching</title>
     <published>2015-12-06T00:00:00-07:00</published>
     <updated>2015-12-06T00:00:00-07:00</updated>
@@ -2201,7 +2201,7 @@ tmux kill-server
   
   <entry>
     <id>https://theworkaround.com/2015/11/29/dipping-into-elixir</id>
-    <link type="text/html" rel="alternate" href="http://example.com/2015/11/29/dipping-into-elixir.html"/>
+    <link type="text/html" rel="alternate" href="https://theworkaround.com/2015/11/29/dipping-into-elixir.html"/>
     <title>Dipping into Elixir</title>
     <published>2015-11-29T00:00:00-07:00</published>
     <updated>2015-11-29T00:00:00-07:00</updated>
@@ -2330,7 +2330,7 @@ tmux kill-server
   
   <entry>
     <id>https://theworkaround.com/2015/06/12/using-uuids-in-rails</id>
-    <link type="text/html" rel="alternate" href="http://example.com/2015/06/12/using-uuids-in-rails.html"/>
+    <link type="text/html" rel="alternate" href="https://theworkaround.com/2015/06/12/using-uuids-in-rails.html"/>
     <title>Using UUIDs in Rails</title>
     <published>2015-06-12T00:00:00-06:00</published>
     <updated>2015-06-12T00:00:00-06:00</updated>
@@ -2475,7 +2475,7 @@ tmux kill-server
   
   <entry>
     <id>https://theworkaround.com/2015/05/26/make-your-own-motivation</id>
-    <link type="text/html" rel="alternate" href="http://example.com/2015/05/26/make-your-own-motivation.html"/>
+    <link type="text/html" rel="alternate" href="https://theworkaround.com/2015/05/26/make-your-own-motivation.html"/>
     <title>Make your own Motivation</title>
     <published>2015-05-26T00:00:00-06:00</published>
     <updated>2015-05-26T00:00:00-06:00</updated>
@@ -2508,7 +2508,7 @@ tmux kill-server
   
   <entry>
     <id>https://theworkaround.com/2015/03/16/working-with-the-foreman</id>
-    <link type="text/html" rel="alternate" href="http://example.com/2015/03/16/working-with-the-foreman.html"/>
+    <link type="text/html" rel="alternate" href="https://theworkaround.com/2015/03/16/working-with-the-foreman.html"/>
     <title>Working with the Foreman</title>
     <published>2015-03-16T00:00:00-06:00</published>
     <updated>2015-03-16T00:00:00-06:00</updated>
@@ -2571,7 +2571,7 @@ tmux kill-server
   
   <entry>
     <id>https://theworkaround.com/2014/12/27/setting-goals-for-2015</id>
-    <link type="text/html" rel="alternate" href="http://example.com/2014/12/27/setting-goals-for-2015.html"/>
+    <link type="text/html" rel="alternate" href="https://theworkaround.com/2014/12/27/setting-goals-for-2015.html"/>
     <title>Setting Goals for 2015</title>
     <published>2014-12-27T00:00:00-07:00</published>
     <updated>2014-12-27T00:00:00-07:00</updated>
@@ -2594,7 +2594,7 @@ tmux kill-server
   
   <entry>
     <id>https://theworkaround.com/2014/11/05/slimming-down</id>
-    <link type="text/html" rel="alternate" href="http://example.com/2014/11/05/slimming-down.html"/>
+    <link type="text/html" rel="alternate" href="https://theworkaround.com/2014/11/05/slimming-down.html"/>
     <title>Slimming Down</title>
     <published>2014-11-05T00:00:00-07:00</published>
     <updated>2014-11-05T00:00:00-07:00</updated>
@@ -2675,7 +2675,7 @@ tmux kill-server
   
   <entry>
     <id>https://theworkaround.com/2014/10/29/resque-to-sidekiq</id>
-    <link type="text/html" rel="alternate" href="http://example.com/2014/10/29/resque-to-sidekiq.html"/>
+    <link type="text/html" rel="alternate" href="https://theworkaround.com/2014/10/29/resque-to-sidekiq.html"/>
     <title>Resque to Sidekiq</title>
     <published>2014-10-29T00:00:00-06:00</published>
     <updated>2014-10-29T00:00:00-06:00</updated>
@@ -2729,7 +2729,7 @@ But before I attempt to push this any faster and milk every drop of performance 
   
   <entry>
     <id>https://theworkaround.com/2014/07/06/the-saturation-of-technologies</id>
-    <link type="text/html" rel="alternate" href="http://example.com/2014/07/06/the-saturation-of-technologies.html"/>
+    <link type="text/html" rel="alternate" href="https://theworkaround.com/2014/07/06/the-saturation-of-technologies.html"/>
     <title>The Saturation of a Technologies</title>
     <published>2014-07-06T00:00:00-06:00</published>
     <updated>2014-07-06T00:00:00-06:00</updated>
@@ -2761,7 +2761,7 @@ But before I attempt to push this any faster and milk every drop of performance 
   
   <entry>
     <id>https://theworkaround.com/2013/05/26/nurture-it-like-a-garden</id>
-    <link type="text/html" rel="alternate" href="http://example.com/2013/05/26/nurture-it-like-a-garden.html"/>
+    <link type="text/html" rel="alternate" href="https://theworkaround.com/2013/05/26/nurture-it-like-a-garden.html"/>
     <title>Nurture It Like a Garden</title>
     <published>2013-05-26T00:00:00-06:00</published>
     <updated>2013-05-26T00:00:00-06:00</updated>
@@ -2787,7 +2787,7 @@ But before I attempt to push this any faster and milk every drop of performance 
   
   <entry>
     <id>https://theworkaround.com/2013/05/20/the-truth-of-it-all</id>
-    <link type="text/html" rel="alternate" href="http://example.com/2013/05/20/the-truth-of-it-all.html"/>
+    <link type="text/html" rel="alternate" href="https://theworkaround.com/2013/05/20/the-truth-of-it-all.html"/>
     <title>The Truth of It All</title>
     <published>2013-05-20T00:00:00-06:00</published>
     <updated>2013-05-20T00:00:00-06:00</updated>
@@ -2807,7 +2807,7 @@ But before I attempt to push this any faster and milk every drop of performance 
   
   <entry>
     <id>https://theworkaround.com/2013/05/19/fresh-bacon</id>
-    <link type="text/html" rel="alternate" href="http://example.com/2013/05/19/fresh-bacon.html"/>
+    <link type="text/html" rel="alternate" href="https://theworkaround.com/2013/05/19/fresh-bacon.html"/>
     <title>Fresh Bacon</title>
     <published>2013-05-19T00:00:00-06:00</published>
     <updated>2013-05-19T00:00:00-06:00</updated>
