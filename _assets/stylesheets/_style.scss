@@ -88,3 +88,10 @@ h1, h2, h3, h4, h5 {
     text-align: center !important;
   }
 }
+
+// For setting images to fill with on smaller devices
+@media (max-width:992px) {
+  .sm-w-100 {
+    width: 100% !important;
+  }
+}

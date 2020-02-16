@@ -4,7 +4,7 @@
   <title>TheWorkAround</title>
   <link href="https://theworkaround.com/"/>
   <link type="application/atom+xml" rel="self" href="https://theworkaround.com/atom.xml"/>
-  <updated>2020-02-16T11:23:36-07:00</updated>
+  <updated>2020-02-16T12:16:47-07:00</updated>
   <id>https://theworkaround.com/</id>
   <author>
     <name>Brandon Hicks</name>
@@ -32,7 +32,7 @@ So I started to monitoring our networks traffic a little more thoroughly, and it
 
 &lt;p&gt;Let me say since I setup our PiHole our network speed seems to have dramatically increased and as you can see from the picture below our network traffic have halved. I’m only theorizing here, but the increase in network speed seems to be from from a combination of having a local DNS within our home network, as well as denying network traffic to a &lt;em&gt;&lt;strong&gt;TON&lt;/strong&gt;&lt;/em&gt; of external resources.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/img/posts/setting_up_a_pihole/network_traffic.png&quot; alt=&quot;&quot; class=&quot;img-fluid w-25&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/img/posts/setting_up_a_pihole/network_traffic.png&quot; alt=&quot;&quot; class=&quot;img-fluid w-25 sm-w-100&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;I won’t be walking you through how to setup the RasberryPi with Rasbian, but if you haven’t set it up yet I would suggest starting with their &lt;a href=&quot;https://www.raspberrypi.org/documentation/raspbian/&quot;&gt;documentation&lt;/a&gt;. (I setup my Pi using &lt;a href=&quot;https://www.raspberrypi.org/downloads/raspbian/&quot;&gt;Rasbian Lite&lt;/a&gt; to reduce the number of wasted resources, since it will be mainly used as a headless network device.)&lt;/p&gt;
 
@@ -316,22 +316,22 @@ service fail2ban status
 &lt;p&gt;I know thus far, it’s been like provisioning any other Linux box; but now comes the fun part.
 To get started quickly run the following command &lt;code class=&quot;highlighter-rouge&quot;&gt;curl -sSL https://install.pi-hole.net | bash&lt;/code&gt;, it does take a few moments because it attempts to install any additional required libraries. It also required to select a number of configurations based on how you like your PiHole setup.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/img/posts/setting_up_a_pihole/installing_pihole_1.png&quot; alt=&quot;Beginning Install (15%)&quot; class=&quot;img-fluid w-50&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/img/posts/setting_up_a_pihole/installing_pihole_1.png&quot; alt=&quot;Beginning Install (15%)&quot; class=&quot;img-fluid w-50 sm-w-100&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/img/posts/setting_up_a_pihole/installing_pihole_2.png&quot; alt=&quot;PiHole Network Notice&quot; class=&quot;img-fluid w-50&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/img/posts/setting_up_a_pihole/installing_pihole_2.png&quot; alt=&quot;PiHole Network Notice&quot; class=&quot;img-fluid w-50 sm-w-100&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;After going through a few of the setup screens you’ll be presented with your fix big choice. Which DNS Upstream do you with to use?
 You’ll be presented with a number of choices, including but not limited to Google, OpenDNS, Level3, CloudFlare and a number of other choices.
 I’m my opinion I suggest picking CloudFlare their &lt;a href=&quot;https://www.cloudflare.com/dns/&quot;&gt;DNS&lt;/a&gt; service is extremely fast and their whole suite of services is about providing security by default.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/img/posts/setting_up_a_pihole/installing_pihole_3.png&quot; alt=&quot;Selecting Upstream Provider&quot; class=&quot;img-fluid w-50&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/img/posts/setting_up_a_pihole/installing_pihole_3.png&quot; alt=&quot;Selecting Upstream Provider&quot; class=&quot;img-fluid w-50 sm-w-100 sm-w-100&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Next you’ll be present with of thirdparty blocklists to choose from, this is completely up to you and what you want to block.
 And you can always add more later (which we do with this walkthrough).&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/img/posts/setting_up_a_pihole/installing_pihole_4.png&quot; alt=&quot;Choosing your blocklists&quot; class=&quot;img-fluid w-50&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/img/posts/setting_up_a_pihole/installing_pihole_4.png&quot; alt=&quot;Choosing your blocklists&quot; class=&quot;img-fluid w-50 sm-w-100&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/img/posts/setting_up_a_pihole/installing_pihole_5.png&quot; alt=&quot;Installing additional packages&quot; class=&quot;img-fluid w-50&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/img/posts/setting_up_a_pihole/installing_pihole_5.png&quot; alt=&quot;Installing additional packages&quot; class=&quot;img-fluid w-50 sm-w-100&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Since we setup UFW network requests should be filtered. Part of the installation script ensures that the proper ports available in order for the pihole to function properly.&lt;/p&gt;
 
@@ -341,13 +341,13 @@ And you can always add more later (which we do with this walkthrough).&lt;/p&gt;
 
 &lt;p&gt;Once the installation has finished installing you should be presented with a final menu telling you your PiHoles dashboard address and password. (The address should be something like &lt;code class=&quot;highlighter-rouge&quot;&gt;http://192.168.1.5/admin&lt;/code&gt;). When visiting the dashboard you should be presented with something similar to the following image:&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/img/posts/setting_up_a_pihole/installing_pihole_8.png&quot; alt=&quot;PiHole Dashboard&quot; class=&quot;img-fluid w-50&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/img/posts/setting_up_a_pihole/installing_pihole_8.png&quot; alt=&quot;PiHole Dashboard&quot; class=&quot;img-fluid w-50 sm-w-100&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Now for the most part you’re almost, next we’ll need to configure our router to query the PiHole service for any DNS requests.
 To do this you’ll need to change your Routers DNS settings to use the internal IP Address for the RaspberryPi.
 I also applied CloudFlares DNS IP Addresses &lt;code class=&quot;highlighter-rouge&quot;&gt;1.1.1.1&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;1.0.0.1&lt;/code&gt;. This is because for any reason the Pi is shutdown or inaccessible your network won’t come a dead halt, it’ll fallback to the secondary DNS server (Cloudflare).&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/img/posts/setting_up_a_pihole/installing_pihole_9.png&quot; alt=&quot;PiHole Dashboard&quot; class=&quot;img-fluid w-50&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/img/posts/setting_up_a_pihole/installing_pihole_9.png&quot; alt=&quot;PiHole Dashboard&quot; class=&quot;img-fluid w-50 sm-w-100&quot; /&gt;&lt;/p&gt;
 
 &lt;h3 id=&quot;setting-up-vpn-access&quot;&gt;Setting up VPN Access&lt;/h3&gt;
 
@@ -457,13 +457,13 @@ shutdown now &lt;span class=&quot;nt&quot;&gt;-r&lt;/span&gt;
 
 &lt;p&gt;If you’re device requires an update your results should look similar to the following screenshot.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/img/posts/setting_up_a_pihole/bootloader_update.png&quot; alt=&quot;Bootloader Update&quot; class=&quot;img-fluid&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/img/posts/setting_up_a_pihole/bootloader_update.png&quot; alt=&quot;Bootloader Update&quot; class=&quot;img-fluid sm-w-100&quot; /&gt;&lt;/p&gt;
 
 &lt;h2 id=&quot;update-pihole-blocklists&quot;&gt;Update PiHole Blocklists&lt;/h2&gt;
 
 &lt;p&gt;By default the basic list that your Pihole uses is pretty decent it blocks quite a bit of the heavy ad and trackying systems, but I prefer to block more. This is because as I watch my traffic I noticed several of the devices in my houses are still sending requests to various tracking URLs including my smart TV, my kids tablets, my printer, etc.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/img/posts/setting_up_a_pihole/pihole_stats.png&quot; alt=&quot;Pihole Request Stats&quot; class=&quot;img-fluid w-50&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/img/posts/setting_up_a_pihole/pihole_stats.png&quot; alt=&quot;Pihole Request Stats&quot; class=&quot;img-fluid w-50 sm-w-100&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;First you’ll want setup your &lt;a href=&quot;https://docs.pi-hole.net/guides/whitelist-blacklist/&quot;&gt;blocklist&lt;/a&gt; of DNS requests to start blocking as many trackers as you possibly can. My list of blocklists is ended up including about 2 million different links and ends up blocking anywhere between 40-70% of my daily traffic &lt;em&gt;(&lt;a href=&quot;https://gist.githubusercontent.com/tarellel/40296f278405e48365cf91b319a9dd3d/raw/af63425d1506dbb03aa47b57aae7ed32bbd7f92a/PiHole_Blocklists.txt&quot;&gt;my list of blocklists&lt;/a&gt;)&lt;/em&gt;.
 Once you add these lists to your piholes blocklist and update you Pi gravity rating you’ll almost instant notice pages are loading faster and you traffics congestion has been massive reduced.&lt;/p&gt;
@@ -479,11 +479,11 @@ These included; our xbox, Spotify, updating my kids android devices, updating ou
 If you are using an iPhone you’ll need to use &lt;a href=&quot;https://apps.apple.com/us/app/openvpn-connect/id590379981&quot;&gt;OpenVPN&lt;/a&gt; iOS client, for android you can download the &lt;a href=&quot;https://play.google.com/store/apps/details?id=net.openvpn.openvpn&quot;&gt;OpenVPN&lt;/a&gt; app, and for OSx I used &lt;a href=&quot;https://tunnelblick.net/downloads.html&quot;&gt;Tunnelblick&lt;/a&gt;.&lt;/p&gt;
 
 &lt;p&gt;In order to use the VPN client on your iPhone you will need to connect it to your computer, similar to how you would sync data between the two or doing a backup.
-&lt;img src=&quot;/img/posts/setting_up_a_pihole/trust_iphone.png&quot; alt=&quot;Bootloader Update&quot; class=&quot;img-fluid w-50&quot; /&gt;&lt;/p&gt;
+&lt;img src=&quot;/img/posts/setting_up_a_pihole/trust_iphone.png&quot; alt=&quot;Bootloader Update&quot; class=&quot;img-fluid w-50 sm-w-100&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Than on the list of options available for your phone , you need to click the files tab, this will allow you to access the files on your phone. We’ll now need to find the VPN key we generated and &lt;code class=&quot;highlighter-rouge&quot;&gt;scp&lt;/code&gt;‘ed from the Raspberry Pi earlier. And you’ll need to dump it on the OpenVPN application. It may prompt you if you’d like to trust the file be transfered to your phone. Accept it and it should setup the VPN connection configuration for you on your phone.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/img/posts/setting_up_a_pihole/iphone_application_list.png&quot; alt=&quot;Bootloader Update&quot; class=&quot;img-fluid w-25&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/img/posts/setting_up_a_pihole/iphone_application_list.png&quot; alt=&quot;Bootloader Update&quot; class=&quot;img-fluid w-25 sm-w-100&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;This won’t work while you’re in the same network, but if you turn off wifi or connect from outside the network you should be able to connect like the pictures below. (if you added a password to your VPN key you may also need to occasionally input the password  before it will allow you to connect or use the key).&lt;/p&gt;
 
