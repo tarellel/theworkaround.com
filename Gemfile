@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-gem 'jekyll', '~> 3.8'
+gem 'jekyll'
 
 # A C library for faster Liquid template compiling
 gem 'liquid', github: 'Shopify/liquid', branch: 'master'
@@ -20,6 +20,7 @@ group :jekyll_plugins do
   gem 'jekyll-sass-converter'     # github: 'jekyll/jekyll-sass-converter'
   gem 'jekyll-seo-tag'
   gem 'jekyll-tagging', github: 'pattex/jekyll-tagging'
+  gem 'sprockets', '3.7.2'
 end
 gem 'autoprefixer-rails'
 # Used for image compression
