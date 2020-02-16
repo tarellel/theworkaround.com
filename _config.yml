@@ -28,11 +28,15 @@ keywords: [ design, development, ruby ]
 author:
   email: tarellel@gmail.com
   name: 'Brandon Hicks'
+  homepage: 'http://brandonhicks.me/'
+  location: 'New Mexico, USA'
+  alias: 'tarellel'
   github: tarellel
   twitter: tarellel
 
 apis:
-  google_analytics: UA-XXXXX-X
+  #google_analytics: UA-XXXXX-X
+  google_analytics: UA-41384218-1
   disqus_shortname: theworkaround
 
 # tagging - https://github.com/pattex/jekyll-tagging
@@ -76,7 +80,7 @@ plugins:
     - jekyll-compress-images
 
 jekyll-minifier:
-  exclude: ['atom.xml','rss.xml','sitemap.xml'] # Exclude files from processing - file name, glob pattern or array of file names and glob patterns
+  exclude: ['atom.xml', 'rss.xml', 'sitemap.xml', 'humans.txt'] # Exclude files from processing - file name, glob pattern or array of file names and glob patterns
 
 # used by jekyll-compress-images
 imageoptim:

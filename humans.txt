@@ -1,16 +1,22 @@
+---
+layout: null
+sitemap:
+exclude: 'yes'
+---
+
 /* TEAM */
-  Developer:  Brandon Hicks [tarellel]
-  Blog:       http://theworkaround.com/
-  Website:    http://brandonhicks.me/
-  Twitter:    @tarellel
-  Location:   New Mexico, USA
+  Developer:  {{ site.author.name }} [{{ site.author.alias }}]
+  Blog:       {{ site.url }}
+  Website:    {{ site.author.homepage }}
+  Twitter:    @{{ site.author.twitter }}
+  Location:   {{ site.author. location }}
 
 /* SITE */
-  Last updated: 3/1/2018
+  Last updated: {{ site.time | date: "%Y/%m/%d" }}
   Language:   English
   Doctype:    HTML5
   Standards:  HTML, CSS3
   Components: Bootstrap, FontAwesome, Jekyll, and Google WebFonts
-  IDE:        SublimeText2, Atom
+  IDE:        VSCode
 
 HumansTXT is a ingenious method to allow developers to establish who contributed to a websites creation.
