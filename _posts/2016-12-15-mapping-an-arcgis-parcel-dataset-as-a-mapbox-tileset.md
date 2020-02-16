@@ -10,68 +10,66 @@ Before I get begin on how I mapped out several large datasets for [SanJuanMaps](
 I would like to say that there was plenty of [inspiration](https://www.mapbox.com/gallery/) behind my actions.
 I was especially inspired by [Justin Palmer's](https://twitter.com/caged) - [The Age of a City](http://labratrevenge.com/pdx/#12/45.4800/-122.6706).
 Where he tastefully mapped out all the building ages of Portland, Oregon.
-But what sets my county maps apart from various other is that I didn't just map out buildings, people, or obects.
-I mapped out several sets of data includeing: building age, building zoning types, current active well sites, and recent crimes.
+But what sets my county maps apart from various other is that I didn't just map out buildings, people, or objects.
+I mapped out several sets of data including: building age, building zoning types, current active well sites, and recent crimes.
 
 
 ## Loading the Parcel Map
-Depending on your city, state, or county it may be struggle to get ahold of your local GIS information.
-But after some digging I was able to find my counties gis information for all buildings (not located on local reservation land).
-But in order to work with it, load the information, and process it, it took a few hoops to jump through.
+Depending on your city, state, or county it may be a struggle struggle to get a hold of your local GIS information.
+But for me, I was able to find my counties GIS information for all buildings (not located on federal and/or local reservation land).
+It took jumping through a few hoops in order to make the data loadable and usable for processing.
 
-To begin San Juan County currently allows you to download a 240MB zip file, thats supposed to contain all GIS information.
+To begin San Juan County currently allows you to download a 240MB zip file, thats supposed to contain all GIS information through out the area.
 This zip file contains numerous files, but the most important one is a [dBase](http://www.dbase.com/) file `*.dbf`.
-This database table is linked to several ArcGis index files `*.atx`. It appears that each database column has a unique atx file (phys_address, ownerName, ect).
-Now that know it a GIS dataset, who wants to pay [hundreds](http://www.arcgis.com/features/plans/pricing.html) of dollars to access a GIS file, maybe a handful of times? Don't get me wrong, ArcGIS is one hell of a product and if you plan on working with GIS information often or with large datasets it's worth it. But since this is a one in a blue moon type thing for me I'll stick with using [QGIS](http://www.qgis.org/), which is an Open-Source GIS projection application. There are several components to install in order to get the application running, but in the long run it's well worth.
+This database table is linked to several ArcGis index files `*.atx`, meaning that each database column has a unique atx file (phys_address, ownerName, ect).
+Now that we have access to the GIS dataset, there are a few ways we can access the data in which in contains.
+Now let me ask; who wants to pay [hundreds](http://www.arcgis.com/features/plans/pricing.html) of dollars to access a GIS file that'll we'll be only using a handful of times? Don't get me wrong, ArcGIS is one hell of a product and if you plan on working with GIS information often or with large datasets it's worth it. But since this is a one in a blue moon type thing for me I'll stick with using [QGIS](http://www.qgis.org/), which is an Open-Source GIS projection application. In order to get the application running there are several components that we'll require, but in the long run it's well worth.
 
-Now comes to fun part, we'll begin with starting up QGIS and opening up the `.dbx` as stated before. When you load this database table, it may table a few moments because it will also try to load all of it's other component files as well. Once the parcel project loads, you may be faced with a map that looks similar to CAD wireframe, except very intricate. But slow down, your on the right path. Just consider this as vector points similar to using the Pen Tool to build shapes in Adobe Illustrator.
+Now lets= begin with starting up QGIS and opening up the `.dbx` file as stated before.
+Since this is a pretty significant file with a ton of datapoints and components, it will take a few moments for everything to load.
+Once the parcel project loads, you may be faced with a very intricate map that looks similar to CAD wireframe. Your on the right path, lets slow down for a moment. Now an easy way to think of it, is to consider these map components as vector points similar to using the Pen Tool to build shapes in Adobe Illustrator.
 
 ![GIS Grid](/img/posts/mapping_arcgis/gis_grid500.jpg){: .img-fluid .center-block }
 
-Except the GIS map doesn't just include points to create a layout of buildings.
-If you zoom in and switch to the Identify Features/vector information tool and click individual plots or buildings notice it allows you to view information for each parcel. Which consists of tons of information used by the county to identify the area (PARCELNO, GrossAcres, PhysAddr, ACCTTYPE, etc.). Now this doesn't seem like it'll be anything important, but when we convert the dBase table to a PostGIS table each one of these attributes will be used as a column to identify each and every building in the county.
-
+Except this GIS map doesn't just include points to create a layout of buildings (these is quite a bit of meta-data included with each component on the map).
+If you zoom in and switch to the Identify Features/vector information tool and click individual plots or buildings you'll notice it allows you to view information for each parcel. Which consists of tons of information used by the county to identify the area (PARCELNO, GrossAcres, PhysAddr, ACCTTYPE, etc.). Now this doesn't seem like it'll be anything important, but when we convert the dBase table to a PostGIS table each one of these attributes will be used as a column to identify each and every building throughout the county.
 
 ## Understanding Coordinate Reference Systems and Projections
 
 *~ **Note:** This section is not require to read, but helps with understanding why we need to perform a CRS conversion.*
 
-Before we get started on converting the parcel dataset to a database table, lets talk about [Coordinate Reference Systems (CRS)](http://docs.qgis.org/2.0/en/docs/gentle_gis_introduction/coordinate_reference_systems.html).
+Before we get started on converting the parcel dataset to a database table, lets talk about [Coordinate Reference Systems (CRS)](https://docs.qgis.org/2.8/en/docs/gentle_gis_introduction/coordinate_reference_systems.html).
 Wait, why aren't we just using latitude/longitude?
 With different maps, we use different coordinate systems. Geographic Coordinate Systems use latitude/longitude
 and Projected Coordinate Systems use points (X and Y) that originate at a specified lat/long.
-Think of Projected Coordinate Systems as a window pane, it's got its one size, area, and dimensions.
+Think of Projected Coordinate Systems as a window frame, it's got its one size, area, and dimensions.
 But no matter how you look at it, all these glass panes end up going together and making one big window.
 
-
-Lets begin by understanding there have been several methods developed to map the Earth's surface ([Mercator](https://en.wikipedia.org/wiki/Mercator_projection), [Flamsteed-Sinusoidal](https://en.wikipedia.org/wiki/Sinusoidal_projection), [Equal area](https://en.wikipedia.org/wiki/Cylindrical_equal-area_projection), [Equidistant](https://en.wikipedia.org/wiki/Azimuthal_equidistant_projection), [Albers](https://en.wikipedia.org/wiki/Albers_projection), [Lambert](https://en.wikipedia.org/wiki/Lambert_projection), and [many more](http://webhelp.esri.com/arcgisdesktop/9.2/index.cfm?TopicName=List_of_supported_map_projections)).
+Lets try to look at why there have been several methods developed to map the Earth's surface ([Mercator](https://en.wikipedia.org/wiki/Mercator_projection), [Flamsteed-Sinusoidal](https://en.wikipedia.org/wiki/Sinusoidal_projection), [Equal area](https://en.wikipedia.org/wiki/Cylindrical_equal-area_projection), [Equidistant](https://en.wikipedia.org/wiki/Azimuthal_equidistant_projection), [Albers](https://en.wikipedia.org/wiki/Albers_projection), [Lambert](https://en.wikipedia.org/wiki/Lambert_projection), and [many more](http://webhelp.esri.com/arcgisdesktop/9.2/index.cfm?TopicName=List_of_supported_map_projections)).
 Now I know what your thinking, "What are all these different projections for? And why would I care?"
 Throughout the years [cartographers](https://en.wikipedia.org/wiki/List_of_cartographers) have experimented with creating projections in which they thought was best for mapping out land, water, cities, and the various features of our planet.
 And many of them were quite accurate for their time, while others have been slightly [narrow minded](http://www.livescience.com/14754-ingenious-flat-earth-theory-revealed-map.html) at depicting the earth.
 
 As we can see, it's no easy task depicting a spherical planet and all of it's features as a flat surface.
-This topographical projectionis called an [ellipsoid](https://en.wikipedia.org/wiki/Earth_ellipsoid).
+This topographical projection types are called an [ellipsoid](https://en.wikipedia.org/wiki/Earth_ellipsoid).
 No matter what sort of map is used, they have always been an important asset for traveling, freight, military operations, and space travel. Some of these projections are better at depicting land forms, street planning, distances, or scale and accuracy but each one had its place and time.
-
-Now the point is, it [doesn't matter](http://www.directionsmag.com/site/latlong-converter/) if your using degrees (25 is degrees, 35 is minutes and 22.3 is seconds), meters, decimal degrees (25.58952777777778), or whatever your always going to end up at approximately the same place.
+Now the point is, it [doesn't matter](http://www.directionsmag.com/site/latlong-converter/) if your using degrees (25 is degrees, 35 is minutes, and 22.3 is seconds), meters, decimal degrees (25.58952777777778), or whatever plot point method you _should_ always going to end up at approximately the same place.
 
 So [what is a datum](https://www.maptoaster.com/maptoaster-topo-nz/articles/projection/datum-projection.html)? In my opinion the easiest way to explain a [datum](http://oceanservice.noaa.gov/facts/datum.html) is by stating it is a standard or method for mapping geographic coordinates to a projection. A datum can consist of various datasets or an individual GIS vector, but generally consists of a large set of data points to be mapped out (roads, buildings, elevation changes, land formations, water, etc).
 
 Mapping with GIS can be a really complicated task, but with the right tools it can make things quite a bit easier.
 
-
-
 ## Let's convert it to usable data
 
 The ArcGIS data in which we obtained through the county is geo-formatted using the [GRS:80](https://en.wikipedia.org/wiki/GRS_80) reference system.
 QGIS will display this and various other attributes when loading up the vector map projection.
-You should see something similar to the following attributes upon loading up the map.
+When looking at the data you should see something similar to the following attributes upon loading up the map.
 
 ```javascript
 USER:1000001 (* Generated CRS (+proj=tmerc +lat_0=31 +lon_0=-107.8333333333333 +k=0.9999166666666667 +x_0=829999.9999999998 +y_0=0 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=us-ft +no_defs))
 ```
 
-We now very much on our way to having a data projection of usable data for mapping out San Juan County.
+We are now very much on our way to having a data projection of usable data for mapping out the county.
 The only issue we are going to have at this point is the majority of online mapping tools use the [EPSG:4326/WGS84](https://confluence.qps.nl/pages/viewpage.action?pageId=29855173) standard for projecting data.
 This can easy be achieved by reprojecting the layer with WGS84 coordinates.
 **Go To:** `Menu -> Processing -> Toolbox -> QGIS geoalgorithms -> Vector General Tools -> Reproject Layer`.
@@ -109,7 +107,7 @@ head -n 20 Buildings.csv | csvsql --no-constraints --table buildings
 
 Depending on the information available, your SQL output should be something similar to the following.
 Several of these columns we'll never even use, but for now it's better to not chance corrupting any of our fields.
-Before you go any father be sure the change the geometry field names to geom and if CSVKIT labels geom as a VARCHAR change it to use the geometry property type.
+Before you go any farther be sure to change the geometry field names to geom and if CSVKIT labels geom as a VARCHAR for the geometry property type.
 
 ```sql
 CREATE TABLE "buildings" (
@@ -135,7 +133,7 @@ CREATE TABLE "buildings" (
 );
 ```
 
-**NOTE**: depending on the GIS software you used, I had various issues with the CSV file that I needed to correct before importing it.
+**NOTE**: Depending on the GIS software you used, I had various issues with the CSV file that I needed to correct before importing it.
 The issues that we'll encounter involve the geometry field. Since CSV fields are separated by commas Postgres tries to import the polygons coordinates as separate columns as well.
 ```csv
 POLYGON ((-108.195455993822 36.979941009114)),1,2075189351198,R0051867,,,57.06,EXEMPT,UNITED STATES OF AMERICA US DEPT OF INTE,,6251 COLLEGE BLVD STE A,"FARMINGTON, NM 87402",,A TRACT OF LAND IN THE  SESW AND NESW AND NWSE OF 153213 DESCRIBED ON PERM CARD  BK.1172 PG.996,,http://propery.url,NM 170,LA_PLATA,
@@ -144,7 +142,7 @@ POLYGON ((-108.195455993822 36.979941009114)),1,2075189351198,R0051867,,,57.06,E
 In order to fix this, we need to quote the geometry column in order to make it a field of it's own.
 With Sublime's find/replace REGEX functionality this would be very straight forward step.
 In order to find the rows with the issue, I used the following `^(?!"POLYGON)`.
-Out of 81000 or so columns, there were a few hundred rows with with this issue that solved rather quickly.
+Out of 81000 or so columns, there were only a few hundred rows with this issue that needed to be changed.
 
 ```csv
 "POLYGON ((-108.195455993822 36.979941009114,-108.195717330387 36.987213809214,-108.19557299488 36.987214765187))",1,2075189351198,R0051867,,,57.06,EXEMPT,UNITED STATES OF AMERICA US DEPT OF INTE,,6251 COLLEGE BLVD STE A,"FARMINGTON, NM 87402",,A TRACT OF LAND IN THE  SESW AND NESW AND NWSE OF 153213 DESCRIBED ON PERM CARD  BK.1172 PG.996,,http://propery.url,NM 170,LA_PLATA,
@@ -161,18 +159,20 @@ CREATE EXTENSION postgis;
 
 Now depending on how your managing your database, you either import the CSV file through pgAdmin or through the command line.
 I chose the the command line, because of its speed and convenience.
+
 ```sql
 copy buildings FROM '/Users/Tarellel/Desktop/SJC_GIS/Exported/Buildings.csv' DELIMITER ',' CSV HEADER;
 ```
-Now compared to loading data in IDE's and/or Excel, Postgres is extremely fast at accessing, modifying, and deleting rows, columns, and fields.
-Depending on what data you plan on mapping may be set. I'm going to be mapping out all building ages in the county, so lets add the `built_in` column to the table, for the year in which the stucture was built.
+
+Compared to loading data in IDE's and/or Excel, Postgres is extremely fast at accessing, modifying, and deleting rows, columns, and fields.
+Depending on what data you plan on mapping you may not need to make any additional changes. I'm going to be mapping out all building ages in the county, so I needed to add the `built_in` column to the table, for the year in which the structure was built.
+
 ```sql
 ALTER TABLE buildings ADD built_in integer;
 ```
 
-
-If you're like my, you instantly started doing queries to verify the integrity of the information imported.
-Something you may notice is that the structures geometry field no longer looks like `"POLYGON ((-108.195455993822 36.979941009114,-108.195717330387 36.987213809214,-108.19557299488 36.987214765187))"`. That is because PostGIS stores the locations as a binary specification, but when queried the information is viewed as a hex-encoded string. This makes it easier for storing and manipulation into various data projection formats.
+If you're like me, you probably already started doing queries to verify the integrity of the information imported.
+Something you may notice is that the structures geometry field no longer looks like `"POLYGON ((-108.195455993822 36.979941009114,-108.195717330387 36.987213809214,-108.19557299488 36.987214765187))"`. That is because PostGIS stores the locations as a binary specification, but when queried the information is viewed as a hex-encoded string. This makes it easier for PostGIS to store and project the data as various data projection formats.
 
 ```sql
 SELECT geom FROM buildings LIMIT 1;
@@ -184,14 +184,13 @@ SELECT geom FROM buildings LIMIT 1;
 
 ### Lets fetch the build/properties initial build date
 
-
 In order to get each and every buildings initial build date,
 I ended up using nokogiri to scan the county assessors property listings for their initial build dates.
 Don't get me wrong, I tried to look for an easy way to get the information.
-But they had no APIs for pulling data requests and never received a response from anyone I attempted to contact.
-So, I used the next best thing, the counties web site for getting property listing information.
+But they have no publicly accessible API for pulling data requests and never received a response from anyone I attempted to contact.
+So, I used the next best thing, farmed the counties web site for property listing information.
 
-*For warning,* this script was build to be quick and effective,
+*For warning,* This script was build to be quick and simple solution,
 rather than being well formatted and following best practices.
 
 ```ruby
@@ -303,13 +302,11 @@ class FetchYear
                     cookies: { isLoggedInAsPublic: 'true' }
                   )
                 )
-
       yearbuilt = summary.css('tr').xpath('//span[contains(text(), "Actual Year Built")]').first.parent.search('span').last.content
 
       # year must be stripped and turned into an into an integer
       # because it trails with an invisible space '&nbsp;'
       yearbuilt.strip.to_i
-
     rescue OpenURI::HTTPError => e
       puts '--------------------'
       puts 'Error loading property summary page'
@@ -347,9 +344,9 @@ end
 
 I ran this script over night and came back with a fully populated database and ready for to be fully utilized.
 Depending on the server load, each request usually took a few seconds for each building/property.
-But one thing that really surprised me, was the counties server had no rate-limited setup.
+But one thing that really surprised me, was the counties server had no rate-limiting setup (at least non that I ever experiences).
 So I was getting results as fast as my script could run and connect.
-I'm sure the next morning it might of looked like a small DDOS attack by a script kiddy with 80 thousand plus page loads from a single source.
+I'm sure the next morning it might of looked like a small DDOS attack by a script kiddy with thousands of page loads from a single source.
 But I tried to minimize the effect by doing all my data retrieval in the middle of the night, when it would have as little effect as possible.
 
 ### How the Script Works
@@ -357,7 +354,7 @@ But I tried to minimize the effect by doing all my data retrieval in the middle 
 Now, before you start scratching your head thinking "what the hell?" let me explain.
 Each and every property has a unique weblink associated with the count assessors office.
 When you access the page a cookie `isLoggedInAsPublic` is set to true, using a get request.
-I believe this is used in order to prevent general web scraping, because if the cookie isn't set when the page is loaded redirected to a  user login.
+I believe this is used in order to prevent general web scraping, because if the cookie isn't set when the page is loaded redirected to a user login.
 
 I know it looks like a mess and over complicated by let me explain a few things.
 But some of the properties are owned by the same owner so we can't exactly relay on the `accountno` to update properties.
@@ -365,11 +362,12 @@ And we can't use `physaddr` because some properties have more than one building 
 
 And what about the EXEMPT and Vacant properties?
 Well the majority of them consists of Churches, Post Offices, Government Buildings, the Airport, and unclassified BLM land.
-And yes there are quite a few in the generate area. This is an area heavily funded by the government, we're also a city bordering the edge of several reservations.
+And yes there are quite a few in the generate area. This is the surrounding area is heavily funded by the government, we're also a city bordering the edge of several reservations.
 
 ### Lets convert it to a GeoJson file for vectoring
-For those of you who who don't know, Postgres has amazing support for exporting data as [json](http://www.json.org/).
-Some people seem to be unaware that you can resolve to exporting your database queries in various formats.
+
+For those of you who have never used used it, Postgres has amazing support for exporting data as [json](http://www.json.org/).
+Some people seem to be unaware that you can resolve to exporting your database queries in different data formats.
 And some databases (such as Postgres) also allow you to export your database query returns to various file formats.
 
 I can assure you, I didn't get this right on the first even second try.
@@ -404,7 +402,7 @@ COPY (
 ) TO '/Users/Tarellel/Desktop/buildings.json';
 ```
 
-But just a heads up you may be expecting a nice and beautiful json structure similar to the following.
+Just a heads up you may be expecting a nice and beautiful json structure similar to the following.
 
 <small>Example from *[geojson-spec data](http://geojson.org/geojson-spec.html)*</small>
 ```json
@@ -458,7 +456,7 @@ From here you can edit and [style](https://www.mapbox.com/help/getting-started-s
 ---
 ### References
 
-- Coordinate Reference Systems
+* Coordinate Reference Systems
   * [Overview of Coordinate Reference Systems](https://www.nceas.ucsb.edu/~frazier/RSpatialGuides/OverviewCoordinateReferenceSystems.pdf)
   * [Understanding of Coordinate Reference Systems](http://docs.qgis.org/2.0/en/docs/gentle_gis_introduction/coordinate_reference_systems.html)
   * [Overview of Coordinate Reference Systems](https://www.nceas.ucsb.edu/~frazier/RSpatialGuides/OverviewCoordinateReferenceSystems.pdf)
@@ -474,10 +472,10 @@ From here you can edit and [style](https://www.mapbox.com/help/getting-started-s
   * [Map Projections: From Spherical Earth to Flat Map](http://www.icsm.gov.au/mapping/images/MapProjections.pdf)
   * [Deducing the Sanson-Flamsteed (sinusoidal) Projection](http://www.progonos.com/furuti/MapProj/Normal/CartHow/HowSanson/howSanson.html)
   * [Useful Map Properties: Distances and Scale](http://www.progonos.com/furuti/MapProj/Dither/CartProp/DistPres/distPres.html)
-- GIS : Coordinate Converters
+* GIS : Coordinate Converters
   * [Converting Degrees Minutes Seconds values to Decimal Degree values](http://webhelp.esri.com/arcgisdesktop/9.2/index.cfm?TopicName=Converting_Degrees_Minutes_Seconds_values_to_Decimal_Degree_values)
   * [PGC Coordinate Converter](http://www.pgc.umn.edu/tools/conversion)
-- GeoForms
+* GeoForms
   * [Web-Friendly Geo formats](http://www.ogcnetwork.net/webgeoformats)
-- Postgres / PostGIS
-- * [Getting Started With PostGIS](http://www.bostongis.com/PrinterFriendly.aspx?content_name=postgis_tut01)
+* Postgres / PostGIS
+  * [Getting Started With PostGIS](http://www.bostongis.com/PrinterFriendly.aspx?content_name=postgis_tut01)

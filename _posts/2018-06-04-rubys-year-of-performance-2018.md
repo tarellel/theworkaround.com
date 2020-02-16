@@ -3,7 +3,7 @@ layout: post
 title: "Ruby's Year of Performance (2018)"
 date: 2018-06-04 09-06-56
 description: ""
-tags: [ruby]
+tags: [performance, ruby]
 comments: true
 ---
 Many people claim Ruby is no longer relevant and quite a few people have moved on to Elixir, Go, Rust, and Node. This is because Ruby was not originally built for speed, it was built for ease of use. It does have its limitations and Rails is a monstrosity with all it’s services, workers, etc. But I’ve never had an issue with this, I started using Ruby because of its ease of use. I can from a world of using PHP and ugly spaghetti code to Ruby where coding is more of a thing of art.
@@ -29,6 +29,7 @@ rvm install 2.5 -C --with-jemalloc --autolibs=disable
 ```
 
 I tend to use the [Fish](https://fishshell.com/) shell, it has dramatically increased my productivity with its ease of use, auto completion libraries, and great features. So to make compiling a new RVM instance easier I created a function titled `rvm_install` so now when I want to compile a new Ruby version with the jemalloc flag I issue a command similar to the following `rvm_install 2.6` and wait. Below is a copy of the function I created, I know I should probably issue some validation to verify the value of the argument, but I'm the only one using this on my computer and it's works wonders for what I need it for.
+
 ```shell
 # Install the specified Ruby version through RVM, with the jemalloc library included
 function rvm_install

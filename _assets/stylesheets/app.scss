@@ -11,17 +11,25 @@
 }
 
  code {
-  background: #f5f5f5;
+  // background: #f5f5f5;
+  background: #f1f1f1 !important;
   color: #bf616a;
   font-size: 85%;
+  padding: 0 5px;
 }
 
 div.highlight {
   padding: 0 !important;
 }
-.highlight pre {
+
+pre.highlight {
   border: 0 !important;
   padding: 1.25em;
+
+  code {
+    background: transparent !important;
+    padding: 0;
+  }
 }
 
 .header {

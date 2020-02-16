@@ -3,7 +3,7 @@ layout: post
 title: "Docker Swarm Persistent Storage"
 date: 2019-05-15 19-05-33
 description: "Docker-swarm persistent storage using glusterFS (a network filesystem)"
-tags: [docker, docker-swarm, gluster, linux]
+tags: [containers, docker, docker-swarm, gluster, linux, storage]
 comments: true
 ---
 Unless you've been living under a rock, you should need no explanation what [Docker](https://www.docker.com/) is.
@@ -100,7 +100,7 @@ Documentation for using Gluster can be found on their [docs](https://docs.gluste
 To begin you will need to list all of the Docker Swarm nodes you wish to connect in the `/etc/hosts` files of each server.
 On linux (Debian/Ubuntu), you can get the current nodes IP Address run the following command `hostname -I | awk '{print $1}'`
 
-_&nbsp;_{: .fa.fa-info-circle } _(The majority of the commands listed below need to be ran on each and every node simultaneously unless specified. To do this I opened a number of terminal tabs and connected to each server in a different tab.)_{: .small }
+_&nbsp;_{: .fa.fa-info-circle.text-primary } _(The majority of the commands listed below need to be ran on each and every node simultaneously unless specified. To do this I opened a number of terminal tabs and connected to each server in a different tab.)_{: .small }
 
 ```config
 # /etc/hosts

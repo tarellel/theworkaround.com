@@ -23,7 +23,6 @@ rake page  title="Page title" [date="2012-02-09"] [tags=[tag1, tag2]]
 rake preview
 ```
 
-
 #### For code Synax Highlighting:
 
     # Gemfile:

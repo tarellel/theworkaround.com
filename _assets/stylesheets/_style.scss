@@ -8,14 +8,15 @@ $monospace-font: Menlo, Monaco, 'Courier New', monospace;
 /********************
  * Attributes
  ********************/
- html{
+ html {
   font-size: 16px;
   line-height: 1.5em;
 }
- body{
+ body {
   border-top: 1em solid #4cb8c4;
   color: $txt-color;
   font: 400 16px/1.5 $primary_font-family;
+  font-display: optional;
   padding: 1em 0 2.5em 0;
 
   /* Antialias the font  for smooth text rendering */

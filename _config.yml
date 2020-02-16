@@ -20,7 +20,7 @@ permalink:  /:year/:month/:day/:title.html
 # Site information used by the layouts and SEO
 title: 'TheWorkAround'
 name: TheWorkAround
-url: http://theworkaround.com
+url: https://theworkaround.com
 tagline: 'blah blah blah'
 description: 'The infinate rambelings and ideas of Brandon Hicks'
 keywords: [ design, development, ruby ]
@@ -42,9 +42,17 @@ tag_permalink_style: pretty
 
 # for jekyll-assets
 assets:
+  # Autoprefixer
+  autoprefixer:
+    browsers:
+    - "last 2 versions"
+    - "IE > 9"
+  # jekyll-assets
   source_maps: false
   dirname: assets
+  destination: "/assets"
   compression: true
+  gzip: false
   # Pathnames where to find assets relative to the root of the site.
   sources:
     - _assets
@@ -53,6 +61,14 @@ assets:
     - _assets/images
     #- _assets/fonts
   gzip: [ text/css, application/javascript ]
+  caching:
+    path: ".jekyll-cache/assets"
+    type: file # Possible values: memory, file
+    enabled: true
+  # image_optim for assets -> https://github.com/envygeeks/jekyll-assets#imageoptim
+  plugins:
+    img:
+      optim: false
 
 plugins:
     - jekyll-minifier

@@ -70,8 +70,7 @@ p.splash
 # Slim
 ul
   li
-    p.splash
-      | Hello World
+    p.splash Hello World
 
 # Outputs
 <ul>
