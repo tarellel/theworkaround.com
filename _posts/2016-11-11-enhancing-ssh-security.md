@@ -3,7 +3,7 @@ layout: post
 title: "Enhancing SSH Security"
 date: 2016-11-11 21-11-22
 description: "SSH is an important multipurpose service, that we need to properly secure."
-tags: [security, ssh, terminal]
+tags: [security, shell, ssh, terminal]
 comments: true
 ---
 With the whole security/privacy revolution rolling throughout the internet, it has recently come to my attention

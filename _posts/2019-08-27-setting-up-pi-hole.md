@@ -466,7 +466,21 @@ If you're device requires an update your results should look similar to the foll
 
 ![Bootloader Update](/img/posts/setting_up_a_pihole/bootloader_update.png){: .img-fluid }
 
-### Applications to use
+## Update PiHole Blocklists
+
+By default the basic list that your Pihole uses is pretty decent it blocks quite a bit of the heavy ad and trackying systems, but I prefer to block more. This is because as I watch my traffic I noticed several of the devices in my houses are still sending requests to various tracking URLs including my smart TV, my kids tablets, my printer, etc.
+
+![Pihole Request Stats](/img/posts/setting_up_a_pihole/pihole_stats.png){: .img-fluid .w-50 }
+
+First you'll want setup your [blocklist](https://docs.pi-hole.net/guides/whitelist-blacklist/) of DNS requests to start blocking as many trackers as you possibly can. My list of blocklists is ended up including about 2 million different links and ends up blocking anywhere between 40-70% of my daily traffic _([my list of blocklists](https://gist.githubusercontent.com/tarellel/40296f278405e48365cf91b319a9dd3d/raw/af63425d1506dbb03aa47b57aae7ed32bbd7f92a/PiHole_Blocklists.txt))_.
+Once you add these lists to your piholes blocklist and update you Pi gravity rating you'll almost instant notice pages are loading faster and you traffics congestion has been massive reduced.
+
+Not lets add some [regex](https://docs.pi-hole.net/ftldns/regex/tutorial/) filters to filter out any of those DNS that haven't been caught by the blocklists. The [regex filters I use](https://gist.githubusercontent.com/tarellel/40296f278405e48365cf91b319a9dd3d/raw/af63425d1506dbb03aa47b57aae7ed32bbd7f92a/PiHole_Regex_filers.txt), I believe I got some piecing together a few reddit posts together. They are specifically setup to catch any DNS requests that have the phrase `tracker, traffic, ads, analytics` or various other phrases
+
+Next you'll need to add some your whitelists, mine if a bit liberal and I need to go through and trim it down. But I started out by making it pretty broad, because otherwise spccific services and devices would no longer work on my home network because they uptime ping backs were completely disabled.
+These included; our xbox, Spotify, updating my kids android devices, updating our LG Smart TV, using our Plex server, Hulu, accessing namecheap, and blocking facebook _(which I'd prefer, but my wife can't list without)_ from the network. My whitelist can also be found also be found on [github as a gist](https://gist.githubusercontent.com/tarellel/40296f278405e48365cf91b319a9dd3d/raw/af63425d1506dbb03aa47b57aae7ed32bbd7f92a/PiHole_Whitelist.txt). After updating and all all these URL's and snips to your piholes list, you'll also want to update and reload your piholes gravity list again. This is to ensure anything added to the whitelist hopefully won't still be filtered and any regex you added will have hopefully be properly filtered.
+
+## Applications to use
 
 In order to VPN into your network _(if you want to use the Pihole when outside your network)_, you'll need to download the specified VPN client.
 If you are using an iPhone you'll need to use [OpenVPN](https://apps.apple.com/us/app/openvpn-connect/id590379981) iOS client, for android you can download the [OpenVPN](https://play.google.com/store/apps/details?id=net.openvpn.openvpn) app, and for OSx I used [Tunnelblick](https://tunnelblick.net/downloads.html).

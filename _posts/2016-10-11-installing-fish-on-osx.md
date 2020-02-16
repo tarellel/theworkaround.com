@@ -3,7 +3,7 @@ layout: post
 title: "Installing Fish on OSx"
 date: 2016-10-11 22-10-10
 description: "Enhance your terminal with the fish shell"
-tags: [fish, terminal, osx]
+tags: [fish, osx, shell, terminal]
 comments: true
 ---
 As developers we all use the command line, to make things happen.
