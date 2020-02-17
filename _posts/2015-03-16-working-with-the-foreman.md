@@ -7,11 +7,11 @@ tags: [ruby, rails]
 ---
 Lets to work on using [Foreman](https://github.com/ddollar/foreman) and when I say Foreman I'm not referring to Eric Forman the goof for a son on [The 70's Show](http://www.imdb.com/title/tt0165598/?ref_=nv_sr_1). I'm talking about the Ruby gem Foreman for making your applications easier to manage and deploy.
 
-![Eric Forman](https://i.imgur.com/vlQFjab.jpg)
+![Eric Forman](https://i.imgur.com/vlQFjab.jpg){: .img-fluid .w-100}
 
 For those unfamiliar with Foreman it is a way to initialize your application and its components without making a mess. Before I started using this wonderful gem, whenever I would want to test and/or run an application I would have numerous tabs open and start numerous tasks in order to even get started (Rails Server, Sidekiq, etc.). But with foreman this can all be done with a single command.
 
-![Before Foreman](/img/before_foreman_tabs.png)
+![Before Foreman](/img/before_foreman_tabs.png){: .img-fluid .w-100}
 
 With Foreman all you need to do is install the gem, create a ``Procfile`` and put your desired tasks in it. A Profile will contain the designated tasks which you wish to have initiated when you begin the application. An example of starting the rails server with foreman could look something similar to the following
 

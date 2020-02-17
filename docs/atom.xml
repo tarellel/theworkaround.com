@@ -4,7 +4,7 @@
   <title>TheWorkAround</title>
   <link href="https://theworkaround.com/"/>
   <link type="application/atom+xml" rel="self" href="https://theworkaround.com/atom.xml"/>
-  <updated>2020-02-16T12:16:47-07:00</updated>
+  <updated>2020-02-16T17:49:41-07:00</updated>
   <id>https://theworkaround.com/</id>
   <author>
     <name>Brandon Hicks</name>
@@ -335,9 +335,9 @@ And you can always add more later (which we do with this walkthrough).&lt;/p&gt;
 
 &lt;p&gt;Since we setup UFW network requests should be filtered. Part of the installation script ensures that the proper ports available in order for the pihole to function properly.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/img/posts/setting_up_a_pihole/installing_pihole_6.png&quot; alt=&quot;Opening up the firewall&quot; class=&quot;img-fluid w-50&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/img/posts/setting_up_a_pihole/installing_pihole_6.png&quot; alt=&quot;Opening up the firewall&quot; class=&quot;img-fluid w-50 sm-w-100&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/img/posts/setting_up_a_pihole/installing_pihole_7.png&quot; alt=&quot;Terminal display of PiHole Installing&quot; class=&quot;img-fluid w-50&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/img/posts/setting_up_a_pihole/installing_pihole_7.png&quot; alt=&quot;Terminal display of PiHole Installing&quot; class=&quot;img-fluid w-50 sm-w-100&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Once the installation has finished installing you should be presented with a final menu telling you your PiHoles dashboard address and password. (The address should be something like &lt;code class=&quot;highlighter-rouge&quot;&gt;http://192.168.1.5/admin&lt;/code&gt;). When visiting the dashboard you should be presented with something similar to the following image:&lt;/p&gt;
 
@@ -487,7 +487,9 @@ If you are using an iPhone you’ll need to use &lt;a href=&quot;https://apps.ap
 
 &lt;p&gt;This won’t work while you’re in the same network, but if you turn off wifi or connect from outside the network you should be able to connect like the pictures below. (if you added a password to your VPN key you may also need to occasionally input the password  before it will allow you to connect or use the key).&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/img/posts/setting_up_a_pihole/VPN_list.png&quot; alt=&quot;List of VPNs on iPhone&quot; class=&quot;img-fluid w-25&quot; /&gt; &lt;img src=&quot;/img/posts/setting_up_a_pihole/VPN_connected.png&quot; alt=&quot;Connected to VPN through the Pi-Hole&quot; class=&quot;img-fluid w-25&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/img/posts/setting_up_a_pihole/VPN_list.png&quot; alt=&quot;List of VPNs on iPhone&quot; class=&quot;img-fluid w-25 sm-w-100&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/img/posts/setting_up_a_pihole/VPN_connected.png&quot; alt=&quot;Connected to VPN through the Pi-Hole&quot; class=&quot;img-fluid w-25 sm-w-100&quot; /&gt;&lt;/p&gt;
 
 &lt;h3 id=&quot;references&quot;&gt;References&lt;/h3&gt;
 
@@ -2532,11 +2534,11 @@ tmux kill-server
     </author>
     <content type="html">&lt;p&gt;Lets to work on using &lt;a href=&quot;https://github.com/ddollar/foreman&quot;&gt;Foreman&lt;/a&gt; and when I say Foreman I’m not referring to Eric Forman the goof for a son on &lt;a href=&quot;http://www.imdb.com/title/tt0165598/?ref_=nv_sr_1&quot;&gt;The 70’s Show&lt;/a&gt;. I’m talking about the Ruby gem Foreman for making your applications easier to manage and deploy.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;https://i.imgur.com/vlQFjab.jpg&quot; alt=&quot;Eric Forman&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://i.imgur.com/vlQFjab.jpg&quot; alt=&quot;Eric Forman&quot; class=&quot;img-fluid w-100&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;For those unfamiliar with Foreman it is a way to initialize your application and its components without making a mess. Before I started using this wonderful gem, whenever I would want to test and/or run an application I would have numerous tabs open and start numerous tasks in order to even get started (Rails Server, Sidekiq, etc.). But with foreman this can all be done with a single command.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/img/before_foreman_tabs.png&quot; alt=&quot;Before Foreman&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/img/before_foreman_tabs.png&quot; alt=&quot;Before Foreman&quot; class=&quot;img-fluid w-100&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;With Foreman all you need to do is install the gem, create a &lt;code class=&quot;highlighter-rouge&quot;&gt;Procfile&lt;/code&gt; and put your desired tasks in it. A Profile will contain the designated tasks which you wish to have initiated when you begin the application. An example of starting the rails server with foreman could look something similar to the following&lt;/p&gt;
 

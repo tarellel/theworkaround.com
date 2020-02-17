@@ -333,9 +333,9 @@ And you can always add more later (which we do with this walkthrough).
 
 Since we setup UFW network requests should be filtered. Part of the installation script ensures that the proper ports available in order for the pihole to function properly.
 
-![Opening up the firewall](/img/posts/setting_up_a_pihole/installing_pihole_6.png){: .img-fluid .w-50}
+![Opening up the firewall](/img/posts/setting_up_a_pihole/installing_pihole_6.png){: .img-fluid .w-50  .sm-w-100 }
 
-![Terminal display of PiHole Installing](/img/posts/setting_up_a_pihole/installing_pihole_7.png){: .img-fluid .w-50}
+![Terminal display of PiHole Installing](/img/posts/setting_up_a_pihole/installing_pihole_7.png){: .img-fluid .w-50  .sm-w-100 }
 
 Once the installation has finished installing you should be presented with a final menu telling you your PiHoles dashboard address and password. (The address should be something like `http://192.168.1.5/admin`). When visiting the dashboard you should be presented with something similar to the following image:
 
@@ -494,7 +494,9 @@ Than on the list of options available for your phone , you need to click the fil
 
 This won't work while you're in the same network, but if you turn off wifi or connect from outside the network you should be able to connect like the pictures below. (if you added a password to your VPN key you may also need to occasionally input the password  before it will allow you to connect or use the key).
 
-![List of VPNs on iPhone](/img/posts/setting_up_a_pihole/VPN_list.png){: .img-fluid .w-25 } ![Connected to VPN through the Pi-Hole](/img/posts/setting_up_a_pihole/VPN_connected.png){: .img-fluid .w-25 . sm-w-100}
+![List of VPNs on iPhone](/img/posts/setting_up_a_pihole/VPN_list.png){: .img-fluid .w-25  .sm-w-100}
+
+![Connected to VPN through the Pi-Hole](/img/posts/setting_up_a_pihole/VPN_connected.png){: .img-fluid .w-25  .sm-w-100}
 
 ### References
 
