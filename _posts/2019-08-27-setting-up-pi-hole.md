@@ -494,9 +494,7 @@ Than on the list of options available for your phone , you need to click the fil
 
 This won't work while you're in the same network, but if you turn off wifi or connect from outside the network you should be able to connect like the pictures below. (if you added a password to your VPN key you may also need to occasionally input the password  before it will allow you to connect or use the key).
 
-![List of VPNs on iPhone](/img/posts/setting_up_a_pihole/VPN_list.png){: .img-fluid .w-25  .sm-w-100}
-
-![Connected to VPN through the Pi-Hole](/img/posts/setting_up_a_pihole/VPN_connected.png){: .img-fluid .w-25  .sm-w-100}
+![List of VPNs on iPhone](/img/posts/setting_up_a_pihole/VPN_list.png){: .img-fluid .w-25  .sm-w-100} ![Connected to VPN through the Pi-Hole](/img/posts/setting_up_a_pihole/VPN_connected.png){: .img-fluid .w-25  .sm-w-100}
 
 ### References
 

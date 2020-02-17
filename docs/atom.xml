@@ -4,7 +4,7 @@
   <title>TheWorkAround</title>
   <link href="https://theworkaround.com/"/>
   <link type="application/atom+xml" rel="self" href="https://theworkaround.com/atom.xml"/>
-  <updated>2020-02-16T17:49:41-07:00</updated>
+  <updated>2020-02-16T17:57:47-07:00</updated>
   <id>https://theworkaround.com/</id>
   <author>
     <name>Brandon Hicks</name>
@@ -487,9 +487,7 @@ If you are using an iPhone you’ll need to use &lt;a href=&quot;https://apps.ap
 
 &lt;p&gt;This won’t work while you’re in the same network, but if you turn off wifi or connect from outside the network you should be able to connect like the pictures below. (if you added a password to your VPN key you may also need to occasionally input the password  before it will allow you to connect or use the key).&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/img/posts/setting_up_a_pihole/VPN_list.png&quot; alt=&quot;List of VPNs on iPhone&quot; class=&quot;img-fluid w-25 sm-w-100&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/img/posts/setting_up_a_pihole/VPN_connected.png&quot; alt=&quot;Connected to VPN through the Pi-Hole&quot; class=&quot;img-fluid w-25 sm-w-100&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/img/posts/setting_up_a_pihole/VPN_list.png&quot; alt=&quot;List of VPNs on iPhone&quot; class=&quot;img-fluid w-25 sm-w-100&quot; /&gt; &lt;img src=&quot;/img/posts/setting_up_a_pihole/VPN_connected.png&quot; alt=&quot;Connected to VPN through the Pi-Hole&quot; class=&quot;img-fluid w-25 sm-w-100&quot; /&gt;&lt;/p&gt;
 
 &lt;h3 id=&quot;references&quot;&gt;References&lt;/h3&gt;
 
