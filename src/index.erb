@@ -1,0 +1,33 @@
+---
+# Feel free to add content and custom Front Matter to this file.
+
+layout: default
+---
+
+<div class="space-y-5">
+  <div class="space-y-5 mb-7">
+    <h1 class="text-4xl font-semibold leading-none text-gray-900">Brandon Hicks</h1>
+
+    <p>
+      My name is Brandon Hicks. I'm a full-stack web developer from New Mexico. And I specialize in creating clean, attractive, and modern web applications using RubyOnRails. My creativity drives me to construct professional and innovative solutions to solve a multitude of problems. I have a passion for learning new things and experiencing new challenges on a daily basis.
+    </p>
+
+    <p>
+      This is my personal website where I want to document and log experiences and challenges I came across.
+      As a full stack developer this may incluse frontend, backend, database, and/or devops specific topics.
+    </p>
+
+    <p>
+      <a href="<%= relative_url '/about' %>" title="About Me">More about me...</a>
+    </p>
+  </div>
+
+  <div>
+    <h2 class="text-2xl font-semibold leading-none text-gray-900text-2xl font-semibold leading-none text-gray-900 mb-4">Recent Posts</h2>
+    <ul class="space-y-4 text-lg">
+      <% collections.posts.resources.take(5).each do |post| %>
+        <%= render(Post::Item.new(post: post)) %>
+      <% end %>
+    </ul>
+  <div>
+</div>

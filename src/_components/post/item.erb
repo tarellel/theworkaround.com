@@ -1,0 +1,8 @@
+<li class="flex justify-between items-center">
+  <a href="<%= post.relative_url %>"><%= post.data.title %></a>
+  <% if post.data.date %>
+    <date datetime="<%= post.data.date %>">
+      <%= post.data.date&.strftime('%b %d, %Y') %>
+    </date>
+  <% end %>
+</li>

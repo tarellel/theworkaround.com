@@ -1,0 +1,32 @@
+<li class="p-3 block group hover:bg-blue-50 odd:bg-gray-50 border">
+  <div class="flex items-center space-x-4 p-3">
+    <div class="flex-1 min-w-0">
+      <p class="text-sm font-medium text-gray-600 truncate">
+        <%= @name %>
+      </p>
+      <% if @description %>
+        <p class="text-sm text-gray-500 dark:text-gray-400 group-hover:text-blue-400">
+          <%= @description.to_s %>
+        </p>
+      <% end %>
+    </div>
+    <div class="inline-flex items-center text-base font-semibold text-gray-900 space-x-3">
+      <% if @rubygems_url %>
+        <a href="<%= @rubygems_url %>" title="Rubygems - <%= @name %>">
+          <%= render Icons::Ruby.new %>
+        </a>
+      <% end %>
+      <% if @github_url %>
+        <a href="<%= @github_url %>" title="Github - <%= @name %>">
+          <%= render Icons::Github.new %>
+        </a>
+      <% end %>
+
+      <% if @url %>
+        <a href="<%= @url %>" title="<%= @name %>">
+          <%= render Icons::Link.new(alt: 'Link') %>
+        </a>
+      <% end %>
+    </div>
+  </div>
+</li>

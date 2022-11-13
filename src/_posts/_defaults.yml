@@ -1,0 +1,4 @@
+layout: post
+author: Brandon
+# permalink: /post/:year/:month/:day/:slug/
+permalink: /:year/:month/:day/:slug/

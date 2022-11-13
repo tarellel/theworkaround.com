@@ -1,0 +1,20 @@
+<li class="py-3 sm:py-4">
+  <div class="flex items-center space-x-4">
+    <div class="flex-1 min-w-0">
+      <p class="text-sm font-medium text-gray-900 truncate">
+        <%= project.name %>
+      </p>
+      <p class="text-sm text-gray-500 dark:text-gray-400">
+        <%= project.description %>
+      </p>
+    </div>
+    <div class="inline-flex items-center text-base font-semibold text-gray-900 space-x-2.5">
+      <a href="<%= project.rubygems_url %>" title="Rubygems - <%= project.name %>">
+        <%= render Icons::Ruby.new %>
+      </a>
+      <a href="<%= project.github_url %>" title="Github - <%= project.name %>">
+        <img src="./images/GitHub-Mark/PNG/GitHub-Mark-120px-plus.png" class="h-6 w-6" alt="Github">
+      </a>
+    </div>
+  </div>
+</li>

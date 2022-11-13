@@ -1,0 +1,16 @@
+<nav class="border-t-12 border-cyan-600 py-3 flex flex-col sm:flex-row sm:justify-between sm:items-center p-4" role="navigation" aria-label="Main">
+  <div class="text-left">
+    <h3 class="text-3xl font-extrabold text-gray-600">
+      <a href="<%= relative_url '/' %>" class="text-gray-600" title="Goto /" key="home">TheWorkAround</a>
+    </h3>
+    <p class="text-md font-semibold leading-5 text-gray-400">Brandon Hicks</p>
+  </div>
+  <div class="lg:text-right text-lg lg:text-xl flex space-y-4 sm:space-y-0 sm:space-x-9 content-center mt-3 sm:mt-0 flex-col sm:flex-row">
+    <a href="<%= absolute_url '/about' %>" class="font-semibold text-gray-700 tracking-tight" title="About Me" key="about">About</a>
+    <a href="<%= absolute_url '/posts' %>" class="font-semibold text-gray-700 tracking-tight" title="View a list of all posts" key="posts">Posts</a>
+    <a href="<%= absolute_url '/projects' %>"" class="font-semibold text-gray-700 tracking-tight" title="Projects I'm working on" key="projects">Projects</a>
+    <a href="<%= absolute_url 'feed.xml' %>" class="flex content-center text-orange-600" title="RSS Feed" key="feed">
+      <%= render Icons::Feed.new(classes: 'h-5 w-5 self-center text-orange-600') %>
+    </a>
+  </div>
+</nav>

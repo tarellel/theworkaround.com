@@ -1,0 +1,11 @@
+---
+layout: page
+title: Posts
+permalink: /posts/
+---
+
+<ul class="space-y-4 text-lg" role="list">
+  <% collections.posts.resources.each do |post| %>
+    <%= render(Post::Item.new(post: post)) %>
+  <% end %>
+</ul>

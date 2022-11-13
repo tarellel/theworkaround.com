@@ -1,0 +1,21 @@
+<div class="max-w-full mx-auto">
+  <div class="flex justify-between items-center mb-4">
+    <% if @title %>
+      <h3 class="text-2xl font-semibold leading-none text-gray-900"><%= @title %></h3>
+    <% end %>
+
+    <% if @url %>
+      <a href="<%= @url %>" class="text-sm font-medium text-blue-600 no-underline dark:text-blue-500" title="<%= @url_title %>">
+      View all
+      </a>
+    <% end %>
+  </div>
+
+  <% if content %>
+    <div class="flow-root">
+      <ul role="list" class="bg-white divide-y divide-gray-700 dark:divide-gray-700 shadow sm:rounded-lg">
+        <%= content %>
+      </ul>
+    </div>
+  <% end %>
+</div>

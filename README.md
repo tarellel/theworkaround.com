@@ -1,64 +1,70 @@
+# Bridgetown Website README
 
-[TheWorkAround](http://theworkaround.com/) - My personal blog filled with rambling and ideas
+Welcome to your new Bridgetown website! You can update this README file to provide additional context and setup information for yourself or other contributors.
 
-    Serve Assets as static assets:
-    jekyll serve
+## Table of Contents
 
-    Serve Site as changes happen
-    jekyll serve --watch
+- [Prerequisites](#prerequisites)
+- [Install](#install)
+- [Development](#development)
+- [Commands](#commands)
+- [Deployment](#deployment)
+- [Contributing](#contributing)
 
-    Build for serving production assets
-    JEKYLL_ENV=production jekyll build
+## Prerequisites
 
-### For generating new posts
+- [GCC](https://gcc.gnu.org/install/)
+- [Make](https://www.gnu.org/software/make/)
+- [Ruby](https://www.ruby-lang.org/en/downloads/)
+  - `>= 2.7`
+- [Bridgetown Gem](https://rubygems.org/gems/bridgetown)
+  - `gem install bridgetown -N`
+- [Node](https://nodejs.org)
+  - `>= 12`
+- [Yarn](https://yarnpkg.com)
 
-```shell
+## Install
 
-# the only required attribute is titles
-rake post title="A Title" [date="2012-02-09"] [tags=[tag1, tag2]]
+```sh
+cd bridgetown-site-folder
+bundle install && yarn install
+```
+> Learn more: [Bridgetown Getting Started Documentation](https://www.bridgetownrb.com/docs/).
 
-rake page  title="Page title" [date="2012-02-09"] [tags=[tag1, tag2]]
+## Development
 
-# run in watch mode
-rake preview
+To start your site in development mode, run `bin/bridgetown start` and navigate to [localhost:4000](https://localhost:4000/)!
+
+Use a [theme](https://github.com/topics/bridgetown-theme) or add some [plugins](https://www.bridgetownrb.com/plugins/) to get started quickly.
+
+### Commands
+
+```sh
+# running locally
+bin/bridgetown start
+
+# build & deploy to production
+bin/bridgetown deploy
+
+# load the site up within a Ruby console (IRB)
+bin/bridgetown console
 ```
 
-#### For code Synax Highlighting:
+> Learn more: [Bridgetown CLI Documentation](https://www.bridgetownrb.com/docs/command-line-usage)
 
-    # Gemfile:
-    gem 'devise-async'
+## Deployment
 
+You can deploy Bridgetown sites on hosts like Render or Vercel as well as traditional web servers by simply building and copying the output folder to your HTML root.
 
-    ~~~ ruby
-    def what?
-      42
-    end
-    ~~~
+> Read the [Bridgetown Deployment Documentation](https://www.bridgetownrb.com/docs/deployment) for more information.
 
+## Contributing
 
-    {% highlight ruby %}
-        require "rubygems"
-        require 'rake'
-        require 'yaml'
-        require 'time'
+If repo is on GitHub:
 
-        # Gemfile:
-        gem 'devise-async'
-    {% endhighlight %}
-
-
-    {% highlight ruby %}
-    def foo
-      puts 'foo'
-    end
-    {% endhighlight %}
-
-
-    ~~~
-    def hello
-      puts "hello world"
-    end
-    ~~~
-    {:lang="ruby"}
-
-    `aslf = '1'.to_s`{:lang="ruby"}
+1. Fork it
+2. Clone the fork using `git clone` to your local development machine.
+3. Create your feature branch (`git checkout -b my-new-feature`)
+4. Commit your changes (`git commit -am 'Add some feature'`)
+5. Push to the branch (`git push origin my-new-feature`)
+6. Create a new Pull Request

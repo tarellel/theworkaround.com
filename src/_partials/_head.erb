@@ -1,0 +1,43 @@
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta http-equiv="Content-Language" content="en">
+
+<% resource_title = strip_html(strip_newlines(title)) %>
+<title><% if resource_title != "Index" %><%= resource_title %> | <%= metadata.title %><% else %><%= metadata.title %>: <%= metadata.tagline %><% end %></title>
+<%= seo title: false %>
+<%= feed_meta %>
+
+<meta name="author" content="<%= site.metadata.author.name %>">
+<meta name="description" content="<%= metadata.description %>" />
+<meta name="generator" content="Bridgetown">
+<meta name="referrer" content="no-referrer-when-downgrade">
+<meta name="robots" content="index, follow">
+
+<%= render "preloads" %>
+<link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+<link rel="stylesheet" href="<%= webpack_path :css %>" data-turbo-track="reload" />
+<script src="<%= webpack_path :js %>" data-turbo-track="reload" defer></script>
+<%# live_reload_dev_js %>
+
+<%# MetaLinks %>
+<link href="<%= absolute_url 'sitemap.xml' %>" rel="sitemap" title="Sitemap" type="application/xml">
+<link href="<%= absolute_url 'humans.txt' %>" rel="author" type="text/plain">
+<link rel="manifest" href="<%= absolute_url "/site.webmanifest" %>">
+
+<link rel="me" href="<%= site.metadata.url %>" type="text/html">
+<link rel="me" href="https://github.com/<%= site.metadata.author.github %>">
+<link rel="me" href="https://twitter.com/<%= site.metadata.author.twitter %>">
+
+<%# Meta Colors %>
+<meta name="theme-color" content="<%= site.metadata.theme.color %>">
+
+<%# Analytics %>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-41384218-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'UA-41384218-1');
+</script>

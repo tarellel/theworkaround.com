@@ -1,50 +1,37 @@
-.bundle/*
-# src: https://raw.github.com/Modernizr/modernizr.com/gh-pages/.gitignore
-_site/
-_site/*/**
-ideas.md
-misc.md
-.jekyll-cache
-.jekyll-cache/*
+# Bridgetown
+output
+.bridgetown-cache
+.bridgetown-metadata
+.bridgetown-webpack
 
-#stuff from h5bp's gitignore
+# Dependency folders
+node_modules
+bower_components
+vendor
 
-# Numerous always-ignore extensions
-*.diff
-*.err
-*.orig
-*.log
-*.rej
-*.swo
-*.swp
-*.vi
-*~
-*.sass-cache
+# Caches
+.sass-cache
+.npm
+.node_repl_history
 
-# OS or Editor folders
+# Ignore bundler config.
+/.bundle
+
+# Ignore Byebug command history file.
+.byebug_history
+
+# dotenv environment variables file
+.env
+
+# Mac files
 .DS_Store
-*/.DS_Store
-.cache
-.project
-.settings
-.tmproj
-nbproject
-Thumbs.db
 
-# Dreamweaver added files
-_notes
-dwsync.xml
+# Yarn
+yarn-error.log
+yarn-debug.log*
+.pnp/
+.pnp.js
+# Yarn Integrity file
+.yarn-integrity
 
-# Komodo
-*.komodoproject
-.komodotools
-
-# Folders to ignore
-.hg
-.svn
-.CVS
-intermediate
-publish
-.idea
-.asset-cache
-.asset-cache/*
+frontend/styles/jit-refresh.css

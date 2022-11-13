@@ -1,0 +1,67 @@
+github:
+  - name: debian-rails
+    description: "A Vagrant/Ansible Provision using Debian as it's VM image to do a basic setup for a Rails Server. It comes with various required systems for a basic rails setup, including but not limited to: postgresql, redis, nodejs, nginx, Phusion Passenger, and much more."
+    github_url: https://github.com/tarellel/debian-rails
+
+  - name: jQuery.Storage
+    description: A jQuery plugin to make localStorage easy and manageable to use across variable browsers. Which includes various fallback techniques if the required features are not supported.
+    github_url: https://github.com/tarellel/jquery.Storage
+
+  - name: PineBox
+    description: A rails starter template with devise, tailwind, stimulus, hotwire, ViewComponents, Vite, and TypeScript.
+    github_url: https://github.com/tarellel/pinebox
+
+rubygems:
+  - name: bootstrap_views_generator
+    description: A Rails based generator for creating Bootstrap Views/layouts for for your application
+    rubygems_url: https://rubygems.org/gems/bootstrap_views_generator
+    github_url: https://github.com/tarellel/bootstrap_views_generator
+
+  - name: semantic_ui_views_generator
+    description: A Rails based generator for creating Semantic UI Views/layouts for for your application
+    rubygems_url: https://rubygems.org/gems/semantic_ui_views_generator
+    github_url: https://github.com/tarellel/semantic_ui_views_generator
+
+  - name: healthicons
+    description: A helper to easy add healthicon SVG icons to you application
+    rubygems_url: https://rubygems.org/gems/healthicons
+    github_url: https://github.com/tarellel/healthicons
+
+  - name: sailpoint
+    description: An helper for making API requests to a Sailpoint/IdentityIQ APIendpoint
+    rubygems_url: https://rubygems.org/gems/sailpoint
+    github_url: https://github.com/tarellel/sailpoint
+
+  - name: tailwind_views_generator
+    description: A Rails based generator for creating TailwindCSS based Views/layouts for for your application
+    rubygems_url: https://rubygems.org/gems/tailwind_views_generator
+    github_url: https://github.com/tarellel/tailwind_views_generator
+
+  - name: ldap_query
+    description: Easily generate LDAP connections and queries without having to learn how to build an LDAP connection with ruby.
+    rubygems_url: https://rubygems.org/gems/ldap_query
+    github_url: https://github.com/tarellel/ldap_query
+
+  - name: fx-sqlserver-adapter
+    description:
+      Adds sqlserver adapter to the FX gem to enable database migrations and schema to work with functions and triggers on applications using sqlserver as database
+    # Adds sqlserver adapter to the <a href="https://github.com/teoljungberg/fx" rel="nofollow" title="Versioned database functions and triggers for Rails">FX</a> gem to enable database migrations and schema to work with functions and triggers on applications using sqlserver as database
+    rubygems_url: https://rubygems.org/gems/fx-sqlserver-adapter
+    github_url: https://github.com/tarellel/fx-sqlserver-adapter
+
+  - name: simple_form-tailwind
+    description: A basic rails generator for adding a simpleform config for tailwindCSS based forms
+    rubygems_url: https://rubygems.org/gems/simple_form-tailwind
+    github_url: https://github.com/tarellel/simple_form-tailwind
+
+
+other:
+  - name: San Juan Maps
+    description: >-
+      A mapping of several county datasets to map out several different aspects of the county. Including but not limited to: the building ages in the county, all county property types, all active well sites, and all recently posted crimes in the county.A mapping of several county datasets to map out several different aspects of the county. Including but not limited to: the building ages in the county, all county property types, all active well sites, and all recently posted crimes in the county.
+    url: https://sanjuanmaps.com/
+
+  - name: Farmington geoCrimeMap
+    description: >-
+      A local city geoCrimeMap prototype in order to map out local crime using a custom mapping interface.A local city geoCrimeMap prototype in order to map out local crime using a custom mapping interface.
+    url: https://brandonhicks.me/geoCrimeMap/

@@ -1,0 +1,36 @@
+---
+layout: page
+title: Projects
+permalink: /projects/
+---
+
+<!-- SRC: https://tailwindcomponents.com/component/tailwind-css-users-card-list -->
+<div class="max-w-full mx-auto flex flex-col space-y-14">
+  <!-- Github Projects -->
+  <%= render(Project::Group.new(title: 'Github Projects', url: 'https://github.com/tarellel')) do %>
+    <% site.data.projects.github.each do |project| %>
+      <%= render Project::Item.new(name: project.name,
+                                   description: project.description,
+                                   github_url: project.github_url) %>
+    <% end %>
+  <% end %>
+
+  <!-- Rubygem Projects -->
+  <%= render(Project::Group.new(title: 'Ruby Gems', url: 'https://rubygems.org/profiles/tarellel')) do %>
+    <% site.data.projects.rubygems.each do |project| %>
+      <%= render Project::Item.new(name: project.name,
+                                   description: project.description,
+                                   rubygems_url: project.rubygems_url,
+                                   github_url: project.github_url) %>
+    <% end %>
+  <% end %>
+
+  <!-- Other Projects -->
+  <%= render(Project::Group.new(title: 'Other Projects')) do %>
+    <% site.data.projects.other.each do |project| %>
+      <%= render Project::Item.new(name: project.name,
+                                   description: project.description,
+                                   url: project.url) %>
+    <% end %>
+  <% end %>
+</div>
