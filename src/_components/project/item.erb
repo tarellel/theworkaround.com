@@ -12,18 +12,18 @@
     </div>
     <div class="inline-flex items-center text-base font-semibold text-gray-900 space-x-3">
       <% if @rubygems_url %>
-        <a href="<%= @rubygems_url %>" title="Rubygems - <%= @name %>">
+        <a href="<%= @rubygems_url %>" title="Rubygems - <%= @name %>" target="_blank" rel="noopener noreferrer">
           <%= render Icons::Ruby.new %>
         </a>
       <% end %>
       <% if @github_url %>
-        <a href="<%= @github_url %>" title="Github - <%= @name %>">
+        <a href="<%= @github_url %>" title="Github - <%= @name %>" target="_blank" rel="noopener noreferrer">
           <%= render Icons::Github.new %>
         </a>
       <% end %>
 
       <% if @url %>
-        <a href="<%= @url %>" title="<%= @name %>">
+        <a href="<%= @url %>" title="<%= @name %>" target="_blank" rel="noopener noreferrer">
           <%= render Icons::Link.new(alt: 'Link') %>
         </a>
       <% end %>
