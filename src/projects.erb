@@ -17,7 +17,7 @@ permalink: /projects/
 
   <!-- Rubygem Projects -->
   <%= render(Project::Group.new(title: 'Ruby Gems', url: 'https://rubygems.org/profiles/tarellel')) do %>
-    <% site.data.projects.rubygems.each do |project| %>
+    <% site.data.projects.rubygems&.sort_by(&:name).each do |project| %>
       <%= render Project::Item.new(name: project.name,
                                    description: project.description,
                                    rubygems_url: project.rubygems_url,

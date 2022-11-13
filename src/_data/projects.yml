@@ -17,6 +17,11 @@ rubygems:
     rubygems_url: https://rubygems.org/gems/bootstrap_views_generator
     github_url: https://github.com/tarellel/bootstrap_views_generator
 
+  - name: crossbeam
+    description: An easy way to create and run service objects with callbacks, validations, errors, and responses
+    rubygems_url: https://rubygems.org/gems/crossbeam
+    github_url: https://github.com/tarellel/crossbeam
+
   - name: semantic_ui_views_generator
     description: A Rails based generator for creating Semantic UI Views/layouts for for your application
     rubygems_url: https://rubygems.org/gems/semantic_ui_views_generator
