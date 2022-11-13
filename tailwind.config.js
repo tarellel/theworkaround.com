@@ -2,8 +2,8 @@
 module.exports = {
   mode: 'jit',
   content: [
-    './src/**/*.{html,md,liquid,erb,serb,rb}',
-    './frontend/javascript/**/*.js',
+    "./src/**/*.{md,rb,erb,html}",
+    "./frontend/javascript/**/*.js"
   ],
   theme: {
     extend: {
