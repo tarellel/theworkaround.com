@@ -1,0 +1,16 @@
+/* TEAM */
+  Developer: Brandon Hicks
+  Blog:      https://theworkaround.com/
+  Website:   https://brandonhicks.me/
+  Twitter:   @tarellel
+  Location:  New Mexico, USA
+
+/* SITE */
+  Last updated:
+  Language:   English
+  Doctype:    HTML5
+  Standards:  HTML, CSS3
+  Components: Tailwind, BridgetownRB, Ruby, and TubroJS
+  IDE:        VSCode
+
+HumansTXT is a ingenious method to allow developers to establish who contributed to a websites creation.
