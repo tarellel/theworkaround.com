@@ -1,8 +1,29 @@
-<li class="flex justify-between items-center">
-  <a href="<%= post.relative_url %>"><%= post.data.title %></a>
-  <% if post.data.date %>
-    <date datetime="<%= post.data.date %>">
-      <%= post.data.date&.strftime('%b %d, %Y') %>
-    </date>
-  <% end %>
+<%# <li class="flex justify-between items-center"> %>
+<li class="flex flex-col">
+  <a href="<%= post.relative_url %>" class="font-semibold"><%= post.data.title %></a>
+
+  <div class="flex flex-col sm:flex-row text-sm">
+    <% if post.data.date %>
+      <span>
+        Originally posted on&nbsp;
+        <date datetime="<%= post.data.date %>" class="published">
+          <%= formatted_data %>
+        </date>
+      </span>
+
+      <%- if post.content %>
+        <span>
+          &nbsp;&bull;&nbsp;
+          <%= post_length %> <%= post_word_txt %>
+        </span>
+      <% end %>
+
+      <%- if post.data.tags %>
+        <span>
+          &nbsp;&bull;&nbsp;
+          <%= post_tags %>
+        </span>
+      <% end %>
+    <% end %>
+  </div>
 </li>
