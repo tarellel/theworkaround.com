@@ -13,14 +13,14 @@
 
       <%- if post.content %>
         <span>
-          &nbsp;&bull;&nbsp;
+          <span class="hidden sm:inline">&nbsp;&bull;</span>
           <%= post_length %> <%= post_word_txt %>
         </span>
       <% end %>
 
       <%- if post.data.tags %>
         <span>
-          &nbsp;&bull;&nbsp;
+          <span class="hidden sm:inline">&nbsp;&bull;</span>
           <%= post_tags %>
         </span>
       <% end %>
