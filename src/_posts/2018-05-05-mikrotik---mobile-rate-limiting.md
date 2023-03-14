@@ -10,6 +10,7 @@ comments: true
 ![](/images/posts/mikrotik.png){: .img-fluid .w-3/12 }
 
 ### A Brief Intro
+
 I've been using Mikrotik routers for about a year now and I've had nothing but an amazing experience thus far.
 I haven't taken any of the [certification](https://mikrotik.com/training/) training courses (MTCNA, MTCRE, MTCWE) for the Mikrotik routers and thus far all my learning has been hands more of a hands on experience and following the RouterOS [documentation](https://wiki.mikrotik.com/wiki/Manual:TOC).
 
@@ -22,12 +23,14 @@ He recommended I use MikroTik routers because their cheap, highly efficient, eas
 -----
 
 ### Now To the Issue
+
 Across the facility here are is a large number of devices assigned static IP addresses; ie. printers, VoIP phones, and several special purpose devices. Now we always have people coming from all over for meetings, training, consultation, etc. So in any one day you may have a few hundred devices connect to the network. And having a huge wireless network with a plethora of devices always connecting to the network can be a nightmare. To ensure a quality network experience, I reduced DHCP lifespans to 10 minutes this removes devices from the DHCP table after a short amount of time. I also setup a rollover subnet, so when the basic subnet chain was full it starts assigning IP addresses to a secondary subnet. I also have a default rate-limit (Queues) for when a new device connects to the network.
 
 Now one of the biggest issues we have is people using a ton of bandwidth on social media. Part of the problem is; we have several people who do marketing, advertising, and outreach across various social media mediums including but not limited to facebook, twitter, youtube, and few others. But we all known, people like to stream videos, baseball games, concerts, and tons of high bandwidth streams with their phones when visiting these sites.
 
 To counter this, I decided it'd be a good idea to specifically rate-limit/set Queue speeds for mobile devices. This isn't a fool proof method, but it does tend to catch about 99% of all mobile devices that connect to the network. It compares the devices $hostname to a regular expression list of mobile device manufacturers.
 To setup up the regular expression you goto: IP>Firewall> [Tab] layer7 Protocols, you'll than create a new Firewall L7 protocol and label it `mobileDevices` with the following regex.
+
 ```javascript
 ^.*(android|ANDROID|AppleWatch|BLACKBERRY|Galaxy|HTC|Huaweu|iPhone|iPhne|Moto|SAMSUNG|Xperia).*$
 ```
@@ -79,6 +82,7 @@ This isn't a fool proof method, but it does catch the vast majority of mobile de
 ~ **Note:** This may not be the best or the most effective script for what I wanted to achieve, but it accomplished what I needed to do. And it's been tested and proven to work effectively for exactly what I needed.
 
 ##### UPDATED: <small class="text-muted">5/31/18</small>
+
 After updating our Routers' packages and routerboad to v6.42.3, I begun having issues with the script showing above.
 So I removed the Layer7 and revamped the script to use it hostname matches through a variable string. The new revision appears to run a bit faster than the previous version and in my opinion, it seems to be a bit easier to read.
 
