@@ -1,4 +1,41 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://bridgetownrb.com/" version="1.1.0">Bridgetown</generator><link href="https://theworkaround.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://theworkaround.com/" rel="alternate" type="text/html" /><updated>2023-02-21T17:54:57+00:00</updated><id>https://theworkaround.com/feed.xml</id><title type="html">TheWorkAround</title><subtitle>The infinite ramblings and ideas of Brandon Hicks</subtitle><author><name>Brandon Hicks</name></author><entry><title type="html">Setting up a Pi-Hole</title><link href="https://theworkaround.com/2019/08/27/setting-up-pi-hole/" rel="alternate" type="text/html" title="Setting up a Pi-Hole" /><published>2019-08-27T00:00:00+00:00</published><updated>2019-08-27T00:00:00+00:00</updated><id>repo://posts.collection/_posts/2019-08-27-setting-up-pi-hole.md</id><content type="html" xml:base="https://theworkaround.com/2019/08/27/setting-up-pi-hole/">&lt;p&gt;Before we get started, if you haven’t heard of the &lt;a href=&quot;https://pi-hole.net/&quot;&gt;PiHole&lt;/a&gt; module.
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://bridgetownrb.com/" version="1.1.0">Bridgetown</generator><link href="https://theworkaround.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://theworkaround.com/" rel="alternate" type="text/html" /><updated>2023-03-14T22:13:41+00:00</updated><id>https://theworkaround.com/feed.xml</id><title type="html">TheWorkAround</title><subtitle>The infinite ramblings and ideas of Brandon Hicks</subtitle><author><name>Brandon Hicks</name></author><entry><title type="html">Devise-OTP without jQuery</title><link href="https://theworkaround.com/2023/03/13/devise-otp-without-jquery/" rel="alternate" type="text/html" title="Devise-OTP without jQuery" /><published>2023-03-13T00:00:00+00:00</published><updated>2023-03-13T00:00:00+00:00</updated><id>repo://posts.collection/_posts/2023-03-13-devise-otp-without-jquery.md</id><content type="html" xml:base="https://theworkaround.com/2023/03/13/devise-otp-without-jquery/">&lt;p&gt;Ruby/Rails boasts a unique diversity of available libraries and gems, including several options for authentication such as &lt;a href=&quot;https://github.com/heartcombo/devise&quot;&gt;Devise&lt;/a&gt;, &lt;a href=&quot;https://github.com/omniauth/omniauth&quot;&gt;omniauth&lt;/a&gt;, &lt;a href=&quot;https://github.com/thoughtbot/clearance&quot;&gt;clearance&lt;/a&gt;, &lt;a href=&quot;https://github.com/sorcery/sorcery&quot;&gt;sorcery&lt;/a&gt;, &lt;a href=&quot;https://github.com/jeremyevans/rodauth&quot;&gt;rodauth&lt;/a&gt;, among others. While there are many options to choose from, I personally prefers Devise for its modularity and ease of use.&lt;/p&gt;
+
+&lt;p&gt;However, any modern application needs more than just an authentication system; you also want to ensure you build on permissions permissions &lt;em&gt;(for authorization)&lt;/em&gt;, 2FA, and a solid hash library for additional secure measures.&lt;/p&gt;
+
+&lt;p&gt;There are several &lt;a href=&quot;https://en.wikipedia.org/wiki/Multi-factor_authentication&quot;&gt;2fa&lt;/a&gt; libraries that you can integrate with Devise, such as &lt;a href=&quot;https://github.com/tinfoil/devise-two-factor&quot;&gt;devise-two-factor&lt;/a&gt;, &lt;a href=&quot;https://github.com/wmlele/devise-otp&quot;&gt;devise-otp&lt;/a&gt;, &lt;a href=&quot;https://github.com/williamatodd/devise-2fahttps://github.com/williamatodd/devise-2fa&quot;&gt;devise-2fa&lt;/a&gt;, &lt;a href=&quot;https://github.com/Houdini/two_factor_authentication&quot;&gt;two_factor_authentication&lt;/a&gt;, among others. I honestly prefer &lt;a href=&quot;https://github.com/wmlele/devise-otp&quot;&gt;Devise-OTP&lt;/a&gt; for its ease of use and adherence to &lt;a href=&quot;https://datatracker.ietf.org/doc/html/rfc6238&quot;&gt;RFC 6238&lt;/a&gt; implementation using the  &lt;a href=&quot;https://github.com/mdp/rotp&quot;&gt;ROTP&lt;/a&gt; gem.&lt;/p&gt;
+
+&lt;p&gt;However I did encounter an issue with Devise-OTP in that it still assumes applications using it are using Sprockets and jQuery, and the &lt;a href=&quot;https://github.com/wmlele/devise-otp/blob/master/app/assets/javascripts/qrcode.js&quot;&gt;qrcode JS&lt;/a&gt; file it includes requires jQuery. While I still use jQuery regularly at work, I have moved to using StimulusJS for personal projects.&lt;/p&gt;
+
+&lt;p&gt;After attempting to use several npm packages &lt;em&gt;(like &lt;a href=&quot;https://github.com/soldair/node-qrcode&quot;&gt;node-qrcode&lt;/a&gt;)&lt;/em&gt; for generating the users 2fa QRcodes, I also found that 1Password had issues when scanning for a valid 2FA QR code; which could be a significant concern for many users. It is noted that the gem has a handy &lt;a href=&quot;https://github.com/wmlele/devise-otp/blob/master/lib/devise_otp_authenticatable/controllers/helpers.rb#L148&quot;&gt;helper&lt;/a&gt; &lt;code class=&quot;highlighter-rouge&quot;&gt;otp_authenticator_token_image_google&lt;/code&gt; for generating QR codes using the Google Chart API, but generating QR codes with a third party like Google may not be the most security-conscious decision.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/posts/devise_otp_without_query/qrcode.png&quot; alt=&quot;qrcode&quot; class=&quot;img-fluid w-3/12&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;After some playing around I was able to find an alternative method to get the qrcodes genreted in the application and without requiring jQuery to be included.&lt;/p&gt;
+
+&lt;p&gt;First to modify devise-opts views I ran the generator so they would be in the app, rather than in the gem.&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;rails g devise_otp:views&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;Next I added the follow gems to my Gemfile and bundled&lt;/p&gt;
+
+&lt;div class=&quot;language-ruby highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;gem&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&apos;rotp&apos;&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;gem&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&apos;rqrcode&apos;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;In my users helper I added the following method to generate the users 2fa QRcode&lt;/p&gt;
+
+&lt;div class=&quot;language-ruby highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;otp_rqr_image&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;otp_url&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;qr_code&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;RQRCode&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;QRCode&lt;/span&gt;
+            &lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;new&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;otp_url&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+            &lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;as_png&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;resize_exactly_to: &lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;300&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+            &lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;to_data_url&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;image_tag&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;qr_code&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Now within the view files that the gem generated you should have &lt;code class=&quot;highlighter-rouge&quot;&gt;app/views/devise/otp_tokens/_token_secret.html.slim&lt;/code&gt;. This &lt;a href=&quot;https://github.com/wmlele/devise-otp/blob/master/app/views/devise/otp_tokens/_token_secret.html.erb#L4&quot;&gt;file&lt;/a&gt; is where the qrcode is generate for the user. I replaced the &lt;code class=&quot;highlighter-rouge&quot;&gt;otp_authenticator_token_image&lt;/code&gt; (jQuery based) method with the &lt;code class=&quot;highlighter-rouge&quot;&gt;otp_rqr_image&lt;/code&gt; that we created earlier. You should now have a valid 2fa QRcode which is also scanable by 1Password and most of password managers or 2fa authenticators.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/posts/devise_otp_without_query/2fa_user_qrcode.png&quot; alt=&quot;qrcode&quot; class=&quot;img-fluid w-4/5&quot; /&gt;&lt;/p&gt;</content><author><name>Brandon</name></author><category term="devise" /><category term="opt" /><category term="rails" /><category term="2fa" /></entry><entry><title type="html">Setting up a Pi-Hole</title><link href="https://theworkaround.com/2019/08/27/setting-up-pi-hole/" rel="alternate" type="text/html" title="Setting up a Pi-Hole" /><published>2019-08-27T00:00:00+00:00</published><updated>2019-08-27T00:00:00+00:00</updated><id>repo://posts.collection/_posts/2019-08-27-setting-up-pi-hole.md</id><content type="html" xml:base="https://theworkaround.com/2019/08/27/setting-up-pi-hole/">&lt;p&gt;Before we get started, if you haven’t heard of the &lt;a href=&quot;https://pi-hole.net/&quot;&gt;PiHole&lt;/a&gt; module.
 It’s an Open Source networking product that’s &lt;a href=&quot;https://www.reddit.com/r/pihole/&quot;&gt;exploding&lt;/a&gt; in the consumer networking world.
 Let me begin by saying at my families house we have multiple TV’s (a smart TV and a TV with a Roku), the kids each have tablets, and my wife and I have our phones and laptops, as well as a few personal servers (local NAS and development servers). And for the majority of the time, most of these devices are sending and receiving traffic at any given time.&lt;/p&gt;
 
@@ -771,6 +808,7 @@ end
 &lt;p&gt;~ &lt;strong&gt;NOTE:&lt;/strong&gt; These tests are performed on a MBP with OSx 10.12,  a 2.2ghz i7, 16GB of RAM, and a SSD. So the results may vary from device to device.&lt;/p&gt;</content><author><name>Brandon</name></author><category term="performance" /><category term="ruby" /></entry><entry><title type="html">MikroTik - Mobile Rate-Limiting</title><link href="https://theworkaround.com/2018/05/05/mikrotik-mobile-rate-limiting/" rel="alternate" type="text/html" title="MikroTik - Mobile Rate-Limiting" /><published>2018-05-05T00:00:00+00:00</published><updated>2018-05-05T00:00:00+00:00</updated><id>repo://posts.collection/_posts/2018-05-05-mikrotik---mobile-rate-limiting.md</id><content type="html" xml:base="https://theworkaround.com/2018/05/05/mikrotik-mobile-rate-limiting/">&lt;p&gt;&lt;img src=&quot;/images/posts/mikrotik.png&quot; alt=&quot;&quot; class=&quot;img-fluid w-3/12&quot; /&gt;&lt;/p&gt;
 
 &lt;h3 id=&quot;a-brief-intro&quot;&gt;A Brief Intro&lt;/h3&gt;
+
 &lt;p&gt;I’ve been using Mikrotik routers for about a year now and I’ve had nothing but an amazing experience thus far.
 I haven’t taken any of the &lt;a href=&quot;https://mikrotik.com/training/&quot;&gt;certification&lt;/a&gt; training courses (MTCNA, MTCRE, MTCWE) for the Mikrotik routers and thus far all my learning has been hands more of a hands on experience and following the RouterOS &lt;a href=&quot;https://wiki.mikrotik.com/wiki/Manual:TOC&quot;&gt;documentation&lt;/a&gt;.&lt;/p&gt;
 
@@ -783,12 +821,14 @@ I haven’t taken any of the &lt;a href=&quot;https://mikrotik.com/training/&quo
 &lt;hr /&gt;
 
 &lt;h3 id=&quot;now-to-the-issue&quot;&gt;Now To the Issue&lt;/h3&gt;
+
 &lt;p&gt;Across the facility here are is a large number of devices assigned static IP addresses; ie. printers, VoIP phones, and several special purpose devices. Now we always have people coming from all over for meetings, training, consultation, etc. So in any one day you may have a few hundred devices connect to the network. And having a huge wireless network with a plethora of devices always connecting to the network can be a nightmare. To ensure a quality network experience, I reduced DHCP lifespans to 10 minutes this removes devices from the DHCP table after a short amount of time. I also setup a rollover subnet, so when the basic subnet chain was full it starts assigning IP addresses to a secondary subnet. I also have a default rate-limit (Queues) for when a new device connects to the network.&lt;/p&gt;
 
 &lt;p&gt;Now one of the biggest issues we have is people using a ton of bandwidth on social media. Part of the problem is; we have several people who do marketing, advertising, and outreach across various social media mediums including but not limited to facebook, twitter, youtube, and few others. But we all known, people like to stream videos, baseball games, concerts, and tons of high bandwidth streams with their phones when visiting these sites.&lt;/p&gt;
 
 &lt;p&gt;To counter this, I decided it’d be a good idea to specifically rate-limit/set Queue speeds for mobile devices. This isn’t a fool proof method, but it does tend to catch about 99% of all mobile devices that connect to the network. It compares the devices $hostname to a regular expression list of mobile device manufacturers.
 To setup up the regular expression you goto: IP&amp;gt;Firewall&amp;gt; [Tab] layer7 Protocols, you’ll than create a new Firewall L7 protocol and label it &lt;code class=&quot;highlighter-rouge&quot;&gt;mobileDevices&lt;/code&gt; with the following regex.&lt;/p&gt;
+
 &lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;o&quot;&gt;^&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;android&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;ANDROID&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;AppleWatch&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;BLACKBERRY&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Galaxy&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;HTC&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Huaweu&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;iPhone&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;iPhne&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Moto&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;SAMSUNG&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Xperia&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;$&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
@@ -838,6 +878,7 @@ To setup up the regular expression you goto: IP&amp;gt;Firewall&amp;gt; [Tab] la
 &lt;p&gt;~ &lt;strong&gt;Note:&lt;/strong&gt; This may not be the best or the most effective script for what I wanted to achieve, but it accomplished what I needed to do. And it’s been tested and proven to work effectively for exactly what I needed.&lt;/p&gt;
 
 &lt;h5 id=&quot;updated-53118&quot;&gt;UPDATED: &lt;small class=&quot;text-muted&quot;&gt;5/31/18&lt;/small&gt;&lt;/h5&gt;
+
 &lt;p&gt;After updating our Routers’ packages and routerboad to v6.42.3, I begun having issues with the script showing above.
 So I removed the Layer7 and revamped the script to use it hostname matches through a variable string. The new revision appears to run a bit faster than the previous version and in my opinion, it seems to be a bit easier to read.&lt;/p&gt;
 
@@ -1958,108 +1999,4 @@ tmux kill-server
   &lt;li&gt;
     &lt;p&gt;&lt;a href=&quot;https://github.com/tmuxinator/tmuxinator&quot;&gt;tmuxinator&lt;/a&gt;&lt;/p&gt;
   &lt;/li&gt;
-&lt;/ul&gt;</content><author><name>Brandon</name></author><category term="development" /><category term="programming" /><category term="terminal" /><category term="tmux" /></entry><entry><title type="html">Elixir Pattern Matching</title><link href="https://theworkaround.com/2015/12/06/elixir-pattern-matching/" rel="alternate" type="text/html" title="Elixir Pattern Matching" /><published>2015-12-06T00:00:00+00:00</published><updated>2015-12-06T00:00:00+00:00</updated><id>repo://posts.collection/_posts/2015-12-06-elixir-pattern-matching.md</id><content type="html" xml:base="https://theworkaround.com/2015/12/06/elixir-pattern-matching/">&lt;h2 id=&quot;special-characters-have-meaning-as-well&quot;&gt;Special Characters have meaning as well&lt;/h2&gt;
-
-&lt;p&gt;Learning any new programming language is a always a great challenge. There’s always new techniques, methods, and syntax to learn. But it is also a great experience to expand you knowledge and learn new tricks and with Elixir this is also the case. As with many programming languages there are numerous keywords and special characters that have meaning. They can assign a value, perform some sort of logic test, run a method, etc. And in this article we will taking a brief look at Elixir based Pattern Matching.&lt;/p&gt;
-
-&lt;h3 id=&quot;pattern-matching&quot;&gt;Pattern matching&lt;/h3&gt;
-
-&lt;p&gt;In numerous programming languages the equal symbol &lt;code class=&quot;highlighter-rouge&quot;&gt;=&lt;/code&gt; is generally an assignment operator. Which means you set XYZ variable to the value of JKL &lt;code class=&quot;highlighter-rouge&quot;&gt;xyz = &apos;FooBar&apos;&lt;/code&gt;. You can usually assign an object, a value, a function, or many other datatypes to a variable. With Elixir this is still the case, but with exceptions. In Elixir, the equals operator means to match the left side of the &lt;code class=&quot;highlighter-rouge&quot;&gt;=&lt;/code&gt; sign to the the right side.&lt;/p&gt;
-
-&lt;div class=&quot;language-elixir highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;iex&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;7&lt;/span&gt;
-&lt;span class=&quot;c1&quot;&gt;# =&amp;gt; 7&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;iex&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;y&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt;
-&lt;span class=&quot;c1&quot;&gt;# =&amp;gt; 5&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;iex&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;7&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;y&lt;/span&gt;
-&lt;span class=&quot;c1&quot;&gt;# =&amp;gt; ** (MatchError) no match of right hand side value: 5&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;You may be wondering what this error is about. Well the variable &lt;code class=&quot;highlighter-rouge&quot;&gt;y&lt;/code&gt; was assigned the value of 5, meaning that in the last line you are stating that 7 = 5. This value should always be false. Now if the variable was on the left side of the equal sign the value of 7 would have been assigned the variable.&lt;/p&gt;
-
-&lt;h3 id=&quot;taking-it-a-step-farther&quot;&gt;Taking it a step farther&lt;/h3&gt;
-&lt;p&gt;Once you begin using pattern matching, it can become a very powerful feature in you application. Not only can you do pattern matching with basic variables and datatypes, you can also match values with tuples and lists. This can be a double edged sword, it can either complicate the heck out of your program or make things work extremely effectively. Pattern matching assignment is a great tool when working with tuples/lists, because it allows us to pick which values we wish to assign and use.&lt;/p&gt;
-
-&lt;div class=&quot;language-elixir highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;costanza&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;%{&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;name:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;George&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;age:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;27&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;likes:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;Sports&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;c1&quot;&gt;# =&amp;gt; %{age: 27, likes: &quot;Sports&quot;, name: &quot;George&quot;}&lt;/span&gt;
-
-&lt;span class=&quot;c1&quot;&gt;# lets verify name is an unassigned variable&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;
-&lt;span class=&quot;c1&quot;&gt;# =&amp;gt; ** (CompileError) iex:2: undefined function name/0&lt;/span&gt;
-
-&lt;span class=&quot;p&quot;&gt;%{&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;name:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;costanza&lt;/span&gt;
-&lt;span class=&quot;c1&quot;&gt;# =&amp;gt; %{age: 27, likes: &quot;Sports&quot;, name: &quot;George&quot;}&lt;/span&gt;
-
-&lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;
-&lt;span class=&quot;c1&quot;&gt;# =&amp;gt; &quot;George&quot;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;Lets put this in prospective of an HTTP request/response, to assign&lt;/p&gt;
-
-&lt;div class=&quot;language-elixir highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;result&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:error&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;404&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;c1&quot;&gt;# =&amp;gt; {:error, 404}&lt;/span&gt;
-
-&lt;span class=&quot;n&quot;&gt;result&lt;/span&gt;
-&lt;span class=&quot;c1&quot;&gt;# =&amp;gt; :error&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;Now rather than assigning values, lets look at an example of pattern matching based on conditional comparisons.&lt;/p&gt;
-
-&lt;div class=&quot;language-elixir highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:ok&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;reponse&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:error&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;404&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;c1&quot;&gt;# =&amp;gt; ** (MatchError) no match of right hand side value: {:error, 404}&lt;/span&gt;
-
-&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:status&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;reponse&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:status&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;200&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;c1&quot;&gt;# =&amp;gt; {:status, 200}&lt;/span&gt;
-
-&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;200&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;response&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;200&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;html/text;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;c1&quot;&gt;# =&amp;gt; {200, &quot;html/text;&quot;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;In the first example you can see the left hand and right hand of the &lt;code class=&quot;highlighter-rouge&quot;&gt;=&lt;/code&gt; operator are not equal and do not having matching :atoms so they can not be assigned values to their corresponding variables. But the second example does have matching atoms/object so their values can be associated with one another. By using this pattern matching techniques, you are not solely limited to using :atoms to match the values, you can use various data types. If you look at the third example you can see that they correspond with each other with an integer that has the value of &lt;code class=&quot;highlighter-rouge&quot;&gt;200&lt;/code&gt;. This may look like a mess, why would you want to do this? Well the sample below might shine some like on this. With pattern matching you could assign the values based on a functions response values, using a simple HTTP request I will try to show you that it isn’t so hard to understand how and why these values may be passed.&lt;/p&gt;
-
-&lt;div class=&quot;language-elixir highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;defmodule&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;Http&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
-  &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;request&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
-    &lt;span class=&quot;c1&quot;&gt;# ...&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:status&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;404&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-  &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
-
-&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:status&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;response&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;Http&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;request&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
-&lt;span class=&quot;c1&quot;&gt;# =&amp;gt; {:status, 404}&lt;/span&gt;
-
-&lt;span class=&quot;n&quot;&gt;response&lt;/span&gt;
-&lt;span class=&quot;c1&quot;&gt;# =&amp;gt; 404&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;functional-pattern-matching&quot;&gt;Functional Pattern Matching&lt;/h3&gt;
-
-&lt;p&gt;When declaring and calling functions you can continue to do pattern matching based on the declared values without using the equals &lt;code class=&quot;highlighter-rouge&quot;&gt;=&lt;/code&gt; assignment operator. Generally function pattern matching is used for with making recursion effective and manageable.&lt;/p&gt;
-
-&lt;div class=&quot;language-elixir highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;defmodule&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;Seinfield&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
-  &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;cast&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([],&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;_&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;# STOP: when end of list has been reached&lt;/span&gt;
-
-  &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;cast&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;list&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;cast&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;list&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;# start index from 1 when beginning to map through the list&lt;/span&gt;
-  &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;cast&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;head&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;tail&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;count&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
-    &lt;span class=&quot;no&quot;&gt;IO&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;puts&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;#{&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;count&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;: &lt;/span&gt;&lt;span class=&quot;si&quot;&gt;#{&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;head&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;cast&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;tail&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;count&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
-  &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
-
-&lt;span class=&quot;n&quot;&gt;characters&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;George&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;Jerry&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;Kramer&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;Elaine&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;Newman&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
-&lt;span class=&quot;c1&quot;&gt;# =&amp;gt; [&quot;George&quot;, &quot;Jerry&quot;, &quot;Kramer&quot;, &quot;Elaine&quot;, &quot;Newman&quot;]&lt;/span&gt;
-
-&lt;span class=&quot;no&quot;&gt;Seinfield&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;cast&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;characters&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-
-&lt;span class=&quot;c1&quot;&gt;# =&amp;gt; George&lt;/span&gt;
-&lt;span class=&quot;c1&quot;&gt;# Jerry&lt;/span&gt;
-&lt;span class=&quot;c1&quot;&gt;# Kramer&lt;/span&gt;
-&lt;span class=&quot;c1&quot;&gt;# Elaine&lt;/span&gt;
-&lt;span class=&quot;c1&quot;&gt;# Newman&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;I know this is an extreme example jumping from basic variable declarations to module/function matching. But if you look at the cast function, you’ll notice that when passing parameters using a list Elixir will match to the lists &lt;code class=&quot;highlighter-rouge&quot;&gt;[head |tail]&lt;/code&gt; to make break down in forms of context here is what it would look like with the characters list passed through it.&lt;/p&gt;
-
-&lt;div class=&quot;language-elixir highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;head&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;tail&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;George&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;Jerry&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;Kramer&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;Elaine&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;Newman&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;clearing-it-up&quot;&gt;Clearing it up&lt;/h3&gt;
-&lt;p&gt;I hope you have better understanding of Elixirs pattern matching capabilities and that the equal sign is not just an assignment operator in Elixir. Elixir has a massive amount of capabilities and some of these may be confusing as hell, but pattern matching helps bring it one step closer to help make everything easier to understand and use.&lt;/p&gt;</content><author><name>Brandon</name></author><category term="development" /><category term="elixir" /><category term="programming" /></entry></feed>
+&lt;/ul&gt;</content><author><name>Brandon</name></author><category term="development" /><category term="programming" /><category term="terminal" /><category term="tmux" /></entry></feed>
