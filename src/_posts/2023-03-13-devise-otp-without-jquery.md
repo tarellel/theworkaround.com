@@ -44,6 +44,6 @@ def otp_rqr_image(otp_url)
 end
 ```
 
-Now within the view files that the gem generated you should have `app/views/devise/otp_tokens/_token_secret.html.slim`. This [file](https://github.com/wmlele/devise-otp/blob/master/app/views/devise/otp_tokens/_token_secret.html.erb#L4) is where the qrcode is generate for the user. I replaced the `otp_authenticator_token_image` (jQuery based) method with the `otp_rqr_image` that we created earlier. You should now have a valid 2fa QRcode which is also scanable by 1Password and most of password managers or 2fa authenticators.
+Now within the view files that the gem generated you should have `app/views/devise/otp_tokens/_token_secret.html.slim`. This [file](https://github.com/wmlele/devise-otp/blob/master/app/views/devise/otp_tokens/_token_secret.html.erb#L4) is where the qrcode is generated for the user enabling 2fa for their account. I replaced the `otp_authenticator_token_image` (jQuery based) method with `otp_rqr_image` that we created earlier. You should now have a valid 2fa QRcode which is also scanable by 1Password and most of password managers or 2fa authenticators.
 
 ![qrcode](/images/posts/devise_otp_without_query/2fa_user_qrcode.png){: .img-fluid .w-4/5  }
