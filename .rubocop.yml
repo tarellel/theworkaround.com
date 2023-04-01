@@ -1,0 +1,10 @@
+AllCops:
+  NewCops: disable
+  Exclude:
+    - Rakefile
+    - node_modules/**/*
+    - output/**/*
+    - plugins/**/*
+    - server/**/*
+  TargetRubyVersion: 3.2
+  UseCache: true

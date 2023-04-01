@@ -1,4 +1,6 @@
-require "bridgetown"
+# frozen_string_literal: true
+
+require 'bridgetown'
 
 Bridgetown.load_tasks
 
@@ -8,53 +10,52 @@ task default: :deploy
 #
 # Standard set of tasks, which you can customize if you wish:
 #
-desc "Build the Bridgetown site for deployment"
-task :deploy => [:clean, "frontend:build"] do
+desc 'Build the Bridgetown site for deployment'
+task deploy: [:clean, 'frontend:build'] do
   Bridgetown::Commands::Build.start
 end
 
-desc "Build the site in a test environment"
+desc 'Build the site in a test environment'
 task :test do
-  ENV["BRIDGETOWN_ENV"] = "test"
+  ENV['BRIDGETOWN_ENV'] = 'test'
   Bridgetown::Commands::Build.start
 end
 
-desc "Runs the clean command"
+desc 'Runs the clean command'
 task :clean do
   Bridgetown::Commands::Clean.start
 end
 
 namespace :frontend do
-  desc "Build the frontend with esbuild for deployment"
+  desc 'Build the frontend with esbuild for deployment'
   task :build do
-    sh "touch frontend/styles/jit-refresh.css"
-    sh "yarn run esbuild"
+    sh 'touch frontend/styles/jit-refresh.css'
+    sh 'yarn run esbuild'
   end
 
-  desc "Watch the frontend with esbuild during development"
+  desc 'Watch the frontend with esbuild during development'
   task :dev do
-    sh "touch frontend/styles/jit-refresh.css"
-    sh "yarn run esbuild-dev"
+    sh 'touch frontend/styles/jit-refresh.css'
+    sh 'yarn run esbuild-dev'
   rescue Interrupt
   end
 end
 
-desc "Runs the update commands"
-task update: ["update:cssdb", "update:yarn"]
+desc 'Runs the update commands'
+task update: ['update:cssdb', 'update:yarn']
 
 namespace :update do
-  desc "Update browserlists db"
+  desc 'Update browserlists db'
   task :cssdb do
-    sh "npx browserslist@latest --update-db"
+    sh 'npx browserslist@latest --update-db'
   end
 
-  desc "Update yarn dependencies"
+  desc 'Update yarn dependencies'
   task :yarn do
-    sh "yarn upgrade-interactive --latest && yarn upgrade"
+    sh 'yarn upgrade-interactive --latest && yarn upgrade'
   rescue Interrupt
   end
 end
-
 
 #
 # Add your own Rake tasks here! You can use `environment` as a prerequisite

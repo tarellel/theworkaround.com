@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
@@ -37,11 +39,11 @@ group :development do
 end
 
 group :bridgetown_plugins do
-  gem 'bridgetown-minify-html', '~> 2.0'
   gem 'bridgetown-feed'
+  gem 'bridgetown-minify-html', '~> 2.0'
   gem 'bridgetown-rougify'
   gem 'bridgetown-seo-tag'
-  gem 'bridgetown-svg-inliner'
   gem 'bridgetown-sitemap'
+  gem 'bridgetown-svg-inliner'
   gem 'bridgetown-view-component'
 end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Roda is a simple Rack-based framework with a flexible architecture based
 # on the concept of a routing tree. Bridgetown uses it for its development
 # server, but you can also run it in production for fast, dynamic applications.
@@ -14,8 +16,5 @@ class RodaApp < Bridgetown::Rack::Roda
   # uncomment the gem dependency in your `Gemfile` as well):
   # plugin :bridgetown_routes
 
-  route do |r|
-    # Load Roda routes in server/routes (and src/_routes via `bridgetown-routes`)
-    r.bridgetown
-  end
+  route(&:bridgetown)
 end
