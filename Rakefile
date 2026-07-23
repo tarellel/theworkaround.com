@@ -27,15 +27,18 @@ task :clean do
 end
 
 namespace :frontend do
-  desc 'Build the frontend with esbuild for deployment'
+  desc 'Build the frontend (esbuild for JS, Tailwind CLI for CSS) for deployment'
   task :build do
-    sh 'touch frontend/styles/jit-refresh.css'
+    # esbuild first so the frontend manifest exists, then Tailwind compiles and
+    # fingerprints its CSS into that manifest.
     sh 'yarn run esbuild'
+    sh 'bin/tailwindcss'
   end
 
-  desc 'Watch the frontend with esbuild during development'
+  desc 'Watch the frontend (esbuild for JS, Tailwind CLI for CSS) during development'
   task :dev do
-    sh 'touch frontend/styles/jit-refresh.css'
+    # Run Tailwind's watcher alongside esbuild so both rebuild on change.
+    Bridgetown::Utils::Aux.run_process('Tailwind', :magenta, 'bin/tailwindcss --watch')
     sh 'yarn run esbuild-dev'
   rescue Interrupt
   end

@@ -227,7 +227,11 @@ const bridgetownPreset = (bridgetownConfig) => ({
         return
       }
 
-      const manifest = {}
+      // Seed the manifest with the Tailwind CSS entry (compiled separately by
+      // `bin/tailwindcss`). In production `bin/tailwindcss` runs after esbuild and
+      // overwrites this with the fingerprinted filename; in watch/dev mode the
+      // unfingerprinted file is served as-is.
+      const manifest = { "styles/tailwind.css": "tailwind.css" }
       const entrypoints = []
 
       // Clean up entrypoint naming

@@ -1,5 +1,5 @@
-import "$styles/index.css"
-import "$styles/syntax-highlighting.css"
+// Styles are compiled separately by the Tailwind CLI (see `bin/tailwindcss`),
+// so no CSS is imported here — esbuild bundles JavaScript only.
 import * as Turbo from "@hotwired/turbo"
 
 // Uncomment the line below to add transition animations when Turbo navigates.

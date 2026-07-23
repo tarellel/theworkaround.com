@@ -1,0 +1,71 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+# Compiles frontend/styles/tailwind.css with the Tailwind CSS v4 CLI, then
+# fingerprints the output and records it in Bridgetown's frontend-bundling
+# manifest so `asset_path "styles/tailwind.css"` resolves to a cache-busted URL.
+#
+# Pass --watch to run the Tailwind CLI in watch mode (used during development;
+# fingerprinting and minification are skipped in that case).
+#
+# Adapted from https://github.com/bridgetownrb/tailwindcss-automation
+
+require 'base64'
+require 'digest'
+require 'fileutils'
+require 'json'
+
+root = Dir.pwd
+input_path = File.join(root, 'frontend', 'styles', 'tailwind.css')
+output_dir = File.join(root, 'output', '_bridgetown', 'static')
+temp_output_path = File.join(output_dir, 'tailwind.css')
+manifest_path = File.join(root, '.bridgetown-cache', 'frontend-bundling', 'manifest.json')
+manifest_key = 'styles/tailwind.css'
+
+should_watch = ARGV.include?('--watch')
+
+def update_manifest(manifest_path, key, value)
+  return unless File.exist?(manifest_path)
+
+  manifest = JSON.parse(File.read(manifest_path))
+  manifest[key] = value
+  File.write(manifest_path, JSON.generate(manifest))
+end
+
+def fingerprint_css(temp_output_path, output_dir)
+  css = File.read(temp_output_path)
+  digest = Digest::SHA256.digest(css)
+  fingerprint = Base64.urlsafe_encode64(digest).delete('=').upcase[0, 8]
+  name = "tailwind.#{fingerprint}.css"
+  File.write(File.join(output_dir, name), css)
+  name
+end
+
+tailwind_cli = File.join(root, 'node_modules', '@tailwindcss', 'cli', 'dist', 'index.mjs')
+unless File.exist?(tailwind_cli)
+  warn 'tailwindcss CLI not found; run `yarn add --dev @tailwindcss/cli`'
+  exit 1
+end
+
+FileUtils.mkdir_p(output_dir)
+
+tailwind_args = [tailwind_cli, '-i', input_path, '-o', temp_output_path]
+tailwind_args << (should_watch ? '--watch' : '--minify')
+
+pid = Process.spawn('node', *tailwind_args, out: $stdout, err: $stderr)
+Process.wait(pid)
+exit_status = $?.exitstatus
+
+exit exit_status if should_watch
+
+if exit_status.zero?
+  if File.exist?(temp_output_path)
+    name = fingerprint_css(temp_output_path, output_dir)
+    update_manifest(manifest_path, manifest_key, name)
+    puts "tailwind: fingerprinted -> #{name}"
+  else
+    warn 'tailwind: output css not found, skipping fingerprint'
+  end
+else
+  exit exit_status
+end

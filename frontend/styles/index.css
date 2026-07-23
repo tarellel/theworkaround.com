@@ -1,11 +1,7 @@
-/* If you need to add @import statements, do so up here */
-
-@import "jit-refresh.css"; /* triggers frontend rebuilds */
-
-/* Set up Tailwind imports */
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+/*
+ * Custom base styles. Imported by `tailwind.css` and compiled by the Tailwind
+ * CLI, so `@apply` and Tailwind utilities are available here.
+ */
 
 :root {
   --body-background: #f2f2f2;
