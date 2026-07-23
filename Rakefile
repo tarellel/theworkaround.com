@@ -45,9 +45,9 @@ desc 'Runs the update commands'
 task update: ['update:cssdb', 'update:yarn']
 
 namespace :update do
-  desc 'Update browserlists db'
+  desc 'Update browserslist db'
   task :cssdb do
-    sh 'npx browserslist@latest --update-db'
+    sh 'npx update-browserslist-db@latest'
   end
 
   desc 'Update yarn dependencies'

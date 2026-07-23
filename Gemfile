@@ -21,10 +21,10 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 # If you need to upgrade/switch Bridgetown versions, change the line below
 # and then run `bundle update bridgetown`
-gem 'bridgetown', '~> 1.1.0'
+gem 'bridgetown', '~> 2.0'
 
 # Uncomment to add file-based dynamic routing to your project:
-# gem 'bridgetown-routes', '~> 1.1.0', group: :bridgetown_plugins
+# gem 'bridgetown-routes', '~> 2.0', group: :bridgetown_plugins
 
 # Uncomment to use the Inspectors API to manipulate the output
 # of your HTML or XML resources:
@@ -40,10 +40,7 @@ end
 
 group :bridgetown_plugins do
   gem 'bridgetown-feed'
-  gem 'bridgetown-minify-html', '~> 2.0'
-  gem 'bridgetown-rougify'
   gem 'bridgetown-seo-tag'
   gem 'bridgetown-sitemap'
   gem 'bridgetown-svg-inliner'
-  gem 'bridgetown-view-component'
 end
